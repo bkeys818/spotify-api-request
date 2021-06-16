@@ -1,0 +1,100 @@
+type ErrorType = keyof typeof SpotifyError.Type
+
+export class SpotifyError extends Error {
+
+    /** Error type for machine */
+    readonly type: ErrorType
+
+    /** For Node.js system error */
+    readonly internalError?: any
+
+    readonly data?: any[]
+
+    constructor(tokenError: AuthenticationError)
+    constructor(message: string, type: ErrorType)
+    constructor(message: string, type: ErrorType, ...data: any[])
+    constructor(message: string, type: 'unknown', internalError: any)
+    constructor(
+        messageOrToken: string | AuthenticationError,
+        type?: ErrorType,
+        dataOrSystemError?: any
+    ) {
+        super()
+        Object.setPrototypeOf(this, SpotifyError.prototype)
+        this.name = 'SpotifyError'
+        this.type = type ?? 'token'
+        if (typeof messageOrToken === 'string') {
+            this.message = messageOrToken
+            if (dataOrSystemError) {
+                if (type === 'unknown') this.internalError = dataOrSystemError
+                else this.data = dataOrSystemError
+            }
+        } else {
+            this.message = messageOrToken.error_description
+        }
+        this.message = `${this.name} - ${SpotifyError.Type[this.type]}! ${this.message}`
+    }
+
+    static readonly Type = {
+        token: 'Failed to get token',
+        system: 'Internal error',
+        authorization: 'Failed to authorize',
+        api: 'Failure in API',
+        request: 'Inavlid request',
+        unknown: 'Unknown error',
+    } as const
+    static readonly errorCodes = [304, 403, 429, 204, 404, 500, 502, 503]
+    static readonly detailsFor = (code: ErrorCode) => errorDetails[code]
+
+    log() {
+        if (this.internalError) console.error(this.message, this.internalError)
+        else if (this.data) console.error(this.message, ...this.data)
+        else console.error(this.message)
+    }
+}
+
+type ErrorCode = typeof SpotifyError.errorCodes[number]
+interface ErrorDetails {
+    type: ErrorType
+    message: string
+}
+const errorDetails: { [key in ErrorCode]: ErrorDetails } = {
+    304: {
+        type: 'request',
+        message: 'Not Modified: See Conditional requests.',
+    },
+    403: {
+        type: 'request',
+        message:
+            'Forbidden: The server understood the request, but is refusing to fulfill it.',
+    },
+    429: {
+        type: 'request',
+        message: 'Too Many Requests: Rate limiting has been applied.',
+    },
+    204: {
+        type: 'system',
+        message:
+            'No Content: The request has succeeded but returns no message body.',
+    },
+    404: {
+        type: 'system',
+        message:
+            'Not Found: The requested resource could not be found. This error can be due to a temporary or permanent condition.',
+    },
+    500: {
+        type: 'api',
+        message:
+            'Internal Server Error: You should never receive this error because our clever coders catch them all … but if you are unlucky enough to get one, please report it to us through a comment at the bottom of this page.',
+    },
+    502: {
+        type: 'api',
+        message:
+            'Bad Gateway: The server was acting as a gateway or proxy and received an invalid response from the upstream server.',
+    },
+    503: {
+        type: 'api',
+        message:
+            'Service Unavailable: The server is currently unable to handle the request due to a temporary condition which will be alleviated after some delay. You can choose to resend the request again.',
+    },
+}

@@ -1,6 +1,6 @@
 import { authorize, Token } from './authorize'
-import { request, requestWithURL } from './request'
+import { request } from './request'
 import { Name, RequestParams as Request, Response } from './api'
 
-export { authorize, request, requestWithURL }
+export { authorize, request }
 export type { Token, Name as Names, Request, Response }

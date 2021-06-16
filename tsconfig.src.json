@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "target": "es5",
+        "declaration": true,
+        "outDir": "./lib",
+        "rootDir": "./src",
+        "removeComments": true,
+    },
+    "exclude": [
+        "tests",
+        "jest.config.js",
+        "global-setup.ts"
+    ],
+    "files": ["src/index.ts"]
+}

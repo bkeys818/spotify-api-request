@@ -1,0 +1,33 @@
+{
+  "name": "spotify-api",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "author": "Ben Keys",
+  "license": "MIT",
+  "private": "true",
+  "scripts": {
+    "test": "rimraf coverage & jest --coverage",
+    "coverage": "open http://localhost:8080 & http-server -s -a localhost ./coverage/lcov-report",
+    "build": "rimraf lib & tsc --build tsconfig.src.json"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.1",
+    "@types/node-fetch": "^2.5.10",
+    "babel-jest": "^27.0.2",
+    "dotenv": "^10.0.0",
+    "http-server": "^0.12.3",
+    "jest": "^27.0.4",
+    "prettier": "^2.3.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  }
+}

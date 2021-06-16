@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "isolatedModules": true,
+
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "esModuleInterop": false,
+        "typeRoots": ["./types", "./node_modules/@types"],
+
+        // "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["src", "tests", "types", "jest.config.js", "global-setup.ts"]
+}

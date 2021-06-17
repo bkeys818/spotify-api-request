@@ -1,3 +1,5 @@
+import type { AlbumObject, PagingObject, TrackObject } from '../objects'
+
 export const endpoints = {
     ['Get Multiple Albums' as const]: {
         url: 'https://api.spotify.com/v1/albums' as `https://api.spotify.com/v1/albums`,

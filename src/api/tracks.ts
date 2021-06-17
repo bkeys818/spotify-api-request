@@ -1,3 +1,5 @@
+import { TrackObject, AudioFeaturesObject, AudioAnalysisObject } from '../objects'
+
 export const endpoints = {
     ['Get Several Tracks' as const]: {
         url: 'https://api.spotify.com/v1/tracks' as `https://api.spotify.com/v1/tracks`,

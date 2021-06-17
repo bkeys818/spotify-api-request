@@ -1,3 +1,11 @@
+import type {
+    PagingObject,
+    SimplifiedPlaylistObject,
+    PlaylistObject,
+    PlaylistTrackObject,
+    ImageObject,
+} from '../objects'
+
 export const endpoints = {
     ["Get a List of Current User's Playlists" as const]: {
         url: 'https://api.spotify.com/v1/me/playlists' as `https://api.spotify.com/v1/me/playlists`,

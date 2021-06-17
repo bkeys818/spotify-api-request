@@ -1,4 +1,4 @@
-import { SpotifyError } from './error'
+import { SpotifyError, AuthenticationError } from './error'
 import fetch from 'node-fetch'
 
 export interface Token {

@@ -3,6 +3,7 @@
     "compilerOptions": {
         "target": "es5",
         "declaration": true,
+        "declarationDir": "./types",
         "outDir": "./lib",
         "rootDir": "./src",
         "removeComments": true,

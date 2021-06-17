@@ -1,6 +1,6 @@
 {
   "name": "spotify-api-request",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Ben Keys",
     "url": "https://github.com/bkeys818"
@@ -13,12 +13,13 @@
     "tsconfig.json",
     "tsconfig.src.json"
   ],
+  "types": "types",
   "scripts": {
     "pretest": "rimraf coverage",
     "test": "jest --coverage",
     "precoverage": "open http://localhost:8080",
     "coverage": "http-server -s -a localhost ./coverage/lcov-report",
-    "prebuild": "rimraf lib",
+    "prebuild": "rimraf lib & rimraf types",
     "build": "tsc --build tsconfig.src.json",
     "prepublish": "yarn build"
   },

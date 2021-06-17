@@ -1,3 +1,31 @@
+import { Response } from 'node-fetch'
+
+/** Checks status, and if error is found, a SpotifyError is returned */
+export async function checkStatus(res: Response) {
+    if (res.status === 200 || res.status === 201 || res.status === 202) return
+    if (res.status === 400 || res.status === 401) {
+        const message = ((await res.json()).error as RegularError).message
+        if (
+            res.status === 401 ||
+            message === 'Only valid bearer authentication supported'
+        ) {
+            return new SpotifyError(
+                'Unauthorized: ' + message,
+                'authorization',
+                res.headers.get('Authorization')
+            )
+        }
+        return new SpotifyError('Bad Request: ' + message, 'request')
+    }
+
+    if (res.status in SpotifyError.errorCodes) {
+        const info = SpotifyError.detailsFor(res.status)
+        return new SpotifyError(info.message, info.type)
+    }
+
+    return new SpotifyError(`Unknown status code (${res.status})`, 'unknown')
+}
+
 type ErrorType = keyof typeof SpotifyError.Type
 
 export class SpotifyError extends Error {

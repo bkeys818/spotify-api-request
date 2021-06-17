@@ -1,4 +1,5 @@
-import { authorize, Token } from '../src/authorize'
+import { authorize } from '../src'
+import type { Token } from '../src/authorize'
 import { SpotifyError } from '../src/error'
 
 test.concurrent('Returns valid token', async () => {

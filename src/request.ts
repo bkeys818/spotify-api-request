@@ -1,80 +1,55 @@
-import { endpoints, Name, EndpointsInfo, RequestParams, Response } from './api'
-import { SpotifyError, checkStatus } from './error'
+import fetch, { RequestInit, Response } from 'node-fetch'
 import type { Token } from './authorize'
-import fetch, { RequestInit } from 'node-fetch'
 
-type RequestParams1<N extends Name> = {
-    name: N
-    token: string | Token
-} & RequestParams<N>
-type RequestParams2<E extends EndpointsInfo> = {
-    url: E['url'],
-    method: E['method'],
-    token: string | Token
-}
+/** @internal */
+export async function sendRequest(params: {
+    endpoint: string
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE'
+    token: Token
+    headers?: { [key: string]: any }
+    pathParameter?: { [key: string]: any }
+    queryParameter?: { [key: string]: any }
+    jsonBodyParameter?: { [key: string]: any }
+}): Promise<Response> {
+    const {
+        endpoint,
+        method,
+        token,
+        headers,
+        pathParameter,
+        queryParameter,
+        jsonBodyParameter,
+    } = params
 
-async function request<T extends Name | EndpointsInfo>(
-    params:
-          T extends EndpointsInfo ? RequestParams2<T>
-        : T extends Name ? RequestParams1<T>
-        : never
-): Promise<Response<T>> {
-    let url: string
-    const requestInit: RequestInit = {}
+    let url = 'https://api.spotify.com/v1/' + endpoint
 
-    let { token } = params
-    if (typeof token == 'object')
-        token = `${token.token_type} ${token.access_token}`
-    requestInit.headers = {
-        Authorization: token
-    }
-
-    // overload 1
-    if ('name' in params) {
-        url = endpoints[params.name].url
-        requestInit.method = endpoints[params.name].method
-        
-        if ('pathParameter' in params)
-            for (let key in params['pathParameter']) {
-                // @ts-ignore
-                url = url.replace(key, params['pathParameter'][key])
-            }
-
-        if ('queryParameter' in params) {
-            url += '?'
-            for (let key in (params['queryParameter'])) {
-                // @ts-ignore
-                url += key + '=' + params['queryParameter'][key] + '&'
-            }
-            url = url.slice(0, -1)
+    if (pathParameter)
+        for (const key in pathParameter) {
+            url = url.replace(key, pathParameter[key] as string)
         }
 
-        if ('headers' in params)
-            requestInit.headers = {
-                ...requestInit.headers,
-                ...params['headers']
-            }
-
-        if ('jsonBodyParameter' in params)
-            requestInit.body = JSON.stringify(params['jsonBodyParameter'])
-
-    // overload 2
-    } else {
-        const { url: _url, method } = params
-        
-        url = _url
-        requestInit.method = method
+    if (queryParameter) {
+        url += '?'
+        for (const key in queryParameter) {
+            url += `${key}=${queryParameter[key]}&`
+        }
+        url = url.slice(0, -1)
     }
 
-    const response = await fetch(url, requestInit),
-        error = await checkStatus(response)
-
-    if (error) throw error
-    try {
-        return await response.json()
-    } catch (error) {
-        throw new SpotifyError('Unknown error during request', 'unknown', error)
+    const options: RequestInit = {
+        headers: {
+            Authorization: `${token.token_type} ${token.access_token}`,
+        },
+        method: method,
     }
+
+    if (headers)
+        options.headers = {
+            ...options.headers,
+            ...headers,
+        }
+
+    if (jsonBodyParameter) options.body = JSON.stringify(jsonBodyParameter)
+
+    return await fetch(url, options)
 }
-
-export { request }

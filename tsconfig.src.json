@@ -13,5 +13,15 @@
         "jest.config.js",
         "global-setup.ts"
     ],
-    "files": ["src/index.ts"]
+    "files": ["src/index.ts"],
+
+    "typedocOptions": {
+        "excludeInternal": true,
+        "entryPoints": [
+            "src/authorize.ts",
+            "src/error.ts",
+            "src/index.ts",
+            "src/objects.ts",
+        ],
+    }
 }

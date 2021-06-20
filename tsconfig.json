@@ -17,5 +17,5 @@
         // "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["src", "tests", "jest.config.js", "global-setup.ts", "error.ts"]
+    "include": ["src", "tests", "jest.config.js", "global-setup.ts"]
 }

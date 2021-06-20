@@ -20,8 +20,8 @@
     "precoverage": "open http://localhost:8080",
     "coverage": "http-server -s -a localhost ./coverage/lcov-report",
     "predocs": "rimraf docs && mkdir docs",
-    "docs": "typedoc --out docs src/api/*",
-    "postdocs": "open http://localhost:8080 && http-server -s -a localhost docs",
+    "docs": "typedoc --tsconfig tsconfig.src.json",
+    "postdocs": "open http://localhost:5050 && http-server -a -s localhost -p 5050 docs",
     "prebuild": "rimraf lib & rimraf types",
     "build": "tsc --build tsconfig.src.json",
     "prepublish": "yarn build"

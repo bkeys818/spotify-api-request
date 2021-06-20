@@ -1,6 +1,6 @@
 import { Token } from './authorize'
 import { getMultipleAlbums, getAlbum, getAlbumsTracks } from './api/albums'
-import { getListOfCurrentUsersPlaylists, getListOfUsersPlaylists, createPlaylist, getPlaylist, changePlaylistsDetails } from './api/playlists'
+import { getListOfCurrentUsersPlaylists, getListOfUsersPlaylists, createPlaylist, getPlaylist, changePlaylistsDetails, addItemsToPlaylist } from './api/playlists'
 
 type OmitFirstParam<F> = F extends (_: Token, ...args: infer P) => infer R ? (...args: P) => R : never
 
@@ -14,6 +14,7 @@ interface StaticSpotifyApi {
     createPlaylist: OmitFirstParam<typeof createPlaylist>
     getPlaylist: OmitFirstParam<typeof getPlaylist>
     changePlaylistsDetails: OmitFirstParam<typeof changePlaylistsDetails>
+    addItemsToPlaylist: OmitFirstParam<typeof addItemsToPlaylist>
 }
 
 export default class SpotifyApi implements StaticSpotifyApi {
@@ -80,6 +81,12 @@ export default class SpotifyApi implements StaticSpotifyApi {
     }) {
         return changePlaylistsDetails(this.token, playlistId, options)
     }
-
+    static addItemsToPlaylist = addItemsToPlaylist
+    addItemsToPlaylist(playlistId: string, options?: {
+        position?: number
+        uris?: string
+    }) {
+        return addItemsToPlaylist(this.token, playlistId, options)
+    }
 }
 

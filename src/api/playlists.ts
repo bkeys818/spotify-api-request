@@ -239,7 +239,7 @@ export async function getPlaylistsItems(
  * @param {Object} options
  * @param {number} [options.position]
  * @param {string} [options.uris]
- * @returns {Promise<SnapshotIdObject>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function addItemsToPlaylist(
     token: Token,
@@ -254,7 +254,7 @@ export async function addItemsToPlaylist(
          */
         uris?: string
     }
-): Promise<SnapshotIdObject> {
+): Promise<{ snapshot_id: string }> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',
@@ -280,7 +280,7 @@ export async function addItemsToPlaylist(
  * @param {[number]} options.insert_before
  * @param {[number]} options.ange_length
  * @param {[string]} options.snapshot_id
- * @returns {Promise<SnapshotIdObject>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function reorderOReplacePlaylistsItems(
     token: Token,
@@ -315,7 +315,7 @@ export async function reorderOReplacePlaylistsItems(
         /** The playlist’s snapshot ID against which you want to make the changes. */
         snapshot_id?: string
     }
-): Promise<SnapshotIdObject> {
+): Promise<{ snapshot_id: string }> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',
@@ -338,7 +338,7 @@ export async function reorderOReplacePlaylistsItems(
  * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
  * @param {{ uri: string, positions?: number[] }[]} tracks - An array of objects containing [Spotify URIs](https://developer.spotify.com/spotify-documentation/web-api/#spotify-uris-and-ids) of the tracks or episodes to remove. For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
  * @param {string} [snapshotId] - The playlist’s snapshot ID against which you want to make the changes. The API will validate that the specified items exist and in the specified positions and make the changes, even if more recent changes have been made to the playlist.
- * @returns {Promise<SnapshotIdObject>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function removeItemsFromPlaylist(
     token: Token,
@@ -348,7 +348,7 @@ export async function removeItemsFromPlaylist(
         positions?: number[]
     }[],
     snapshotId?: string
-): Promise<SnapshotIdObject> {
+): Promise<{ snapshot_id: string }> {
     const jsonBody: { [key: string]: any } = {
         tracks: tracks,
     }

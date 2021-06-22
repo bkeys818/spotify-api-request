@@ -9,7 +9,7 @@ export async function sendRequest(params: {
     headers?: { [key: string]: any }
     pathParameter?: { [key: string]: any }
     queryParameter?: { [key: string]: any }
-    jsonBodyParameter?: { [key: string]: any }
+    bodyParameter?: { [key: string]: any } | string
 }): Promise<Response> {
     const {
         endpoint,
@@ -18,7 +18,7 @@ export async function sendRequest(params: {
         headers,
         pathParameter,
         queryParameter,
-        jsonBodyParameter,
+        bodyParameter
     } = params
 
     let url = 'https://api.spotify.com/v1/' + endpoint
@@ -49,7 +49,11 @@ export async function sendRequest(params: {
             ...headers,
         }
 
-    if (jsonBodyParameter) options.body = JSON.stringify(jsonBodyParameter)
+    if (bodyParameter)
+        options.body =
+            typeof bodyParameter == 'object'
+                ? JSON.stringify(bodyParameter)
+                : bodyParameter
 
     return await fetch(url, options)
 }

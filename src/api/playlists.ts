@@ -5,11 +5,7 @@ import type {
     PlaylistObject,
     TrackObject,
     ImageObject,
-} from '../objects'
-
-interface SnapshotIdObject {
-    snapshot_id: string
-}
+} from './objects'
 
 /**
  * Get a list of the playlists owned or followed by the current Spotify user.

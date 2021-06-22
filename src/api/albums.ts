@@ -1,6 +1,6 @@
 import { sendRequest } from '../request'
 import type { Token } from '../authorize'
-import type { AlbumObject, PagingObject, TrackObject } from '../objects'
+import type { AlbumObject, PagingObject, TrackObject } from './objects'
 
 /**
  * Get Spotify catalog information for multiple albums identified by their Spotify IDs.

@@ -6,22 +6,15 @@
         "declarationDir": "./types",
         "outDir": "./lib",
         "rootDir": "./src",
-        "removeComments": true,
+        "removeComments": true
     },
-    "exclude": [
-        "tests",
-        "jest.config.js",
-        "global-setup.ts"
-    ],
+    "exclude": ["tests", "jest.config.js", "global-setup.ts"],
     "files": ["src/index.ts"],
 
     "typedocOptions": {
+        "entryPoints": [ "src/api" ],
         "excludeInternal": true,
-        "entryPoints": [
-            "src/authorize.ts",
-            "src/error.ts",
-            "src/index.ts",
-            "src/objects.ts",
-        ],
+        "disableSources": true,
+        "name": "Spotify API Request",
     }
 }

@@ -21,7 +21,7 @@
     "coverage": "http-server -s -a localhost ./coverage/lcov-report",
     "predocs": "rimraf docs && mkdir docs",
     "docs": "typedoc --tsconfig tsconfig.src.json",
-    "postdocs": "open http://localhost:5050 && http-server -a -s localhost -p 5050 docs",
+    "postdocs": "http-server -a -s localhost -p 5050 docs",
     "prebuild": "rimraf lib & rimraf types",
     "build": "tsc --build tsconfig.src.json",
     "prepublish": "yarn build"
@@ -45,6 +45,6 @@
     "ts-jest": "^27.0.2",
     "ts-node": "^10.0.0",
     "typedoc": "^0.21.0",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   }
 }

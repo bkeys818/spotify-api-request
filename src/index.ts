@@ -41,6 +41,7 @@ export default class SpotifyApi implements StaticSpotifyApi {
         this.token = token
     }
 
+    // Album Request
     static getMultipleAlbums = getMultipleAlbums
     getMultipleAlbums(
         ids: Parameters<typeof getMultipleAlbums>[1],
@@ -63,6 +64,7 @@ export default class SpotifyApi implements StaticSpotifyApi {
         return getAlbumsTracks(this.token, id, options)
     }
 
+    // Playlist Request
     static getListOfCurrentUsersPlaylists = getListOfCurrentUsersPlaylists
     getListOfCurrentUsersPlaylists(
         options?: Parameters<typeof getListOfCurrentUsersPlaylists>[1],

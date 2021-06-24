@@ -13,6 +13,7 @@
 
     "typedocOptions": {
         "entryPoints": [ "src/api" ],
+        "exclude": [ "src/api/index.ts" ],
         "excludeInternal": true,
         "disableSources": true,
         "name": "Spotify API Request",

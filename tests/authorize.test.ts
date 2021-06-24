@@ -7,9 +7,9 @@ test.concurrent('Returns valid token', async () => {
             clientID: process.env.CLIENT_ID!,
             clientSecret: process.env.CLIENT_SECRET!
     })).resolves.toEqual<Token>({
-        accessToken: expect.any(String),
-        tokenType: 'Bearer',
-        expiresIn: expect.any(Number)
+        access_token: expect.any(String),
+        token_type: 'Bearer',
+        expires_in: expect.any(Number)
     })
 })
 

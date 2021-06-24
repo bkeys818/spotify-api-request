@@ -38,7 +38,7 @@ export async function sendRequest(params: {
 
     const options: RequestInit = {
         headers: {
-            Authorization: `${token.tokenType} ${token.accessToken}`,
+            Authorization: `${token.token_type} ${token.access_token}`,
         },
         method: method,
     }

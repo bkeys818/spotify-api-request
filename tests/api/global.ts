@@ -29,7 +29,7 @@ export async function sendRequest<N extends Name>(name: N, request: RequestParam
     const options: RequestInit = {
         method: method,
         headers: {
-            Authorization: `${token.token_type} ${token.access_token}`
+            Authorization: `${token.tokenType} ${token.accessToken}`
         }
     }
 

@@ -2,9 +2,9 @@ import { SpotifyError, AuthenticationError } from './error'
 import fetch from 'node-fetch'
 
 export interface Token {
-    access_token: string
-    token_type: 'Bearer'
-    expires_in: number
+    accessToken: string
+    tokenType: 'Bearer'
+    expiresIn: number
 }
 
 interface AuthorizeParams {
@@ -17,7 +17,7 @@ export async function authorize(params?: AuthorizeParams): Promise<Token> {
         method: 'POST',
         headers: {
             Authorization: `Basic ${Buffer.from(
-                `${params?.clientID ?? process.env.CLIENT_ID}:${params?.clientSecret ?? process.env.CLIENT_SECRET}`
+                `${clientID}:${clientSecret}`
             ).toString("base64")}`,
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         },

@@ -264,8 +264,9 @@ export async function addItemsToPlaylist(
     ).json()
 }
 
+// TODO: - Split into two function
 /**
- * Either reorder or replace items in a playlist depending on the request’s parameters. To reorder items, include `range_start`, `insert_before`, `range_length` and `snapshot_id` in the request’s body. To replace items, include `uris` as either a query parameter or in the request’s body. Replacing items in a playlist will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist
+ * Either reorder or replace items in a playlist depending on the request’s parameters. To reorder items, include `range_start`, `insert_before`, `range_length` and `snapshot_id` in the request’s body. To replace items, include `uris` as either a query parameter or in the request’s body. Replacing items in a playlist will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist.
  *
  * **Note**: Replace and reorder are mutually exclusive operations which share the same endpoint, but have different parameters. These operations can’t be applied together in a single request.
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Reordering or replacing items in the current user’s public playlists requires authorization of the `playlist-modify-public` scope; reordering or replacing items in the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).

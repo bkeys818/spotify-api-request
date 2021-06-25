@@ -1,4 +1,5 @@
-type HasEndpoint = 
+/** @internal */
+export type HasEndpoint = 
     | SimplifiedAlbumObject | AlbumObject
     | SimplifiedArtistObject | ArtistObject
     | SimplifiedEpisodeObject | EpisodeObject
@@ -441,17 +442,17 @@ export interface LinkedTrackObject {
 /** [Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject) */
 export interface PagingObject<T extends HasEndpoint> {
     /** A link to the Web API endpoint returning the full result of the request */
-    href: HREF<T>
+    href: `${HREF<T>}` | `${HREF<T>}?${string}`
     /** The requested data. */
     items: T[]
     /** The maximum number of items in the response (as set in the query or by default). */
     limit: number
     /** URL to the next page of items. (`null` if none) */
-    next: HREF<T> | null
+    next: `${HREF<T>}` | `${HREF<T>}?${string}` | null
     /** The offset of the items returned (as set in the query or by default) */
     offset: number
     /** URL to the previous page of items. (`null` if none) */
-    previous: HREF<T> | null
+    previous: `${HREF<T>}` | `${HREF<T>}?${string}` | null
     /** The total number of items available to return. */
     total: number
 }

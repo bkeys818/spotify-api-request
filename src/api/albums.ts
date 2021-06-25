@@ -50,7 +50,7 @@ export async function getAlbum(
         endpoint: 'albums/{id}',
         method: 'GET',
         token: token,
-        pathParameter: { '{id}': id },
+        pathParameter: { id: id },
         ...((): object | void => {
             if (options) return { queryParameter: options }
         })(),
@@ -83,7 +83,7 @@ export async function getAlbumsTracks(
         endpoint: 'albums/{id}/tracks',
         method: 'GET',
         token: token,
-        pathParameter: { '{id}': id },
+        pathParameter: { id: id },
         queryParameter: options,
     })).json()
 }

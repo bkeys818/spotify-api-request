@@ -58,7 +58,7 @@ export async function getListOfUsersPlaylists(
             endpoint: 'users/{user_id}/playlists',
             method: 'GET',
             token: token,
-            pathParameter: { '{user_id}': userId },
+            pathParameter: { user_id: userId },
             queryParameter: options,
         })
     ).json()
@@ -98,7 +98,7 @@ export async function createPlaylist(
                 'Content-Type': 'application/json',
             },
             pathParameter: {
-                '{user_id}': userId,
+                user_id: userId,
             },
             bodyParameter: options,
         })
@@ -137,7 +137,7 @@ export async function getPlaylist(
             method: 'GET',
             token: token,
             pathParameter: {
-                '{playlist_id}': playlistId,
+                playlist_id: playlistId,
             },
             queryParameter: options,
         })
@@ -177,7 +177,7 @@ export async function changePlaylistsDetails(
             'Content-Type': 'application/json',
         },
         pathParameter: {
-            '{playlist_id}': playlistId,
+            playlist_id: playlistId,
         },
         bodyParameter: options,
     })
@@ -221,7 +221,7 @@ export async function getPlaylistsItems(
             method: 'GET',
             token: token,
             pathParameter: {
-                '{playlist_id}': playlistId,
+                playlist_id: playlistId,
             },
             queryParameter: options,
         })
@@ -257,7 +257,7 @@ export async function addItemsToPlaylist(
             method: 'POST',
             token: token,
             pathParameter: {
-                '{playlist_id}': playlistId,
+                playlist_id: playlistId,
             },
             bodyParameter: options,
         })
@@ -322,7 +322,7 @@ export async function reorderOReplacePlaylistsItems(
                 'Content-Type': 'application/json',
             },
             pathParameter: {
-                '{playlist_id}': playlistId,
+                playlist_id: playlistId,
             },
             bodyParameter: options,
         })
@@ -359,7 +359,7 @@ export async function removeItemsFromPlaylist(
                 'Content-Type': 'application/json',
             },
             pathParameter: {
-                '{playlist_id}': playlistId,
+                playlist_id: playlistId,
             },
             bodyParameter: jsonBody,
         })
@@ -382,7 +382,7 @@ export async function getPlaylistCoverImage(
             method: 'GET',
             token: token,
             pathParameter: {
-                '{playlist_id}': playlistId,
+                playlist_id: playlistId,
             },
         })
     ).json()
@@ -413,7 +413,7 @@ export async function uploadCustomPlaylistCoverImage(
             'Content-Type': 'image/jpeg'
         },
         pathParameter: {
-            '{playlist_id}': playlistId
+            playlist_id: playlistId
         },
         bodyParameter: image
     })

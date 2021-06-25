@@ -25,7 +25,7 @@ export async function sendRequest(params: {
 
     if (pathParameter)
         for (const key in pathParameter) {
-            url = url.replace(key, pathParameter[key] as string)
+            url = url.replace(`{${key}}`, pathParameter[key] as string)
         }
 
     if (queryParameter) {

@@ -19,7 +19,7 @@ export async function getUsersSavedAlbums(
     options?: {
         /** The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
-        /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit`to get the next set of objects. */
+        /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
@@ -110,7 +110,7 @@ export async function getUsersSavedTracks(
         market?: string
         /** The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
-        /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit`to get the next set of objects. */
+        /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
 ): Promise<PagingObject<TrackObject>> {
@@ -209,7 +209,7 @@ export async function getUsersSavedEpisodes(
         market?: string
         /** The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
-        /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit`to get the next set of objects. */
+        /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
 ): Promise<PagingObject<EpisodeObject>> {

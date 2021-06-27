@@ -42,7 +42,7 @@ export async function searchforItem(
          *
          * - If market is set to `from_token`, and a valid access token is specified in the request header, only content playable in the country associated with the user account, is returned.
          *
-         * - Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/). A user must grant access to the `user-read-private`scope prior to when the access token is issued.
+         * - Users can view the country that is associated with their account in the [account settings](https://www.spotify.com/se/account/overview/). A user must grant access to the `user-read-private` scope prior to when the access token is issued.
          */
         market?: string
         /**

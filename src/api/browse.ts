@@ -46,13 +46,13 @@ export async function getAllFeaturedPlaylists(
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
         country?: string
-        /** The desired language, consisting of a lowercase [ISO 639-1 language code](http://en.wikipedia.org/wiki/ISO_639-1) and an uppercase [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the results returned in a particular language (where available). Note that, if `locale`is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale`parameter, combined with the `country`parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
+        /** The desired language, consisting of a lowercase [ISO 639-1 language code](http://en.wikipedia.org/wiki/ISO_639-1) and an uppercase [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the results returned in a particular language (where available). Note that, if `locale` is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale` parameter, combined with the `country` parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
         locale?: string
         /** A timestamp in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601): `yyyy-MM-ddTHH:mm:ss`. Use this parameter to specify the user’s local time to get results tailored for that specific date and time in the day. If not provided, the response defaults to the current UTC time. Example: “2014-10-23T09:00:00” for a user whose local time is 9AM. If there were no featured playlists (or there is no data) at the specified time, the response will revert to the current UTC time. */
         timestamp?: string
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
-        /** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of items. */
+        /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
 ): Promise<{
@@ -80,11 +80,11 @@ export async function getAllCategories(
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned items will be globally relevant. */
         country?: string
-        /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the category metadata returned in a particular language. Note that, if `locale`is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale`parameter, combined with the `country`parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
+        /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the category metadata returned in a particular language. Note that, if `locale` is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale` parameter, combined with the `country` parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
         locale?: string
         /** The maximum number of categories to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
-        /** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of categories. */
+        /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of categories. */
         offset?: number
     }
 ): Promise<{ categories: PagingObject<CategoryObject> }> {
@@ -111,7 +111,7 @@ export async function getCategory(
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
         country?: string
-        /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language. Note that, if `locale`is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English).*/
+        /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language. Note that, if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English).*/
         locale?: string
     }
 ): Promise<CategoryObject> {
@@ -143,7 +143,7 @@ export async function getCategorysPlaylists(
         country?: string
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.*/
         limit?: number
-        /** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of items.*/
+        /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.*/
         offset?: number
     }
 ): Promise<PagingObject<PlaylistObject>> {

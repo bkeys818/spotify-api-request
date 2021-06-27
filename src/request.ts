@@ -2,58 +2,76 @@ import fetch, { RequestInit, Response } from 'node-fetch'
 import type { Token } from './authorize'
 
 /** @internal */
+type UrlParameter = {
+    [key: string]: boolean | number | string | Array<boolean | number | string>
+}
+
+/** @internal */
 export async function sendRequest(params: {
     endpoint: string
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     token: Token
-    headers?: { [key: string]: any }
-    pathParameter?: { [key: string]: any }
-    queryParameter?: { [key: string]: any }
+    headers?: { [key: string]: string }
+    pathParameter?: UrlParameter
+    queryParameter?: UrlParameter
     bodyParameter?: { [key: string]: any } | string
 }): Promise<Response> {
-    const {
-        endpoint,
-        method,
-        token,
-        headers,
-        pathParameter,
-        queryParameter,
-        bodyParameter
-    } = params
+    const { pathParameter, queryParameter } = params
 
-    let url = 'https://api.spotify.com/v1/' + endpoint
+    let url = 'https://api.spotify.com/v1/' + params.endpoint
 
     if (pathParameter)
         for (const key in pathParameter) {
-            url = url.replace(`{${key}}`, pathParameter[key] as string)
+            url = url.replace(`{${key}}`, convertToString(pathParameter[key]))
         }
 
     if (queryParameter) {
         url += '?'
         for (const key in queryParameter) {
-            url += `${key}=${queryParameter[key]}&`
+            url += `${key}=${convertToString(queryParameter[key])}&`
         }
         url = url.slice(0, -1)
     }
 
     const options: RequestInit = {
         headers: {
-            Authorization: `${token.token_type} ${token.access_token}`,
+            Authorization: `${params.token.token_type} ${params.token.access_token}`,
         },
-        method: method,
+        method: params.method,
     }
 
-    if (headers)
+    if (params.headers)
         options.headers = {
             ...options.headers,
-            ...headers,
+            ...params.headers,
         }
 
-    if (bodyParameter)
+    if (params.bodyParameter)
         options.body =
-            typeof bodyParameter == 'object'
-                ? JSON.stringify(bodyParameter)
-                : bodyParameter
+            typeof params.bodyParameter == 'object'
+                ? JSON.stringify(params.bodyParameter)
+                : params.bodyParameter
 
     return await fetch(url, options)
+}
+
+/** @internal */
+function convertToString(value: any): string {
+    if (
+        typeof value == 'boolean' ||
+        typeof value == 'string' ||
+        typeof value == 'number'
+    )
+        return value.toString()
+    else if (
+        Array.isArray(value) &&
+        value.every(
+            (elem: any) =>
+                typeof elem == 'boolean' ||
+                typeof elem == 'string' ||
+                typeof elem == 'number'
+        )
+    )
+        return value.join()
+    else throw new Error(`Invalid value used for pathParameter. (${value})`)
 }

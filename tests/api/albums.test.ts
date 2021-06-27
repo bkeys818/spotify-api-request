@@ -2,22 +2,17 @@ import type { Globals } from '../../jest.config'
 import { getMultipleAlbums, getAlbum, getAlbumsTracks } from '../../src/api/albums'
 import { SimplifiedAlbumObject, AlbumObject } from '../../src/api/objects'
 import {
-    UnwrapPromise,
-    pagingObject,
-    contextObject,
-    externalIdObject,
-    imageObject
+    testPagingObject,
+    testContextObject,
+    testExternalIdObject,
+    testImageObject
 } from './global'
 import { testSimplifiedArtistObject } from './artists.test'
 import { testSimplifiedTrackObject, testTrackObject } from './tracks.test'
 
-const token = (global as unknown as Globals).testData.token
-const albumIDs = ['7gsWAHLeT0w7es6FofOXk1']
-
-
 export function testSimplifiedAlbumObject(value: SimplifiedAlbumObject): SimplifiedAlbumObject {
     const expectedObj: SimplifiedAlbumObject = {
-        ...contextObject('album'),
+        ...testContextObject('album'),
         album_type: expect.stringMatching(/album|single|compilation/),
         artists: expect.any(Array),
         available_markets: expect.any(Array),
@@ -45,7 +40,7 @@ export function testSimplifiedAlbumObject(value: SimplifiedAlbumObject): Simplif
         expect(available_market).toMatch(/[A-Z]{2}/)
     })
     value.images.forEach(image => {
-        imageObject(image)
+        testImageObject(image)
     })
 
     return expectedObj
@@ -55,11 +50,11 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
     const expectedObj: AlbumObject = {
         ...testSimplifiedAlbumObject(value),
         copyrights: expect.any(Array),
-        external_ids: externalIdObject(value.external_ids),
+        external_ids: testExternalIdObject(value.external_ids),
         genres: expect.any(Array),
         label: expect.any(String),
         popularity: expect.any(Number),
-        tracks: pagingObject<typeof value['tracks']['items'][number]>({
+        tracks: testPagingObject<typeof value['tracks']['items'][number]>({
             value: value.tracks,
             url: expect.stringMatching(
                 /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+\/tracks(\\?.+)?/i
@@ -83,12 +78,13 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
     return expectedObj
 }
 
+const token = (global as unknown as Globals).testData.token
+const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
+
 test(getMultipleAlbums.name, async () => {
     const res = await getMultipleAlbums(token, albumIDs)
 
-    type ExpectedObj = UnwrapPromise<ReturnType<typeof getMultipleAlbums>>
-
-    expect(res).toMatchObject<ExpectedObj>({
+    expect(res).toMatchObject<typeof res>({
         albums: expect.any(Array)
     })
 
@@ -99,15 +95,14 @@ test(getMultipleAlbums.name, async () => {
 })
 
 test(getAlbum.name, async () => {
-    testAlbumObject(await getAlbum(token, albumIDs[0]))
+    const res = await getAlbum(token, albumIDs[0])
+    testAlbumObject(res)
 })
 
 test(getAlbumsTracks.name, async () => {
     const res = await getAlbumsTracks(token, albumIDs[0])
 
-    type ExpectedObj = UnwrapPromise<ReturnType<typeof getAlbumsTracks>>
-
-    expect(res).toMatchObject<ExpectedObj>(pagingObject<ExpectedObj['items'][number]>({
+    expect(res).toMatchObject<typeof res>(testPagingObject<typeof res['items'][number]>({
         value: res,
         url: expect.stringMatching(
             /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+\/tracks(\\?.+)?/i

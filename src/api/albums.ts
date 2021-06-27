@@ -22,12 +22,14 @@ export async function getMultipleAlbums(
         ids: ids.join(','),
     }
     if (options) queryParameter.market = options.market
-    return await (await sendRequest({
-        endpoint: 'albums',
-        method: 'GET',
-        token: token,
-        queryParameter: queryParameter,
-    })).json()
+    return await (
+        await sendRequest({
+            endpoint: 'albums',
+            method: 'GET',
+            token: token,
+            queryParameter: queryParameter,
+        })
+    ).json()
 }
 
 /**
@@ -46,15 +48,17 @@ export async function getAlbum(
         market: string
     }
 ): Promise<AlbumObject> {
-    return await (await sendRequest({
-        endpoint: 'albums/{id}',
-        method: 'GET',
-        token: token,
-        pathParameter: { id: id },
-        ...((): object | void => {
-            if (options) return { queryParameter: options }
-        })(),
-    })).json()
+    return await (
+        await sendRequest({
+            endpoint: 'albums/{id}',
+            method: 'GET',
+            token: token,
+            pathParameter: { id: id },
+            ...((): object | void => {
+                if (options) return { queryParameter: options }
+            })(),
+        })
+    ).json()
 }
 
 /**
@@ -79,11 +83,13 @@ export async function getAlbumsTracks(
         offset?: number
     }
 ): Promise<PagingObject<TrackObject>> {
-    return await (await sendRequest({
-        endpoint: 'albums/{id}/tracks',
-        method: 'GET',
-        token: token,
-        pathParameter: { id: id },
-        queryParameter: options,
-    })).json()
+    return await (
+        await sendRequest({
+            endpoint: 'albums/{id}/tracks',
+            method: 'GET',
+            token: token,
+            pathParameter: { id: id },
+            queryParameter: options,
+        })
+    ).json()
 }

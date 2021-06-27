@@ -24,7 +24,7 @@ export async function followPlaylist(
             token: token,
             headers: { 'Content-Type': 'application/json' },
             pathParameter: { playlist_id: playlistId },
-            bodyParameter: options
+            bodyParameter: options,
         })
     ).json()
 }
@@ -94,7 +94,7 @@ export async function getUsersFollowedArtists(
             endpoint: 'me/following',
             method: 'GET',
             token: token,
-            queryParameter: options
+            queryParameter: options,
         })
     ).json()
 }
@@ -109,7 +109,7 @@ export async function getUsersFollowedArtists(
 export async function followArtistsOrUsers(
     token: Token,
     type: 'artist' | 'user',
-    ids: string[],
+    ids: string[]
 ): Promise<void> {
     return await (
         await sendRequest({
@@ -118,7 +118,7 @@ export async function followArtistsOrUsers(
             token: token,
             headers: { 'Content-Type': 'application/json' },
             queryParameter: { type: type },
-            bodyParameter: { ids: ids},
+            bodyParameter: { ids: ids },
         })
     ).json()
 }
@@ -133,7 +133,7 @@ export async function followArtistsOrUsers(
 export async function unfollowArtistsOrUsers(
     token: Token,
     type: 'artist' | 'user',
-    ids: string[],
+    ids: string[]
 ): Promise<void> {
     return await (
         await sendRequest({
@@ -157,7 +157,7 @@ export async function unfollowArtistsOrUsers(
 export async function getFollowingStateForArtistsOrUsers(
     token: Token,
     type: 'artist' | 'user',
-    ids: string[],
+    ids: string[]
 ): Promise<boolean[]> {
     return await (
         await sendRequest({

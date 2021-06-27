@@ -1,6 +1,11 @@
 import { sendRequest } from '../request'
 import type { Token } from '../authorize'
-import type { ArtistObject, TrackObject, AlbumObject, PagingObject } from './objects'
+import type {
+    ArtistObject,
+    TrackObject,
+    AlbumObject,
+    PagingObject,
+} from './objects'
 
 /**
  * Get Spotify catalog information for several artists based on their Spotify IDs.
@@ -72,7 +77,7 @@ export async function getArtistsTopTracks(
             pathParameter: {
                 id: id,
             },
-            queryParameter: options,  
+            queryParameter: options,
         })
     ).json()
 }
@@ -85,7 +90,7 @@ export async function getArtistsTopTracks(
  */
 export async function getArtistsRelatedArtists(
     token: Token,
-    id: string,
+    id: string
 ): Promise<{ tracks: TrackObject[] }> {
     return await (
         await sendRequest({
@@ -114,21 +119,21 @@ export async function getArtistsAlbums(
     token: Token,
     id: string,
     options?: {
-        /** 
+        /**
          * A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. Valid values are:
          * - `album`
          * - `single`
          * - `appears_on`
          * - `compilation`
-         * 
+         *
          * For example: `include_groups=album,single.`
          */
         include_groups?: string
-        /** 
+        /**
          * Synonym for `country`. An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`.
-         * 
+         *
          * Supply this parameter to limit the response to one particular geographical market. For example, for albums available in Sweden: `market=SE`.
-         * 
+         *
          * *If not given, results will be returned for all markets and you are likely to get duplicate results per album, one for each market in which the album is available!*
          */
         market?: string
@@ -146,7 +151,7 @@ export async function getArtistsAlbums(
             pathParameter: {
                 id: id,
             },
-            queryParameter: options
+            queryParameter: options,
         })
     ).json()
 }

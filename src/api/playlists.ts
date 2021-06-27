@@ -400,8 +400,7 @@ export async function uploadCustomPlaylistCoverImage(
     playlistId: string,
     image: Buffer | string
 ): Promise<void> {
-    if (typeof image != 'string')
-        image = Buffer.from(image).toString('base64')
+    if (typeof image != 'string') image = Buffer.from(image).toString('base64')
     // TODO: - Error if data to large
     // Throw error if data size > 256_000 bytes
 
@@ -409,13 +408,9 @@ export async function uploadCustomPlaylistCoverImage(
         endpoint: 'playlists/{playlist_id}/images',
         method: 'PUT',
         token: token,
-        headers: {
-            'Content-Type': 'image/jpeg'
-        },
-        pathParameter: {
-            playlist_id: playlistId
-        },
-        bodyParameter: image
+        headers: { 'Content-Type': 'image/jpeg' },
+        pathParameter: { playlist_id: playlistId },
+        bodyParameter: image,
     })
 }
 

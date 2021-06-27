@@ -66,7 +66,7 @@ export async function getEpisode(
             method: 'GET',
             token: token,
             pathParameter: { id: id },
-            queryParameter: options
+            queryParameter: options,
         })
     ).json()
 }

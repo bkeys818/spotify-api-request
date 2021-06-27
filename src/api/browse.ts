@@ -5,7 +5,7 @@ import type {
     PagingObject,
     PlaylistObject,
     CategoryObject,
-    RecommendationsObject
+    RecommendationsObject,
 } from './objects'
 
 /**
@@ -30,7 +30,7 @@ export async function getAllNewReleases(
             endpoint: 'browse/new-releases',
             method: 'GET',
             token: token,
-            queryParameter: options
+            queryParameter: options,
         })
     ).json()
 }
@@ -40,33 +40,33 @@ export async function getAllNewReleases(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} [options]
  * @returns {Promise<{message: string, playlists: PagingObject<PlaylistObject>}>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
-*/
+ */
 export async function getAllFeaturedPlaylists(
-	token: Token,
-	options?: {
-		/** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
-		country?: string
-		/** The desired language, consisting of a lowercase [ISO 639-1 language code](http://en.wikipedia.org/wiki/ISO_639-1) and an uppercase [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the results returned in a particular language (where available). Note that, if `locale`is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale`parameter, combined with the `country`parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
-		locale?: string
-		/** A timestamp in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601): `yyyy-MM-ddTHH:mm:ss`. Use this parameter to specify the user’s local time to get results tailored for that specific date and time in the day. If not provided, the response defaults to the current UTC time. Example: “2014-10-23T09:00:00” for a user whose local time is 9AM. If there were no featured playlists (or there is no data) at the specified time, the response will revert to the current UTC time. */
-		timestamp?: string
-		/** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
-		limit?: number
-		/** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of items. */
-		offset?: number
-	},
+    token: Token,
+    options?: {
+        /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
+        country?: string
+        /** The desired language, consisting of a lowercase [ISO 639-1 language code](http://en.wikipedia.org/wiki/ISO_639-1) and an uppercase [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the results returned in a particular language (where available). Note that, if `locale`is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale`parameter, combined with the `country`parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
+        locale?: string
+        /** A timestamp in [ISO 8601 format](http://en.wikipedia.org/wiki/ISO_8601): `yyyy-MM-ddTHH:mm:ss`. Use this parameter to specify the user’s local time to get results tailored for that specific date and time in the day. If not provided, the response defaults to the current UTC time. Example: “2014-10-23T09:00:00” for a user whose local time is 9AM. If there were no featured playlists (or there is no data) at the specified time, the response will revert to the current UTC time. */
+        timestamp?: string
+        /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
+        limit?: number
+        /** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of items. */
+        offset?: number
+    }
 ): Promise<{
     message: string
     playlists: PagingObject<PlaylistObject>
 }> {
-	return await(
-		await sendRequest({
-			endpoint: 'browse/featured-playlists',
-			method: 'GET',
-			token: token,
-            queryParameter: options
+    return await (
+        await sendRequest({
+            endpoint: 'browse/featured-playlists',
+            method: 'GET',
+            token: token,
+            queryParameter: options,
         })
-	).json()
+    ).json()
 }
 
 /**
@@ -74,90 +74,90 @@ export async function getAllFeaturedPlaylists(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} [options]
  * @returns {Promise<{categories: PagingObject<CategoryObject>}>} An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
-*/
+ */
 export async function getAllCategories(
-	token: Token,
-	options?: {
-		/** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned items will be globally relevant. */
-		country?: string
-		/** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the category metadata returned in a particular language. Note that, if `locale`is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale`parameter, combined with the `country`parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
-		locale?: string
-		/** The maximum number of categories to return. Default: 20. Minimum: 1. Maximum: 50. */
-		limit?: number
-		/** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of categories. */
-		offset?: number
-	},
-): Promise<{categories: PagingObject<CategoryObject>}> {
-	return await(
-		await sendRequest({
-			endpoint: 'browse/categories',
-			method: 'GET',
-			token: token,
-            queryParameter: options
-		})
-	).json()
+    token: Token,
+    options?: {
+        /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned items will be globally relevant. */
+        country?: string
+        /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning “Spanish (Mexico)”. Provide this parameter if you want the category metadata returned in a particular language. Note that, if `locale`is not supplied, or if the specified language is not available, all strings will be returned in the Spotify default language (American English). The `locale`parameter, combined with the `country`parameter, may give odd results if not carefully matched. For example `country=SE&locale=de_DE`will return a list of categories relevant to Sweden but as German language strings. */
+        locale?: string
+        /** The maximum number of categories to return. Default: 20. Minimum: 1. Maximum: 50. */
+        limit?: number
+        /** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of categories. */
+        offset?: number
+    }
+): Promise<{ categories: PagingObject<CategoryObject> }> {
+    return await (
+        await sendRequest({
+            endpoint: 'browse/categories',
+            method: 'GET',
+            token: token,
+            queryParameter: options,
+        })
+    ).json()
 }
 
 /**
  * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
  * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} category_id - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)for the category.
+ * @param {string} categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)for the category.
  * @param {Object} [options]
  * @returns {Promise<CategoryObject>} A {@link CategoryObject category object}.
-*/
+ */
 export async function getCategory(
-	token: Token,
-	category_id: string,
-	options?: {
-		/** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
-		country?: string
-		/** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language. Note that, if `locale`is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English).*/
-		locale?: string
-	},
+    token: Token,
+    categoryId: string,
+    options?: {
+        /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
+        country?: string
+        /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language. Note that, if `locale`is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English).*/
+        locale?: string
+    }
 ): Promise<CategoryObject> {
-	return await(
-		await sendRequest({
-			endpoint: 'browse/categories/{category_id}',
-			method: 'GET',
-			token: token,
+    return await (
+        await sendRequest({
+            endpoint: 'browse/categories/{category_id}',
+            method: 'GET',
+            token: token,
             pathParameter: {
-                category_id: category_id
+                category_id: categoryId,
             },
-            queryParameter: options
-		})
-	).json()
+            queryParameter: options,
+        })
+    ).json()
 }
 
 /**
  * Get a list of Spotify playlists tagged with a particular category.
  * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} category_id - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the category.
+ * @param {string} categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the category.
  * @param {Object} [options]
  * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object})
-*/
+ */
 export async function getCategorysPlaylists(
-	token: Token,
-	categoryId: string,
-	options?: {
-		/** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
-		country?: string
-		/** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.*/
-		limit?: number
-		/** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of items.*/
-		offset?: number
-	},
+    token: Token,
+    categoryId: string,
+    options?: {
+        /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
+        country?: string
+        /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.*/
+        limit?: number
+        /** The index of the first item to return. Default: 0 (the first object). Use with `limit`to get the next set of items.*/
+        offset?: number
+    }
 ): Promise<PagingObject<PlaylistObject>> {
-	return await(
-		await sendRequest({
-			endpoint: 'browse/categories/{category_id}/playlists',
-			method: 'GET',
-			token: token,
+    return await (
+        await sendRequest({
+            endpoint: 'browse/categories/{category_id}/playlists',
+            method: 'GET',
+            token: token,
             pathParameter: {
-                category_id: categoryId
+                category_id: categoryId,
             },
-            queryParameter: options
-		})
-	).json()
+            queryParameter: options,
+        })
+    ).json()
 }
 
 /**
@@ -165,9 +165,9 @@ export async function getCategorysPlaylists(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} options
  * @returns {Promise<RecommendationsObject>} A {@link RecommendationsObject recommendations response object}
-*/
+ */
 export async function getRecommendations(
-	token: Token,
+    token: Token,
     options: {
         /** The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20. Minimum: 1. Maximum: 100. */
         limit?: number
@@ -265,29 +265,29 @@ export async function getRecommendations(
         target_valence?: number
     }
 ): Promise<RecommendationsObject> {
-	return await(
-		await sendRequest({
-			endpoint: 'recommendations',
-			method: 'GET',
-			token: token,
-            queryParameter: options
-		})
-	).json()
+    return await (
+        await sendRequest({
+            endpoint: 'recommendations',
+            method: 'GET',
+            token: token,
+            queryParameter: options,
+        })
+    ).json()
 }
 
 /**
  * Retrieve a list of available genres seed parameter values for [recommendations](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recommendations).
  * @param {Token} token - A valid user access token or your client credentials.
  * @returns {Promise<RecommendationsObject>} A {@link RecommendationsObject recommendations response object}
-*/
+ */
 export async function getRecommendationGenres(
-	token: Token,
+    token: Token
 ): Promise<RecommendationsObject> {
-	return await(
-		await sendRequest({
-			endpoint: 'recommendations/available-genre-seeds',
-			method: 'GET',
-			token: token,
-		})
-	).json()
+    return await (
+        await sendRequest({
+            endpoint: 'recommendations/available-genre-seeds',
+            method: 'GET',
+            token: token,
+        })
+    ).json()
 }

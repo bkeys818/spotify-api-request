@@ -270,7 +270,7 @@ export async function getRecommendations(
 			endpoint: 'recommendations',
 			method: 'GET',
 			token: token,
-
+            queryParameter: options
 		})
 	).json()
 }

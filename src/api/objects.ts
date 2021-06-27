@@ -67,7 +67,7 @@ export interface RestrictionObject {
 }
 
 /** [Artist Object](https://developer.spotify.com/documentation/web-api/reference/#object-artistobject) */
-export interface ArtistObject {
+export interface ArtistObject extends SimplifiedArtistObject {
     /**
      * Information about the followers of the artist.
      */

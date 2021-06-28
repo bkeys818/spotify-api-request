@@ -2,17 +2,18 @@ import type { Globals } from '../../jest.config'
 import { getMultipleAlbums, getAlbum, getAlbumsTracks } from '../../src/api/albums'
 import { SimplifiedAlbumObject, AlbumObject } from '../../src/api/objects'
 import {
-    testPagingObject,
-    testContextObject,
+    pagingObject,
+    contextObject,
     testExternalIdObject,
-    testImageObject
+    testCopyrightObject,
+    testImageObject,
 } from './global'
 import { testSimplifiedArtistObject } from './artists.test'
 import { testSimplifiedTrackObject, testTrackObject } from './tracks.test'
 
 export function testSimplifiedAlbumObject(value: SimplifiedAlbumObject): SimplifiedAlbumObject {
     const expectedObj: SimplifiedAlbumObject = {
-        ...testContextObject('album'),
+        ...contextObject('album'),
         album_type: expect.stringMatching(/album|single|compilation/),
         artists: expect.any(Array),
         available_markets: expect.any(Array),
@@ -54,7 +55,7 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
         genres: expect.any(Array),
         label: expect.any(String),
         popularity: expect.any(Number),
-        tracks: testPagingObject<typeof value['tracks']['items'][number]>({
+        tracks: pagingObject<typeof value['tracks']['items'][number]>({
             value: value.tracks,
             url: expect.stringMatching(
                 /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+\/tracks(\\?.+)?/i
@@ -65,12 +66,7 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
 
     expect(value).toMatchObject(expectedObj)
 
-    value.copyrights.forEach(copyright => {
-        expect(copyright).toMatchObject<typeof copyright>({
-            text: expect.any(String),
-            type: expect.stringMatching(/C|P/)
-        })
-    })
+    value.copyrights.forEach(testCopyrightObject)
     value.genres.forEach(genre => {
         expect(genre).toBe(expect.any(String))
     })
@@ -102,7 +98,7 @@ test(getAlbum.name, async () => {
 test(getAlbumsTracks.name, async () => {
     const res = await getAlbumsTracks(token, albumIDs[0])
 
-    expect(res).toMatchObject<typeof res>(testPagingObject<typeof res['items'][number]>({
+    expect(res).toMatchObject<typeof res>(pagingObject<typeof res['items'][number]>({
         value: res,
         url: expect.stringMatching(
             /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+\/tracks(\\?.+)?/i

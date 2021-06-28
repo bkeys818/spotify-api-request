@@ -11,12 +11,12 @@ import {
     getArtistsRelatedArtists,
     getArtistsAlbums,
 } from '../../src/api/artists'
-import { testPagingObject, testContextObject, testImageObject } from './global'
+import { pagingObject, contextObject, testImageObject } from './global'
 import { testAlbumObject } from './albums.test'
 import { testTrackObject } from './tracks.test'
 
 export const testSimplifiedArtistObject: SimplifiedArtistObject = {
-    ...testContextObject('artist'),
+    ...contextObject('artist'),
     id: expect.any(String),
     name: expect.any(String),
 }
@@ -83,7 +83,7 @@ test(getArtistsRelatedArtists.name, async () => {
 test(getArtistsAlbums.name, async () => {
     let res = await getArtistsAlbums(token, artistIDs[0])
 
-    testPagingObject<AlbumObject>({
+    pagingObject<AlbumObject>({
         // @ts-ignore
         value: res,
         url: expect.stringMatching(

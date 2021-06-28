@@ -15,7 +15,7 @@ import {
 import { SimplifiedPlaylistObject, PlaylistObject, PlaylistTrackObject, PagingObject } from '../../src/api/objects'
 import { contextObject, followerObject, pagingObject, testImageObject } from './global'
 import { testTrackObject } from './tracks.test'
-import { testPublicUserObject } from './user-profile.test'
+import { testPublicUserObject, userID } from './user-profile.test'
 
 /** @internal */
 function _testSimplifiedPlaylistObject(value: Omit<SimplifiedPlaylistObject, 'tracks'>): Omit<SimplifiedPlaylistObject, 'tracks'> {
@@ -84,7 +84,6 @@ function testPlaylistTrackObject(value: PlaylistTrackObject): PlaylistTrackObjec
 }
 
 const token = (global as unknown as Globals).testData.token
-const userID = 'spotify'
 const playlistID = '6innvmsboMZC5rdrmY292j'
 
 const playlistPagingObject = (

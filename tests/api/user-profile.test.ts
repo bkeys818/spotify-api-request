@@ -1,7 +1,6 @@
-// import type { Globals } from '../../jest.config'
-// import { getCurrentUsersProfile, getUsersProfile } from '../../src/api/user-profile'
-// import { PrivateUserObject, PublicUserObject } from '../../src/api/objects'
-import { PublicUserObject } from '../../src/api/objects'
+import type { Globals } from '../../jest.config'
+import { getCurrentUsersProfile, getUsersProfile } from '../../src/api/user-profile'
+import { PrivateUserObject, PublicUserObject } from '../../src/api/objects'
 import { testImageObject, followerObject } from './global'
 
 export function testPublicUserObject(value: PublicUserObject): PublicUserObject {
@@ -30,3 +29,27 @@ export function testPublicUserObject(value: PublicUserObject): PublicUserObject 
 
     return expectedObj
 }
+
+export function testPrivateUserObject(value: PrivateUserObject): PrivateUserObject {
+    const expectedObj: PrivateUserObject = {
+        ...testPublicUserObject(value),
+        country: expect.any(String),
+        email: value.email ? expect.any(String): null,
+        product: expect.any(String),
+    }
+    expect(value).toMatchObject(expectedObj)
+    return expectedObj
+}
+
+const token = (global as unknown as Globals).testData.token
+export const userID = 'spotify'
+
+test(getCurrentUsersProfile.name, async () => {
+    const res = await getCurrentUsersProfile(token)
+    testPrivateUserObject(res)
+})
+
+test(getUsersProfile.name, async () => {
+    const res = await getUsersProfile(token, userID)
+    testPublicUserObject(res)
+})

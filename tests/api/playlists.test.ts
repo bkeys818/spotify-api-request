@@ -95,38 +95,32 @@ const playlistPagingObject = (
     itemTest: testPlaylistObject
 })
 
-/**  */
 test(getListOfCurrentUsersPlaylists.name, async () => {
     const res = await getListOfCurrentUsersPlaylists(token)
 
     expect(res).toMatchObject<typeof res>(playlistPagingObject(res))
 })
 
-/**  */
 test(getListOfUsersPlaylists.name, async () => {
     const res = await getListOfUsersPlaylists(token, userID)
 
     expect(res).toMatchObject<typeof res>(playlistPagingObject(res))
 })
 
-// /**  */
 // test(createPlaylist.name, async () => {
 //     const res = await createPlaylist(token)
 // })
 
-/**  */
 test(getPlaylist.name, async () => {
     const res = await getPlaylist(token, playlistID)
 
     testPlaylistObject(res)
 })
 
-// /**  */
 // test(changePlaylistsDetails.name, async () => {
 //     const res = await changePlaylistsDetails(token)
 // })
 
-/**  */
 test(getPlaylistsItems.name, async () => {
     const res = await getPlaylistsItems(token, playlistID, { market: 'US' })
 
@@ -137,29 +131,24 @@ test(getPlaylistsItems.name, async () => {
     }))
 })
 
-// /**  */
 // test(addItemsToPlaylist.name, async () => {
 //     const res = await addItemsToPlaylist(token)
 // })
 
-// /**  */
 // test(reorderOReplacePlaylistsItems.name, async () => {
 //     const res = await reorderOReplacePlaylistsItems(token)
 // })
 
-// /**  */
 // test(removeItemsFromPlaylist.name, async () => {
 //     const res = await removeItemsFromPlaylist(token)
 // })
 
-/**  */
 test(getPlaylistCoverImage.name, async () => {
     const res = await getPlaylistCoverImage(token, playlistID)
 
     res.forEach(testImageObject)
 })
 
-// /**  */
 // test(uploadCustomPlaylistCoverImage.name, async () => {
 //     const res = await uploadCustomPlaylistCoverImage(token)
 // })

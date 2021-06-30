@@ -50,7 +50,7 @@ export function testShowObject(value: ShowObject): ShowObject {
 }
 
 const token = (global as unknown as Globals).testData.token
-const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
+export const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 
 test(getMultipleShows.name, async () => {
     const res = await getMultipleShows(token, showIDs)

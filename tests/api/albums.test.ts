@@ -77,7 +77,7 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
 }
 
 const token = (global as unknown as Globals).testData.token
-const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
+export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 
 test(getMultipleAlbums.name, async () => {
     const res = await getMultipleAlbums(token, albumIDs)

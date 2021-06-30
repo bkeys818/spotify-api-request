@@ -54,7 +54,7 @@ export function testEpisodeObject(value: EpisodeObject): EpisodeObject {
 }
 
 const token = (global as unknown as Globals).testData.token
-const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
+export const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
 
 test(getMultipleEpisodes.name, async () => {
     const res = await getMultipleEpisodes(token, episodeIds)

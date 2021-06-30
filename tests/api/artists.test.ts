@@ -42,7 +42,7 @@ export function testArtistObject(value: ArtistObject): ArtistObject {
 }
 
 const token = (global as unknown as Globals).testData.token
-const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
+export const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 
 test(getMultipleArtists.name, async () => {
     const res = await getMultipleArtists(token, artistIDs)

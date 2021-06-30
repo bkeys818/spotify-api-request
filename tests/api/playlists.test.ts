@@ -83,8 +83,7 @@ function testPlaylistTrackObject(value: PlaylistTrackObject): PlaylistTrackObjec
 }
 
 const token = (global as unknown as Globals).testData.token
-const playlistID = '6innvmsboMZC5rdrmY292j'
-
+export const playlistID = '6innvmsboMZC5rdrmY292j'
 const playlistPagingObject = (
     value: PagingObject<PlaylistObject>
 ): PagingObject<PlaylistObject> => pagingObject<PlaylistObject>({

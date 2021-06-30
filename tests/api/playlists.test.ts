@@ -17,6 +17,9 @@ import { contextObject, followerObject, pagingObject, testImageObject } from './
 import { testTrackObject } from './tracks.test'
 import { testPublicUserObject, userID } from './user-profile.test'
 
+export const playlistsUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/playlists\/[a-z\d]+/
+const playlistsTracksUrlRegExp = new RegExp(playlistsUrlRegExp + '\/tracks(\\?.+)?', 'i')
+
 /** @internal */
 function _testSimplifiedPlaylistObject(value: Omit<SimplifiedPlaylistObject, 'tracks'>): Omit<SimplifiedPlaylistObject, 'tracks'> {
     const expectedObj: Omit<SimplifiedPlaylistObject, 'tracks'> = {
@@ -42,9 +45,7 @@ export function testSimplifiedPlaylistObject(value: SimplifiedPlaylistObject): S
     const expectedObj: SimplifiedPlaylistObject = {
         ..._testSimplifiedPlaylistObject(value),
         tracks: {
-            href: expect.stringMatching(
-                /https:\/\/api\.spotify\.com\/v1\/playlists\/[a-z\d]+\/tracks(\\?.+)?/i
-            ),
+            href: expect.stringMatching(playlistsTracksUrlRegExp),
             total: expect.any(Number)
         },
     }
@@ -58,9 +59,7 @@ export function testPlaylistObject(value: PlaylistObject): PlaylistObject {
         followers: followerObject,
         tracks: pagingObject<PlaylistTrackObject>({
             value: value.tracks,
-            url: expect.stringMatching(
-                /https:\/\/api\.spotify\.com\/v1\/playlists\/[a-z\d]+\/tracks/i
-            ),
+            url: expect.stringMatching(playlistsTracksUrlRegExp),
             itemTest: testPlaylistTrackObject
         })
     }
@@ -90,7 +89,7 @@ const playlistPagingObject = (
     value: PagingObject<PlaylistObject>
 ): PagingObject<PlaylistObject> => pagingObject<PlaylistObject>({
     value: value,
-    url: expect.stringMatching(/https:\/\/api\.spotify\.com\/v1\/playlists\/[a-z\d]+/),
+    url: expect.stringMatching(playlistsUrlRegExp),
     itemTest: testPlaylistObject
 })
 
@@ -125,7 +124,7 @@ test(getPlaylistsItems.name, async () => {
 
     expect(res).toMatchObject<typeof res>(pagingObject<PlaylistTrackObject>({
         value: res,
-        url: expect.stringMatching(/https:\/\/api\.spotify\.com\/v1\/playlists\/[a-z\d]+\/tracks(\\?.+)?/i),
+        url: expect.stringMatching(playlistsTracksUrlRegExp),
         itemTest: testPlaylistTrackObject
     }))
 })

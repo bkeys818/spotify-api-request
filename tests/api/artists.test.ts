@@ -15,6 +15,8 @@ import { pagingObject, contextObject, testImageObject } from './global'
 import { testAlbumObject } from './albums.test'
 import { testTrackObject } from './tracks.test'
 
+export const artistsUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/artists\/[a-z\d]+/i
+
 export const testSimplifiedArtistObject: SimplifiedArtistObject = {
     ...contextObject('artist'),
     id: expect.any(String),
@@ -87,7 +89,7 @@ test(getArtistsAlbums.name, async () => {
         // @ts-ignore
         value: res,
         url: expect.stringMatching(
-            /https:\/\/api\.spotify\.com\/v1\/artists\/[a-z\d]+\/albums(\\?.+)?/i
+            new RegExp(artistsUrlRegExp.source + '\/albums(\\?.+)?', 'i')
         ),
         itemTest: testAlbumObject
     })

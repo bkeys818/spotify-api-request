@@ -3,6 +3,8 @@ import { getCurrentUsersProfile, getUsersProfile } from '../../src/api/user-prof
 import { PrivateUserObject, PublicUserObject } from '../../src/api/objects'
 import { testImageObject, followerObject } from './global'
 
+const usersUrlRegExp =  /https:\/\/api\.spotify\.com\/v1\/users\/[a-z\d-_\.~]+/i
+
 export function testPublicUserObject(value: PublicUserObject): PublicUserObject {
     const expectedObj: PublicUserObject = {
         display_name: expect.any(String),
@@ -14,9 +16,7 @@ export function testPublicUserObject(value: PublicUserObject): PublicUserObject 
             spotify: expect.any(String)
         },
         followers: followerObject,
-        href: expect.stringMatching(
-            /https:\/\/api\.spotify\.com\/v1\/users\/[a-z\d]+/i
-        ),
+        href: expect.stringMatching(usersUrlRegExp),
         id: expect.any(String),
         images: expect.any(Array),
         type: 'user',

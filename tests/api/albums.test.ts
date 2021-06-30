@@ -11,6 +11,8 @@ import {
 import { testSimplifiedArtistObject } from './artists.test'
 import { testSimplifiedTrackObject, testTrackObject } from './tracks.test'
 
+export const albumsUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+/
+
 export function testSimplifiedAlbumObject(value: SimplifiedAlbumObject): SimplifiedAlbumObject {
     const expectedObj: SimplifiedAlbumObject = {
         ...contextObject('album'),
@@ -58,7 +60,7 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
         tracks: pagingObject<typeof value['tracks']['items'][number]>({
             value: value.tracks,
             url: expect.stringMatching(
-                /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+\/tracks(\\?.+)?/i
+                new RegExp(albumsUrlRegExp.source + '\/tracks(\\?.+)?', 'i')
             ),
             itemTest: testSimplifiedTrackObject
         })
@@ -101,7 +103,7 @@ test(getAlbumsTracks.name, async () => {
     expect(res).toMatchObject<typeof res>(pagingObject<typeof res['items'][number]>({
         value: res,
         url: expect.stringMatching(
-            /https:\/\/api\.spotify\.com\/v1\/albums\/[a-z\d]+\/tracks(\\?.+)?/i
+            new RegExp(albumsUrlRegExp.source + '\/tracks(\\?.+)?', 'i')
         ),
         itemTest: testTrackObject
     }))

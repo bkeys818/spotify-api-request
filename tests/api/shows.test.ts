@@ -4,6 +4,8 @@ import { SimplifiedShowObject, ShowObject, SimplifiedEpisodeObject } from '../..
 import { contextObject, testCopyrightObject, testImageObject, pagingObject } from './global'
 import { testSimplifiedEpisodeObject } from './episodes.test'
 
+const showsUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/shows\/[a-z\d]+/
+
 export function testSimplifiedShowObject(value: SimplifiedShowObject): SimplifiedShowObject {
     const expectedObj: SimplifiedShowObject = {
         ...contextObject('show'),
@@ -68,7 +70,7 @@ test(getShowsEpisodes.name, async () => {
     expect(res).toMatchObject<typeof res>(pagingObject<SimplifiedEpisodeObject>({
         value: res,
         url: expect.stringMatching(
-            /https:\/\/api\.spotify\.com\/v1\/shows\/[a-z\d]+\/episodes(\\?.+)?/i
+            new RegExp(showsUrlRegExp + '\/episodes(\\?.+)?', 'i')
         ),
         itemTest: testSimplifiedEpisodeObject
     }))

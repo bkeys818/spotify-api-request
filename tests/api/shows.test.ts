@@ -4,7 +4,7 @@ import { SimplifiedShowObject, ShowObject, SimplifiedEpisodeObject } from '../..
 import { contextObject, testCopyrightObject, testImageObject, pagingObject } from './global'
 import { testSimplifiedEpisodeObject } from './episodes.test'
 
-const showsUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/shows\/[a-z\d]+/
+export const showsUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/shows\/[a-z\d]+/
 
 export function testSimplifiedShowObject(value: SimplifiedShowObject): SimplifiedShowObject {
     const expectedObj: SimplifiedShowObject = {

@@ -4,6 +4,8 @@ import { SimplifiedEpisodeObject, EpisodeObject } from '../../src/api/objects'
 import { contextObject, testImageObject } from './global'
 import { testSimplifiedShowObject } from './shows.test'
 
+export const episodesUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/episodes\/[a-z\d]+/i
+
 export function testSimplifiedEpisodeObject(value: SimplifiedEpisodeObject): SimplifiedEpisodeObject {
     const expectedObj: SimplifiedEpisodeObject = {
         ...contextObject('episode'),

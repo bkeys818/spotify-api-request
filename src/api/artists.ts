@@ -14,7 +14,7 @@ import type {
  * @returns {Promise<{ artists: (ArtistObject | null)[] }>} An object whose key is `"artists"` and whose value is an array of {@link ArtistObject artist object}.
  */
 export async function getMultipleArtists(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<{
     artists: (ArtistObject | null)[]
@@ -38,7 +38,7 @@ export async function getMultipleArtists(
  * @returns {Promise<ArtistObject>} An artist object.
  */
 export async function getArtist(
-    token: Token,
+    token: Token | string,
     id: string[]
 ): Promise<ArtistObject> {
     return await (
@@ -62,7 +62,7 @@ export async function getArtist(
  * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.
  */
 export async function getArtistsTopTracks(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Synonym for `country`. */
@@ -89,7 +89,7 @@ export async function getArtistsTopTracks(
  * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `"artists"` and whose value is an array of up to 20 {@link ArtistObject artist objects}.
  */
 export async function getArtistsRelatedArtists(
-    token: Token,
+    token: Token | string,
     id: string
 ): Promise<{ tracks: TrackObject[] }> {
     return await (
@@ -116,7 +116,7 @@ export async function getArtistsRelatedArtists(
  * @returns {Promise<PagingObject<AlbumObject>>} an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getArtistsAlbums(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /**

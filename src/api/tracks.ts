@@ -14,7 +14,7 @@ import type {
  * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `tracks` and whose value is an array of {@link TrackObject track objects}.
  */
 export async function getSeveralTracks(
-    token: Token,
+    token: Token | string,
     ids: string[],
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
@@ -41,7 +41,7 @@ export async function getSeveralTracks(
  * @returns {Promise<TrackObject>} A {@link TrackObject track object}.
  */
 export async function getTrack(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
@@ -66,7 +66,7 @@ export async function getTrack(
  * @returns {Promise<{ audio_features: AudioFeaturesObject[] }>} An object whose key is `"audio_features"` and whose value is an array of {@link AudioFeaturesObject audio features objects}.
  */
 export async function getAudioFeaturesforSeveralTracks(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<{ audio_features: AudioFeaturesObject[] }> {
     return await (
@@ -86,7 +86,7 @@ export async function getAudioFeaturesforSeveralTracks(
  * @returns {Promise<AudioFeaturesObject>} An {@link AudioFeaturesObject audio features object}.
  */
 export async function getAudioFeaturesforTrack(
-    token: Token,
+    token: Token | string,
     id: string
 ): Promise<AudioFeaturesObject> {
     return await (
@@ -106,7 +106,7 @@ export async function getAudioFeaturesforTrack(
  * @returns {Promise<AudioAnalysisObject>} An {@link AudioAnalysisObject audio analysis object}.
  */
 export async function getAudioAnalysisforTrack(
-    token: Token,
+    token: Token | string,
     id: string
 ): Promise<AudioAnalysisObject> {
     return await (

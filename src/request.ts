@@ -10,7 +10,7 @@ type UrlParameter = {
 export async function sendRequest(params: {
     endpoint: string
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-    token: Token
+    token: Token | string
     headers?: { [key: string]: string }
     pathParameter?: UrlParameter
     queryParameter?: UrlParameter
@@ -35,7 +35,10 @@ export async function sendRequest(params: {
 
     const options: RequestInit = {
         headers: {
-            Authorization: `${params.token.token_type} ${params.token.access_token}`,
+            Authorization:
+                typeof params.token == 'string'
+                    ? `Bearer ${params.token}`
+                    : `${params.token.token_type} ${params.token.access_token}`,
         },
         method: params.method,
     }

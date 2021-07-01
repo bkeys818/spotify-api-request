@@ -15,7 +15,7 @@ import type {
  * @returns {Promise<{message: string, albums: PagingObject<AlbumObject>}>} The response contains a `message` and an `albums` object. The `albums` object contains an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllNewReleases(
-    token: Token,
+    token: Token | string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
         country?: string
@@ -42,7 +42,7 @@ export async function getAllNewReleases(
  * @returns {Promise<{message: string, playlists: PagingObject<PlaylistObject>}>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllFeaturedPlaylists(
-    token: Token,
+    token: Token | string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
         country?: string
@@ -76,7 +76,7 @@ export async function getAllFeaturedPlaylists(
  * @returns {Promise<{categories: PagingObject<CategoryObject>}>} An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllCategories(
-    token: Token,
+    token: Token | string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned items will be globally relevant. */
         country?: string
@@ -106,7 +106,7 @@ export async function getAllCategories(
  * @returns {Promise<CategoryObject>} A {@link CategoryObject category object}.
  */
 export async function getCategory(
-    token: Token,
+    token: Token | string,
     categoryId: string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
@@ -136,7 +136,7 @@ export async function getCategory(
  * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object})
  */
 export async function getCategorysPlaylists(
-    token: Token,
+    token: Token | string,
     categoryId: string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter to ensure that the category exists for a particular country.*/
@@ -167,7 +167,7 @@ export async function getCategorysPlaylists(
  * @returns {Promise<RecommendationsObject>} A {@link RecommendationsObject recommendations response object}
  */
 export async function getRecommendations(
-    token: Token,
+    token: Token | string,
     options: {
         /** The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20. Minimum: 1. Maximum: 100. */
         limit?: number
@@ -281,7 +281,7 @@ export async function getRecommendations(
  * @returns {Promise<RecommendationsObject>} A {@link RecommendationsObject recommendations response object}
  */
 export async function getRecommendationGenres(
-    token: Token
+    token: Token | string
 ): Promise<RecommendationsObject> {
     return await (
         await sendRequest({

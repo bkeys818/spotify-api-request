@@ -10,7 +10,7 @@ import type { PagingObject, ArtistObject, TrackObject } from './objects'
  * @returns {Promise<PagingObject<ArtistObject | TrackObject>>} A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
  */
 export async function getUsersTopArtistsandTracks(
-    token: Token,
+    token: Token | string,
     type: 'artists' | 'tracks',
     options?: {
         /** 

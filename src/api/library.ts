@@ -15,7 +15,7 @@ import type {
  * @returns {Promise<PagingObject<AlbumObject>>} An array of saved {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedAlbums(
-    token: Token,
+    token: Token | string,
     options?: {
         /** The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
@@ -42,7 +42,7 @@ export async function getUsersSavedAlbums(
  * @returns {Promise<void>}
  */
 export async function saveAlbumsforCurrentUser(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -63,7 +63,7 @@ export async function saveAlbumsforCurrentUser(
  * @returns {Promise<void>}
  */
 export async function removeAlbumsforCurrentUser(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -84,7 +84,7 @@ export async function removeAlbumsforCurrentUser(
  * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedAlbums(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<boolean[]> {
     return await (
@@ -104,7 +104,7 @@ export async function checkUsersSavedAlbums(
  * @returns {Promise<PagingObject<TrackObject>>} An array of saved {@link TrackObject track objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedTracks(
-    token: Token,
+    token: Token | string,
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
@@ -131,7 +131,7 @@ export async function getUsersSavedTracks(
  * @returns {Promise<void>}
  */
 export async function saveTracksforUser(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -152,7 +152,7 @@ export async function saveTracksforUser(
  * @returns {Promise<void>}
  */
 export async function removeUsersSavedTracks(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -173,7 +173,7 @@ export async function removeUsersSavedTracks(
  * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedTracks(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<boolean[]> {
     return await (
@@ -195,7 +195,7 @@ export async function checkUsersSavedTracks(
  * @returns {Promise<PagingObject<EpisodeObject>>} An array of saved {@link EpisodeObject episode objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedEpisodes(
-    token: Token,
+    token: Token | string,
     options?: {
         /**
          * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). If a country code is specified, only episodes that are available in that market will be returned.
@@ -232,7 +232,7 @@ export async function getUsersSavedEpisodes(
  * @returns {Promise<void>}
  */
 export async function saveEpisodesforUser(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -255,7 +255,7 @@ export async function saveEpisodesforUser(
  * @returns {Promise<void>}
  */
 export async function removeUsersSavedEpisodes(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -278,7 +278,7 @@ export async function removeUsersSavedEpisodes(
  * @returns {Promise<void>} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedEpisodes(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -298,7 +298,7 @@ export async function checkUsersSavedEpisodes(
  * @returns {Promise<PagingObject<ShowObject>>} An array of {@link ShowObject saved show objects} (wrapped in a {@link PagingObject paging object}) in JSON format. If the current user has no shows saved, the response will be an empty array. If a show is unavailable in the given `market` it is filtered out. The `total` field in the paging object represents the number of all items, filtered or not, and thus might be larger than the actual total number of observable items.
  */
 export async function getUsersSavedShows(
-    token: Token,
+    token: Token | string,
     options?: {
         /** The maximum number of shows to return. Default: 20. Minimum: 1. Maximum: 50 */
         limit?: number
@@ -323,7 +323,7 @@ export async function getUsersSavedShows(
  * @returns {Promise<void>}
  */
 export async function saveShowsforCurrentUser(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<void> {
     return await (
@@ -344,7 +344,7 @@ export async function saveShowsforCurrentUser(
  * @returns {Promise<void>}
  */
 export async function removeUsersSavedShows(
-    token: Token,
+    token: Token | string,
     ids: string[],
     options?: {
         /**
@@ -378,7 +378,7 @@ export async function removeUsersSavedShows(
  * @returns {boolean[]} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedShows(
-    token: Token,
+    token: Token | string,
     ids: string[]
 ): Promise<boolean[]> {
     return await (

@@ -11,7 +11,7 @@ import type { AlbumObject, PagingObject, TrackObject } from './objects'
  * @returns {Promise<{ albums: (AlbumObject | null)[] }} Objects are returned in the order requested. If an object is not found, a `null` value is returned in the appropriate position. Duplicate `ids` in the query will result in duplicate objects in the response.
  */
 export async function getMultipleAlbums(
-    token: Token,
+    token: Token | string,
     ids: string[],
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) orstring `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
@@ -41,7 +41,7 @@ export async function getMultipleAlbums(
  * @returns {Promise<AlbumObject>} An album object in JSON format.
  */
 export async function getAlbum(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /** The market you’d like to request. Synonym for `country`. */
@@ -72,7 +72,7 @@ export async function getAlbum(
  * @returns {Promise<PagingObject<TrackObject>>} An album object in JSON format.
  */
 export async function getAlbumsTracks(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /** The market you’d like to request. Synonym for `country`. */

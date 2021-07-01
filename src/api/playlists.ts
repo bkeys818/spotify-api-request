@@ -16,7 +16,7 @@ import type {
  * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfCurrentUsersPlaylists(
-    token: Token,
+    token: Token | string,
     options?: {
         /** The maximum number of playlists to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
@@ -44,7 +44,7 @@ export async function getListOfCurrentUsersPlaylists(
  * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfUsersPlaylists(
-    token: Token,
+    token: Token | string,
     userId: string,
     options?: {
         /** The maximum number of playlists to return. Default: 20. Minimum: 1. Maximum: 50. */
@@ -76,7 +76,7 @@ export async function getListOfUsersPlaylists(
  * @returns {Promise<PlaylistObject>} - The created {@link addItemsToPlaylist playlist object}.
  */
 export async function createPlaylist(
-    token: Token,
+    token: Token | string,
     userId: string,
     options: {
         /** The name for the new playlist, for example `"Your Coolest Playlist"`. This name does not need to be unique; a user may have several playlists with the same name. */
@@ -116,7 +116,7 @@ export async function createPlaylist(
  * @returns {Promise<PlaylistObject>} A {@link PlaylistObject playlist object} in JSON.
  */
 export async function getPlaylist(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     options?: {
         /**
@@ -156,7 +156,7 @@ export async function getPlaylist(
  * @return {Promise<void>}
  */
 export async function changePlaylistsDetails(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     options: {
         /** The new name for the playlist, for example `"My New Playlist Title"`. */
@@ -196,7 +196,7 @@ export async function changePlaylistsDetails(
  * @returns {Promise<PagingObject<TrackObject>>} An array of {@link TrackObject track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
  */
 export async function getPlaylistsItems(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     options: {
         /**
@@ -238,7 +238,7 @@ export async function getPlaylistsItems(
  * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function addItemsToPlaylist(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     options?: {
         /** The position to insert the items, a zero-based index. For example, to insert the items in the first position: `position=0`; to insert the items in the third position: `position=2`. If omitted, the items will be appended to the playlist. Items are added in the order they are listed in the query string or request body. */
@@ -280,7 +280,7 @@ export async function addItemsToPlaylist(
  * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function reorderOReplacePlaylistsItems(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     options: {
         /** A list of [Spotify URIs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) to set, can be track or episode URIs. A maximum of 100 items can be set in one request. */
@@ -338,7 +338,7 @@ export async function reorderOReplacePlaylistsItems(
  * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function removeItemsFromPlaylist(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     tracks: {
         uri: string
@@ -373,7 +373,7 @@ export async function removeItemsFromPlaylist(
  * @returns {Promise<ImageObject[]>} A list of image objects.
  */
 export async function getPlaylistCoverImage(
-    token: Token,
+    token: Token | string,
     playlistId: string
 ): Promise<ImageObject[]> {
     return await (
@@ -396,7 +396,7 @@ export async function getPlaylistCoverImage(
  * @returns {Promise<void>}
  */
 export async function uploadCustomPlaylistCoverImage(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     image: Buffer | string
 ): Promise<void> {

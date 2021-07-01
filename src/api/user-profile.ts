@@ -8,7 +8,7 @@ import type { PrivateUserObject, PublicUserObject } from './objects'
  * @returns {Promise<PrivateUserObject>} A {@link PrivateUserObject user object}.<br>**Important!** If the `user-read-email` scope is authorized, the returned JSON will include the email address that was entered when the user created their Spotify account. **This email address is unverified**; do not assume that the email address belongs to the user.
  */
 export async function getCurrentUsersProfile(
-    token: Token
+    token: Token | string
 ): Promise<PrivateUserObject> {
     return await (
         await sendRequest({
@@ -26,7 +26,7 @@ export async function getCurrentUsersProfile(
  * @returns {Promise<PublicUserObject>} A {@link PublicUserObject user object}.
  */
 export async function getUsersProfile(
-    token: Token,
+    token: Token | string,
     userId: string
 ): Promise<PublicUserObject> {
     return await (

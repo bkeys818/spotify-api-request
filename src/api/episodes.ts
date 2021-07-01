@@ -10,7 +10,7 @@ import type { EpisodeObject } from './objects'
  * @returns {Promise<EpisodeObject>} An object whose key is episodes and whose value is an array of {@link EpisodeObject episode objects}.
  */
 export async function getMultipleEpisodes(
-    token: Token,
+    token: Token | string,
     ids: string[],
     options?: {
         /**
@@ -45,7 +45,7 @@ export async function getMultipleEpisodes(
  * @returns {Promise<EpisodeObject>} An {@link EpisodeObject episode object}.
  */
 export async function getEpisode(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /**

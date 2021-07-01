@@ -15,7 +15,7 @@ import type {
  * @returns {Promise<{ shows: SimplifiedShowObject[] }>} An object whose key is `shows` and whose value is an array of {@link SimplifiedShowObject simple show object}.
  */
 export async function getMultipleShows(
-    token: Token,
+    token: Token | string,
     ids: string[],
     options?: {
         /**
@@ -50,7 +50,7 @@ export async function getMultipleShows(
  * @returns {Promise<ShowObject>} A {@link ShowObject show object}
  */
 export async function getShow(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /**
@@ -84,7 +84,7 @@ export async function getShow(
  * @returns {Promise<PagingObject<SimplifiedEpisodeObject>>}
  */
 export async function getShowsEpisodes(
-    token: Token,
+    token: Token | string,
     id: string,
     options?: {
         /**

@@ -10,7 +10,7 @@ import type { CursorPagingObject, ArtistObject } from './objects'
  * @returns {Promise<void>}
  */
 export async function followPlaylist(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     options?: {
         /** Defaults to `true`. If `true` the playlist will be included in user’s public playlists, if `false` it will remain private. */
@@ -36,7 +36,7 @@ export async function followPlaylist(
  * @returns {Promise<void>}
  */
 export async function unfollowPlaylist(
-    token: Token,
+    token: Token | string,
     playlistId: string
 ): Promise<void> {
     return await (
@@ -57,7 +57,7 @@ export async function unfollowPlaylist(
  * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the `ids` were specified.
  */
 export async function checkIfUsersFollowPlaylist(
-    token: Token,
+    token: Token | string,
     playlistId: string,
     userIds: string[]
 ): Promise<boolean[]> {
@@ -79,7 +79,7 @@ export async function checkIfUsersFollowPlaylist(
  * @returns {Promise<{ artists: CursorPagingObject<ArtistObject> }>} An object that conatins an `artists` object. The `artists` object in turn contains a {@link CursorPagingObject<ArtistObject> cursor-based paging object} of {@link ArtistObject Artists}.
  */
 export async function getUsersFollowedArtists(
-    token: Token,
+    token: Token | string,
     options: {
         /** The ID type: currently only `artist` is supported. */
         type: string
@@ -107,7 +107,7 @@ export async function getUsersFollowedArtists(
  * @returns {Promise<void>}
  */
 export async function followArtistsOrUsers(
-    token: Token,
+    token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
 ): Promise<void> {
@@ -131,7 +131,7 @@ export async function followArtistsOrUsers(
  * @returns {Promise<void>}
  */
 export async function unfollowArtistsOrUsers(
-    token: Token,
+    token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
 ): Promise<void> {
@@ -155,7 +155,7 @@ export async function unfollowArtistsOrUsers(
  * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the `ids` were specified.
  */
 export async function getFollowingStateForArtistsOrUsers(
-    token: Token,
+    token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
 ): Promise<boolean[]> {

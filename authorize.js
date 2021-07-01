@@ -34,7 +34,7 @@ if (!('REFRESH_TOKEN' in process.env))
 
 // 2. has refresh_token but token is expired
 else if (
-    !('EXPIRES_AT' in process.env) &&
+    !('EXPIRES_AT' in process.env) ||
     parseInt(process.env.EXPIRES_AT) < (new Date()).valueOf()
 ) getNewToken()
     .then(saveToEnv)
@@ -193,7 +193,6 @@ async function postRequest(body) {
  * @param {Token | RefreshTokenResponse} value
  */
 function saveToEnv(value) {
-
     delete value.scope
 
     const expiresAt = ((new Date()).valueOf() + value.expires_in * 1000)
@@ -202,6 +201,9 @@ function saveToEnv(value) {
     const envPath = './.env'
     try {
         const obj = dotenv.parse(fs.readFileSync(envPath))
+        delete obj.ACCESS_TOKEN
+        delete obj.TOKEN_TYPE
+        delete obj.EXPIRES_AT
         const updatedData = Object.entries({
             ...obj,
             ...value,

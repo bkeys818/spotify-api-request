@@ -1,10 +1,10 @@
-import type { Globals } from '../../jest.config'
 import { getUsersTopArtistsandTracks } from '../../src/api/personalization'
 import { PagingObject, TrackObject } from '../../src/api/objects'
 import { pagingObject } from './global'
 import { tracksUrlRegExp, testTrackObject } from './tracks.test'
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 
 test(getUsersTopArtistsandTracks.name, async () => {
     const res = await getUsersTopArtistsandTracks(token, 'tracks')

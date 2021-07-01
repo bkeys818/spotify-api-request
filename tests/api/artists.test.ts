@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import {
     SimplifiedArtistObject,
     ArtistObject,
@@ -41,7 +40,8 @@ export function testArtistObject(value: ArtistObject): ArtistObject {
     return expectedObj
 }
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 export const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 
 test(getMultipleArtists.name, async () => {

@@ -1,7 +1,7 @@
-import type { Globals } from '../../jest.config'
 import { getAvailableMarkets } from '../../src/api/markets'
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 
 test(getAvailableMarkets.name, async () => {
     const res = await getAvailableMarkets(token)

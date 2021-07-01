@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import { 
     // followPlaylist,
     // unfollowPlaylist,
@@ -12,7 +11,8 @@ import { playlistID } from './playlists.test'
 import { userID } from './user-profile.test'
 import { artistsUrlRegExp, testArtistObject, artistIDs } from './artists.test'
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 
 // test(followPlaylist.name, async () => {}
 

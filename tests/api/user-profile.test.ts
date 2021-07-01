@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import { getCurrentUsersProfile, getUsersProfile } from '../../src/api/user-profile'
 import { PrivateUserObject, PublicUserObject } from '../../src/api/objects'
 import { testImageObject, followerObject } from './global'
@@ -41,7 +40,8 @@ export function testPrivateUserObject(value: PrivateUserObject): PrivateUserObje
     return expectedObj
 }
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 export const userID = 'spotify'
 
 test(getCurrentUsersProfile.name, async () => {

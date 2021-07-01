@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import { getMultipleShows, getShow, getShowsEpisodes } from '../../src/api/shows'
 import { SimplifiedShowObject, ShowObject, SimplifiedEpisodeObject } from '../../src/api/objects'
 import { contextObject, testCopyrightObject, testImageObject, pagingObject } from './global'
@@ -49,7 +48,8 @@ export function testShowObject(value: ShowObject): ShowObject {
     return expectedObj
 }
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 export const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 
 test(getMultipleShows.name, async () => {

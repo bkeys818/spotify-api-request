@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import {
     getAllNewReleases,
     getAllFeaturedPlaylists,
@@ -61,7 +60,8 @@ function testRecommendationsObject(
 }
 
 const categoryID = 'party'
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 
 
 test(getAllNewReleases.name, async () => {

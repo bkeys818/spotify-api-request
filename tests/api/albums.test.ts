@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import { getMultipleAlbums, getAlbum, getAlbumsTracks } from '../../src/api/albums'
 import { SimplifiedAlbumObject, AlbumObject } from '../../src/api/objects'
 import {
@@ -76,7 +75,8 @@ export function testAlbumObject(value: AlbumObject): AlbumObject {
     return expectedObj
 }
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 
 test(getMultipleAlbums.name, async () => {

@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import { getMultipleEpisodes, getEpisode } from '../../src/api/episodes'
 import { SimplifiedEpisodeObject, EpisodeObject } from '../../src/api/objects'
 import { contextObject, testImageObject } from './global'
@@ -53,7 +52,8 @@ export function testEpisodeObject(value: EpisodeObject): EpisodeObject {
     return expectedObj
 }
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 export const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
 
 test(getMultipleEpisodes.name, async () => {

@@ -1,15 +1,10 @@
 import type { Config } from '@jest/types'
 import { config } from 'dotenv'
 
-import fetch from 'node-fetch'
-import type { Token } from './src/authorize'
-
 config()
 
 export interface Globals {
-    testData: {
-        token: Token
-    }
+    token: string
 }
 
 type JestConfig = Omit<Config.InitialOptions, 'globals'> & {
@@ -20,18 +15,7 @@ export default  async (): Promise<JestConfig> => {
     return {
         preset: 'ts-jest',
         globals: {
-            testData: {
-                token: await fetch('https://accounts.spotify.com/api/token', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Basic ${Buffer.from(
-                            `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
-                        ).toString("base64")}`,
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                    },
-                    body: encodeURIComponent('grant_type') + '=' + encodeURIComponent('client_credentials'),
-                }).then(res => res.json())
-            }
+            token: process.env.ACCESS_TOKEN!
         },
         collectCoverageFrom: [ '**/src/**/*.ts' ]
     }

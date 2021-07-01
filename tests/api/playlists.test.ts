@@ -1,4 +1,3 @@
-import type { Globals } from '../../jest.config'
 import {
     getListOfCurrentUsersPlaylists,
     getListOfUsersPlaylists,
@@ -82,7 +81,8 @@ function testPlaylistTrackObject(value: PlaylistTrackObject): PlaylistTrackObjec
     return expectedObj
 }
 
-const token = (global as unknown as Globals).testData.token
+// @ts-ignore
+const token = global.token
 export const playlistID = '6innvmsboMZC5rdrmY292j'
 const playlistPagingObject = (
     value: PagingObject<PlaylistObject>

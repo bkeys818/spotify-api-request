@@ -24,21 +24,21 @@ export function simplifiedShowObject(
     return {
         ...contextObject('show'),
         available_markets: expect.arrayContaining<
-            typeof value['available_markets'][number]
+            typeof value.available_markets[number]
         >([expect.any(String)]),
-        copyrights: expect.arrayContaining<typeof value['copyrights'][number]>([
+        copyrights: expect.arrayContaining<typeof value.copyrights[number]>([
             copyrightObject,
         ]),
         description: expect.any(String),
         explicit: expect.any(Boolean),
         id: expect.any(String),
-        images: expect.arrayContaining<typeof value['images'][number]>(
+        images: expect.arrayContaining<typeof value.images[number]>(
             value.images.map(imageObject)
         ),
         is_externally_hosted: value.is_externally_hosted
             ? expect.any(Boolean)
             : null,
-        languages: expect.arrayContaining<typeof value['languages'][number]>([
+        languages: expect.arrayContaining<typeof value.languages[number]>([
             expect.any(String),
         ]),
         media_type: expect.any(String),
@@ -50,7 +50,7 @@ export function simplifiedShowObject(
 export function showObject(value: ShowObject): ShowObject {
     return {
         ...simplifiedShowObject(value),
-        episodes: expect.arrayContaining<typeof value['episodes'][number]>(
+        episodes: expect.arrayContaining<typeof value.episodes[number]>(
             value.episodes.map(simplifiedEpisodeObject)
         ),
     }
@@ -63,7 +63,7 @@ export const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 test(getMultipleShows.name, async () => {
     const res = await getMultipleShows(token, showIDs)
     expect(res).toMatchObject<typeof res>({
-        shows: expect.arrayContaining<typeof res['shows'][number]>(
+        shows: expect.arrayContaining<typeof res.shows[number]>(
             res.shows.map(simplifiedShowObject)
         ),
     })

@@ -40,7 +40,7 @@ test(getUsersFollowedArtists.name, async () => {
             },
             href: expect.stringMatching(artistsUrlRegExpWithQuery),
             items: expect.arrayContaining<
-                typeof res['artists']['items'][number]
+                typeof res.artists.items[number]
             >(res.artists.items.map(artistObject)),
             limit: expect.any(Number),
             next: res.artists.next

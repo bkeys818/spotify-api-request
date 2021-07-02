@@ -17,7 +17,7 @@ export function publicUserObject(value: PublicUserObject): PublicUserObject {
         followers: followerObject,
         href: expect.stringMatching(usersUrlRegExp),
         id: expect.any(String),
-        images: expect.arrayContaining<typeof value['images'][number]>(
+        images: expect.arrayContaining<typeof value.images[number]>(
             value.images.map(imageObject)
         ),
         type: 'user',

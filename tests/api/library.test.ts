@@ -47,7 +47,7 @@ test.each([
     const urlRegExpQuery = new RegExp(urlRegExp.source + '(\\?.+)?', 'i')
     expect(res).toMatchObject<typeof res>({
         href: expect.stringMatching(urlRegExpQuery),
-        items: expect.arrayContaining<typeof res['items'][number]>(
+        items: expect.arrayContaining<typeof res.items[number]>(
             // @ts-ignore
             res.items.map(testItem)
         ),

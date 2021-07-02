@@ -31,7 +31,7 @@ export function artistObject(value: ArtistObject): ArtistObject {
             total: expect.any(Number),
         },
         genres: expect.arrayContaining([expect.any(String)]),
-        images: expect.arrayContaining<typeof value['images'][number]>(
+        images: expect.arrayContaining<typeof value.images[number]>(
             value.images.map(imageObject)
         ),
         popularity: expect.any(Number),
@@ -46,7 +46,7 @@ test(getMultipleArtists.name, async () => {
     const res = await getMultipleArtists(token, artistIDs)
 
     expect(res).toMatchObject<typeof res>({
-        artists: expect.arrayContaining<typeof res['artists'][number]>(
+        artists: expect.arrayContaining<typeof res.artists[number]>(
             res.artists.map((artist) => (artist ? artistObject(artist) : null))
         ),
     })
@@ -61,7 +61,7 @@ test(getArtistsTopTracks.name, async () => {
     const res = await getArtistsTopTracks(token, artistIDs[0])
 
     expect(res).toMatchObject<typeof res>({
-        tracks: expect.arrayContaining<typeof res['tracks'][number]>(
+        tracks: expect.arrayContaining<typeof res.tracks[number]>(
             res.tracks.map(trackObject)
         ),
     })
@@ -71,7 +71,7 @@ test(getArtistsRelatedArtists.name, async () => {
     const res = await getArtistsRelatedArtists(token, artistIDs[0])
 
     expect(res).toMatchObject<typeof res>({
-        artists: expect.arrayContaining<typeof res['artists'][number]>(
+        artists: expect.arrayContaining<typeof res.artists[number]>(
             res.artists.map(artistObject)
         ),
     })

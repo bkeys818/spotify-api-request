@@ -15,7 +15,7 @@ export function pagingObject<T extends HasEndpoint>(props: {
 }): PagingObject<T> {
     return {
         href: props.url,
-        items: expect.arrayContaining<typeof props.value['items'][number]>(
+        items: expect.arrayContaining<typeof props.value.items[number]>(
             props.value.items.map(props.itemTest)
         ),
         limit: expect.any(Number),

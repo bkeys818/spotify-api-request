@@ -42,7 +42,7 @@ function _simplifiedPlaylistObject(
         collaborative: expect.any(Boolean),
         description: value.description ? expect.any(String) : null,
         id: expect.any(String),
-        images: expect.arrayContaining<typeof value['images'][number]>(
+        images: expect.arrayContaining<typeof value.images[number]>(
             value.images.map(imageObject)
         ),
         name: expect.any(String),

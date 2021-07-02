@@ -17,7 +17,7 @@ export function simplifiedEpisodeObject(
         explicit: expect.any(Boolean),
         html_description: expect.any(String),
         id: expect.any(String),
-        images: expect.arrayContaining<typeof value['images'][number]>(
+        images: expect.arrayContaining<typeof value.images[number]>(
             value.images.map(imageObject)
         ),
         is_externally_hosted: expect.any(Boolean),
@@ -35,7 +35,7 @@ export function simplifiedEpisodeObject(
         }
 
     if (value.languages)
-        expectedObj.languages = expect.arrayContaining([expect.any(String)])
+        expectedObj.languages = expect.arrayContaining<typeof value.language[number]>([expect.any(String)])
 
     return expectedObj
 }

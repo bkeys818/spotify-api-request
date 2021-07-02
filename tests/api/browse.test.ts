@@ -24,7 +24,7 @@ const categoriesUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/browse\/categories
 function categoryObject(value: CategoryObject): CategoryObject {
     return{
         href: expect.stringMatching(categoriesUrlRegExp),
-        icons: expect.arrayContaining<typeof value['icons'][number]>(
+        icons: expect.arrayContaining<typeof value.icons[number]>(
             value.icons.map(imageObject)
         ),
         id: expect.any(String),
@@ -36,7 +36,7 @@ function recommendationsObject(
     value: RecommendationsObject
 ): RecommendationsObject {
     return {
-        seeds: expect.arrayContaining<typeof value['seeds'][number]>(
+        seeds: expect.arrayContaining<typeof value.seeds[number]>(
                 value.seeds.map(seed => ({
                 afterFilteringSize: expect.any(Number),
                 afterRelinkingSize: expect.any(Number),
@@ -51,7 +51,7 @@ function recommendationsObject(
                 type: expect.stringMatching(/artist|track|genre/),
             }))
         ),
-        tracks: expect.arrayContaining<typeof value['tracks'][number]>(
+        tracks: expect.arrayContaining<typeof value.tracks[number]>(
             value.tracks.map(simplifiedTrackObject)
         ),
     }

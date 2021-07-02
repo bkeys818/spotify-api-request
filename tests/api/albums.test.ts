@@ -23,14 +23,14 @@ export function simplifiedAlbumObject(
     const expectedObj: SimplifiedAlbumObject = {
         ...contextObject('album'),
         album_type: expect.stringMatching(/album|single|compilation/),
-        artists: expect.arrayContaining<typeof value['artists'][number]>([
+        artists: expect.arrayContaining<typeof value.artists[number]>([
             simplifiedArtistObject,
         ]),
         available_markets: expect.arrayContaining<
-            typeof value['available_markets'][number]
+            typeof value.available_markets[number]
         >([expect.any(String)]),
         id: expect.any(String),
-        images: expect.arrayContaining<typeof value['images'][number]>(
+        images: expect.arrayContaining<typeof value.images[number]>(
             value.images.map(imageObject)
         ),
         name: expect.any(String),
@@ -54,14 +54,14 @@ export function simplifiedAlbumObject(
 export function albumObject(value: AlbumObject): AlbumObject {
     return {
         ...simplifiedAlbumObject(value),
-        copyrights: expect.arrayContaining<typeof value['copyrights'][number]>([
+        copyrights: expect.arrayContaining<typeof value.copyrights[number]>([
             copyrightObject,
         ]),
         external_ids: externalIdObject(value.external_ids),
         genres: expect.arrayContaining([expect.any(String)]),
         label: expect.any(String),
         popularity: expect.any(Number),
-        tracks: pagingObject<typeof value['tracks']['items'][number]>({
+        tracks: pagingObject<typeof value.tracks.items[number]>({
             value: value.tracks,
             url: expect.stringMatching(
                 new RegExp(albumsUrlRegExp.source + '/tracks(\\?.+)?', 'i')
@@ -79,7 +79,7 @@ test(getMultipleAlbums.name, async () => {
     const res = await getMultipleAlbums(token, albumIDs)
 
     expect(res).toMatchObject<typeof res>({
-        albums: expect.arrayContaining<typeof res['albums'][number]>(
+        albums: expect.arrayContaining<typeof res.albums[number]>(
             res.albums.map((album) => (album ? albumObject(album) : null))
         ),
     })
@@ -94,7 +94,7 @@ test(getAlbumsTracks.name, async () => {
     const res = await getAlbumsTracks(token, albumIDs[0])
 
     expect(res).toMatchObject<typeof res>(
-        pagingObject<typeof res['items'][number]>({
+        pagingObject<typeof res.items[number]>({
             value: res,
             url: expect.stringMatching(
                 new RegExp(albumsUrlRegExp.source + '/tracks(\\?.+)?', 'i')

@@ -5,16 +5,12 @@ import { } from './global'
 
 export const tracksUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/tracks\/[a-z\d]+/i
 
-export function testSimplifiedTrackObject(value: SimplifiedTrackObject): SimplifiedTrackObject {
-    const expectedObj: SimplifiedTrackObject = expect.any(Object)
-    expect(value).toMatchObject(expectedObj)
-    return expectedObj
+export function simplifiedTrackObject(_: SimplifiedTrackObject): SimplifiedTrackObject {
+    return expect.any(Object)
 }
 
-export function testTrackObject(value: TrackObject): TrackObject {
-    const expectedObj: TrackObject = expect.any(Object)
-    expect(value).toMatchObject(expectedObj)
-    return expectedObj
+export function trackObject(_: TrackObject): TrackObject {
+    return expect.any(Object)
 }
 
 // const token = (global as unknown as Globals).testData.token

@@ -13,50 +13,48 @@ import {
     CategoryObject,
     RecommendationsObject,
 } from '../../src/api/objects'
-import { pagingObject, testImageObject } from './global'
-import { testAlbumObject, albumsUrlRegExp } from './albums.test'
-import { testPlaylistObject, playlistsUrlRegExp } from './playlists.test'
+import { pagingObject, imageObject } from './global'
+import { albumObject, albumsUrlRegExp } from './albums.test'
+import { playlistObject, playlistsUrlRegExp } from './playlists.test'
 import { artistsUrlRegExp, artistIDs } from './artists.test'
-import { tracksUrlRegExp, testSimplifiedTrackObject, trackIds } from './tracks.test'
+import { tracksUrlRegExp, simplifiedTrackObject, trackIds } from './tracks.test'
 
 const categoriesUrlRegExp = /https:\/\/api\.spotify\.com\/v1\/browse\/categories\/[a-z\d]+/i
 
-function testCategoryObject(value: CategoryObject): CategoryObject {
-    const expectedObj: CategoryObject = {
+function categoryObject(value: CategoryObject): CategoryObject {
+    return{
         href: expect.stringMatching(categoriesUrlRegExp),
-        icons: expect.any(Array),
+        icons: expect.arrayContaining<typeof value['icons'][number]>(
+            value.icons.map(imageObject)
+        ),
         id: expect.any(String),
         name: expect.any(String),
     }
-    expect(value).toMatchObject(expectedObj)
-    value.icons.forEach(testImageObject)
-    return expectedObj
 }
 
-function testRecommendationsObject(
+function recommendationsObject(
     value: RecommendationsObject
 ): RecommendationsObject {
-    const expectedObj: RecommendationsObject = {
-        seeds: expect.any(Array),
-        tracks: expect.any(Array),
+    return {
+        seeds: expect.arrayContaining<typeof value['seeds'][number]>(
+                value.seeds.map(seed => ({
+                afterFilteringSize: expect.any(Number),
+                afterRelinkingSize: expect.any(Number),
+                href:
+                    seed.type == 'artist'
+                        ? expect.stringMatching(artistsUrlRegExp)
+                        : seed.type == 'track'
+                        ? expect.stringMatching(tracksUrlRegExp)
+                        : null,
+                id: expect.any(String),
+                initialPoolSize: expect.any(Number),
+                type: expect.stringMatching(/artist|track|genre/),
+            }))
+        ),
+        tracks: expect.arrayContaining<typeof value['tracks'][number]>(
+            value.tracks.map(simplifiedTrackObject)
+        ),
     }
-    value.seeds.forEach((seed) => {
-        expect(seed).toMatchObject<typeof seed>({
-            afterFilteringSize: expect.any(Number),
-            afterRelinkingSize: expect.any(Number),
-            href:
-                seed.type == 'artist'
-                    ? expect.stringMatching(artistsUrlRegExp)
-                    : seed.type == 'track'
-                    ? expect.stringMatching(tracksUrlRegExp)
-                    : null,
-            id: expect.any(String),
-            initialPoolSize: expect.any(Number),
-            type: expect.stringMatching(/artist|track|genre/),
-        })
-    })
-    value.tracks.forEach(testSimplifiedTrackObject)
-    return expectedObj
 }
 
 const categoryID = 'party'
@@ -71,7 +69,7 @@ test(getAllNewReleases.name, async () => {
         albums: pagingObject<AlbumObject>({
             value: res.albums,
             url: expect.stringMatching(albumsUrlRegExp),
-            itemTest: testAlbumObject,
+            itemTest: albumObject,
         }),
     })
 })
@@ -83,7 +81,7 @@ test(getAllFeaturedPlaylists.name, async () => {
         playlists: pagingObject<PlaylistObject>({
             value: res.playlists,
             url: expect.stringMatching(playlistsUrlRegExp),
-            itemTest: testPlaylistObject,
+            itemTest: playlistObject,
         }),
     })
 })
@@ -94,14 +92,14 @@ test(getAllCategories.name, async () => {
         categories: pagingObject<CategoryObject>({
             value: res.categories,
             url: expect.stringMatching(categoriesUrlRegExp),
-            itemTest: testCategoryObject,
+            itemTest: categoryObject,
         }),
     })
 })
 
 test(getCategory.name, async () => {
     const res = await getCategory(token, categoryID)
-    testCategoryObject(res)
+    expect(res).toMatchObject<typeof res>(categoryObject(res))
 })
 
 test(getCategorysPlaylists.name, async () => {
@@ -110,7 +108,7 @@ test(getCategorysPlaylists.name, async () => {
         pagingObject<PlaylistObject>({
             value: res,
             url: expect.stringMatching(playlistsUrlRegExp),
-            itemTest: testPlaylistObject,
+            itemTest: playlistObject,
         })
     )
 })
@@ -121,10 +119,10 @@ test(getRecommendations.name, async () => {
         seed_tracks: trackIds[0],
         seed_genres: categoryID,
     })
-    testRecommendationsObject(res)
+    expect(res).toMatchObject<typeof res>(recommendationsObject(res))
 })
 
 test(getRecommendationGenres.name, async () => {
     const res = await getRecommendationGenres(token)
-    testRecommendationsObject(res)
+    expect(res).toMatchObject<typeof res>(recommendationsObject(res))
 })

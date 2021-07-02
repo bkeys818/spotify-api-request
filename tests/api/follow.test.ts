@@ -1,4 +1,4 @@
-import { 
+import {
     // followPlaylist,
     // unfollowPlaylist,
     checkIfUsersFollowPlaylist,
@@ -9,7 +9,7 @@ import {
 } from '../../src/api/follow'
 import { playlistID } from './playlists.test'
 import { userID } from './user-profile.test'
-import { artistsUrlRegExp, testArtistObject, artistIDs } from './artists.test'
+import { artistsUrlRegExp, artistObject, artistIDs } from './artists.test'
 
 // @ts-ignore
 const token = global.token
@@ -21,32 +21,38 @@ const token = global.token
 test(checkIfUsersFollowPlaylist.name, async () => {
     const res = await checkIfUsersFollowPlaylist(token, playlistID, [userID])
 
-    expect(res).toEqual(expect.any(Array))
-    res.forEach(playlist => expect(playlist).toEqual(true))
+    expect(res).toEqual(
+        expect.arrayContaining<typeof res[number]>([expect.any(Boolean)])
+    )
 })
 
 test(getUsersFollowedArtists.name, async () => {
     const res = await getUsersFollowedArtists(token, { type: 'artist' })
 
     const artistsUrlRegExpWithQuery = new RegExp(
-        artistsUrlRegExp + '\/tracks(\\?.+)?', 'i'
+        artistsUrlRegExp + '/tracks(\\?.+)?',
+        'i'
     )
     expect(res).toMatchObject<typeof res>({
         artists: {
             cursors: {
-                after: expect.any(String)
+                after: expect.any(String),
             },
             href: expect.stringMatching(artistsUrlRegExpWithQuery),
-            items:  expect.any(Array),
+            items: expect.arrayContaining<
+                typeof res['artists']['items'][number]
+            >(res.artists.items.map(artistObject)),
             limit: expect.any(Number),
-            next: res.artists.next ? expect.stringMatching(artistsUrlRegExpWithQuery) : null,
-            offset:  expect.any(Number),
-            previous: res.artists.previous ? expect.stringMatching(artistsUrlRegExpWithQuery) : null,
-            total:  expect.any(Number),
-        }
+            next: res.artists.next
+                ? expect.stringMatching(artistsUrlRegExpWithQuery)
+                : null,
+            offset: expect.any(Number),
+            previous: res.artists.previous
+                ? expect.stringMatching(artistsUrlRegExpWithQuery)
+                : null,
+            total: expect.any(Number),
+        },
     })
-
-    res.artists.items.forEach(testArtistObject)
 })
 
 // test(followArtistsOrUsers.name, async () => {}
@@ -54,8 +60,13 @@ test(getUsersFollowedArtists.name, async () => {
 // test(unfollowArtistsOrUsers.name, async () => {}
 
 test(getFollowingStateForArtistsOrUsers.name, async () => {
-    const res = await getFollowingStateForArtistsOrUsers(token, 'artist', artistIDs)
+    const res = await getFollowingStateForArtistsOrUsers(
+        token,
+        'artist',
+        artistIDs
+    )
 
-    expect(res).toEqual(expect.any(Array))
-    res.forEach(playlist => expect(playlist).toEqual(true))
+    expect(res).toEqual(
+        expect.arrayContaining<typeof res[number]>([expect.any(Boolean)])
+    )
 })

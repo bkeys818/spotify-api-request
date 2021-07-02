@@ -1,11 +1,11 @@
 import { getCurrentUsersProfile, getUsersProfile } from '../../src/api/user-profile'
 import { PrivateUserObject, PublicUserObject } from '../../src/api/objects'
-import { testImageObject, followerObject } from './global'
+import { imageObject, followerObject } from './global'
 
 const usersUrlRegExp =  /https:\/\/api\.spotify\.com\/v1\/users\/[a-z\d-_\.~]+/i
 
-export function testPublicUserObject(value: PublicUserObject): PublicUserObject {
-    const expectedObj: PublicUserObject = {
+export function publicUserObject(value: PublicUserObject): PublicUserObject {
+    return {
         display_name: expect.any(String),
         explicit_content: {
             filter_enabled: expect.any(Boolean),
@@ -17,27 +17,21 @@ export function testPublicUserObject(value: PublicUserObject): PublicUserObject 
         followers: followerObject,
         href: expect.stringMatching(usersUrlRegExp),
         id: expect.any(String),
-        images: expect.any(Array),
+        images: expect.arrayContaining<typeof value['images'][number]>(
+            value.images.map(imageObject)
+        ),
         type: 'user',
         uri: expect.any(String),
     }
-
-    value.images.forEach(testImageObject)
-
-    expect(value).toMatchObject(expectedObj)
-
-    return expectedObj
 }
 
-export function testPrivateUserObject(value: PrivateUserObject): PrivateUserObject {
-    const expectedObj: PrivateUserObject = {
-        ...testPublicUserObject(value),
+export function privateUserObject(value: PrivateUserObject): PrivateUserObject {
+    return {
+        ...publicUserObject(value),
         country: expect.any(String),
         email: value.email ? expect.any(String): null,
         product: expect.any(String),
     }
-    expect(value).toMatchObject(expectedObj)
-    return expectedObj
 }
 
 // @ts-ignore
@@ -46,10 +40,10 @@ export const userID = 'spotify'
 
 test(getCurrentUsersProfile.name, async () => {
     const res = await getCurrentUsersProfile(token)
-    testPrivateUserObject(res)
+    expect(res).toMatchObject<typeof res>(privateUserObject(res))
 })
 
 test(getUsersProfile.name, async () => {
     const res = await getUsersProfile(token, userID)
-    testPublicUserObject(res)
+    expect(res).toMatchObject<typeof res>(publicUserObject(res))
 })

@@ -7,11 +7,11 @@ import type { PagingObject, ArtistObject, TrackObject } from './objects'
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the current user.<br>Getting details of a user’s top artists and tracks requires authorization of the `user-top-read` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
  * @param {'artists'|'tracks'} type - The type of entity to return.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<ArtistObject | TrackObject>>} A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
+ * @returns {Promise<PagingObject<T extends 'artists' ? ArtistObject : TrackObject, T>>} A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
  */
-export async function getUsersTopArtistsandTracks(
+export async function getUsersTopArtistsandTracks<T extends 'artists' | 'tracks'>(
     token: Token | string,
-    type: 'artists' | 'tracks',
+    type: T,
     options?: {
         /** 
          * Over what time frame the affinities are computed.
@@ -27,7 +27,7 @@ export async function getUsersTopArtistsandTracks(
         /** The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities. */
         offset?: number
     }
-): Promise<PagingObject<ArtistObject | TrackObject>> {
+): Promise<PagingObject<T extends 'artists' ? ArtistObject : TrackObject, T>> {
     return await (
         await sendRequest({
             endpoint: 'me/top/{type}',

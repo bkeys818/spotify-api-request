@@ -12,7 +12,7 @@ import type {
  * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} options
- * @returns {Promise<{message: string, albums: PagingObject<AlbumObject>}>} The response contains a `message` and an `albums` object. The `albums` object contains an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<{message: string, albums: PagingObject<AlbumObject,'albums'>}>} The response contains a `message` and an `albums` object. The `albums` object contains an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllNewReleases(
     token: Token | string,
@@ -24,7 +24,7 @@ export async function getAllNewReleases(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<{ message: string; albums: PagingObject<AlbumObject> }> {
+): Promise<{ message: string; albums: PagingObject<AlbumObject, 'albums'> }> {
     return await (
         await sendRequest({
             endpoint: 'browse/new-releases',
@@ -39,7 +39,7 @@ export async function getAllNewReleases(
  * Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} [options]
- * @returns {Promise<{message: string, playlists: PagingObject<PlaylistObject>}>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<{message: string, playlists: PagingObject<PlaylistObject, 'playlists'>}>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllFeaturedPlaylists(
     token: Token | string,
@@ -57,7 +57,7 @@ export async function getAllFeaturedPlaylists(
     }
 ): Promise<{
     message: string
-    playlists: PagingObject<PlaylistObject>
+    playlists: PagingObject<PlaylistObject, 'playlists'>
 }> {
     return await (
         await sendRequest({
@@ -73,7 +73,7 @@ export async function getAllFeaturedPlaylists(
  * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} [options]
- * @returns {Promise<{categories: PagingObject<CategoryObject>}>} An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<{categories: PagingObject<CategoryObject,'categories'>}>} An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllCategories(
     token: Token | string,
@@ -87,7 +87,7 @@ export async function getAllCategories(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of categories. */
         offset?: number
     }
-): Promise<{ categories: PagingObject<CategoryObject> }> {
+): Promise<{ categories: PagingObject<CategoryObject, 'categories'> }> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories',
@@ -133,7 +133,7 @@ export async function getCategory(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the category.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object})
+ * @returns {Promise<PagingObject<PlaylistObject,'category’s playlists'>>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object})
  */
 export async function getCategorysPlaylists(
     token: Token | string,
@@ -146,7 +146,7 @@ export async function getCategorysPlaylists(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.*/
         offset?: number
     }
-): Promise<PagingObject<PlaylistObject>> {
+): Promise<PagingObject<PlaylistObject, 'category’s playlists'>> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories/{category_id}/playlists',

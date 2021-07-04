@@ -3,7 +3,7 @@ import {
     getAlbum,
     getAlbumsTracks,
 } from '../../src/api/albums'
-import { albumObject, pagingObject, url, trackObject } from './objects'
+import { albumObject, pagingObject, trackObject } from './objects'
 
 // @ts-ignore
 const token = global.token
@@ -28,9 +28,9 @@ test(getAlbumsTracks.name, async () => {
     console.log(res)
 
     expect(res).toEqual<typeof res>(
-        pagingObject<typeof res['items'][number]>({
+        pagingObject({
             value: res,
-            url: url(/albums\/[a-z\d]+\/tracks/, true),
+            endpoint: 'album’s tracks',
             testObj: trackObject,
         })
     )

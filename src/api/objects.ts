@@ -1,25 +1,35 @@
 /** @internal */
-export type HasEndpoint = 
-    | SimplifiedAlbumObject | AlbumObject
-    | SimplifiedArtistObject | ArtistObject
-    | SimplifiedEpisodeObject | EpisodeObject
-    | SimplifiedPlaylistObject | PlaylistObject
-    | SimplifiedShowObject | ShowObject
-    | SimplifiedTrackObject | TrackObject
-    | PlaylistTracksRefObject | PlaylistTrackObject
-    | CategoryObject
-    | PublicUserObject
-type HREF<T extends HasEndpoint> = 
-      T extends (SimplifiedAlbumObject | AlbumObject) ? `https://api.spotify.com/v1/albums/${string}`
-    : T extends (SimplifiedArtistObject | ArtistObject) ? `https://api.spotify.com/v1/artists/${string}`
-    : T extends (SimplifiedEpisodeObject | EpisodeObject) ? `https://api.spotify.com/v1/episodes/${string}`
-    : T extends (SimplifiedPlaylistObject | PlaylistObject) ? `https://api.spotify.com/v1/playlists/${string}`
-    : T extends (SimplifiedShowObject | ShowObject) ? `https://api.spotify.com/v1/shows/${string}`
-    : T extends (SimplifiedTrackObject | TrackObject) ? `https://api.spotify.com/v1/tracks/${string}`
-    : T extends (PlaylistTracksRefObject | PlaylistTrackObject) ? `https://api.spotify.com/v1/playlists/${string}/tracks`
-    : T extends (CategoryObject) ? `https://api.spotify.com/v1/browse/categories/${string}`
-    : T extends (PublicUserObject) ? `https://api.spotify.com/v1/users/${string}`
-    : never
+export const urlBase = 'https://api.spotify.com/v1/' as const
+/** @internal */
+export const endpoints = {
+    'albums': `albums/{id}` as `albums/${string}`,
+    'album’s tracks': `albums/{id}/tracks` as `albums/${string}/tracks`,
+    'artists': `artists/{id}` as `artists/${string}`,
+    'artist’s albums': `artists/{id}/albums` as `artists/${string}/albums`,
+    'categories': `browse/categories/{id}` as `browse/categories/${string}`,
+    'category’s playlists': `browse/categories/{id}/playlists` as `browse/categories/${string}/playlist`,
+    'episodes' :`episodes/{id}` as `episodes/${string}`,
+    'playlists': `playlists/{id}` as `playlists/${string}`,
+    'playlist’s tracks': `playlists/{id}/tracks` as `playlists/${string}/tracks`,
+    'show’s episodes': `shows/{id}/episodes` as `shows/${string}/episodes`,
+    'shows': `shows/{id}` as `shows/${string}`,
+    'tracks': `tracks/{id}` as `tracks/${string}`,
+    'users': `users/{id}` as `users/${string}`,
+    'user’s playlists': `users/{id}/playlist` as `users/${string}/playlist`,
+    'search': `search` as const,
+    'my albums': `me/albums` as const,
+    'my episodes': `me/episodes` as const,
+    'my shows': `me/shows` as const,
+    'my tracks': `me/tracks` as const,
+} as const
+/** @internal */
+type Query = `?${string}` | ''
+
+type UrlBase = typeof urlBase
+export type Endpoint = keyof typeof endpoints
+type EndpointUrl<E extends Endpoint> = typeof endpoints[E]
+type SpotifyUrl<E extends Endpoint> = `${UrlBase}${EndpointUrl<E>}${Query | ''}`
+
 
 /** [Album Object](https://developer.spotify.com/documentation/web-api/reference/#object-albumobject) */
 export interface AlbumObject extends SimplifiedAlbumObject {
@@ -48,7 +58,7 @@ export interface AlbumObject extends SimplifiedAlbumObject {
     /**
      * The tracks of the album.
      */
-    tracks: PagingObject<SimplifiedTrackObject>
+    tracks: PagingObject<SimplifiedTrackObject, 'album’s tracks'>
 }
 
 /** [Album Restriction Object](https://developer.spotify.com/documentation/web-api/reference/#object-albumrestrictionobject) & [Track Restriction Object](https://developer.spotify.com/documentation/web-api/reference/#object-trackrestrictionobject) */
@@ -237,7 +247,7 @@ export interface AudioFeaturesObject {
      */
     time_signature: number
     /** A link to the Web API endpoint providing full details of the track. */
-    track_href: HREF<TrackObject>
+    track_href: SpotifyUrl<'tracks'>
     /** The object type: “audio_features” */
     type: 'audio_features'
     /** The Spotify URI for the track. */
@@ -252,7 +262,7 @@ export interface AudioFeaturesObject {
 /** [Category Object](https://developer.spotify.com/documentation/web-api/reference/#object-categoryobject) */
 export interface CategoryObject {
     /** A link to the Web API endpoint returning full details of the category. */
-    href: HREF<CategoryObject>
+    href: SpotifyUrl<'categories'>
     /** The category icon, in various sizes. */
     icons: ImageObject[]
     /** The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) of the category. */
@@ -316,7 +326,11 @@ export interface CursorObject {
 }
 
 /** [Cursor Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-cursorpagingobject) */
-export interface CursorPagingObject<T extends ArtistObject | AlbumObject> extends PagingObject<T> {
+export interface CursorPagingObject<
+    T extends AlbumObject | ArtistObject,
+    E extends T extends AlbumObject ? 'albums' : 'artists'
+>
+    extends PagingObject<T, E> {
     /** The cursors used to find the next set of items. */
     cursors: CursorObject
 }
@@ -430,7 +444,7 @@ export interface LinkedTrackObject {
     /** Known external URLs for this track. */
     external_urls: ExternalUrlObject
     /** A link to the Web API endpoint providing full details of the track. */
-    href: HREF<TrackObject>
+    href: SpotifyUrl<'tracks'>
     /** The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track. */
     id: string
     /** The object type: “track”. */
@@ -440,19 +454,19 @@ export interface LinkedTrackObject {
 }
 
 /** [Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject) */
-export interface PagingObject<T extends HasEndpoint> {
+export interface PagingObject<T, E extends Endpoint> {
     /** A link to the Web API endpoint returning the full result of the request */
-    href: `${HREF<T>}`
+    href: SpotifyUrl<E>
     /** The requested data. */
     items: T[]
     /** The maximum number of items in the response (as set in the query or by default). */
     limit: number
     /** URL to the next page of items. (`null` if none) */
-    next: `${HREF<T>}` | null
+    next: SpotifyUrl<E> | null
     /** The offset of the items returned (as set in the query or by default) */
     offset: number
     /** URL to the previous page of items. (`null` if none) */
-    previous: `${HREF<T>}` | null
+    previous: SpotifyUrl<E> | null
     /** The total number of items available to return. */
     total: number
 }
@@ -519,7 +533,7 @@ export interface PlaylistObject extends Omit<SimplifiedPlaylistObject, 'tracks'>
     /** Information about the followers of the playlist. */
     followers: FollowersObject
     /** Information about the tracks of the playlist. */
-    tracks: PagingObject<PlaylistTrackObject>
+    tracks: PagingObject<PlaylistTrackObject, 'playlist’s tracks'>
 }
 
 /** [Playlist Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-playlisttrackobject) */
@@ -547,7 +561,7 @@ export interface PlaylistTrackObject {
 /** [Playlist Tracks Ref Object](https://developer.spotify.com/documentation/web-api/reference/#object-playlisttracksrefobject) */
 export interface PlaylistTracksRefObject {
     /** A link to the Web API endpoint where full details of the playlist’s tracks can be retrieved. */
-    href: HREF<PlaylistTracksRefObject>
+    href: SpotifyUrl<'playlist’s tracks'>
     /** Number of tracks in the playlist. */
     total: number
 }
@@ -573,7 +587,7 @@ export interface PublicUserObject {
     /** Information about the followers of this user. */
     followers: FollowersObject
     /** A link to the Web API endpoint for this user. */
-    href: HREF<PublicUserObject>
+    href: SpotifyUrl<'users'>
     /** The [Spotify user ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for this user. */
     id: string
     /** The user’s profile image. */

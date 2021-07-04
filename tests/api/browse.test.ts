@@ -9,7 +9,6 @@ import {
 } from '../../src/api/browse'
 import {
     pagingObject,
-    url,
     albumObject,
     playlistObject,
     categoryObject,
@@ -27,9 +26,9 @@ test(getAllNewReleases.name, async () => {
 
     expect(res).toStrictEqual<typeof res>({
         message: expect.any(String),
-        albums: pagingObject<typeof res.albums.items[number]>({
+        albums: pagingObject({
             value: res.albums,
-            url: url(/albums\/[a-z\d]+/, true),
+            endpoint: 'albums',
             testObj: albumObject,
         }),
     })
@@ -40,9 +39,9 @@ test(getAllFeaturedPlaylists.name, async () => {
 
     expect(res).toStrictEqual<typeof res>({
         message: expect.any(String),
-        playlists: pagingObject<typeof res.playlists.items[number]>({
+        playlists: pagingObject({
             value: res.playlists,
-            url: url(/playlists\/[a-z\d]+/, true),
+            endpoint: 'playlists',
             testObj: playlistObject,
         }),
     })
@@ -52,9 +51,9 @@ test(getAllCategories.name, async () => {
     const res = await getAllCategories(token)
 
     expect(res).toStrictEqual<typeof res>({
-        categories: pagingObject<typeof res.categories.items[number]>({
+        categories: pagingObject({
             value: res.categories,
-            url: url(/browse\/categories\/[a-z\d]+/, true),
+            endpoint: 'categories',
             testObj: categoryObject,
         }),
     })
@@ -69,9 +68,9 @@ test(getCategorysPlaylists.name, async () => {
     const res = await getCategorysPlaylists(token, categoryID)
 
     expect(res).toStrictEqual<typeof res>(
-        pagingObject<typeof res.items[number]>({
+        pagingObject({
             value: res,
-            url: url(/playlists\/[a-z\d]+/, true),
+            endpoint: 'category’s playlists',
             testObj: playlistObject,
         })
     )

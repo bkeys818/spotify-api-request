@@ -15,7 +15,6 @@ import {
     episodeObject,
     showObject,
     trackObject,
-    url,
 } from './objects'
 import { albumIDs } from './albums.test'
 import { episodeIds } from './episodes.test'
@@ -25,41 +24,51 @@ import { trackIds } from './tracks.test'
 // @ts-ignore
 const token = global.token
 
-test.each([
-    [
-        getUsersSavedAlbums.name,
-        getUsersSavedAlbums,
-        /albums\/[a-z\d]+/,
-        albumObject,
-    ],
-    [
-        getUsersSavedEpisodes.name,
-        getUsersSavedEpisodes,
-        /episodes\/[a-z\d]+/,
-        episodeObject,
-    ],
-    [
-        getUsersSavedShows.name,
-        getUsersSavedShows,
-        /shows\/[a-z\d]+/,
-        showObject,
-    ],
-    [
-        getUsersSavedTracks.name,
-        getUsersSavedTracks,
-        /tracks\/[a-z\d]+/,
-        trackObject,
-    ],
-])('%s', async (_, request, urlRegExp, test) => {
-    const res = await request(token)
+
+test(getUsersSavedAlbums.name, async () => {
+    const res = await getUsersSavedAlbums(token)
 
     expect(res).toStrictEqual<typeof res>(
-        // @ts-ignore
-        pagingObject<typeof res.items[number]>({
+        pagingObject({
             value: res,
-            url: url(urlRegExp, true),
-            // @ts-ignore
-            testObj: test,
+            endpoint: 'my albums',
+            testObj: albumObject
+        })
+    )
+})
+
+test(getUsersSavedEpisodes.name, async () => {
+    const res = await getUsersSavedEpisodes(token)
+
+    expect(res).toStrictEqual<typeof res>(
+        pagingObject({
+            value: res,
+            endpoint: 'my episodes',
+            testObj: episodeObject
+        })
+    )
+})
+
+test(getUsersSavedShows.name, async () => {
+    const res = await getUsersSavedShows(token)
+
+    expect(res).toStrictEqual<typeof res>(
+        pagingObject({
+            value: res,
+            endpoint: 'my shows',
+            testObj: showObject
+        })
+    )
+})
+
+test(getUsersSavedTracks.name, async () => {
+    const res = await getUsersSavedTracks(token)
+
+    expect(res).toStrictEqual<typeof res>(
+        pagingObject({
+            value: res,
+            endpoint: 'my tracks',
+            testObj: trackObject
         })
     )
 })

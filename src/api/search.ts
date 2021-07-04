@@ -10,13 +10,14 @@ import type {
 } from './objects'
 
 type SearchType = 'album' | 'artist' | 'playlist' | 'track' | 'show' | 'episode'
-type SearchResponse = PagingObject<
-    | ArtistObject
-    | SimplifiedAlbumObject
-    | TrackObject
-    | SimplifiedShowObject
-    | SimplifiedEpisodeObject
->
+type ResponseItem<T extends SearchType | SearchType[]> = 
+      T extends 'artist' ? ArtistObject
+    : T extends 'album' ? SimplifiedAlbumObject
+    : T extends 'track' ? TrackObject
+    : T extends 'show' ? SimplifiedShowObject
+    : T extends 'episode' ? SimplifiedEpisodeObject
+    : T extends SearchType[] ? ResponseItem<T[number]>
+    : never
 
 /**
  * Get Spotify Catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.
@@ -24,13 +25,13 @@ type SearchResponse = PagingObject<
  * @param {Object} options
  * @returns {Proimse<SearchResponse>} For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
  */
-export async function searchforItem(
+export async function searchforItem<T extends SearchType | SearchType[]>(
     token: Token | string,
     options: {
         /** Search [query](https://developer.spotify.com/documentation/web-api/reference/#notes-2) keywords and optional field filters and operators. */
         q: string
         /** A list of item types to search across. Search results include hits from all the specified item types. */
-        type: SearchType | SearchType[]
+        type: T
         /**
          * An [ISO 3166-1 alpha-2 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `"from_token"`.
          *
@@ -76,7 +77,7 @@ export async function searchforItem(
          */
         include_external?: 'audio'
     }
-): Promise<SearchResponse> {
+): Promise<PagingObject<ResponseItem<T>, 'search'>> {
     return await (
         await sendRequest({
             endpoint: 'search',

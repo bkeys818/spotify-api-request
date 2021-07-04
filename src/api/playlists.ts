@@ -13,7 +13,7 @@ import type {
  * @param {Object} [options]
  * @param {number} [options.limit=20]
  * @param {number} [options.offset=0]
- * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<PlaylistObject, 'user’s playlists'>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfCurrentUsersPlaylists(
     token: Token | string,
@@ -23,7 +23,7 @@ export async function getListOfCurrentUsersPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100,000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<PlaylistObject>> {
+): Promise<PagingObject<PlaylistObject, 'user’s playlists'>> {
     return await (
         await sendRequest({
             endpoint: 'me/playlists',
@@ -41,7 +41,7 @@ export async function getListOfCurrentUsersPlaylists(
  * @param {Object} [options]
  * @param {number} [options.limit=20]
  * @param {number} [options.offset=0]
- * @returns {Promise<PagingObject<PlaylistObject>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<PlaylistObject, 'user’s playlists'>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfUsersPlaylists(
     token: Token | string,
@@ -52,7 +52,7 @@ export async function getListOfUsersPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<PlaylistObject>> {
+): Promise<PagingObject<PlaylistObject, 'user’s playlists'>> {
     return await (
         await sendRequest({
             endpoint: 'users/{user_id}/playlists',
@@ -193,7 +193,7 @@ export async function changePlaylistsDetails(
  * @param {number} [options.limit]
  * @param {number} [options.offset]
  * @param {'track' | 'episode'} [options.additional_types]
- * @returns {Promise<PagingObject<TrackObject>>} An array of {@link TrackObject track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
+ * @returns {Promise<PagingObject<PlaylistTrackObject, 'playlist’s tracks'>>} An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
  */
 export async function getPlaylistsItems(
     token: Token | string,
@@ -214,7 +214,7 @@ export async function getPlaylistsItems(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: 'track' | 'episode'
     }
-): Promise<PagingObject<PlaylistTrackObject>> {
+): Promise<PagingObject<PlaylistTrackObject, 'playlist’s tracks'>> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',

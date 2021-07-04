@@ -76,9 +76,9 @@ export async function checkIfUsersFollowPlaylist(
  * Get the current user’s followed artists.
  * @param {Token} token - A valid user access token or your client credentials. Requires the `user-follow-modify` scope.
  * @param {Object} options
- * @returns {Promise<{ artists: CursorPagingObject<ArtistObject> }>} An object that conatins an `artists` object. The `artists` object in turn contains a {@link CursorPagingObject<ArtistObject> cursor-based paging object} of {@link ArtistObject Artists}.
+ * @returns {Promise<{ artists: CursorPagingObject<ArtistObject, 'artists'> }>} An object that conatins an `artists` object. The `artists` object in turn contains a {@link CursorPagingObject<ArtistObject> cursor-based paging object} of {@link ArtistObject Artists}.
  */
-export async function getUsersFollowedArtists(
+export async function getUsersFollowedArtists<T extends 'artist'>(
     token: Token | string,
     options: {
         /** The ID type: currently only `artist` is supported. */
@@ -88,7 +88,7 @@ export async function getUsersFollowedArtists(
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
     }
-): Promise<{ artists: CursorPagingObject<ArtistObject> }> {
+): Promise<{ artists: CursorPagingObject<ArtistObject, `${T}s`> }> {
     return await (
         await sendRequest({
             endpoint: 'me/following',

@@ -7,7 +7,7 @@ import {
     // unfollowArtistsOrUsers,
     getFollowingStateForArtistsOrUsers,
 } from '../../src/api/follow'
-import { arrayOf, cursorPagingObject, url, artistObject } from './objects'
+import { arrayOf, cursorPagingObject, artistObject } from './objects'
 import { playlistID } from './playlists.test'
 import { userID } from './user-profile.test'
 import { artistIDs } from './artists.test'
@@ -29,9 +29,9 @@ test(getUsersFollowedArtists.name, async () => {
     const res = await getUsersFollowedArtists(token, { type: 'artist' })
 
     expect(res).toStrictEqual<typeof res>({
-        artists: cursorPagingObject<typeof res.artists.items[number]>({
+        artists: cursorPagingObject({
             value: res.artists,
-            url: url(/artists\/[a-z\d]+/, true),
+            endpoint: 'artists',
             testObj: artistObject
         })
     })

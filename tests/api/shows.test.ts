@@ -7,7 +7,6 @@ import {
     simplifiedShowObject,
     showObject,
     pagingObject,
-    url,
     simplifiedEpisodeObject,
 } from './objects'
 
@@ -33,9 +32,9 @@ test(getShowsEpisodes.name, async () => {
     const res = await getShowsEpisodes(token, showIDs[0])
 
     expect(res).toStrictEqual<typeof res>(
-        pagingObject<typeof res.items[number]>({
+        pagingObject({
             value: res,
-            url: url(/shows\/[a-z\d]+\/episodes/, true),
+            endpoint: 'show’s episodes',
             testObj: simplifiedEpisodeObject,
         })
     )

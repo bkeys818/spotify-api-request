@@ -53,9 +53,9 @@ test(getArtistsAlbums.name, async () => {
     const res = await getArtistsAlbums(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>(
-        pagingObject<typeof res.items[number]>({
+        pagingObject({
             value: res,
-            url: url(/albums\/[a-z\d]+/, true),
+            endpoint: 'artist’s albums',
             testObj: albumObject,
         })
     )

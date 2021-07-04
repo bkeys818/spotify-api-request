@@ -11,10 +11,8 @@ import {
     getPlaylistCoverImage,
     // uploadCustomPlaylistCoverImage,
 } from '../../src/api/playlists'
-import { PagingObject, PlaylistObject } from '../../src/api/objects'
 import {
     pagingObject,
-    url,
     playlistObject,
     playlistTrackObject,
     imageObject,
@@ -25,23 +23,28 @@ import { userID } from './user-profile.test'
 const token = global.token
 export const playlistID = '6innvmsboMZC5rdrmY292j'
 
-const playlistPagingObject = (value: PagingObject<PlaylistObject>) =>
-    pagingObject<PlaylistObject>({
-        value: value,
-        url: url(/playlist\/[a-z\d]+\/tracks/, true),
-        testObj: playlistObject,
-    })
-
 test(getListOfCurrentUsersPlaylists.name, async () => {
     const res = await getListOfCurrentUsersPlaylists(token)
 
-    expect(res).toStrictEqual<typeof res>(playlistPagingObject(res))
+    expect(res).toStrictEqual<typeof res>(
+        pagingObject({
+            value: res,
+            endpoint: 'user’s playlists',
+            testObj: playlistObject,
+        })
+    )
 })
 
 test(getListOfUsersPlaylists.name, async () => {
     const res = await getListOfUsersPlaylists(token, userID)
 
-    expect(res).toStrictEqual<typeof res>(playlistPagingObject(res))
+    expect(res).toStrictEqual<typeof res>(
+        pagingObject({
+            value: res,
+            endpoint: 'user’s playlists',
+            testObj: playlistObject,
+        })
+    )
 })
 
 // test(createPlaylist.name, async () => {
@@ -62,9 +65,9 @@ test(getPlaylistsItems.name, async () => {
     const res = await getPlaylistsItems(token, playlistID, { market: 'US' })
 
     expect(res).toStrictEqual<typeof res>(
-        pagingObject<typeof res.items[number]>({
+        pagingObject({
             value: res,
-            url: url(/playlist\/[a-z\d]+\/tracks/, true),
+            endpoint: 'playlist’s tracks',
             testObj: playlistTrackObject,
         })
     )

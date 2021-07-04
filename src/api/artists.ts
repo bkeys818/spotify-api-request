@@ -113,7 +113,7 @@ export async function getArtistsRelatedArtists(
  * @param {string} [options.market]
  * @param {number} [options.limit]
  * @param {number} [options.offset]
- * @returns {Promise<PagingObject<AlbumObject>>} an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<AlbumObject, 'artist’s albums'>>} an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getArtistsAlbums(
     token: Token | string,
@@ -142,7 +142,7 @@ export async function getArtistsAlbums(
         /** The index of the first album to return. Default: 0 (i.e., the first album). Use with `limit` to get the next set of albums. */
         offset?: number
     }
-): Promise<PagingObject<AlbumObject>> {
+): Promise<PagingObject<AlbumObject, 'artist’s albums'>> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/albums',

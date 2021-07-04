@@ -43,7 +43,7 @@ import {
     TrackObject,
     // TuneableTrackObject,
 } from '../../src/api/objects'
-import { HasEndpoint } from '../../src/api/objects'
+import { urlBase, endpoints, Endpoint } from '../../src/api/objects'
 
 type ConstructorConverter<T extends BooleanConstructor | NumberConstructor | StringConstructor> = 
     T extends BooleanConstructor ? boolean
@@ -74,7 +74,7 @@ export function albumObject(value: AlbumObject): AlbumObject {
         popularity: expect.any(Number),
         tracks: pagingObject({
             value: value.tracks,
-            url: url(/albums\/[a-z\d]+\/tracks/, true),
+            endpoint: url(/albums\/[a-z\d]+\/tracks/, true),
             testObj: simplifiedTrackObject,
         }),
     }
@@ -240,11 +240,14 @@ function cursorObject(): CursorObject {
     }
 }
 
-export function cursorPagingObject<T extends AlbumObject | ArtistObject>(props: {
-    value: CursorPagingObject<T>
-    url: CursorPagingObject<T>['href']
+export function cursorPagingObject<
+    T extends AlbumObject | ArtistObject,
+    E extends T extends AlbumObject ? 'albums' : 'artists'
+>(props: {
+    value: CursorPagingObject<T, E>
+    endpoint: E
     testObj: (() => T) | ((value: T) => T)
-}): CursorPagingObject<T> {
+}): CursorPagingObject<T, E> {
     return {
         ...pagingObject(props),
         cursors: cursorObject(),
@@ -312,18 +315,21 @@ function linkedTrackObject(): LinkedTrackObject {
     }
 }
 
-export function pagingObject<T extends HasEndpoint>(params: {
-    value: PagingObject<T>
-    url: PagingObject<T>['href']
+export function pagingObject<T, E extends Endpoint>(params: {
+    value: PagingObject<T, E>
+    endpoint: E
     testObj: (() => T) | ((value: T) => T)
-}): PagingObject<T> {
+}): PagingObject<T, E> {
+    let urlStr = `${urlBase}${endpoints[params.endpoint]}`
+    urlStr = urlStr.replace(/\//g, '\\/').replace(/\./g, '\\.').replace('{id}', '[a-z\\d]+')
+    const expectUrl = expect.stringMatching(url(new RegExp(urlStr), true))
     return {
-        href: params.url,
+        href: expectUrl,
         items: params.value.items.map(params.testObj),
         limit: expect.any(Number),
-        next: params.value.next ? params.url : null,
+        next: params.value.next ? expectUrl : null,
         offset: expect.any(Number),
-        previous: params.value.previous ? params.url : null,
+        previous: params.value.previous ? expectUrl : null,
         total: expect.any(Number),
     }
 }
@@ -337,9 +343,9 @@ export function playlistObject(value: PlaylistObject): PlaylistObject {
         // @ts-ignore
         ...simplifiedPlaylistObject(value),
         followers: followersObject(),
-        tracks: pagingObject<PlaylistTrackObject>({
+        tracks: pagingObject({
             value: value.tracks,
-            url: url(/playlists\/[a-z\d]+\/tracks/, true),
+            endpoint: 'playlist’s tracks',
             testObj: playlistTrackObject,
         }),
     }

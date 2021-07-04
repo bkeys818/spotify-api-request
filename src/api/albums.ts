@@ -69,7 +69,7 @@ export async function getAlbum(
  * @param {string} [options.market]
  * @param {number} [options.limit=20]
  * @param {number} [options.offset=0]
- * @returns {Promise<PagingObject<TrackObject>>} An album object in JSON format.
+ * @returns {Promise<PagingObject<TrackObject, 'album’s tracks'>>} An album object in JSON format.
  */
 export async function getAlbumsTracks(
     token: Token | string,
@@ -82,7 +82,7 @@ export async function getAlbumsTracks(
         /** The index of the first track to return. Default: 0 (the first object). Use with limit to get the next set of tracks. */
         offset?: number
     }
-): Promise<PagingObject<TrackObject>> {
+): Promise<PagingObject<TrackObject, 'album’s tracks'>> {
     return await (
         await sendRequest({
             endpoint: 'albums/{id}/tracks',

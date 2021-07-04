@@ -81,7 +81,7 @@ export async function getShow(
  * @param {Token} token - valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
  * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<SimplifiedEpisodeObject>>}
+ * @returns {Promise<PagingObject<SimplifiedEpisodeObject, 'show’s episodes's>>}
  */
 export async function getShowsEpisodes(
     token: Token | string,
@@ -102,7 +102,7 @@ export async function getShowsEpisodes(
         /** The index of the first episode to return. Default: 0 (the first object). Use with limit to get the next set of episodes. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedEpisodeObject>> {
+): Promise<PagingObject<SimplifiedEpisodeObject, 'show’s episodes'>> {
     return await (
         await sendRequest({
             endpoint: 'shows/{id}/episodes',

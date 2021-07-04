@@ -39,7 +39,7 @@ export async function getMultipleArtists(
  */
 export async function getArtist(
     token: Token | string,
-    id: string[]
+    id: string
 ): Promise<ArtistObject> {
     return await (
         await sendRequest({
@@ -86,12 +86,12 @@ export async function getArtistsTopTracks(
  * Get Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community’s [listening history](http://news.spotify.com/se/2010/02/03/related-artists/).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
- * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `"artists"` and whose value is an array of up to 20 {@link ArtistObject artist objects}.
+ * @returns {Promise<{ artists: ArtistObject[] }>} An object whose key is `"artists"` and whose value is an array of up to 20 {@link ArtistObject artist objects}.
  */
 export async function getArtistsRelatedArtists(
     token: Token | string,
     id: string
-): Promise<{ tracks: TrackObject[] }> {
+): Promise<{ artists: ArtistObject[] }> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/related-artists',

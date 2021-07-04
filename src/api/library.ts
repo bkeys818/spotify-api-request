@@ -275,12 +275,12 @@ export async function removeUsersSavedEpisodes(
  * This API endpoint is in **beta** and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
  * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>} An array of `true` or `false` values, in the same order in which the ids were specified.
+ * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedEpisodes(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<boolean[]> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes/contains',

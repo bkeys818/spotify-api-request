@@ -82,7 +82,7 @@ export async function getUsersFollowedArtists(
     token: Token | string,
     options: {
         /** The ID type: currently only `artist` is supported. */
-        type: string
+        type: 'artist'
         /** The last artist ID retrieved from the previous request. */
         after?: string
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */

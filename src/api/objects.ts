@@ -92,7 +92,7 @@ export interface ArtistObject extends SimplifiedArtistObject {
 /** This object is not in the offical Spotify API, but its the response from "Get Audio Analysis for a Track" */
 export interface AudioAnalysisObject {
     meta: {
-        analyzer_version: `${number}.${number}.${number}"`
+        analyzer_version: `${number}.${number}.${number}`
         platform: string
         detailed_status: string
         status_code: number
@@ -442,17 +442,17 @@ export interface LinkedTrackObject {
 /** [Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject) */
 export interface PagingObject<T extends HasEndpoint> {
     /** A link to the Web API endpoint returning the full result of the request */
-    href: `${HREF<T>}` | `${HREF<T>}?${string}`
+    href: `${HREF<T>}`
     /** The requested data. */
     items: T[]
     /** The maximum number of items in the response (as set in the query or by default). */
     limit: number
     /** URL to the next page of items. (`null` if none) */
-    next: `${HREF<T>}` | `${HREF<T>}?${string}` | null
+    next: `${HREF<T>}` | null
     /** The offset of the items returned (as set in the query or by default) */
     offset: number
     /** URL to the previous page of items. (`null` if none) */
-    previous: `${HREF<T>}` | `${HREF<T>}?${string}` | null
+    previous: `${HREF<T>}` | null
     /** The total number of items available to return. */
     total: number
 }
@@ -579,7 +579,7 @@ export interface PublicUserObject {
     /** The user’s profile image. */
     images: ImageObject[]
     /** The object type: “user”. */
-    type: string
+    type: 'user'
     /** The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for this user. */
     uri: string
 }
@@ -711,7 +711,7 @@ export interface SimplifiedEpisodeObject extends ContextObject<'episode'> {
     is_playable: boolean
     /**
      * The language used in the episode, identified by a [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code.
-     * @deprecated This field is deprecated and might be removed in the future. Please use the `languages` field instead.
+     * @deprecated This field is deprecated and might be removed in the future. Please use the {@link EpisodeObject.languages `languages`} field instead.
      */
     language: string
     /** A list of the languages used in the episode, identified by their [ISO 639](https://en.wikipedia.org/wiki/ISO_639) code. Optional because sometimes only the deprecated language field is set and this one isn't set at all. */
@@ -721,7 +721,7 @@ export interface SimplifiedEpisodeObject extends ContextObject<'episode'> {
     /** The date the episode was first released, for example "1981-12-15". Depending on the precision, it might be shown as "1981" or "1981-12". */
     release_date: string
     /** The precision with which release_date value is known: "year", "month", or "day". */
-    release_date_precision: string
+    release_date_precision: 'year' | 'month' | 'day'
     /** The user’s most recent position in the episode. Set if the supplied access token is a user token and has the scope user-read-playback-position. */
     resume_point?: ResumePointObject
 }
@@ -753,7 +753,7 @@ export interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
      *
      * Note, a track object may be `null`. This can happen if a track is no longer available.
      */
-    tracks: PlaylistTracksRefObject
+    tracks: PlaylistTracksRefObject | null
 }
 
 /** [Simplified Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedshowobject) */

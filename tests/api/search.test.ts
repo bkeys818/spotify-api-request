@@ -1,16 +1,17 @@
 import { searchforItem } from '../../src/api/search'
-import { PagingObject, TrackObject } from '../../src/api/objects'
-import { pagingObject } from './global'
-import { tracksUrlRegExp, trackObject } from './tracks.test'
+import { pagingObject, url, trackObject } from './objects'
 
 // @ts-ignore
 const token = global.token
 
 test(searchforItem.name, async () => {
     const res = await searchforItem(token, { q: 'heartbeat', type: 'track' })
-    expect(res).toMatchObject<typeof res>(pagingObject<TrackObject>({
-        value: res as PagingObject<TrackObject>,
-        url: expect.stringMatching(tracksUrlRegExp),
-        itemTest: trackObject
-    }))
+    expect(res).toStrictEqual<typeof res>(
+        pagingObject<typeof res.items[number]>({
+            value: res,
+            url: url(/tracks\/[a-z\d]+/, true),
+            // @ts-ignore
+            testObj: trackObject
+        })
+    )
 })

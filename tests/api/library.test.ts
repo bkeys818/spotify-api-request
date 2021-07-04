@@ -8,10 +8,19 @@ import {
     checkUsersSavedShows,
     checkUsersSavedTracks,
 } from '../../src/api/library'
-import { albumsUrlRegExp, albumObject, albumIDs } from './albums.test'
-import { episodesUrlRegExp, episodeObject, episodeIds } from './episodes.test'
-import { showsUrlRegExp, showObject, showIDs } from './shows.test'
-import { tracksUrlRegExp, trackObject, trackIds } from './tracks.test'
+import {
+    arrayOf,
+    pagingObject,
+    albumObject,
+    episodeObject,
+    showObject,
+    trackObject,
+    url,
+} from './objects'
+import { albumIDs } from './albums.test'
+import { episodeIds } from './episodes.test'
+import { showIDs } from './shows.test'
+import { trackIds } from './tracks.test'
 
 // @ts-ignore
 const token = global.token
@@ -20,43 +29,39 @@ test.each([
     [
         getUsersSavedAlbums.name,
         getUsersSavedAlbums,
-        albumsUrlRegExp,
+        /albums\/[a-z\d]+/,
         albumObject,
     ],
     [
         getUsersSavedEpisodes.name,
         getUsersSavedEpisodes,
-        episodesUrlRegExp,
+        /episodes\/[a-z\d]+/,
         episodeObject,
     ],
     [
         getUsersSavedShows.name,
         getUsersSavedShows,
-        showsUrlRegExp,
+        /shows\/[a-z\d]+/,
         showObject,
     ],
     [
         getUsersSavedTracks.name,
         getUsersSavedTracks,
-        tracksUrlRegExp,
+        /tracks\/[a-z\d]+/,
         trackObject,
     ],
-])('%s', async (_, request, urlRegExp, testItem) => {
+])('%s', async (_, request, urlRegExp, test) => {
     const res = await request(token)
 
-    const urlRegExpQuery = new RegExp(urlRegExp.source + '(\\?.+)?', 'i')
-    expect(res).toMatchObject<typeof res>({
-        href: expect.stringMatching(urlRegExpQuery),
-        items: expect.arrayContaining<typeof res.items[number]>(
+    expect(res).toStrictEqual<typeof res>(
+        // @ts-ignore
+        pagingObject<typeof res.items[number]>({
+            value: res,
+            url: url(urlRegExp, true),
             // @ts-ignore
-            res.items.map(testItem)
-        ),
-        limit: expect.any(Number),
-        next: res.next ? expect.stringMatching(urlRegExpQuery) : null,
-        offset: expect.any(Number),
-        previous: res.previous ? expect.stringMatching(urlRegExpQuery) : null,
-        total: expect.any(Number),
-    })
+            testObj: test,
+        })
+    )
 })
 
 test.each([
@@ -66,7 +71,5 @@ test.each([
     [checkUsersSavedTracks.name, checkUsersSavedTracks, trackIds],
 ])('%s', async (_, request, ids) => {
     const res = await request(token, ids)
-    expect(res).toEqual(
-        expect.arrayContaining<typeof res[number]>([expect.any(Boolean)])
-    )
+    expect(res).toStrictEqual(arrayOf(res, Boolean))
 })

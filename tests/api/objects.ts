@@ -56,11 +56,11 @@ export function arrayOf<T extends BooleanConstructor | NumberConstructor | Strin
 ): ConstructorConverter<T>[] {
     return value.length == 0 ? [] : expect.arrayContaining<T>([expect.any(type)]);
 }
-    
 
-export function url(endpoint: RegExp, includeQuery = false) {
-    let source = /https:\/\/api\.spotify\.com\/v1\//.source + endpoint.source
-    if (includeQuery) source += '(\\?.+)?'
+export function url(endpoint: Endpoint) {
+    let source = `${urlBase}${endpoints[endpoint]}`
+    source = source.replace(/\//g, '\\/').replace(/\./g, '\\.').replace('{id}', '[a-z\\d]+')
+    source += '(\\?.+)?'
     return expect.stringMatching(new RegExp(source, 'i'))
 }
 
@@ -74,7 +74,7 @@ export function albumObject(value: AlbumObject): AlbumObject {
         popularity: expect.any(Number),
         tracks: pagingObject({
             value: value.tracks,
-            endpoint: url(/albums\/[a-z\d]+\/tracks/, true),
+            endpoint: 'album’s tracks',
             testObj: simplifiedTrackObject,
         }),
     }
@@ -196,7 +196,7 @@ export function audioFeaturesObject(): AudioFeaturesObject {
         speechiness: expect.any(Number),
         tempo: expect.any(Number),
         time_signature: expect.any(Number),
-        track_href: url(/tracks\/[a-z\d]+/),
+        track_href: url('tracks'),
         type: 'audio_features',
         uri: expect.any(String),
         valence: expect.any(Number),
@@ -205,7 +205,7 @@ export function audioFeaturesObject(): AudioFeaturesObject {
 
 export function categoryObject(value: CategoryObject): CategoryObject {
     return {
-        href: url(/browse\/categories\/[a-z\d]+/),
+        href: url('categories'),
         icons: value.icons.map(imageObject),
         id: expect.any(String),
         name: expect.any(String),
@@ -217,7 +217,7 @@ type ContextObjectType = 'artist' | 'playlist' | 'album' | 'track' | 'show' | 'e
 function contextObject<T extends ContextObjectType>(type: T): ContextObject<T> {
     return {
         type: type,
-        href: url(new RegExp(`${type}s\\/[a-z\\d]+`)),
+        href: url(`${type}s`),
         external_urls: externalUrlObject(),
         uri: expect.any(String),
     }
@@ -308,7 +308,7 @@ export function imageObject(value: ImageObject): ImageObject {
 function linkedTrackObject(): LinkedTrackObject {
     return {
         external_urls: externalUrlObject(),
-        href: url(/tracks\/[a-z\d]+/),
+        href: url('tracks'),
         id: expect.any(String),
         type: 'track',
         uri: expect.any(String),
@@ -320,9 +320,7 @@ export function pagingObject<T, E extends Endpoint>(params: {
     endpoint: E
     testObj: (() => T) | ((value: T) => T)
 }): PagingObject<T, E> {
-    let urlStr = `${urlBase}${endpoints[params.endpoint]}`
-    urlStr = urlStr.replace(/\//g, '\\/').replace(/\./g, '\\.').replace('{id}', '[a-z\\d]+')
-    const expectUrl = expect.stringMatching(url(new RegExp(urlStr), true))
+    const expectUrl = url(params.endpoint)
     return {
         href: expectUrl,
         items: params.value.items.map(params.testObj),
@@ -366,7 +364,7 @@ export function playlistTrackObject(value: PlaylistTrackObject): PlaylistTrackOb
 
 function playlistTracksRefObject(): PlaylistTracksRefObject {
     return {
-        href: url(/playlists\/[a-z\d]+\/tracks/),
+        href: url('playlist’s tracks'),
         total: expect.any(Number),
     }
 }
@@ -386,7 +384,7 @@ export function publicUserObject(value: PublicUserObject): PublicUserObject {
         explicit_content: explicitContentSettingsObject(),
         external_urls: externalUrlObject(),
         followers: followersObject(),
-        href: url(/users\/[a-z\d]+/),
+        href: url('users'),
         id: expect.any(String),
         images: value.images.map(imageObject),
         type: 'user',
@@ -400,12 +398,7 @@ function recommendationSeedObject<T extends 'artist' | 'track' | 'genre'>(
     return {
         afterFilteringSize: expect.any(Number),
         afterRelinkingSize: expect.any(Number),
-        href:
-            type === 'artist'
-                ? url(/artists\/[a-z\d]+/)
-                : type === 'track'
-                ? url(/tracks\/[a-z\d]+/)
-                : null,
+        href: type === 'genre' ? null : url(`${type as 'artist' | 'track'}s`),
         id: expect.any(String),
         initialPoolSize: expect.any(Number),
         type: type,

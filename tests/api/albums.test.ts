@@ -19,13 +19,12 @@ test(getMultipleAlbums.name, async () => {
 
 test(getAlbum.name, async () => {
     const res = await getAlbum(token, albumIDs[0])
+
     expect(res).toStrictEqual<typeof res>(albumObject(res))
 })
 
 test(getAlbumsTracks.name, async () => {
     const res = await getAlbumsTracks(token, albumIDs[0])
-
-    console.log(res)
 
     expect(res).toEqual<typeof res>(
         pagingObject({

@@ -1,7 +1,7 @@
 import {
     getMultipleAlbums,
     getAlbum,
-    getAlbumsTracks,
+    getAlbumTracks,
 } from '../../src/api/albums'
 import { albumObject, pagingObject, trackObject } from './objects'
 
@@ -23,8 +23,8 @@ test(getAlbum.name, async () => {
     expect(res).toStrictEqual<typeof res>(albumObject(res))
 })
 
-test(getAlbumsTracks.name, async () => {
-    const res = await getAlbumsTracks(token, albumIDs[0])
+test(getAlbumTracks.name, async () => {
+    const res = await getAlbumTracks(token, albumIDs[0])
 
     expect(res).toEqual<typeof res>(
         pagingObject({

@@ -15,7 +15,7 @@ import type {
  * @param {number} [options.offset=0]
  * @returns {Promise<PagingObject<PlaylistObject, 'user’s playlists'>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getListOfCurrentUsersPlaylists(
+export async function getListOfCurrentUserPlaylists(
     token: Token | string,
     options?: {
         /** The maximum number of playlists to return. Default: 20. Minimum: 1. Maximum: 50. */
@@ -43,7 +43,7 @@ export async function getListOfCurrentUsersPlaylists(
  * @param {number} [options.offset=0]
  * @returns {Promise<PagingObject<PlaylistObject, 'user’s playlists'>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getListOfUsersPlaylists(
+export async function getListOfUserPlaylists(
     token: Token | string,
     userId: string,
     options?: {
@@ -155,7 +155,7 @@ export async function getPlaylist(
  * @param {string} [options.description]
  * @return {Promise<void>}
  */
-export async function changePlaylistsDetails(
+export async function changePlaylistDetails(
     token: Token | string,
     playlistId: string,
     options: {
@@ -195,7 +195,7 @@ export async function changePlaylistsDetails(
  * @param {'track' | 'episode'} [options.additional_types]
  * @returns {Promise<PagingObject<PlaylistTrackObject, 'playlist’s tracks'>>} An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
  */
-export async function getPlaylistsItems(
+export async function getPlaylistItems(
     token: Token | string,
     playlistId: string,
     options: {
@@ -279,7 +279,7 @@ export async function addItemsToPlaylist(
  * @param {[string]} options.snapshot_id
  * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
-export async function reorderOReplacePlaylistsItems(
+export async function reorderOReplacePlaylistItems(
     token: Token | string,
     playlistId: string,
     options: {

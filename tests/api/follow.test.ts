@@ -2,7 +2,7 @@ import {
     // followPlaylist,
     // unfollowPlaylist,
     checkIfUsersFollowPlaylist,
-    getUsersFollowedArtists,
+    getUserFollowedArtists,
     // followArtistsOrUsers,
     // unfollowArtistsOrUsers,
     getFollowingStateForArtistsOrUsers,
@@ -25,8 +25,8 @@ test(checkIfUsersFollowPlaylist.name, async () => {
     expect(res).toStrictEqual(arrayOf(res, Boolean))
 })
 
-test(getUsersFollowedArtists.name, async () => {
-    const res = await getUsersFollowedArtists(token, { type: 'artist' })
+test(getUserFollowedArtists.name, async () => {
+    const res = await getUserFollowedArtists(token, { type: 'artist' })
 
     expect(res).toStrictEqual<typeof res>({
         artists: cursorPagingObject({

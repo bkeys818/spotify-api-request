@@ -1,7 +1,7 @@
 import {
     getMultipleShows,
     getShow,
-    getShowsEpisodes,
+    getShowEpisodes as getShowEpisodes,
 } from '../../src/api/shows'
 import {
     simplifiedShowObject,
@@ -28,8 +28,8 @@ test(getShow.name, async () => {
     expect(res).toStrictEqual<typeof res>(showObject(res))
 })
 
-test(getShowsEpisodes.name, async () => {
-    const res = await getShowsEpisodes(token, showIDs[0])
+test(getShowEpisodes.name, async () => {
+    const res = await getShowEpisodes(token, showIDs[0])
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({

@@ -71,7 +71,7 @@ export async function getAlbum(
  * @param {number} [options.offset=0]
  * @returns {Promise<PagingObject<TrackObject, 'album’s tracks'>>} An album object in JSON format.
  */
-export async function getAlbumsTracks(
+export async function getAlbumTracks(
     token: Token | string,
     id: string,
     options?: {

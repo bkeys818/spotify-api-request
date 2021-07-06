@@ -3,7 +3,7 @@ import {
     getAllFeaturedPlaylists,
     getAllCategories,
     getCategory,
-    getCategorysPlaylists,
+    getCategoryPlaylists,
     getRecommendations,
     getRecommendationGenres,
 } from '../../src/api/browse'
@@ -64,8 +64,8 @@ test(getCategory.name, async () => {
     expect(res).toStrictEqual<typeof res>(categoryObject(res))
 })
 
-test(getCategorysPlaylists.name, async () => {
-    const res = await getCategorysPlaylists(token, categoryID)
+test(getCategoryPlaylists.name, async () => {
+    const res = await getCategoryPlaylists(token, categoryID)
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({

@@ -1,10 +1,10 @@
 import {
-    getListOfCurrentUsersPlaylists,
-    getListOfUsersPlaylists,
+    getListOfCurrentUserPlaylists,
+    getListOfUserPlaylists,
     // createPlaylist,
     getPlaylist,
     // changePlaylistsDetails,
-    getPlaylistsItems,
+    getPlaylistItems,
     // addItemsToPlaylist,
     // reorderOReplacePlaylistsItems,
     // removeItemsFromPlaylist,
@@ -23,8 +23,8 @@ import { userID } from './user-profile.test'
 const token = global.token
 export const playlistID = '6innvmsboMZC5rdrmY292j'
 
-test(getListOfCurrentUsersPlaylists.name, async () => {
-    const res = await getListOfCurrentUsersPlaylists(token)
+test(getListOfCurrentUserPlaylists.name, async () => {
+    const res = await getListOfCurrentUserPlaylists(token)
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({
@@ -35,8 +35,8 @@ test(getListOfCurrentUsersPlaylists.name, async () => {
     )
 })
 
-test(getListOfUsersPlaylists.name, async () => {
-    const res = await getListOfUsersPlaylists(token, userID)
+test(getListOfUserPlaylists.name, async () => {
+    const res = await getListOfUserPlaylists(token, userID)
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({
@@ -61,8 +61,8 @@ test(getPlaylist.name, async () => {
 //     const res = await changePlaylistsDetails(token)
 // })
 
-test(getPlaylistsItems.name, async () => {
-    const res = await getPlaylistsItems(token, playlistID, { market: 'US' })
+test(getPlaylistItems.name, async () => {
+    const res = await getPlaylistItems(token, playlistID, { market: 'US' })
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({

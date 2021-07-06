@@ -83,7 +83,7 @@ export async function getShow(
  * @param {Object} [options]
  * @returns {Promise<PagingObject<SimplifiedEpisodeObject, 'show’s episodes's>>}
  */
-export async function getShowsEpisodes(
+export async function getShowEpisodes(
     token: Token | string,
     id: string,
     options?: {

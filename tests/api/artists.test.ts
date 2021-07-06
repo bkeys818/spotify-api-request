@@ -1,15 +1,14 @@
 import {
     getMultipleArtists,
     getArtist,
-    getArtistsTopTracks,
-    getArtistsRelatedArtists,
-    getArtistsAlbums,
+    getArtistTopTracks,
+    getArtistRelatedArtists,
+    getArtistAlbums,
 } from '../../src/api/artists'
 import {
     artistObject,
     trackObject,
     pagingObject,
-    url,
     albumObject,
 } from './objects'
 
@@ -33,24 +32,24 @@ test(getArtist.name, async () => {
     expect(res).toStrictEqual<typeof res>(artistObject(res))
 })
 
-test(getArtistsTopTracks.name, async () => {
-    const res = await getArtistsTopTracks(token, artistIDs[0])
+test(getArtistTopTracks.name, async () => {
+    const res = await getArtistTopTracks(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>({
         tracks: res.tracks.map(trackObject),
     })
 })
 
-test(getArtistsRelatedArtists.name, async () => {
-    const res = await getArtistsRelatedArtists(token, artistIDs[0])
+test(getArtistRelatedArtists.name, async () => {
+    const res = await getArtistRelatedArtists(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>({
         artists: res.artists.map(artistObject),
     })
 })
 
-test(getArtistsAlbums.name, async () => {
-    const res = await getArtistsAlbums(token, artistIDs[0])
+test(getArtistAlbums.name, async () => {
+    const res = await getArtistAlbums(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({

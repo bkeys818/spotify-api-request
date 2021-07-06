@@ -135,7 +135,7 @@ export async function getCategory(
  * @param {Object} [options]
  * @returns {Promise<PagingObject<PlaylistObject,'category’s playlists'>>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object})
  */
-export async function getCategorysPlaylists(
+export async function getCategoryPlaylists(
     token: Token | string,
     categoryId: string,
     options?: {

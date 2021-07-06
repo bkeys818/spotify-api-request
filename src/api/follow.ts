@@ -78,7 +78,7 @@ export async function checkIfUsersFollowPlaylist(
  * @param {Object} options
  * @returns {Promise<{ artists: CursorPagingObject<ArtistObject, 'artists'> }>} An object that conatins an `artists` object. The `artists` object in turn contains a {@link CursorPagingObject<ArtistObject> cursor-based paging object} of {@link ArtistObject Artists}.
  */
-export async function getUsersFollowedArtists<T extends 'artist'>(
+export async function getUserFollowedArtists<T extends 'artist'>(
     token: Token | string,
     options: {
         /** The ID type: currently only `artist` is supported. */

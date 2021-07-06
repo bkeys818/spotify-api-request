@@ -1,11 +1,11 @@
-import { getUsersTopArtistsandTracks } from '../../src/api/personalization'
+import { getUserTopArtistsandTracks } from '../../src/api/personalization'
 import { pagingObject, trackObject } from './objects'
 
 // @ts-ignore
 const token = global.token
 
-test(getUsersTopArtistsandTracks.name, async () => {
-    const res = await getUsersTopArtistsandTracks(token, 'tracks')
+test(getUserTopArtistsandTracks.name, async () => {
+    const res = await getUserTopArtistsandTracks(token, 'tracks')
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({

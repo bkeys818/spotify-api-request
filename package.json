@@ -7,6 +7,12 @@
     "url": "https://github.com/bkeys818"
   },
   "license": "MIT",
+  "keywords": [
+    "spotify",
+    "typescript",
+    "spotify api",
+    "spotify web api"
+  ],
   "main": "lib/index.js",
   "files": [
     "lib",

@@ -53,21 +53,24 @@ export async function getArtist(
     ).json()
 }
 
+type ArtistTopTrack = Omit<TrackObject, 'available_markets' | 'album'> & {
+    album: Omit<TrackObject['album'], 'available_markets'>
+}
 /**
  * Get Spotify catalog information about an artist’s top tracks by country.
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
  * @param {Object} [options]
- * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.
+ * @returns {Promise<{ tracks: ArtistTopTrack[] }>} An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.<br>Note: The {@link TrackObject Track objects} in the response don't conain `available_markets` and nor does it's `album` property.
  */
 export async function getArtistTopTracks(
     token: Token | string,
     id: string,
-    options?: {
+    options: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Synonym for `country`. */
         market: string
     }
-): Promise<{ tracks: TrackObject[] }> {
+): Promise<{ tracks: ArtistTopTrack[] }> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/top-tracks',

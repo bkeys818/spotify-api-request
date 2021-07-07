@@ -1,6 +1,6 @@
 // @ts-check
 const dotenv = require('dotenv')
-const express = require('express');
+const http = require('http');
 const fetch = require('node-fetch').default;
 const open = require('open')
 const fs = require('fs')
@@ -67,82 +67,89 @@ else {
  */
 function getRefreshToken() {
     return new Promise(resolve => {
-        const port = 8080
-        const redirectUri = `http://localhost:${port}/callback`
-        const app = express()
+        const host = 'localhost';
+        const port = 8080;
+        const redirectUri = `http://${host}:${port}/callback`
 
-        app.get('/', (req, res) => {
-            const url = new URL('https://accounts.spotify.com/authorize')
-            url.searchParams.set('client_id', process.env.CLIENT_ID)
-            url.searchParams.set('response_type', 'code')
-            url.searchParams.set('redirect_uri', redirectUri)
-            url.searchParams.set('scope', [
-                'ugc-image-upload',
-                'user-read-recently-played',
-                'user-top-read',
-                'user-read-playback-position',
-                'user-read-playback-state',
-                'user-modify-playback-state',
-                'user-read-currently-playing',
-                'app-remote-control',
-                'streaming',
-                'playlist-modify-public',
-                'playlist-modify-private',
-                'playlist-read-private',
-                'playlist-read-collaborative',
-                'user-follow-modify',
-                'user-follow-read',
-                'user-library-modify',
-                'user-library-read',
-                'user-read-email',
-                'user-read-private',
-            ].join())
+        /** @type {http.RequestListener} */
+        const requestListener = function (req, res) {
+            const [path, query] = (req.url ?? '').split('?')
+
+            switch (path) {
+
+                case '/callback':
+                    if (query && query == '') {
+                        console.error('Authorization Error! Redirected to "%s" without authoizing', req.url)
+                        process.exit(1)
+                    }
+
+                    const queryObj = parseQuery(query)
+                
+                    if ('error' in queryObj) {
+                        console.error(`Authoization Error! ${queryObj.error}`)
+                        process.exit(1)
+                    }
+                
+                    if (!('code' in queryObj)) {
+                        console.error("Authoization Error! Couldn't find code for authorization\nquery: \O", queryObj)
+                        process.exit(1)
+                    }
         
-            res.redirect(url.href)
-        })
+                    postRequest({
+                        grant_type: 'authorization_code',
+                        code: queryObj.code,
+                        redirect_uri: redirectUri
+                    }).then(resolve)
+        
+                    res.writeHead(200).end('<script>window.close()</script>')
+                    server.close()
 
-        app.get('/callback', (req, res) => {
-            const [baseUrl, queryStr] = req.originalUrl.split('?')
-            if (!queryStr) {
-                console.error('Authorization Error! Redirected to %s without authoizing', baseUrl)
-                process.exit(1)
+                    break;
+
+                default:
+                    const url = new URL('https://accounts.spotify.com/authorize')
+                    url.searchParams.set('client_id', process.env.CLIENT_ID)
+                    url.searchParams.set('response_type', 'code')
+                    url.searchParams.set('redirect_uri', redirectUri)
+                    url.searchParams.set('scope', [
+                        'ugc-image-upload',
+                        'user-read-recently-played',
+                        'user-top-read',
+                        'user-read-playback-position',
+                        'user-read-playback-state',
+                        'user-modify-playback-state',
+                        'user-read-currently-playing',
+                        'app-remote-control',
+                        'streaming',
+                        'playlist-modify-public',
+                        'playlist-modify-private',
+                        'playlist-read-private',
+                        'playlist-read-collaborative',
+                        'user-follow-modify',
+                        'user-follow-read',
+                        'user-library-modify',
+                        'user-library-read',
+                        'user-read-email',
+                        'user-read-private',
+                    ].join())
+
+                    res.writeHead(302, {
+                        'Location': url.href
+                    })
+
+                    res.end()
+                    break;
             }
-        
-            const query = {}
-            for (const param of queryStr.split('&')) {
-                const [key, value] = param.split('=')
-                query[key] = value
-            }
-        
-            if ('error' in query) {
-                console.error(`Authoization Error! ${query.error}`)
-                process.exit(1)
-            }
-        
-            if (!('code' in query)) {
-                console.error("Authoization Error! Couldn't find code for authorization\nquery: \O", query)
-                process.exit(1)
-            }
 
-            postRequest({
-                grant_type: 'authorization_code',
-                code: query.code,
-                redirect_uri: redirectUri
-            }).then(resolve)
+        }
 
-            res.redirect('/complete')
-        })
+        const server = http.createServer(requestListener);
 
-        app.get('/complete', (req, res) => {
-            res.status(200).send('<script>window.close()</script>')
-            server.close()
-        })
-        
-        const server = app.listen(port, () => {
-            console.log(`Example app listening at http://localhost:${port}`)
-        })
+        server.listen(port, host, () => {
+            console.log(`Server is running on http://${host}:${port}`);
+        });
 
-        open(`http://localhost:${port}`)
+        open(`http://${host}:${port}`)
     })
 }
 
@@ -219,4 +226,18 @@ function saveToEnv(value) {
     }
 
     return
+}
+
+/**
+ * Turn a query in string from into an object
+ * @param {String} query
+ * @returns {Object}
+ */
+function parseQuery(query) {
+    const queryObj = {}
+    for (const param of query.split('&')) {
+        const [key, value] = param.split('=')
+        queryObj[key] = value
+    }
+    return queryObj
 }

@@ -3,7 +3,7 @@ import type { Token } from '../authorize'
 import type {
     ArtistObject,
     TrackObject,
-    AlbumObject,
+    SimplifiedAlbumObject,
     PagingObject,
 } from './objects'
 
@@ -108,7 +108,7 @@ export async function getArtistRelatedArtists(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<AlbumObject, 'artist’s albums'>>} an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<SimplifiedAlbumObject, 'artist’s albums'>>} an array of simplified {@link SimplifiedAlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getArtistAlbums(
     token: Token | string,
@@ -137,7 +137,7 @@ export async function getArtistAlbums(
         /** The index of the first album to return. Default: 0 (i.e., the first album). Use with `limit` to get the next set of albums. */
         offset?: number
     }
-): Promise<PagingObject<AlbumObject, 'artist’s albums'>> {
+): Promise<PagingObject<SimplifiedAlbumObject, 'artist’s albums'>> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/albums',

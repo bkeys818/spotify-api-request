@@ -33,10 +33,28 @@ test(getArtist.name, async () => {
 })
 
 test(getArtistTopTracks.name, async () => {
-    const res = await getArtistTopTracks(token, artistIDs[0])
+    const res = await getArtistTopTracks(token, artistIDs[0], {
+        market: 'US'
+    })
+
+    type ExpectedItem = typeof res.tracks[number]
+    function customTrackObject(value: ExpectedItem): ExpectedItem {
+        const { album, ...otherProps } = value
+        const obj: any = trackObject({
+            ...otherProps,
+            album: {
+                ...album,
+                available_markets: []
+            },
+            available_markets: []
+        })
+        delete obj.available_markets
+        delete obj.album.available_markets
+        return obj
+    }
 
     expect(res).toStrictEqual<typeof res>({
-        tracks: res.tracks.map(trackObject),
+        tracks: res.tracks.map(customTrackObject),
     })
 })
 

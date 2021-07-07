@@ -58,7 +58,6 @@ export async function getArtist(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
  * @param {Object} [options]
- * @param {string} options.market
  * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.
  */
 export async function getArtistTopTracks(
@@ -109,10 +108,6 @@ export async function getArtistRelatedArtists(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
  * @param {Object} [options]
- * @param {string} [options.include_groups]
- * @param {string} [options.market]
- * @param {number} [options.limit]
- * @param {number} [options.offset]
  * @returns {Promise<PagingObject<AlbumObject, 'artist’s albums'>>} an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getArtistAlbums(

@@ -7,7 +7,6 @@ import type { AlbumObject, PagingObject, TrackObject } from './objects'
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string[]} ids - A comma-separated list of [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for albums. Maximum: 20 IDs.
  * @param {Object} [options]
- * @param {string} options.market
  * @returns {Promise<{ albums: (AlbumObject | null)[] }} Objects are returned in the order requested. If an object is not found, a `null` value is returned in the appropriate position. Duplicate `ids` in the query will result in duplicate objects in the response.
  */
 export async function getMultipleAlbums(
@@ -37,7 +36,6 @@ export async function getMultipleAlbums(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The Spotify ID of the album.
  * @param {Object} [options]
- * @param {string} options.market
  * @returns {Promise<AlbumObject>} An album object in JSON format.
  */
 export async function getAlbum(
@@ -66,9 +64,6 @@ export async function getAlbum(
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {string} id - The Spotify ID of the album.
  * @param {Object} [options]
- * @param {string} [options.market]
- * @param {number} [options.limit=20]
- * @param {number} [options.offset=0]
  * @returns {Promise<PagingObject<TrackObject, 'album’s tracks'>>} An album object in JSON format.
  */
 export async function getAlbumTracks(

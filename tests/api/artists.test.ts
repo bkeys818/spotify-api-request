@@ -9,7 +9,7 @@ import {
     artistObject,
     trackObject,
     pagingObject,
-    albumObject,
+    simplifiedAlbumObject,
 } from './objects'
 
 // @ts-ignore
@@ -55,7 +55,7 @@ test(getArtistAlbums.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'artist’s albums',
-            testObj: albumObject,
+            testObj: simplifiedAlbumObject,
         })
     )
 })

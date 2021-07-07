@@ -3,6 +3,6 @@
         "target": "es6",
         "noEmit": true,
 
-        "allowSyntheticDefaultImports": true,
+        "allowSyntheticDefaultImports": true
     }
 }

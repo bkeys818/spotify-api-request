@@ -3,7 +3,7 @@ import {
     getAlbum,
     getAlbumTracks,
 } from '../../src/api/albums'
-import { albumObject, pagingObject, trackObject } from './objects'
+import { albumObject, pagingObject, simplifiedTrackObject } from './objects'
 
 // @ts-ignore
 const token = global.token
@@ -30,7 +30,7 @@ test(getAlbumTracks.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'album’s tracks',
-            testObj: trackObject,
+            testObj: simplifiedTrackObject
         })
     )
 })

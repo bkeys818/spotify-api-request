@@ -45,15 +45,21 @@ import {
 } from '../../src/api/objects'
 import { urlBase, endpoints, Endpoint } from '../../src/api/objects'
 
+
 type ConstructorConverter<T extends BooleanConstructor | NumberConstructor | StringConstructor> = 
     T extends BooleanConstructor ? boolean
     : T extends NumberConstructor ? number
     : T extends StringConstructor ? string
     : never
-export function arrayOf<T extends BooleanConstructor | NumberConstructor | StringConstructor>(
-    value: ConstructorConverter<T>[],
-    type: T
-): ConstructorConverter<T>[] {
+
+/** Same as {@link expect.any} but checks type */
+export const any = <
+    T extends BooleanConstructor | NumberConstructor | StringConstructor
+>(classType: T): ConstructorConverter<T> => expect.any(classType)
+
+export function arrayOf<
+    T extends BooleanConstructor | NumberConstructor | StringConstructor
+>(value: ConstructorConverter<T>[], type: T): ConstructorConverter<T>[] {
     return value.length == 0 ? [] : expect.arrayContaining<T>([expect.any(type)]);
 }
 
@@ -70,8 +76,8 @@ export function albumObject(value: AlbumObject): AlbumObject {
         copyrights: value.copyrights.map(copyrightObject),
         external_ids: externalIdObject(value.external_ids),
         genres: arrayOf(value.genres, String),
-        label: expect.any(String),
-        popularity: expect.any(Number),
+        label: any(String),
+        popularity: any(Number),
         tracks: pagingObject({
             value: value.tracks,
             endpoint: 'album’s tracks',
@@ -92,7 +98,7 @@ export function artistObject(value: ArtistObject): ArtistObject {
         followers: followersObject(),
         genres: arrayOf(value.genres, String),
         images: value.images.map(imageObject),
-        popularity: expect.any(String),
+        popularity: any(Number),
     }
 }
 
@@ -102,104 +108,104 @@ export function audioAnalysisObject(
     return {
         meta: {
             analyzer_version: expect.stringMatching(/\d+\.\d+\.\d+/),
-            platform: expect.any(String),
-            detailed_status: expect.any(String),
-            status_code: expect.any(Number),
-            timestamp: expect.any(Number),
-            analysis_time: expect.any(Number),
-            input_process: expect.any(String),
+            platform: any(String),
+            detailed_status: any(String),
+            status_code: any(Number),
+            timestamp: any(Number),
+            analysis_time: any(Number),
+            input_process: any(String),
         },
         track: {
-            num_samples: expect.any(Number),
-            duration: expect.any(Number),
-            sample_md5: expect.any(String),
-            offset_seconds: expect.any(Number),
-            window_seconds: expect.any(Number),
-            analysis_sample_rate: expect.any(Number),
-            analysis_channels: expect.any(Number),
-            end_of_fade_in: expect.any(Number),
-            start_of_fade_out: expect.any(Number),
-            loudness: expect.any(Number),
-            tempo: expect.any(Number),
-            tempo_confidence: expect.any(Number),
-            time_signature: expect.any(Number),
-            time_signature_confidence: expect.any(Number),
-            key: expect.any(Number),
-            key_confidence: expect.any(Number),
-            mode: expect.any(Number),
-            mode_confidence: expect.any(Number),
-            codestring: expect.any(String),
-            code_version: expect.any(Number),
-            echoprintstring: expect.any(String),
-            echoprint_version: expect.any(Number),
-            synchstring: expect.any(String),
-            synch_version: expect.any(Number),
-            rhythmstring: expect.any(String),
-            rhythm_version: expect.any(Number),
+            num_samples: any(Number),
+            duration: any(Number),
+            sample_md5: any(String),
+            offset_seconds: any(Number),
+            window_seconds: any(Number),
+            analysis_sample_rate: any(Number),
+            analysis_channels: any(Number),
+            end_of_fade_in: any(Number),
+            start_of_fade_out: any(Number),
+            loudness: any(Number),
+            tempo: any(Number),
+            tempo_confidence: any(Number),
+            time_signature: any(Number),
+            time_signature_confidence: any(Number),
+            key: any(Number),
+            key_confidence: any(Number),
+            mode: any(Number),
+            mode_confidence: any(Number),
+            codestring: any(String),
+            code_version: any(Number),
+            echoprintstring: any(String),
+            echoprint_version: any(Number),
+            synchstring: any(String),
+            synch_version: any(Number),
+            rhythmstring: any(String),
+            rhythm_version: any(Number),
         },
         bars: value.bars.map(() => ({
-            start: expect.any(Number),
-            duration: expect.any(Number),
-            confidence: expect.any(Number),
+            start: any(Number),
+            duration: any(Number),
+            confidence: any(Number),
         })),
         beats: value.beats.map(() => ({
-            start: expect.any(Number),
-            duration: expect.any(Number),
-            confidence: expect.any(Number),
+            start: any(Number),
+            duration: any(Number),
+            confidence: any(Number),
         })),
         sections: value.sections.map(() => ({
-            start: expect.any(Number),
-            duration: expect.any(Number),
-            confidence: expect.any(Number),
-            loudness: expect.any(Number),
-            tempo: expect.any(Number),
-            tempo_confidence: expect.any(Number),
-            key: expect.any(Number),
-            key_confidence: expect.any(Number),
-            mode: expect.any(Number),
-            mode_confidence: expect.any(Number),
-            time_signature: expect.any(Number),
-            time_signature_confidence: expect.any(Number),
+            start: any(Number),
+            duration: any(Number),
+            confidence: any(Number),
+            loudness: any(Number),
+            tempo: any(Number),
+            tempo_confidence: any(Number),
+            key: any(Number),
+            key_confidence: any(Number),
+            mode: any(Number),
+            mode_confidence: any(Number),
+            time_signature: any(Number),
+            time_signature_confidence: any(Number),
         })),
         segments: value.segments.map((segment) => ({
-            start: expect.any(Number),
-            duration: expect.any(Number),
-            confidence: expect.any(Number),
-            loudness_start: expect.any(Number),
-            loudness_max_time: expect.any(Number),
-            loudness_max: expect.any(Number),
-            loudness_end: expect.any(Number),
+            start: any(Number),
+            duration: any(Number),
+            confidence: any(Number),
+            loudness_start: any(Number),
+            loudness_max_time: any(Number),
+            loudness_max: any(Number),
+            loudness_end: any(Number),
             pitches: arrayOf(segment.pitches, Number),
             timbre: arrayOf(segment.timbre, Number),
         })),
         tatums: value.sections.map(() => ({
-            start: expect.any(Number),
-            duration: expect.any(Number),
-            confidence: expect.any(Number),
+            start: any(Number),
+            duration: any(Number),
+            confidence: any(Number),
         })),
     }
 }
 
 export function audioFeaturesObject(): AudioFeaturesObject {
     return {
-        acousticness: expect.any(Number),
-        analysis_url: expect.any(String),
-        danceability: expect.any(Number),
-        duration_ms: expect.any(Number),
-        energy: expect.any(Number),
-        id: expect.any(String),
-        instrumentalness: expect.any(Number),
-        key: expect.any(Number),
-        liveness: expect.any(Number),
-        loudness: expect.any(Number),
-        mode: expect.any(Number),
-        speechiness: expect.any(Number),
-        tempo: expect.any(Number),
-        time_signature: expect.any(Number),
+        acousticness: any(Number),
+        analysis_url: any(String),
+        danceability: any(Number),
+        duration_ms: any(Number),
+        energy: any(Number),
+        id: any(String),
+        instrumentalness: any(Number),
+        key: any(Number),
+        liveness: any(Number),
+        loudness: any(Number),
+        mode: any(Number),
+        speechiness: any(Number),
+        tempo: any(Number),
+        time_signature: any(Number),
         track_href: url('tracks'),
         type: 'audio_features',
-        uri: expect.any(String),
-        valence: expect.any(Number),
+        uri: any(String),
+        valence: any(Number),
     }
 }
 
@@ -207,8 +213,8 @@ export function categoryObject(value: CategoryObject): CategoryObject {
     return {
         href: url('categories'),
         icons: value.icons.map(imageObject),
-        id: expect.any(String),
-        name: expect.any(String),
+        id: any(String),
+        name: any(String),
     }
 }
 
@@ -219,13 +225,13 @@ function contextObject<T extends ContextObjectType>(type: T): ContextObject<T> {
         type: type,
         href: url(`${type}s`),
         external_urls: externalUrlObject(),
-        uri: expect.any(String),
+        uri: any(String),
     }
 }
 
 function copyrightObject(): CopyrightObject {
     return {
-        text: expect.any(String),
+        text: any(String),
         type: expect.stringMatching(/C|P/),
     }
 }
@@ -236,7 +242,7 @@ function copyrightObject(): CopyrightObject {
 
 function cursorObject(): CursorObject {
     return {
-        after: expect.any(String),
+        after: any(String),
     }
 }
 
@@ -262,7 +268,7 @@ export function episodeObject(value: EpisodeObject): EpisodeObject {
     return {
         ...simplifiedEpisodeObject(value),
         show: simplifiedShowObject(value.show),
-        uri: expect.any(String),
+        uri: any(String),
     }
 }
 
@@ -270,38 +276,38 @@ export function episodeObject(value: EpisodeObject): EpisodeObject {
 
 function explicitContentSettingsObject(): ExplicitContentSettingsObject {
     return {
-        filter_enabled: expect.any(Boolean),
-        filter_locked: expect.any(Boolean),
+        filter_enabled: any(Boolean),
+        filter_locked: any(Boolean),
     }
 }
 
 function externalIdObject(value: ExternalIdObject): ExternalIdObject {
     const expectedObj: ExternalIdObject = {}
-    if ('ean' in value && value.ean) expectedObj.ean = expect.any(String)
-    if ('isrc' in value && value.isrc) expectedObj.isrc = expect.any(String)
-    if ('upc' in value && value.upc) expectedObj.upc = expect.any(String)
+    if ('ean' in value && value.ean) expectedObj.ean = any(String)
+    if ('isrc' in value && value.isrc) expectedObj.isrc = any(String)
+    if ('upc' in value && value.upc) expectedObj.upc = any(String)
     return expectedObj
 }
 
 function externalUrlObject(): ExternalUrlObject {
     return {
-        spotify: expect.any(String),
+        spotify: any(String),
     }
 }
 
 function followersObject(): FollowersObject {
     return {
         href: null,
-        total: expect.any(Number),
+        total: any(Number),
     }
 }
 
 export function imageObject(value: ImageObject): ImageObject {
     const expectedObj: ImageObject = {
-        url: expect.any(String),
+        url: any(String),
     }
-    if (value.height) expectedObj.height = expect.any(Number)
-    if (value.width) expectedObj.width = expect.any(Number)
+    if (value.height) expectedObj.height = any(Number)
+    if (value.width) expectedObj.width = any(Number)
     return expectedObj
 }
 
@@ -309,9 +315,9 @@ function linkedTrackObject(): LinkedTrackObject {
     return {
         external_urls: externalUrlObject(),
         href: url('tracks'),
-        id: expect.any(String),
+        id: any(String),
         type: 'track',
-        uri: expect.any(String),
+        uri: any(String),
     }
 }
 
@@ -324,11 +330,11 @@ export function pagingObject<T, E extends Endpoint>(params: {
     return {
         href: expectUrl,
         items: params.value.items.map(params.testObj),
-        limit: expect.any(Number),
+        limit: any(Number),
         next: params.value.next ? expectUrl : null,
-        offset: expect.any(Number),
+        offset: any(Number),
         previous: params.value.previous ? expectUrl : null,
-        total: expect.any(Number),
+        total: any(Number),
     }
 }
 
@@ -351,9 +357,9 @@ export function playlistObject(value: PlaylistObject): PlaylistObject {
 
 export function playlistTrackObject(value: PlaylistTrackObject): PlaylistTrackObject {
     return {
-        added_at: value.added_at ? expect.any(Number) : null,
+        added_at: value.added_at ? any(String) : null,
         added_by: value.added_by ? publicUserObject(value.added_by) : null,
-        is_local: expect.any(Boolean),
+        is_local: any(Boolean),
         track: trackObject(value.track),
         primary_color: null,
         video_thumbnail: {
@@ -365,30 +371,30 @@ export function playlistTrackObject(value: PlaylistTrackObject): PlaylistTrackOb
 function playlistTracksRefObject(): PlaylistTracksRefObject {
     return {
         href: url('playlist’s tracks'),
-        total: expect.any(Number),
+        total: any(Number),
     }
 }
 
 export function privateUserObject(value: PrivateUserObject): PrivateUserObject {
     return {
         ...publicUserObject(value),
-        country: expect.any(String),
-        email: value.email ? expect.any(String) : null,
-        product: expect.any(String),
+        country: any(String),
+        email: value.email ? any(String) : null,
+        product: any(String),
     }
 }
 
 export function publicUserObject(value: PublicUserObject): PublicUserObject {
     return {
-        display_name: expect.any(String),
+        display_name: any(String),
         explicit_content: explicitContentSettingsObject(),
         external_urls: externalUrlObject(),
         followers: followersObject(),
         href: url('users'),
-        id: expect.any(String),
+        id: any(String),
         images: value.images.map(imageObject),
         type: 'user',
-        uri: expect.any(String),
+        uri: any(String),
     }
 }
 
@@ -396,11 +402,11 @@ function recommendationSeedObject<T extends 'artist' | 'track' | 'genre'>(
     type: T
 ): RecommendationSeedObject<T> {
     return {
-        afterFilteringSize: expect.any(Number),
-        afterRelinkingSize: expect.any(Number),
+        afterFilteringSize: any(Number),
+        afterRelinkingSize: any(Number),
         href: type === 'genre' ? null : url(`${type as 'artist' | 'track'}s`),
-        id: expect.any(String),
-        initialPoolSize: expect.any(Number),
+        id: any(String),
+        initialPoolSize: any(Number),
         type: type,
     }
 }
@@ -418,7 +424,7 @@ export function recommendationsObject(
 
 type SavedObject = SavedAlbumObject | SavedShowObject | SavedTrackObject
 export function savedObject<T extends SavedObject>(value: T): T {
-    const obj: { [key: string]: any } = { added_at: expect.any(Number) }
+    const obj: { [key: string]: any } = { added_at: any(Number) }
     if ('album' in value) obj.album = albumObject(value.album)
     if ('show' in value) obj.show = simplifiedShowObject(value.show)
     if ('track' in value) obj.track = trackObject(value.track)
@@ -440,12 +446,12 @@ export function simplifiedAlbumObject(
         album_type: expect.stringMatching(/album|single|compilation/),
         artists: value.artists.map(simplifiedArtistObject),
         available_markets: arrayOf(value.available_markets, String),
-        id: expect.any(String),
+        id: any(String),
         images: value.images.map(imageObject),
-        name: expect.any(String),
+        name: any(String),
         release_date: expect.stringMatching(/\d{4}(-\d{2}(-\d{2})?)?/),
         release_date_precision: expect.stringMatching(/year|month|day/),
-        total_tracks: expect.any(Number),
+        total_tracks: any(Number),
     }
 
     if ('album_group' in value)
@@ -461,8 +467,8 @@ export function simplifiedAlbumObject(
 export function simplifiedArtistObject(): SimplifiedArtistObject {
     return {
         ...contextObject('artist'),
-        id: expect.any(String),
-        name: expect.any(String),
+        id: any(String),
+        name: any(String),
     }
 }
 
@@ -471,25 +477,25 @@ export function simplifiedEpisodeObject(
 ): SimplifiedEpisodeObject {
     const obj: SimplifiedEpisodeObject = {
         ...contextObject('episode'),
-        audio_preview_url: value.audio_preview_url ? expect.any(String) : null,
-        description: expect.any(String),
-        duration_ms: expect.any(Number),
-        explicit: expect.any(Boolean),
-        html_description: expect.any(String),
-        id: expect.any(String),
+        audio_preview_url: value.audio_preview_url ? any(String) : null,
+        description: any(String),
+        duration_ms: any(Number),
+        explicit: any(Boolean),
+        html_description: any(String),
+        id: any(String),
         images: value.images.map(imageObject),
-        is_externally_hosted: expect.any(Boolean),
-        is_playable: expect.any(Boolean),
-        language: expect.any(String),
-        name: expect.any(String),
-        release_date: expect.any(String),
+        is_externally_hosted: any(Boolean),
+        is_playable: any(Boolean),
+        language: any(String),
+        name: any(String),
+        release_date: any(String),
         release_date_precision: expect.stringMatching(/year|month|day/),
     }
 
     if (value.resume_point)
         obj.resume_point = {
-            fully_played: expect.any(Boolean),
-            resume_position_ms: expect.any(Number),
+            fully_played: any(Boolean),
+            resume_position_ms: any(Number),
         }
 
     if (value.languages) obj.languages = arrayOf(value.languages, String)
@@ -503,14 +509,14 @@ export function _simplifiedPlaylistObject(
 ): Omit<SimplifiedPlaylistObject, 'tracks'> {
     return {
         ...contextObject('playlist'),
-        collaborative: expect.any(Boolean),
-        description: value.description ? expect.any(String) : null,
-        id: expect.any(String),
+        collaborative: any(Boolean),
+        description: value.description ? any(String) : null,
+        id: any(String),
         images: value.images.map(imageObject),
-        name: expect.any(String),
+        name: any(String),
         owner: publicUserObject(value.owner),
-        public: expect.any(Boolean),
-        snapshot_id: expect.any(String),
+        public: any(Boolean),
+        snapshot_id: any(String),
     }
 }
 
@@ -530,17 +536,17 @@ export function simplifiedShowObject(
         ...contextObject('show'),
         available_markets: arrayOf(value.available_markets, String),
         copyrights: value.copyrights.map(copyrightObject),
-        description: expect.any(String),
-        explicit: expect.any(Boolean),
-        id: expect.any(String),
+        description: any(String),
+        explicit: any(Boolean),
+        id: any(String),
         images: value.images.map(imageObject),
         is_externally_hosted: value.is_externally_hosted
-            ? expect.any(Boolean)
+            ? any(Boolean)
             : null,
         languages: arrayOf(value.languages, String),
-        media_type: expect.any(String),
-        name: expect.any(String),
-        publisher: expect.any(String),
+        media_type: any(String),
+        name: any(String),
+        publisher: any(String),
     }
 }
 
@@ -551,17 +557,17 @@ export function simplifiedTrackObject(
         ...contextObject('track'),
         artists: value.artists.map(simplifiedArtistObject),
         available_markets: arrayOf(value.available_markets, String),
-        disc_number: expect.any(Number),
-        duration_ms: expect.any(Number),
-        explicit: expect.any(Boolean),
-        id: expect.any(String),
-        is_local: expect.any(Boolean),
-        name: expect.any(String),
-        preview_url: value.preview_url ? expect.any(String) : null,
-        track_number: expect.any(Number),
+        disc_number: any(Number),
+        duration_ms: any(Number),
+        explicit: any(Boolean),
+        id: any(String),
+        is_local: any(Boolean),
+        name: any(String),
+        preview_url: value.preview_url ? any(String) : null,
+        track_number: any(Number),
     }
 
-    if ('is_playable' in value) obj.is_playable = expect.any(Boolean)
+    if ('is_playable' in value) obj.is_playable = any(Boolean)
 
     if ('linked_from' in value) obj.linked_from = linkedTrackObject()
 
@@ -575,11 +581,11 @@ export function trackObject(value: TrackObject): TrackObject {
         ...simplifiedTrackObject(value),
         album: simplifiedAlbumObject(value.album),
         external_ids: externalIdObject(value.external_ids),
-        popularity: expect.any(Number),
+        popularity: any(Number),
     }
 
-    if ('episode' in value) obj.episode = expect.any(Boolean)
-    if ('track' in value) obj.track = expect.any(Boolean)
+    if ('episode' in value) obj.episode = any(Boolean)
+    if ('track' in value) obj.track = any(Boolean)
 
     return obj
 }

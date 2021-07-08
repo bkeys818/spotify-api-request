@@ -770,7 +770,7 @@ export interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
     /** The user who owns the playlist */
     owner: Omit<PublicUserObject, 'followers'>
     /** The playlist’s public/private status: `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](https://developer.spotify.com/documentation/general/guides/working-with-playlists/). */
-    public: boolean
+    public: boolean | null
     /** The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version. */
     snapshot_id: string
     /**

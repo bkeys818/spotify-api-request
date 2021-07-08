@@ -684,7 +684,7 @@ export interface SimplifiedAlbumObject extends ContextObject<'album'> {
     /** The field is present when getting an artist’s albums. Possible values are “album”, “single”, “compilation”, “appears_on”. Compare to album_type this field represents relationship between the artist and the album. */
     album_group?: 'album' | 'single' | 'compilation' | 'appears_on'
     /** The type of the album: one of “album”, “single”, or “compilation”. */
-    album_type: 'album' | 'single' | 'compilation'
+    album_type: 'album' | 'single' | 'compilation' | Uppercase<'album' | 'single' | 'compilation'>
     /** The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist. */
     artists: SimplifiedArtistObject[]
     /** The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that an album is considered available in a market when at least 1 of its tracks is available in that market. */

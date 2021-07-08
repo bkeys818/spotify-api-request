@@ -9,7 +9,7 @@ import {
 } from '../../src/api/browse'
 import {
     pagingObject,
-    albumObject,
+    simplifiedAlbumObject,
     playlistObject,
     categoryObject,
     recommendationsObject,
@@ -25,11 +25,10 @@ test(getAllNewReleases.name, async () => {
     const res = await getAllNewReleases(token)
 
     expect(res).toStrictEqual<typeof res>({
-        message: expect.any(String),
         albums: pagingObject({
             value: res.albums,
-            endpoint: 'albums',
-            testObj: albumObject,
+            endpoint: 'new releases',
+            testObj: simplifiedAlbumObject,
         }),
     })
 })

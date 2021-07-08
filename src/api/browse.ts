@@ -1,8 +1,9 @@
 import { sendRequest } from '../request'
 import type { Token } from '../authorize'
 import type {
-    SimplifiedAlbumObject,
     PagingObject,
+    SimplifiedAlbumObject,
+    SimplifiedPlaylistObject,
     PlaylistObject,
     CategoryObject,
     RecommendationsObject,
@@ -39,7 +40,7 @@ export async function getAllNewReleases(
  * Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} [options]
- * @returns {Promise<{message: string, playlists: PagingObject<PlaylistObject, 'playlists'>}>} An array of simplified {@link PlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<{message: string, playlists: PagingObject<SimplifiedPlaylistObject, 'featured playlists'>}>} An array of simplified {@link SimplifiedPlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllFeaturedPlaylists(
     token: Token | string,
@@ -57,7 +58,7 @@ export async function getAllFeaturedPlaylists(
     }
 ): Promise<{
     message: string
-    playlists: PagingObject<PlaylistObject, 'playlists'>
+    playlists: PagingObject<SimplifiedPlaylistObject, 'featured playlists'>
 }> {
     return await (
         await sendRequest({

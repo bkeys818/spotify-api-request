@@ -11,6 +11,7 @@ export const endpoints = {
     // browse
     'categories': `browse/categories` as `browse/categories`,
     'category’s playlists': `browse/categories/{id}/playlists` as `browse/categories/${string}/playlist`,
+    'featured playlists':  `browse/featured-playlists` as const,
     'new releases': `browse/new-releases` as const,
     // episodes
     'episodes' :`episodes/{id}` as `episodes/${string}`,

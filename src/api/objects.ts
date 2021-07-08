@@ -8,6 +8,7 @@ export const endpoints = {
     'artist’s albums': `artists/{id}/albums` as `artists/${string}/albums`,
     'categories': `browse/categories` as `browse/categories`,
     'category’s playlists': `browse/categories/{id}/playlists` as `browse/categories/${string}/playlist`,
+    'new releases': `browse/new-releases` as const,
     'episodes' :`episodes/{id}` as `episodes/${string}`,
     'playlists': `playlists/{id}` as `playlists/${string}`,
     'playlist’s tracks': `playlists/{id}/tracks` as `playlists/${string}/tracks`,

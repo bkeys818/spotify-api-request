@@ -1,7 +1,7 @@
 import { sendRequest } from '../request'
 import type { Token } from '../authorize'
 import type {
-    AlbumObject,
+    SimplifiedAlbumObject,
     PagingObject,
     PlaylistObject,
     CategoryObject,
@@ -12,7 +12,7 @@ import type {
  * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} options
- * @returns {Promise<{message: string, albums: PagingObject<AlbumObject,'albums'>}>} The response contains a `message` and an `albums` object. The `albums` object contains an array of simplified {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<{albums: PagingObject<SimplifiedAlbumObject,'new releases'>}>} The response contains a `message` and an `albums` object. The `albums` object contains an array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllNewReleases(
     token: Token | string,
@@ -24,7 +24,7 @@ export async function getAllNewReleases(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<{ message: string; albums: PagingObject<AlbumObject, 'albums'> }> {
+): Promise<{ albums: PagingObject<SimplifiedAlbumObject, 'new releases'> }> {
     return await (
         await sendRequest({
             endpoint: 'browse/new-releases',

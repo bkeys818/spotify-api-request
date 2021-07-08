@@ -378,6 +378,7 @@ function playlistTracksRefObject(): PlaylistTracksRefObject {
 export function privateUserObject(value: PrivateUserObject): PrivateUserObject {
     return {
         ...publicUserObject(value),
+        explicit_content: explicitContentSettingsObject(),
         country: any(String),
         email: value.email ? any(String) : null,
         product: any(String),
@@ -385,17 +386,19 @@ export function privateUserObject(value: PrivateUserObject): PrivateUserObject {
 }
 
 export function publicUserObject(value: PublicUserObject): PublicUserObject {
-    return {
+    const expectedObj: PublicUserObject = {
         display_name: any(String),
-        explicit_content: explicitContentSettingsObject(),
         external_urls: externalUrlObject(),
         followers: followersObject(),
         href: url('users'),
         id: any(String),
-        images: value.images.map(imageObject),
         type: 'user',
         uri: any(String),
     }
+
+    if (value.images) expectedObj.images = value.images.map(imageObject)
+
+    return expectedObj
 }
 
 function recommendationSeedObject<T extends 'artist' | 'track' | 'genre'>(

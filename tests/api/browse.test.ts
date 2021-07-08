@@ -11,7 +11,7 @@ import {
     pagingObject,
     simplifiedAlbumObject,
     simplifiedPlaylistObject,
-    playlistObject,
+    // playlistObject,
     categoryObject,
     recommendationsObject,
 } from './objects'
@@ -67,13 +67,13 @@ test(getCategory.name, async () => {
 test(getCategoryPlaylists.name, async () => {
     const res = await getCategoryPlaylists(token, categoryID)
 
-    expect(res).toStrictEqual<typeof res>(
-        pagingObject({
-            value: res,
+    expect(res).toStrictEqual<typeof res>({
+        playlists: pagingObject({
+            value: res.playlists,
             endpoint: 'category’s playlists',
-            testObj: playlistObject,
+            testObj: simplifiedPlaylistObject,
         })
-    )
+    })
 })
 
 test(getRecommendations.name, async () => {

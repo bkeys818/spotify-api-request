@@ -10,6 +10,7 @@ import {
 import {
     pagingObject,
     simplifiedAlbumObject,
+    simplifiedPlaylistObject,
     playlistObject,
     categoryObject,
     recommendationsObject,
@@ -40,8 +41,8 @@ test(getAllFeaturedPlaylists.name, async () => {
         message: expect.any(String),
         playlists: pagingObject({
             value: res.playlists,
-            endpoint: 'playlists',
-            testObj: playlistObject,
+            endpoint: 'featured playlists',
+            testObj: simplifiedPlaylistObject,
         }),
     })
 })

@@ -6,7 +6,7 @@ export const endpoints = {
     'album’s tracks': `albums/{id}/tracks` as `albums/${string}/tracks`,
     'artists': `artists/{id}` as `artists/${string}`,
     'artist’s albums': `artists/{id}/albums` as `artists/${string}/albums`,
-    'categories': `browse/categories/{id}` as `browse/categories/${string}`,
+    'categories': `browse/categories` as `browse/categories`,
     'category’s playlists': `browse/categories/{id}/playlists` as `browse/categories/${string}/playlist`,
     'episodes' :`episodes/{id}` as `episodes/${string}`,
     'playlists': `playlists/{id}` as `playlists/${string}`,
@@ -432,11 +432,11 @@ export interface FollowersObject {
 /** [Image Object](https://developer.spotify.com/documentation/web-api/reference/#object-imageobject) */
 export interface ImageObject {
     /** The image height in pixels. If unknown: `null` or not returned. */
-    height?: number | null
+    height: number | null
     /** The source URL of the image. */
     url: string
     /** The image width in pixels. If unknown: null or not returned. */
-    width?: number | null
+    width: number | null
 }
 
 /** [Linked Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-linkedtrackobject) */

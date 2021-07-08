@@ -510,7 +510,7 @@ export function _simplifiedPlaylistObject(
     return {
         ...contextObject('playlist'),
         collaborative: any(Boolean),
-        description: value.description ? any(String) : null,
+        description: value.description === null ? null : any(String),
         id: any(String),
         images: value.images.map(imageObject),
         name: any(String),

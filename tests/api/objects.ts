@@ -305,9 +305,9 @@ function followersObject(): FollowersObject {
 export function imageObject(value: ImageObject): ImageObject {
     const expectedObj: ImageObject = {
         url: any(String),
+        height: value.height ? any(Number) : null,
+        width: value.width ? any(Number) : null,
     }
-    if (value.height) expectedObj.height = any(Number)
-    if (value.width) expectedObj.width = any(Number)
     return expectedObj
 }
 

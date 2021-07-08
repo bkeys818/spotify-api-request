@@ -11,7 +11,7 @@ test(getUserTopArtistsandTracks.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'tracks',
-            testObj: trackObject
+            testObj: trackObject,
         })
     )
 })

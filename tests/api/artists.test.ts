@@ -34,7 +34,7 @@ test(getArtist.name, async () => {
 
 test(getArtistTopTracks.name, async () => {
     const res = await getArtistTopTracks(token, artistIDs[0], {
-        market: 'US'
+        market: 'US',
     })
 
     type ExpectedItem = typeof res.tracks[number]
@@ -44,9 +44,9 @@ test(getArtistTopTracks.name, async () => {
             ...otherProps,
             album: {
                 ...album,
-                available_markets: []
+                available_markets: [],
             },
-            available_markets: []
+            available_markets: [],
         })
         delete obj.available_markets
         delete obj.album.available_markets

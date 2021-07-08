@@ -1,4 +1,7 @@
-import { getCurrentUserProfile, getUserProfile } from '../../src/api/user-profile'
+import {
+    getCurrentUserProfile,
+    getUserProfile,
+} from '../../src/api/user-profile'
 import { privateUserObject, publicUserObject } from './objects'
 
 // @ts-ignore
@@ -13,6 +16,6 @@ test(getCurrentUserProfile.name, async () => {
 
 test(getUserProfile.name, async () => {
     const res = await getUserProfile(token, userID)
-    
+
     expect(res).toStrictEqual<typeof res>(publicUserObject(res))
 })

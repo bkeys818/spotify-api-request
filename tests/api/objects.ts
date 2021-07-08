@@ -45,7 +45,7 @@ import {
 } from '../../src/api/objects'
 import { urlBase, endpoints, Endpoint } from '../../src/api/objects'
 
-
+// prettier-ignore
 type ConstructorConverter<T extends BooleanConstructor | NumberConstructor | StringConstructor> = 
     T extends BooleanConstructor ? boolean
     : T extends NumberConstructor ? number
@@ -55,17 +55,24 @@ type ConstructorConverter<T extends BooleanConstructor | NumberConstructor | Str
 /** Same as {@link expect.any} but checks type */
 export const any = <
     T extends BooleanConstructor | NumberConstructor | StringConstructor
->(classType: T): ConstructorConverter<T> => expect.any(classType)
+>(
+    classType: T
+): ConstructorConverter<T> => expect.any(classType)
 
 export function arrayOf<
     T extends BooleanConstructor | NumberConstructor | StringConstructor
 >(value: ConstructorConverter<T>[], type: T): ConstructorConverter<T>[] {
-    return value.length == 0 ? [] : expect.arrayContaining<T>([expect.any(type)]);
+    return value.length == 0
+        ? []
+        : expect.arrayContaining<T>([expect.any(type)])
 }
 
 export function url(endpoint: Endpoint) {
     let source = `${urlBase}${endpoints[endpoint]}`
-    source = source.replace(/\//g, '\\/').replace(/\./g, '\\.').replace('{id}', '[a-z\\d]+')
+    source = source
+        .replace(/\//g, '\\/')
+        .replace(/\./g, '\\.')
+        .replace('{id}', '[a-z\\d]+')
     source += '(\\?.+)?'
     return expect.stringMatching(new RegExp(source, 'i'))
 }
@@ -355,7 +362,9 @@ export function playlistObject(value: PlaylistObject): PlaylistObject {
     }
 }
 
-export function playlistTrackObject(value: PlaylistTrackObject): PlaylistTrackObject {
+export function playlistTrackObject(
+    value: PlaylistTrackObject
+): PlaylistTrackObject {
     return {
         added_at: value.added_at ? any(String) : null,
         added_by: value.added_by ? publicUserObject(value.added_by) : null,
@@ -517,10 +526,10 @@ export function _simplifiedPlaylistObject(
         id: any(String),
         images: value.images.map(imageObject),
         name: any(String),
-        owner: (() => { 
+        owner: (() => {
             let publicUser: PublicUserObject = {
                 ...value.owner,
-                followers: expect.any(Object)
+                followers: expect.any(Object),
             }
             publicUser = publicUserObject(publicUser)
             const { followers, ...otherProps } = publicUser
@@ -528,7 +537,7 @@ export function _simplifiedPlaylistObject(
         })(),
         public: value.public ? any(Boolean) : null,
         snapshot_id: any(String),
-        primary_color: null
+        primary_color: null,
     }
 }
 
@@ -552,9 +561,7 @@ export function simplifiedShowObject(
         explicit: any(Boolean),
         id: any(String),
         images: value.images.map(imageObject),
-        is_externally_hosted: value.is_externally_hosted
-            ? any(Boolean)
-            : null,
+        is_externally_hosted: value.is_externally_hosted ? any(Boolean) : null,
         languages: arrayOf(value.languages, String),
         media_type: any(String),
         name: any(String),

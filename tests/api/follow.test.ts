@@ -32,8 +32,8 @@ test(getUserFollowedArtists.name, async () => {
         artists: cursorPagingObject({
             value: res.artists,
             endpoint: 'artists',
-            testObj: artistObject
-        })
+            testObj: artistObject,
+        }),
     })
 })
 

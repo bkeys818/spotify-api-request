@@ -5,8 +5,11 @@ import {
     getAudioFeaturesforTrack,
     getAudioAnalysisforTrack,
 } from '../../src/api/tracks'
-import { trackObject, audioFeaturesObject, audioAnalysisObject } from './objects'
-
+import {
+    trackObject,
+    audioFeaturesObject,
+    audioAnalysisObject,
+} from './objects'
 
 // @ts-ignore
 const token = global.token
@@ -16,7 +19,7 @@ test(getSeveralTracks.name, async () => {
     const res = await getSeveralTracks(token, trackIds)
 
     expect(res).toStrictEqual<typeof res>({
-        tracks: res.tracks.map(trackObject)
+        tracks: res.tracks.map(trackObject),
     })
 })
 
@@ -30,7 +33,7 @@ test(getAudioFeaturesforSeveralTracks.name, async () => {
     const res = await getAudioFeaturesforSeveralTracks(token, trackIds)
 
     expect(res).toStrictEqual<typeof res>({
-        audio_features: res.audio_features.map(audioFeaturesObject)
+        audio_features: res.audio_features.map(audioFeaturesObject),
     })
 })
 

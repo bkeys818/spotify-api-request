@@ -61,6 +61,7 @@ test(getAllCategories.name, async () => {
 
 test(getCategory.name, async () => {
     const res = await getCategory(token, categoryID)
+
     expect(res).toStrictEqual<typeof res>(categoryObject(res))
 })
 

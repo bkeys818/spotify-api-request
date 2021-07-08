@@ -30,7 +30,7 @@ test(getAlbumTracks.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'album’s tracks',
-            testObj: simplifiedTrackObject
+            testObj: simplifiedTrackObject,
         })
     )
 })

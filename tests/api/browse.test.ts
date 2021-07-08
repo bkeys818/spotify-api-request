@@ -14,6 +14,7 @@ import {
     // playlistObject,
     categoryObject,
     recommendationsObject,
+    arrayOf
 } from './objects'
 
 // @ts-ignore
@@ -90,5 +91,7 @@ test(getRecommendations.name, async () => {
 test(getRecommendationGenres.name, async () => {
     const res = await getRecommendationGenres(token)
 
-    expect(res).toStrictEqual<typeof res>(recommendationsObject(res))
+    expect(res).toStrictEqual<typeof res>({
+        genres: arrayOf(res.genres, String)
+    })
 })

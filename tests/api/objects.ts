@@ -459,7 +459,7 @@ export function simplifiedAlbumObject(
 ): SimplifiedAlbumObject {
     const obj: SimplifiedAlbumObject = {
         ...contextObject('album'),
-        album_type: expect.stringMatching(/album|single|compilation/),
+        album_type: expect.stringMatching(/album|single|compilation/i),
         artists: value.artists.map(simplifiedArtistObject),
         available_markets: arrayOf(value.available_markets, String),
         id: any(String),

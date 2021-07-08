@@ -768,7 +768,7 @@ export interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
     /** The name of the playlist. */
     name: string
     /** The user who owns the playlist */
-    owner: PublicUserObject
+    owner: Omit<PublicUserObject, 'followers'>
     /** The playlist’s public/private status: `true` the playlist is public, `false` the playlist is private, `null` the playlist status is not relevant. For more about public/private status, see [Working with Playlists](https://developer.spotify.com/documentation/general/guides/working-with-playlists/). */
     public: boolean
     /** The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version. */
@@ -778,7 +778,8 @@ export interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
      *
      * Note, a track object may be `null`. This can happen if a track is no longer available.
      */
-    tracks: PlaylistTracksRefObject | null
+    tracks: PlaylistTracksRefObject | null,
+    primary_color: null
 }
 
 /** [Simplified Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedshowobject) */

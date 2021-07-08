@@ -611,7 +611,7 @@ export interface PublicUserObject {
 }
 
 /** [Recommendation Seed Object](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject) */
-export interface RecommendationSeedObject<T extends 'artist' | 'track' | 'genre'>{
+export interface RecommendationSeedObject<T extends 'ARTIST' | 'TRACK' | 'GENRE'>{
     /** The number of tracks available after min_* and max_* filters have been applied. */
     afterFilteringSize: number
     /** The number of tracks available after relinking for regional availability. */
@@ -633,12 +633,12 @@ export interface RecommendationSeedObject<T extends 'artist' | 'track' | 'genre'
 export interface RecommendationsObject {
     /** An array of [recommendation seed objects](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject). */
     seeds: (
-          RecommendationSeedObject<'artist'>
-        | RecommendationSeedObject<'track'>
-        | RecommendationSeedObject<'genre'>
+          RecommendationSeedObject<'ARTIST'>
+        | RecommendationSeedObject<'TRACK'>
+        | RecommendationSeedObject<'GENRE'>
     )[]
     /** An array of [track object (simplified)](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedtrackobject) ordered according to the parameters supplied. */
-    tracks: SimplifiedTrackObject[]
+    tracks: TrackObject[]
 }
 
 /** [Resume Point Object](https://developer.spotify.com/documentation/web-api/reference/#object-resumepointobject) */

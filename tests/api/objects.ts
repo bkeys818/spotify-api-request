@@ -410,13 +410,17 @@ export function publicUserObject(value: PublicUserObject): PublicUserObject {
     return expectedObj
 }
 
-function recommendationSeedObject<T extends 'artist' | 'track' | 'genre'>(
+function recommendationSeedObject<T extends 'ARTIST' | 'TRACK' | 'GENRE'>(
     type: T
 ): RecommendationSeedObject<T> {
     return {
         afterFilteringSize: any(Number),
         afterRelinkingSize: any(Number),
-        href: type === 'genre' ? null : url(`${type as 'artist' | 'track'}s`),
+        href: (() => {
+            const _type: 'ARTIST' | 'TRACK' | 'GENRE' = type
+            if (_type == 'GENRE') return null
+            else return url(`${_type.toLowerCase() as Lowercase<typeof _type>}s`)
+        })(),
         id: any(String),
         initialPoolSize: any(Number),
         type: type,
@@ -430,7 +434,7 @@ export function recommendationsObject(
         seeds: value.seeds.map((seed) =>
             recommendationSeedObject(seed.type)
         ) as RecommendationsObject['seeds'],
-        tracks: value.tracks.map(simplifiedTrackObject),
+        tracks: value.tracks.map(trackObject),
     }
 }
 

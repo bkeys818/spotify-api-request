@@ -13,6 +13,7 @@ import {
 } from '../../src/api/playlists'
 import {
     pagingObject,
+    simplifiedPlaylistObject,
     playlistObject,
     playlistTrackObject,
     imageObject,
@@ -23,14 +24,14 @@ const token = global.token
 const playlistID = '6innvmsboMZC5rdrmY292j'
 const userID = 'spotify'
 
-test(getListOfCurrentUserPlaylists.name, async () => {
+test.only(getListOfCurrentUserPlaylists.name, async () => {
     const res = await getListOfCurrentUserPlaylists(token)
 
     expect(res).toStrictEqual<typeof res>(
         pagingObject({
             value: res,
             endpoint: 'user’s playlists',
-            testObj: playlistObject,
+            testObj: simplifiedPlaylistObject,
         })
     )
 })

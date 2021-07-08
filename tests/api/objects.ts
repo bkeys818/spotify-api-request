@@ -514,9 +514,18 @@ export function _simplifiedPlaylistObject(
         id: any(String),
         images: value.images.map(imageObject),
         name: any(String),
-        owner: publicUserObject(value.owner),
+        owner: (() => { 
+            let publicUser: PublicUserObject = {
+                ...value.owner,
+                followers: expect.any(Object)
+            }
+            publicUser = publicUserObject(publicUser)
+            const { followers, ...otherProps } = publicUser
+            return otherProps
+        })(),
         public: any(Boolean),
         snapshot_id: any(String),
+        primary_color: null
     }
 }
 

@@ -17,11 +17,11 @@ import {
     playlistTrackObject,
     imageObject,
 } from './objects'
-import { userID } from './user-profile.test'
 
 // @ts-ignore
 const token = global.token
-export const playlistID = '6innvmsboMZC5rdrmY292j'
+const playlistID = '6innvmsboMZC5rdrmY292j'
+const userID = 'spotify'
 
 test(getListOfCurrentUserPlaylists.name, async () => {
     const res = await getListOfCurrentUserPlaylists(token)

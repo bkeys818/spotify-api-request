@@ -14,12 +14,12 @@ import {
     categoryObject,
     recommendationsObject,
 } from './objects'
-import { artistIDs } from './artists.test'
-import { trackIds } from './tracks.test'
 
 // @ts-ignore
 const token = global.token
 const categoryID = 'party'
+const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
+const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
 test(getAllNewReleases.name, async () => {
     const res = await getAllNewReleases(token)

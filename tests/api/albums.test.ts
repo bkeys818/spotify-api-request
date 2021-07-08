@@ -7,7 +7,7 @@ import { albumObject, pagingObject, simplifiedTrackObject } from './objects'
 
 // @ts-ignore
 const token = global.token
-export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
+const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 
 test(getMultipleAlbums.name, async () => {
     const res = await getMultipleAlbums(token, albumIDs)

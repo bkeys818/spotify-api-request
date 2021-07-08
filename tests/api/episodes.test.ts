@@ -3,7 +3,7 @@ import { episodeObject } from './objects'
 
 // @ts-ignore
 const token = global.token
-export const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
+const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
 
 test(getMultipleEpisodes.name, async () => {
     const res = await getMultipleEpisodes(token, episodeIds)

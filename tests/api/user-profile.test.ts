@@ -3,7 +3,7 @@ import { privateUserObject, publicUserObject } from './objects'
 
 // @ts-ignore
 const token = global.token
-export const userID = 'spotify'
+const userID = 'spotify'
 
 test(getCurrentUserProfile.name, async () => {
     const res = await getCurrentUserProfile(token)

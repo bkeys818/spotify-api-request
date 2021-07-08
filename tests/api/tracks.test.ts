@@ -10,7 +10,7 @@ import { trackObject, audioFeaturesObject, audioAnalysisObject } from './objects
 
 // @ts-ignore
 const token = global.token
-export const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
+const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
 test(getSeveralTracks.name, async () => {
     const res = await getSeveralTracks(token, trackIds)

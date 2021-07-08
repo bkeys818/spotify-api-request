@@ -8,12 +8,12 @@ import {
     getFollowingStateForArtistsOrUsers,
 } from '../../src/api/follow'
 import { arrayOf, cursorPagingObject, artistObject } from './objects'
-import { playlistID } from './playlists.test'
-import { userID } from './user-profile.test'
-import { artistIDs } from './artists.test'
 
 // @ts-ignore
 const token = global.token
+const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
+const playlistID = '6innvmsboMZC5rdrmY292j'
+const userID = 'spotify'
 
 // test(followPlaylist.name, async () => {}
 

@@ -16,14 +16,13 @@ import {
     showObject,
     trackObject,
 } from './objects'
-import { albumIDs } from './albums.test'
-import { episodeIds } from './episodes.test'
-import { showIDs } from './shows.test'
-import { trackIds } from './tracks.test'
 
 // @ts-ignore
 const token = global.token
-
+const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
+const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
+const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
+const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
 test(getUsersSavedAlbums.name, async () => {
     const res = await getUsersSavedAlbums(token)

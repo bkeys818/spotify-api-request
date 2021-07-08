@@ -279,11 +279,11 @@ export async function getRecommendations(
 /**
  * Retrieve a list of available genres seed parameter values for [recommendations](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recommendations).
  * @param {Token} token - A valid user access token or your client credentials.
- * @returns {Promise<RecommendationsObject>} A {@link RecommendationsObject recommendations response object}
+ * @returns {Promise<{ genres: string[] }>} An object with a `genres` field containing an array of genres.
  */
 export async function getRecommendationGenres(
     token: Token | string
-): Promise<RecommendationsObject> {
+): Promise<{ genres: string[] }> {
     return await (
         await sendRequest({
             endpoint: 'recommendations/available-genre-seeds',

@@ -2,22 +2,32 @@
 export const urlBase = 'https://api.spotify.com/v1/' as const
 /** @internal */
 export const endpoints = {
+    // albums
     'albums': `albums/{id}` as `albums/${string}`,
     'album’s tracks': `albums/{id}/tracks` as `albums/${string}/tracks`,
+    // artists
     'artists': `artists/{id}` as `artists/${string}`,
     'artist’s albums': `artists/{id}/albums` as `artists/${string}/albums`,
+    // browse
     'categories': `browse/categories` as `browse/categories`,
     'category’s playlists': `browse/categories/{id}/playlists` as `browse/categories/${string}/playlist`,
     'new releases': `browse/new-releases` as const,
+    // episodes
     'episodes' :`episodes/{id}` as `episodes/${string}`,
+    // playlists
     'playlists': `playlists/{id}` as `playlists/${string}`,
     'playlist’s tracks': `playlists/{id}/tracks` as `playlists/${string}/tracks`,
+    // shows
     'show’s episodes': `shows/{id}/episodes` as `shows/${string}/episodes`,
     'shows': `shows/{id}` as `shows/${string}`,
+    // tracks
     'tracks': `tracks/{id}` as `tracks/${string}`,
+    // users
     'users': `users/{id}` as `users/${string}`,
     'user’s playlists': `users/{id}/playlist` as `users/${string}/playlist`,
+    // search
     'search': `search` as const,
+    // library
     'my albums': `me/albums` as const,
     'my episodes': `me/episodes` as const,
     'my shows': `me/shows` as const,

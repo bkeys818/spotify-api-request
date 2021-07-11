@@ -31,6 +31,7 @@ import {
     RecommendationSeedObject,
     RecommendationsObject,
     SavedAlbumObject,
+    SavedEpisodeObject,
     SavedShowObject,
     SavedTrackObject,
     ShowObject,
@@ -457,12 +458,13 @@ export function recommendationsObject(
     }
 }
 
-type SavedObject = SavedAlbumObject | SavedShowObject | SavedTrackObject
+type SavedObject = SavedAlbumObject | SavedEpisodeObject | SavedShowObject | SavedTrackObject
 export function savedObject<T extends SavedObject>(value: T): T {
-    const obj: { [key: string]: any } = { added_at: any(Number) }
-    if ('album' in value) obj.album = albumObject(value.album)
-    if ('show' in value) obj.show = simplifiedShowObject(value.show)
-    if ('track' in value) obj.track = trackObject(value.track)
+    const obj: { [key: string]: any } = { added_at: any(String) }
+    if ('album' in value && value.album) obj.album = albumObject(value.album)
+    else if ('episode' in value && value.episode) obj.episode = episodeObject(value.episode)
+    else if ('show' in value && value.show) obj.show = simplifiedShowObject(value.show)
+    else if ('track' in value && value.track) obj.track = trackObject(value.track)
     return obj as T
 }
 

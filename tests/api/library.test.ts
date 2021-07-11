@@ -11,10 +11,7 @@ import {
 import {
     arrayOf,
     pagingObject,
-    albumObject,
-    episodeObject,
-    showObject,
-    trackObject,
+    savedObject,
 } from './objects'
 
 // @ts-ignore
@@ -31,7 +28,9 @@ test(getUsersSavedAlbums.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'my albums',
-            testObj: albumObject
+            testObj: (value: typeof res.items[number]) => {
+                return savedObject(value)
+            }
         })
     )
 })
@@ -43,7 +42,9 @@ test(getUsersSavedEpisodes.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'my episodes',
-            testObj: episodeObject
+            testObj: (value: typeof res.items[number]) => {
+                return savedObject(value)
+            }
         })
     )
 })
@@ -55,7 +56,9 @@ test(getUsersSavedShows.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'my shows',
-            testObj: showObject
+            testObj: (value: typeof res.items[number]) => {
+                return savedObject(value)
+            }
         })
     )
 })
@@ -67,7 +70,9 @@ test(getUsersSavedTracks.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'my tracks',
-            testObj: trackObject
+            testObj: (value: typeof res.items[number]) => {
+                return savedObject(value)
+            }
         })
     )
 })

@@ -42,7 +42,7 @@ export async function getListOfCurrentUserPlaylists(
  * @param {Object} [options]
  * @param {number} [options.limit=20]
  * @param {number} [options.offset=0]
- * @returns {Promise<PagingObject<PlaylistObject, 'user’s playlists'>>} An array of simplified {@link PlaylistObject playlist object} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<SimplifiedPlaylistObject, 'user’s playlists'>>} An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfUserPlaylists(
     token: Token | string,
@@ -53,7 +53,7 @@ export async function getListOfUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<PlaylistObject, 'user’s playlists'>> {
+): Promise<PagingObject<SimplifiedPlaylistObject, 'user’s playlists'>> {
     return await (
         await sendRequest({
             endpoint: 'users/{user_id}/playlists',

@@ -40,7 +40,7 @@ export async function getAllNewReleases(
  * Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
  * @param {Token} token - A valid user access token or your client credentials.
  * @param {Object} [options]
- * @returns {Promise<{message: string, playlists: PagingObject<SimplifiedPlaylistObject, 'featured playlists'>}>} An array of simplified {@link SimplifiedPlaylistObject playlist objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<{message: string, playlists: PagingObject<SimplifiedPlaylistObject, 'featured playlists'>}>} An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllFeaturedPlaylists(
     token: Token | string,

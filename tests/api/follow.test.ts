@@ -31,7 +31,7 @@ test(getUserFollowedArtists.name, async () => {
     expect(res).toStrictEqual<typeof res>({
         artists: cursorPagingObject({
             value: res.artists,
-            endpoint: 'artists',
+            endpoint: 'my following',
             testObj: artistObject,
         }),
     })

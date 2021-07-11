@@ -543,7 +543,7 @@ export function _simplifiedPlaylistObject(
             const { followers, ...otherProps } = publicUser
             return otherProps
         })(),
-        public: value.public ? any(Boolean) : null,
+        public: value.public === null ? null : any(Boolean),
         snapshot_id: any(String),
         primary_color: null,
     }

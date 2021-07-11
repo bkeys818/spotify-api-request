@@ -555,7 +555,7 @@ export interface PlaylistTrackObject {
     /** The date and time the track or episode was added. *Note that some very old playlists may return `null` in this field.* */
     added_at: string | null
     /** The Spotify user who added the track or episode. *Note that some very old playlists may return `null` in this field.* */
-    added_by: PublicUserObject | null
+    added_by: Omit<PublicUserObject, 'display_name' | 'followers'> | null
     /** Whether this track or episode is a [local file](https://developer.spotify.com/web-api/local-files-spotify-playlists/) or not. */
     is_local: boolean
     /** Information about the track or episode. */
@@ -595,7 +595,7 @@ export interface PrivateUserObject extends PublicUserObject {
 /** [Public User Object](https://developer.spotify.com/documentation/web-api/reference/#object-publicuserobject) */
 export interface PublicUserObject {
     /** The name displayed on the user’s profile. `null` if not available. */
-    display_name: string
+    display_name: string | null
     /** Known public external URLs for this user. */
     external_urls: ExternalUrlObject
     /** Information about the followers of this user. */

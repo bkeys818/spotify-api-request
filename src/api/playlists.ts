@@ -184,6 +184,11 @@ export async function changePlaylistDetails(
     })
 }
 
+type MarketPlaylistTrackObject = Omit<PlaylistTrackObject, 'track'> & {
+    track: Omit<PlaylistTrackObject['track'], 'available_markets' | 'album'> & {
+        album: Omit<PlaylistTrackObject['track']['album'], 'available_markets'>
+    }
+}
 /**
  * Get full details of the items of a playlist owned by a Spotify user.
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. Both Public and Private playlists belonging to any user are retrievable on provision of a valid access token.
@@ -194,7 +199,7 @@ export async function changePlaylistDetails(
  * @param {number} [options.limit]
  * @param {number} [options.offset]
  * @param {'track' | 'episode'} [options.additional_types]
- * @returns {Promise<PagingObject<PlaylistTrackObject, 'playlist’s tracks'>>} An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
+ * @returns {Promise<PagingObject<MarketPlaylistTrackObject, 'playlist’s tracks'>>} An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
  */
 export async function getPlaylistItems(
     token: Token | string,
@@ -215,7 +220,7 @@ export async function getPlaylistItems(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: 'track' | 'episode'
     }
-): Promise<PagingObject<PlaylistTrackObject, 'playlist’s tracks'>> {
+): Promise<PagingObject<MarketPlaylistTrackObject, 'playlist’s tracks'>> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',

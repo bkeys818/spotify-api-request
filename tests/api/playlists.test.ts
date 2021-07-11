@@ -24,7 +24,7 @@ const token = global.token
 const playlistID = '6innvmsboMZC5rdrmY292j'
 const userID = 'spotify'
 
-test.only(getListOfCurrentUserPlaylists.name, async () => {
+test(getListOfCurrentUserPlaylists.name, async () => {
     const res = await getListOfCurrentUserPlaylists(token)
 
     expect(res).toStrictEqual<typeof res>(
@@ -43,7 +43,7 @@ test(getListOfUserPlaylists.name, async () => {
         pagingObject({
             value: res,
             endpoint: 'user’s playlists',
-            testObj: playlistObject,
+            testObj: simplifiedPlaylistObject,
         })
     )
 })

@@ -793,6 +793,8 @@ export interface SimplifiedShowObject extends ContextObject<'show'> {
     description: string
     /** Whether or not the show has explicit content (true = yes it does; false = no it does not OR unknown). */
     explicit: boolean
+    /** A description of the show. This field may contain HTML tags. */
+    html_description: string
     /** The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show. */
     id: string
     /** The cover art for the show in various sizes, widest first. */
@@ -807,6 +809,12 @@ export interface SimplifiedShowObject extends ContextObject<'show'> {
     name: string
     /** The publisher of the show. */
     publisher: string
+    /**
+     * Number of episodes in the show.
+     * 
+     * *Note: - This property is not in the Spotify API Documentation.*
+     */
+    total_episodes: number
 }
 
 /** [Simplified Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedtrackobject) */

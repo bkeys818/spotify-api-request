@@ -336,15 +336,14 @@ export interface CurrentlyPlayingObject {
 /** [Cursor Object](https://developer.spotify.com/documentation/web-api/reference/#object-cursorobject) */
 export interface CursorObject {
     /** The cursor to use as key to find the next page of items. */
-    after: string
+    after: string | null
 }
 
 /** [Cursor Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-cursorpagingobject) */
 export interface CursorPagingObject<
     T extends AlbumObject | ArtistObject,
-    E extends T extends AlbumObject ? 'albums' : 'artists'
->
-    extends PagingObject<T, E> {
+    E extends Endpoint
+> extends Omit<PagingObject<T, E>, 'offset' | 'previous'> {
     /** The cursors used to find the next set of items. */
     cursors: CursorObject
 }

@@ -65,11 +65,31 @@ test(getPlaylist.name, async () => {
 test(getPlaylistItems.name, async () => {
     const res = await getPlaylistItems(token, playlistID, { market: 'US' })
 
+    type ExpectedItem = typeof res.items[number]
+    function customPlaylistTrackObjectObject(value: ExpectedItem): ExpectedItem {
+        const { track, ...otherProps } = value
+        const { album, ...otherTrackProps } = track
+        const obj: any = playlistTrackObject({
+            ...otherProps,
+            track: {
+                ...otherTrackProps,
+                available_markets: [],
+                album: {
+                    ...album,
+                    available_markets: []
+                }
+            }
+        })
+        delete obj.track.available_markets
+        delete obj.track.album.available_markets
+        return obj
+    }
+
     expect(res).toStrictEqual<typeof res>(
         pagingObject({
             value: res,
             endpoint: 'playlist’s tracks',
-            testObj: playlistTrackObject,
+            testObj: customPlaylistTrackObjectObject,
         })
     )
 })

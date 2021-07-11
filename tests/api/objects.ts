@@ -365,9 +365,19 @@ export function playlistObject(value: PlaylistObject): PlaylistObject {
 export function playlistTrackObject(
     value: PlaylistTrackObject
 ): PlaylistTrackObject {
+    let added_by: typeof value.added_by
+    if (value.added_by === null) added_by = null
+    else 
+        added_by = (() => {
+            const { display_name, followers, ...returnValue } =
+            publicUserObject(
+                value.added_by as Parameters<typeof publicUserObject>[0]
+            )
+            return returnValue
+        })()
     return {
         added_at: value.added_at ? any(String) : null,
-        added_by: value.added_by ? publicUserObject(value.added_by) : null,
+        added_by: added_by,
         is_local: any(Boolean),
         track: trackObject(value.track),
         primary_color: null,
@@ -396,7 +406,7 @@ export function privateUserObject(value: PrivateUserObject): PrivateUserObject {
 
 export function publicUserObject(value: PublicUserObject): PublicUserObject {
     const expectedObj: PublicUserObject = {
-        display_name: any(String),
+        display_name: value.display_name === null ? null : any(String),
         external_urls: externalUrlObject(),
         followers: followersObject(),
         href: url('users'),

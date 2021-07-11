@@ -450,7 +450,11 @@ export function savedObject<T extends SavedObject>(value: T): T {
 export function showObject(value: ShowObject): ShowObject {
     return {
         ...simplifiedShowObject(value),
-        episodes: value.episodes.map(simplifiedEpisodeObject),
+        episodes: pagingObject({
+            value: value.episodes,
+            endpoint: 'show’s episodes',
+            testObj: simplifiedEpisodeObject
+        }),
     }
 }
 

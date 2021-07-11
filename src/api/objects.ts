@@ -676,7 +676,7 @@ export interface SavedTrackObject {
 /** [Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-showobject) */
 export interface ShowObject extends SimplifiedShowObject {
     /** A list of the show’s episodes. */
-    episodes: SimplifiedEpisodeObject[]
+    episodes: PagingObject<SimplifiedEpisodeObject, 'show’s episodes'>
 }
 
 /** [Simplified Album Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedalbumobject) */

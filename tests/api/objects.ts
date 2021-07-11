@@ -247,23 +247,32 @@ function copyrightObject(): CopyrightObject {
 
 // function currentlyPlayingObject(value: CurrentlyPlayingObject): CurrentlyPlayingObject {}
 
-function cursorObject(): CursorObject {
+function cursorObject(value: CursorObject): CursorObject {
     return {
-        after: any(String),
+        after: value.after === null ? null : any(String),
     }
 }
 
 export function cursorPagingObject<
     T extends AlbumObject | ArtistObject,
-    E extends T extends AlbumObject ? 'albums' : 'artists'
+    E extends Endpoint
 >(props: {
     value: CursorPagingObject<T, E>
     endpoint: E
     testObj: (() => T) | ((value: T) => T)
 }): CursorPagingObject<T, E> {
+    const { offset, previous, ...otherProps } = pagingObject({
+        value: {
+            ...props.value,
+            offset: 0,
+            previous: null
+        },
+        endpoint: props.endpoint,
+        testObj: props.testObj,
+    })
     return {
-        ...pagingObject(props),
-        cursors: cursorObject(),
+        ...otherProps,
+        cursors: cursorObject(props.value.cursors),
     }
 }
 

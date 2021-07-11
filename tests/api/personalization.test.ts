@@ -10,7 +10,7 @@ test(getUserTopArtistsandTracks.name, async () => {
     expect(res).toStrictEqual<typeof res>(
         pagingObject({
             value: res,
-            endpoint: 'tracks',
+            endpoint: 'my top tracks',
             testObj: trackObject,
         })
     )

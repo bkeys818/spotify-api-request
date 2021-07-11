@@ -2,17 +2,17 @@ import { sendRequest } from '../request'
 import type { Token } from '../authorize'
 import type {
     PagingObject,
-    AlbumObject,
-    TrackObject,
-    EpisodeObject,
-    ShowObject,
+    SavedAlbumObject,
+    SavedTrackObject,
+    SavedEpisodeObject,
+    SavedShowObject,
 } from './objects'
 
 /**
  * Get a list of the albums saved in the current Spotify user’s ‘Your Music’ library.
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<AlbumObject, 'my albums'>>} An array of saved {@link AlbumObject album objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<SavedAlbumObject, 'my albums'>>} An array of {@link SavedAlbumObject saved album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedAlbums(
     token: Token | string,
@@ -24,7 +24,7 @@ export async function getUsersSavedAlbums(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<PagingObject<AlbumObject, 'my albums'>> {
+): Promise<PagingObject<SavedAlbumObject, 'my albums'>> {
     return await (
         await sendRequest({
             endpoint: 'me/albums',
@@ -101,7 +101,7 @@ export async function checkUsersSavedAlbums(
  * Get a list of the songs saved in the current Spotify user’s ‘Your Music’ library.
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<TrackObject, 'my tracks'>>} An array of saved {@link TrackObject track objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<SavedTrackObject, 'my tracks'>>} An array of {@link SavedTrackObject saved track objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedTracks(
     token: Token | string,
@@ -113,7 +113,7 @@ export async function getUsersSavedTracks(
         /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
-): Promise<PagingObject<TrackObject, 'my tracks'>> {
+): Promise<PagingObject<SavedTrackObject, 'my tracks'>> {
     return await (
         await sendRequest({
             endpoint: 'me/tracks',
@@ -192,7 +192,7 @@ export async function checkUsersSavedTracks(
  * This API endpoint is in **beta** and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<EpisodeObject, 'my episodes'>>} An array of saved {@link EpisodeObject episode objects} (wrapped in a {@link PagingObject paging object}).
+ * @returns {Promise<PagingObject<SavedEpisodeObject, 'my episodes'>>} An array of {@link SavedEpisodeObject saved episode objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedEpisodes(
     token: Token | string,
@@ -212,7 +212,7 @@ export async function getUsersSavedEpisodes(
         /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
-): Promise<PagingObject<EpisodeObject, 'my episodes'>> {
+): Promise<PagingObject<SavedEpisodeObject, 'my episodes'>> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes',
@@ -295,7 +295,7 @@ export async function checkUsersSavedEpisodes(
  * Get a list of shows saved in the current Spotify user’s library. Optional parameters can be used to limit the number of shows returned.
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user.
  * @param {Object} [options]
- * @returns {Promise<PagingObject<ShowObject, 'my shows'>>} An array of {@link ShowObject saved show objects} (wrapped in a {@link PagingObject paging object}) in JSON format. If the current user has no shows saved, the response will be an empty array. If a show is unavailable in the given `market` it is filtered out. The `total` field in the paging object represents the number of all items, filtered or not, and thus might be larger than the actual total number of observable items.
+ * @returns {Promise<PagingObject<SavedShowObject, 'my shows'>>} An array of {@link SavedShowObject saved show objects} (wrapped in a {@link PagingObject paging object}) in JSON format. If the current user has no shows saved, the response will be an empty array. If a show is unavailable in the given `market` it is filtered out. The `total` field in the paging object represents the number of all items, filtered or not, and thus might be larger than the actual total number of observable items.
  */
 export async function getUsersSavedShows(
     token: Token | string,
@@ -305,7 +305,7 @@ export async function getUsersSavedShows(
         /** The index of the first show to return. Default: 0 (the first object). Use with limit to get the next set of shows. */
         offset?: number
     }
-): Promise<PagingObject<ShowObject, 'my shows'>> {
+): Promise<PagingObject<SavedShowObject, 'my shows'>> {
     return await (
         await sendRequest({
             endpoint: 'me/shows',

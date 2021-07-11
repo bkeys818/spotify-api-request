@@ -82,13 +82,13 @@ export async function getUserFollowedArtists<T extends 'artist'>(
     token: Token | string,
     options: {
         /** The ID type: currently only `artist` is supported. */
-        type: 'artist'
+        type: T
         /** The last artist ID retrieved from the previous request. */
         after?: string
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
     }
-): Promise<{ artists: CursorPagingObject<ArtistObject, `${T}s`> }> {
+): Promise<{ artists: CursorPagingObject<ArtistObject, 'my following'> }> {
     return await (
         await sendRequest({
             endpoint: 'me/following',

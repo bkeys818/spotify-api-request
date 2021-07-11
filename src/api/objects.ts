@@ -35,6 +35,7 @@ export const endpoints = {
     'my tracks': `me/tracks` as const,
     'my top tracks': `me/top/tracks` as const,
     'my top artists': `me/top/artists` as const,
+    'my following': `me/following` as const
 } as const
 /** @internal */
 type Query = `?${string}` | ''

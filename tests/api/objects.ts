@@ -563,13 +563,15 @@ export function simplifiedShowObject(
         copyrights: value.copyrights.map(copyrightObject),
         description: any(String),
         explicit: any(Boolean),
+        html_description: any(String),
         id: any(String),
         images: value.images.map(imageObject),
-        is_externally_hosted: value.is_externally_hosted ? any(Boolean) : null,
+        is_externally_hosted: value.is_externally_hosted === null ? null : any(Boolean),
         languages: arrayOf(value.languages, String),
         media_type: any(String),
         name: any(String),
         publisher: any(String),
+        total_episodes: any(Number),
     }
 }
 

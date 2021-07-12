@@ -1,0 +1,32 @@
+name: Run test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install modules
+        run: yarn install
+
+      - name: Create .env file
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        run: |
+          cd  ${{ github.workspace }}
+          touch .env
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}\nCLIENT_SECRET=${{ secrets.CLIENT_SECRET }}\n" > .env
+
+      - name: Run tests
+        run: yarn test

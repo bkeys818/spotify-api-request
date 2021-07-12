@@ -4,28 +4,34 @@ import type {
     PagingObject,
     ArtistObject,
     SimplifiedAlbumObject,
+    SimplifiedPlaylistObject,
     TrackObject,
     SimplifiedShowObject,
     SimplifiedEpisodeObject,
 } from './objects'
 
-type SearchType = 'album' | 'artist' | 'playlist' | 'track' | 'show' | 'episode'
-type ResponseItem<T extends SearchType | SearchType[]> = 
-      T extends 'artist' ? ArtistObject
-    : T extends 'album' ? SimplifiedAlbumObject
-    : T extends 'track' ? TrackObject
-    : T extends 'show' ? SimplifiedShowObject
-    : T extends 'episode' ? SimplifiedEpisodeObject
-    : T extends SearchType[] ? ResponseItem<T[number]>
+
+interface ResponseObject {
+    albums: PagingObject<SimplifiedAlbumObject, 'search'>
+    artists: PagingObject<ArtistObject, 'search'>
+    playlists: PagingObject<SimplifiedPlaylistObject, 'search'>
+    tracks: PagingObject<TrackObject, 'search'>
+    shows: PagingObject<SimplifiedShowObject, 'search'>
+    episodes: PagingObject<SimplifiedEpisodeObject, 'search'>
+}
+type SearchType = keyof ResponseObject
+type ResponseType<T extends keyof ResponseObject | (keyof ResponseObject)[]> =
+    T extends SearchType ? Pick<ResponseObject, T>
+    : T extends SearchType[] ? Pick<ResponseObject, T[number]>
     : never
 
 /**
  * Get Spotify Catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
  * @param {Object} options
- * @returns {Proimse<SearchResponse>} For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
+ * @returns {Promise<ResponseType<T>>} For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
  */
-export async function searchforItem<T extends SearchType | SearchType[]>(
+export async function searchForItem<T extends SearchType | SearchType[]>(
     token: Token | string,
     options: {
         /** Search [query](https://developer.spotify.com/documentation/web-api/reference/#notes-2) keywords and optional field filters and operators. */
@@ -77,7 +83,10 @@ export async function searchforItem<T extends SearchType | SearchType[]>(
          */
         include_external?: 'audio'
     }
-): Promise<PagingObject<ResponseItem<T>, 'search'>> {
+): Promise<ResponseType<T>> {
+    if (Array.isArray(options.type))
+        options.type.map(type => type.slice(0, -1))
+    else (options.type as string) = options.type.slice(0, -1)
     return await (
         await sendRequest({
             endpoint: 'search',

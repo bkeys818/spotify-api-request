@@ -186,7 +186,7 @@ export function audioAnalysisObject(
             pitches: arrayOf(segment.pitches, Number),
             timbre: arrayOf(segment.timbre, Number),
         })),
-        tatums: value.sections.map(() => ({
+        tatums: value.tatums.map(() => ({
             start: any(Number),
             duration: any(Number),
             confidence: any(Number),

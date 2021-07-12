@@ -32,7 +32,7 @@
     "postdocs": "http-server -a -s localhost -p 5050 docs",
     "prebuild": "rimraf lib & rimraf types",
     "build": "tsc --build tsconfig.src.json",
-    "prepublish": "yarn build"
+    "prepublish": "yarn test && yarn docs, && yarn build"
   },
   "dependencies": {
     "node-fetch": "^2.6.1"

@@ -1,0 +1,36 @@
+name: Run test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - uses: actions/checkout@v2
+
+      - name: Create .env file
+        shell: bash
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          cd ${{ github.workspace }}
+          touch .env
+          echo "CLIENT_ID=$CLIENT_ID
+          CLIENT_SECRET=$CLIENT_SECRET
+          REFRESH_TOKEN=$REFRESH_TOKEN
+          " > .env
+
+      - name: Install modules
+        run: npm install --ignore-scripts
+
+      - name: Run tests
+        run: yarn test

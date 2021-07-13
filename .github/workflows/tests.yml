@@ -25,14 +25,11 @@ jobs:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         run: |
-          cd  ${{ github.workspace }}
+          cd ${{ github.workspace }}
           touch .env
-          echo "$CLIENT_ID"
-          echo "$CLIENT_SECRET"
           echo "CLIENT_ID=$CLIENT_ID
           CLIENT_SECRET=$CLIENT_SECRET
           " > .env
-          echo "$(cat .env)"
 
       - name: Run tests
-        run: ./node_modules/.bin/jest tests/action.test.ts
+        run: yarn test

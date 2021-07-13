@@ -1,52 +1,36 @@
-import { Name } from '../../src/api/albums'
-import { TestDataRow, sendRequest, pagingObject } from './global'
-import { albumObject } from '../spotify-objects'
+import {
+    getMultipleAlbums,
+    getAlbum,
+    getAlbumTracks,
+} from '../../src/api/albums'
+import { albumObject, pagingObject, simplifiedTrackObject } from './objects'
 
-const albumIDs = ['7gsWAHLeT0w7es6FofOXk1']
+// @ts-ignore
+const token = global.token
+const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 
+test(getMultipleAlbums.name, async () => {
+    const res = await getMultipleAlbums(token, albumIDs)
 
-test.concurrent.each([
-    [
-        'Get Multiple Albums',
-        {
-            queryParameter: {
-                ids: albumIDs.join(',')
-            }
-        },
-        async response => {
-            await expect(response).toMatchObject<typeof response>({
-                albums: response.albums.map(album => 
-                    (album === null ? null : albumObject(album))
-                )
-            })
-        }
-    ] as TestDataRow<'Get Multiple Albums'>,
-    [
-        'Get an Album',
-        {
-            pathParameter: {
-                "{id}": albumIDs[0]
-            }
-        },
-        async response => {
-            await expect(response).toMatchObject<typeof response>(albumObject(response))
-        }
-    ] as TestDataRow<'Get an Album'>,
-    [
-        "Get an Album's Tracks",
-        {
-            pathParameter: {
-                "{id}": albumIDs[0]
-            }
-        },
-        async response => {
-            await expect(response).toMatchObject<typeof response>(
-                pagingObject('track', response, response.items.map(() =>
-                    expect.any(Object)
-                ))
-            )
-        }
-    ] as TestDataRow<"Get an Album's Tracks">,
-] as TestDataRow<Name>[])('Response for "%s"', async (name, request, tests) => {
-    await tests(await sendRequest(name, request))
+    expect(res).toStrictEqual({
+        albums: res.albums.map((album) => (album ? albumObject(album) : null)),
+    })
+})
+
+test(getAlbum.name, async () => {
+    const res = await getAlbum(token, albumIDs[0])
+
+    expect(res).toStrictEqual<typeof res>(albumObject(res))
+})
+
+test(getAlbumTracks.name, async () => {
+    const res = await getAlbumTracks(token, albumIDs[0])
+
+    expect(res).toEqual<typeof res>(
+        pagingObject({
+            value: res,
+            endpoint: 'album’s tracks',
+            testObj: simplifiedTrackObject,
+        })
+    )
 })

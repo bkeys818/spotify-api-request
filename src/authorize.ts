@@ -7,17 +7,12 @@ export interface Token {
     expires_in: number
 }
 
-interface AuthorizeParams {
-    clientID: string
-    clientSecret: string
-}
-
-export async function authorize(params?: AuthorizeParams): Promise<Token> {
+export async function authorize(props: { clientID: string, clientSecret: string}): Promise<Token> {
     const res = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
             Authorization: `Basic ${Buffer.from(
-                `${params?.clientID ?? process.env.CLIENT_ID}:${params?.clientSecret ?? process.env.CLIENT_SECRET}`
+                `${props.clientID}:${props.clientSecret}`
             ).toString("base64")}`,
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         },

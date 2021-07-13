@@ -1,0 +1,21 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "target": "es5",
+        "declaration": true,
+        "declarationDir": "./types",
+        "outDir": "./lib",
+        "rootDir": "./src",
+        "removeComments": true
+    },
+    "exclude": ["tests", "jest.config.js", "global-setup.ts"],
+    "files": ["src/index.ts"],
+
+    "typedocOptions": {
+        "entryPoints": ["src/api"],
+        "exclude": ["src/api/index.ts"],
+        "excludeInternal": true,
+        "disableSources": true,
+        "name": "Spotify API Request"
+    }
+}

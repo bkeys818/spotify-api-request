@@ -5,7 +5,9 @@
 
 <div align=center>
   <!-- TODO: - Codecov -->
-  <!-- TODO: - Build -->
+  <a href="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml">
+    <img src="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml/badge.svg" alt="Build Status">
+  </a>
   <a href="https://www.npmjs.com/package/spotify-api-request">
     <img src="https://img.shields.io/npm/v/spotify-api-request" alt="NPM version">
   </a>
@@ -15,7 +17,7 @@
 </div>
 # Project status
 
-#### This package is still in development! Use it at your own risk.
+#### This package is still in development! All request are functional and accurate, but use it at your own risk.
 
 ## Installation
 
@@ -56,17 +58,15 @@ Now, we can use that token to make requests.
 ```typescript
 import { requests } from 'spotify-api-request'
 
-async function getShowEpisodes(showName: string) {
+async function searchForShow(showName: string) {
   const token = await getToken()
 
 	const searchRes = await requests.searchforItem(token, {
     q: showName,
-    type: 'show'
+    type: 'shows'
   })
-  const showId = searchRes.items[0].id
-  const shows = request.getShowEpisodes(token, showId)
   
-  return shows
+  return searchRes.shows.items
 }
 ```
 

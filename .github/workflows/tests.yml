@@ -29,8 +29,10 @@ jobs:
           touch .env
           echo "$CLIENT_ID"
           echo "$CLIENT_SECRET"
-          echo "CLIENT_ID=$CLIENT_ID\nCLIENT_SECRET=$CLIENT_SECRET\n" > .env
-          ls -a
+          echo "CLIENT_ID=$CLIENT_ID
+          CLIENT_SECRET=$CLIENT_SECRET
+          " > .env
+          echo "$(cat .env)"
 
       - name: Run tests
         run: ./node_modules/.bin/jest tests/action.test.ts

@@ -27,8 +27,8 @@ jobs:
         run: |
           cd  ${{ github.workspace }}
           touch .env
-          echo "CLIENT_ID"
-          echo "CLIENT_SECRET"
+          echo "$CLIENT_ID"
+          echo "$CLIENT_SECRET"
           echo "CLIENT_ID=$CLIENT_ID\nCLIENT_SECRET=$CLIENT_SECRET\n" > .env
           ls -a
 

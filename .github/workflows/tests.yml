@@ -27,6 +27,7 @@ jobs:
           cd  ${{ github.workspace }}
           touch .env
           echo "CLIENT_ID=${{ secrets.CLIENT_ID }}\nCLIENT_SECRET=${{ secrets.CLIENT_SECRET }}\n" > .env
+          ls
 
       - name: Run tests
-        run: yarn test
+        run: jest tests/action.test.ts

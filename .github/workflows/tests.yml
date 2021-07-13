@@ -30,4 +30,4 @@ jobs:
           ls -a
 
       - name: Run tests
-        run: ./node_modules/.bin/jest tests/action.test.ts
+        run: ./node_modules/.bin/jest tests/*.test.ts

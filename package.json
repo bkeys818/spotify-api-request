@@ -16,9 +16,7 @@
   "main": "lib/index.js",
   "files": [
     "lib",
-    "types",
-    "tsconfig.json",
-    "tsconfig.src.json"
+    "types"
   ],
   "types": "types",
   "scripts": {

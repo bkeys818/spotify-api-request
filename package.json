@@ -28,11 +28,11 @@
     "precoverage": "open http://localhost:8080",
     "coverage": "http-server -s -a localhost ./coverage/lcov-report",
     "predocs": "rimraf docs && mkdir docs",
-    "docs": "typedoc --tsconfig tsconfig.src.json",
+    "docs": "typedoc --tsconfig src.tsconfig.json",
     "postdocs": "http-server -a -s localhost -p 5050 docs",
     "prebuild": "rimraf lib & rimraf types",
-    "build": "tsc --build tsconfig.src.json",
-    "prepublish": "yarn test && yarn docs, && yarn build"
+    "build": "tsc --build src.tsconfig.json",
+    "prepublish": "yarn test && npm run docs --ignore-scripts && yarn build"
   },
   "dependencies": {
     "node-fetch": "^2.6.1"

@@ -16,6 +16,7 @@
         "excludeInternal": true,
         "disableSources": true,
         "name": "Spotify API Request",
-        "hideGenerator": true
+        "hideGenerator": true,
+        "includeVersion": true
     }
 }

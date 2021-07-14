@@ -15,6 +15,7 @@
         "exclude": ["src/requests/index.ts"],
         "excludeInternal": true,
         "disableSources": true,
-        "name": "Spotify API Request"
+        "name": "Spotify API Request",
+        "hideGenerator": true
     }
 }

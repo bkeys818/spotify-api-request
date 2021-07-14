@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>albums | Spotify API Request</title>
+	<title>requests/albums | Spotify API Request</title>
 	<meta name="description" content="Documentation for Spotify API Request">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules.html">Spotify API Request</a>
 				</li>
 				<li>
-					<a href="albums.html">albums</a>
+					<a href="requests_albums.html">requests/albums</a>
 				</li>
 			</ul>
-			<h1>Module albums</h1>
+			<h1>Module requests/albums</h1>
 		</div>
 	</div>
 </header>
@@ -72,9 +72,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="albums.html#getalbum" class="tsd-kind-icon">get<wbr>Album</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="albums.html#getalbumstracks" class="tsd-kind-icon">get<wbr>Albums<wbr>Tracks</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="albums.html#getmultiplealbums" class="tsd-kind-icon">get<wbr>Multiple<wbr>Albums</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="requests_albums.html#getAlbum" class="tsd-kind-icon">get<wbr>Album</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="requests_albums.html#getAlbumTracks" class="tsd-kind-icon">get<wbr>Album<wbr>Tracks</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="requests_albums.html#getMultipleAlbums" class="tsd-kind-icon">get<wbr>Multiple<wbr>Albums</a></li>
 							</ul>
 						</section>
 					</div>
@@ -83,10 +83,10 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getalbum" class="tsd-anchor"></a>
+					<a name="getAlbum" class="tsd-anchor"></a>
 					<h3>get<wbr>Album</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Album<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Token</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/objects.albumobject.html" class="tsd-signature-type" data-tsd-kind="Interface">AlbumObject</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Album<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AlbumObject</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -100,7 +100,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>token: <span class="tsd-signature-type">Token</span></h5>
+									<h5>token: <a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A valid user access token or your client credentials.</p>
 									</div>
@@ -125,16 +125,16 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/objects.albumobject.html" class="tsd-signature-type" data-tsd-kind="Interface">AlbumObject</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AlbumObject</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>An album object in JSON format.</p>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getalbumstracks" class="tsd-anchor"></a>
-					<h3>get<wbr>Albums<wbr>Tracks</h3>
+					<a name="getAlbumTracks" class="tsd-anchor"></a>
+					<h3>get<wbr>Album<wbr>Tracks</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Albums<wbr>Tracks<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Token</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/objects.pagingobject.html" class="tsd-signature-type" data-tsd-kind="Interface">PagingObject</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/objects.trackobject.html" class="tsd-signature-type" data-tsd-kind="Interface">TrackObject</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Album<wbr>Tracks<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SimplifiedTrackObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;album’s tracks&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -148,7 +148,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>token: <span class="tsd-signature-type">Token</span></h5>
+									<h5>token: <a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A valid user access token or your client credentials.</p>
 									</div>
@@ -189,16 +189,16 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/objects.pagingobject.html" class="tsd-signature-type" data-tsd-kind="Interface">PagingObject</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/objects.trackobject.html" class="tsd-signature-type" data-tsd-kind="Interface">TrackObject</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SimplifiedTrackObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;album’s tracks&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>An album object in JSON format.</p>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getmultiplealbums" class="tsd-anchor"></a>
+					<a name="getMultipleAlbums" class="tsd-anchor"></a>
 					<h3>get<wbr>Multiple<wbr>Albums</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Multiple<wbr>Albums<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Token</span>, ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>albums<span class="tsd-signature-symbol">: </span><a href="../interfaces/objects.albumobject.html" class="tsd-signature-type" data-tsd-kind="Interface">AlbumObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Multiple<wbr>Albums<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>albums<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">AlbumObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -212,7 +212,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>token: <span class="tsd-signature-type">Token</span></h5>
+									<h5>token: <a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A valid user access token or your client credentials.</p>
 									</div>
@@ -237,12 +237,8 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>albums<span class="tsd-signature-symbol">: </span><a href="../interfaces/objects.albumobject.html" class="tsd-signature-type" data-tsd-kind="Interface">AlbumObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<blockquote>
-									<p>} Objects are returned in the order requested. If an object is not found, a <code>null</code> value is returned in the appropriate position. Duplicate <code>ids</code> in the query will result in duplicate objects in the response.</p>
-								</blockquote>
-							</blockquote>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>albums<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">AlbumObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Objects are returned in the order requested. If an object is not found, a <code>null</code> value is returned in the appropriate position. Duplicate <code>ids</code> in the query will result in duplicate objects in the response.</p>
 						</li>
 					</ul>
 				</section>
@@ -254,89 +250,80 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="authorize.html">authorize</a>
+					</li>
 					<li class="current tsd-kind-module">
-						<a href="albums.html">albums</a>
+						<a href="requests_albums.html">requests/albums</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="artists.html">artists</a>
+						<a href="requests_artists.html">requests/artists</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="browse.html">browse</a>
+						<a href="requests_browse.html">requests/browse</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="episodes.html">episodes</a>
+						<a href="requests_episodes.html">requests/episodes</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="follow.html">follow</a>
+						<a href="requests_follow.html">requests/follow</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="library.html">library</a>
+						<a href="requests_library.html">requests/library</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="markets.html">markets</a>
+						<a href="requests_markets.html">requests/markets</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="objects.html">objects</a>
+						<a href="requests_personalization.html">requests/personalization</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="personalization.html">personalization</a>
+						<a href="requests_playlists.html">requests/playlists</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="player.html">player</a>
+						<a href="requests_search.html">requests/search</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="playlists.html">playlists</a>
+						<a href="requests_shows.html">requests/shows</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="profile.html">profile</a>
+						<a href="requests_tracks.html">requests/tracks</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="search.html">search</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="shows.html">shows</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="tracks.html">tracks</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="user.html">user</a>
+						<a href="requests_user_profile.html">requests/user-<wbr>profile</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="albums.html#getalbum" class="tsd-kind-icon">get<wbr>Album</a>
+						<a href="requests_albums.html#getAlbum" class="tsd-kind-icon">get<wbr>Album</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="albums.html#getalbumstracks" class="tsd-kind-icon">get<wbr>Albums<wbr>Tracks</a>
+						<a href="requests_albums.html#getAlbumTracks" class="tsd-kind-icon">get<wbr>Album<wbr>Tracks</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="albums.html#getmultiplealbums" class="tsd-kind-icon">get<wbr>Multiple<wbr>Albums</a>
+						<a href="requests_albums.html#getMultipleAlbums" class="tsd-kind-icon">get<wbr>Multiple<wbr>Albums</a>
 					</li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 </div>
-<footer class="with-border-bottom">
+<footer>
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
 </body>

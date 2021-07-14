@@ -58,6 +58,77 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<div align=center>
+					<h1>Spotify API Request</h1>
+					<p>A typescript supported wrapper for the Spotify web API</p>
+				</div>
+				<div align=center>
+					<!-- TODO: - Codecov -->
+					<a href="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml">
+						<img src="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml/badge.svg" alt="Build Status">
+					</a>
+					<a href="https://www.npmjs.com/package/spotify-api-request">
+						<img src="https://img.shields.io/npm/v/spotify-api-request" alt="NPM version">
+					</a>
+					<a href="https://www.npmjs.com/package/spotify-api-request">
+						<img src="https://img.shields.io/npm/dt/spotify-api-request" alt="NPM download count">
+					</a>
+				</div>
+				# Project status
+				<a href="#this-package-is-still-in-development-all-request-are-functional-and-accurate-but-use-it-at-your-own-risk" id="this-package-is-still-in-development-all-request-are-functional-and-accurate-but-use-it-at-your-own-risk" style="color: inherit; text-decoration: none;">
+					<h4>This package is still in development! All request are functional and accurate, but use it at your own risk.</h4>
+				</a>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>Install using Yarn or NPM</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add spotify-api-request</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#authorization" id="authorization" style="color: inherit; text-decoration: none;">
+					<h4>Authorization</h4>
+				</a>
+				<p>Using this method will get you a valid token for the next hour. Tokens are used to make requests.</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">authorize</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;spotify-api-request&#039;</span>
+
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">getToken</span><span style="color: #000000">() {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clientId</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;...&#039;</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">clientSecret</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;...&#039;</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">authorize</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientId:</span><span style="color: #000000"> </span><span style="color: #001080">clientId</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">clientSecret:</span><span style="color: #000000"> </span><span style="color: #001080">clientSecret</span>
+<span style="color: #000000">  })</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">token</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Right now, authorization can only be done through Spotify&#39;s <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">Client Credentials Flow</a>. This requires client credentials which you can get at <a href="https://developer.spotify.com/dashboard">Spotify&#39;s developer portal</a>. If you&#39;d prefer to get an access token another way, it can still be used to make request.  </p>
+				<a href="#making-requests" id="making-requests" style="color: inherit; text-decoration: none;">
+					<h4>Making requests</h4>
+				</a>
+				<p>Now, we can use that token to make requests.</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">requests</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;spotify-api-request&#039;</span>
+
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">searchForShow</span><span style="color: #000000">(</span><span style="color: #001080">showName</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">getToken</span><span style="color: #000000">()</span>
+
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">searchRes</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">requests</span><span style="color: #000000">.</span><span style="color: #795E26">searchforItem</span><span style="color: #000000">(</span><span style="color: #001080">token</span><span style="color: #000000">, {</span>
+<span style="color: #000000">    </span><span style="color: #001080">q:</span><span style="color: #000000"> </span><span style="color: #001080">showName</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;shows&#039;</span>
+<span style="color: #000000">  })</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">searchRes</span><span style="color: #000000">.</span><span style="color: #001080">shows</span><span style="color: #000000">.</span><span style="color: #001080">items</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p>Every response is wrapped in a promise, so async/await is really helpful here.</p>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.</p>
+				<p>Please make sure you update all test and documentation as appropriate.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -67,52 +138,46 @@
 						<a href="modules.html">Modules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/albums.html">albums</a>
+						<a href="modules/authorize.html">authorize</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/artists.html">artists</a>
+						<a href="modules/requests_albums.html">requests/albums</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/browse.html">browse</a>
+						<a href="modules/requests_artists.html">requests/artists</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/episodes.html">episodes</a>
+						<a href="modules/requests_browse.html">requests/browse</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/follow.html">follow</a>
+						<a href="modules/requests_episodes.html">requests/episodes</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/library.html">library</a>
+						<a href="modules/requests_follow.html">requests/follow</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/markets.html">markets</a>
+						<a href="modules/requests_library.html">requests/library</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/objects.html">objects</a>
+						<a href="modules/requests_markets.html">requests/markets</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/personalization.html">personalization</a>
+						<a href="modules/requests_personalization.html">requests/personalization</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/player.html">player</a>
+						<a href="modules/requests_playlists.html">requests/playlists</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/playlists.html">playlists</a>
+						<a href="modules/requests_search.html">requests/search</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/profile.html">profile</a>
+						<a href="modules/requests_shows.html">requests/shows</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/search.html">search</a>
+						<a href="modules/requests_tracks.html">requests/tracks</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/shows.html">shows</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/tracks.html">tracks</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/user.html">user</a>
+						<a href="modules/requests_user_profile.html">requests/user-<wbr>profile</a>
 					</li>
 				</ul>
 			</nav>
@@ -123,23 +188,20 @@
 		</div>
 	</div>
 </div>
-<footer class="with-border-bottom">
+<footer>
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
 </body>

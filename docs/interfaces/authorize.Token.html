@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ImageObject | Spotify API Request</title>
+	<title>Token | Spotify API Request</title>
 	<meta name="description" content="Documentation for Spotify API Request">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,31 +55,24 @@
 					<a href="../modules.html">Spotify API Request</a>
 				</li>
 				<li>
-					<a href="../modules/objects.html">objects</a>
+					<a href="../modules/authorize.html">authorize</a>
 				</li>
 				<li>
-					<a href="objects.imageobject.html">ImageObject</a>
+					<a href="authorize.Token.html">Token</a>
 				</li>
 			</ul>
-			<h1>Interface ImageObject</h1>
+			<h1>Interface Token</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p><a href="https://developer.spotify.com/documentation/web-api/reference/#object-imageobject">Image Object</a></p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ImageObject</span>
+						<span class="target">Token</span>
 					</li>
 				</ul>
 			</section>
@@ -90,9 +83,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="objects.imageobject.html#height" class="tsd-kind-icon">height</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="objects.imageobject.html#url" class="tsd-kind-icon">url</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="objects.imageobject.html#width" class="tsd-kind-icon">width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="authorize.Token.html#access_token" class="tsd-kind-icon">access_<wbr>token</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="authorize.Token.html#expires_in" class="tsd-kind-icon">expires_<wbr>in</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="authorize.Token.html#token_type" class="tsd-kind-icon">token_<wbr>type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -101,40 +94,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="height" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> height</h3>
-					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="access_token" class="tsd-anchor"></a>
+					<h3>access_<wbr>token</h3>
+					<div class="tsd-signature tsd-kind-icon">access_<wbr>token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The image height in pixels. If unknown: <code>null</code> or not returned.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="url" class="tsd-anchor"></a>
-					<h3>url</h3>
-					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="expires_in" class="tsd-anchor"></a>
+					<h3>expires_<wbr>in</h3>
+					<div class="tsd-signature tsd-kind-icon">expires_<wbr>in<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The source URL of the image.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="width" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> width</h3>
-					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="token_type" class="tsd-anchor"></a>
+					<h3>token_<wbr>type</h3>
+					<div class="tsd-signature tsd-kind-icon">token_<wbr>type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Bearer&quot;</span></div>
 					<aside class="tsd-sources">
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The image width in pixels. If unknown: null or not returned.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -144,53 +122,47 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/albums.html">albums</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/artists.html">artists</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/browse.html">browse</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/episodes.html">episodes</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/follow.html">follow</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/library.html">library</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/markets.html">markets</a>
-					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/objects.html">objects</a>
+						<a href="../modules/authorize.html">authorize</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/personalization.html">personalization</a>
+						<a href="../modules/requests_albums.html">requests/albums</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/player.html">player</a>
+						<a href="../modules/requests_artists.html">requests/artists</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/playlists.html">playlists</a>
+						<a href="../modules/requests_browse.html">requests/browse</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/profile.html">profile</a>
+						<a href="../modules/requests_episodes.html">requests/episodes</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/search.html">search</a>
+						<a href="../modules/requests_follow.html">requests/follow</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/shows.html">shows</a>
+						<a href="../modules/requests_library.html">requests/library</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/tracks.html">tracks</a>
+						<a href="../modules/requests_markets.html">requests/markets</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/user.html">user</a>
+						<a href="../modules/requests_personalization.html">requests/personalization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/requests_playlists.html">requests/playlists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/requests_search.html">requests/search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/requests_shows.html">requests/shows</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/requests_tracks.html">requests/tracks</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/requests_user_profile.html">requests/user-<wbr>profile</a>
 					</li>
 				</ul>
 			</nav>
@@ -199,44 +171,44 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="objects.imageobject.html" class="tsd-kind-icon">Image<wbr>Object</a>
+						<a href="authorize.Token.html" class="tsd-kind-icon">Token</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="objects.imageobject.html#height" class="tsd-kind-icon">height</a>
+								<a href="authorize.Token.html#access_token" class="tsd-kind-icon">access_<wbr>token</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="objects.imageobject.html#url" class="tsd-kind-icon">url</a>
+								<a href="authorize.Token.html#expires_in" class="tsd-kind-icon">expires_<wbr>in</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="objects.imageobject.html#width" class="tsd-kind-icon">width</a>
+								<a href="authorize.Token.html#token_type" class="tsd-kind-icon">token_<wbr>type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="../modules/authorize.html#authorize-1" class="tsd-kind-icon">authorize</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 </div>
-<footer class="with-border-bottom">
+<footer>
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
 </body>

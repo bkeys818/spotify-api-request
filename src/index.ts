@@ -1,5 +1,3 @@
-import { authorize, Token } from './authorize'
-import requests from './api'
-
-export { authorize, requests }
-export type { Token }
+export { authorize } from './authorize'
+export type { Token } from './authorize'
+export * as requests from './requests'

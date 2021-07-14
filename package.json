@@ -1,7 +1,7 @@
 {
   "name": "spotify-api-request",
   "description": "A typescript supported wrapper for the Spotify Web API.",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "author": {
     "name": "Ben Keys",
     "url": "https://github.com/bkeys818"

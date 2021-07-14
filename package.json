@@ -1,6 +1,6 @@
 {
   "name": "spotify-api-request",
-  "description": "A typescript supported wrapper for the Spotify web API.",
+  "description": "A typescript supported wrapper for the Spotify Web API.",
   "version": "0.1.0",
   "author": {
     "name": "Ben Keys",
@@ -23,12 +23,10 @@
     "authorize": "node authorize.js",
     "pretest": "rimraf coverage && yarn authorize",
     "test": "jest --coverage",
-    "precoverage": "open http://localhost:8080",
     "predocs": "rimraf docs && mkdir docs",
     "docs": "typedoc --tsconfig src.tsconfig.json",
     "prebuild": "rimraf lib & rimraf types",
-    "build": "tsc --build src.tsconfig.json",
-    "prepublish": "yarn test && npm run docs --ignore-scripts && yarn build"
+    "build": "tsc --build src.tsconfig.json"
   },
   "dependencies": {
     "node-fetch": "^2.6.1"

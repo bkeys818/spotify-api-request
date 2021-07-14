@@ -23,7 +23,7 @@
     "authorize": "node authorize.js",
     "pretest": "rimraf coverage && yarn authorize",
     "test": "jest --coverage",
-    "predocs": "rimraf docs && mkdir docs",
+    "predocs": "rimraf docs types && mkdir docs",
     "docs": "typedoc --tsconfig src.tsconfig.json",
     "prebuild": "rimraf lib & rimraf types",
     "build": "tsc --build src.tsconfig.json"

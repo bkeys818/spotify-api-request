@@ -9,7 +9,9 @@ test(getMultipleEpisodes.name, async () => {
     const res = await getMultipleEpisodes(token, episodeIds)
 
     expect(res).toStrictEqual<typeof res>({
-        episodes: res.episodes.map(episodeObject),
+        episodes: res.episodes.map((episode) =>
+            episode === null ? null : episodeObject(episode)
+        ),
     })
 })
 

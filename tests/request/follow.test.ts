@@ -19,21 +19,27 @@ const userID = 'spotify'
 
 // test.concurrent(unfollowPlaylist.name, async () => {}
 
-test.concurrent(checkIfUsersFollowPlaylist.name, async () => {
-    const res = await checkIfUsersFollowPlaylist(token, playlistID, [userID])
+describe(checkIfUsersFollowPlaylist, () => {
+    test.concurrent('basic request', async () => {
+        const res = await checkIfUsersFollowPlaylist(token, playlistID, [
+            userID,
+        ])
 
-    expect(res).toStrictEqual(arrayOf(res, Boolean))
+        expect(res).toStrictEqual(arrayOf(res, Boolean))
+    })
 })
 
-test.concurrent(getUserFollowedArtists.name, async () => {
-    const res = await getUserFollowedArtists(token, { type: 'artist' })
+describe(getUserFollowedArtists, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getUserFollowedArtists(token, { type: 'artist' })
 
-    expect(res).toStrictEqual<typeof res>({
-        artists: cursorPagingObject({
-            value: res.artists,
-            endpoint: 'my following',
-            testObj: artistObject,
-        }),
+        expect(res).toStrictEqual<typeof res>({
+            artists: cursorPagingObject({
+                value: res.artists,
+                endpoint: 'my following',
+                testObj: artistObject,
+            }),
+        })
     })
 })
 
@@ -41,12 +47,14 @@ test.concurrent(getUserFollowedArtists.name, async () => {
 
 // test.concurrent(unfollowArtistsOrUsers.name, async () => {}
 
-test.concurrent(getFollowingStateForArtistsOrUsers.name, async () => {
-    const res = await getFollowingStateForArtistsOrUsers(
-        token,
-        'artist',
-        artistIDs
-    )
+describe(getFollowingStateForArtistsOrUsers, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getFollowingStateForArtistsOrUsers(
+            token,
+            'artist',
+            artistIDs
+        )
 
-    expect(res).toStrictEqual(arrayOf(res, Boolean))
+        expect(res).toStrictEqual(arrayOf(res, Boolean))
+    })
 })

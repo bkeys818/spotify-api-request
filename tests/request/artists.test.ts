@@ -16,64 +16,74 @@ import {
 const token = global.token
 const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 
-test.concurrent(getMultipleArtists.name, async () => {
-    const res = await getMultipleArtists(token, artistIDs)
+describe(getMultipleArtists, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getMultipleArtists(token, artistIDs)
 
-    expect(res).toStrictEqual<typeof res>({
-        artists: res.artists.map((artist) =>
-            artist ? artistObject(artist) : null
-        ),
+        expect(res).toStrictEqual<typeof res>({
+            artists: res.artists.map((artist) =>
+                artist ? artistObject(artist) : null
+            ),
+        })
     })
 })
 
-test.concurrent(getArtist.name, async () => {
-    const res = await getArtist(token, artistIDs[0])
+describe(getArtist, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getArtist(token, artistIDs[0])
 
-    expect(res).toStrictEqual<typeof res>(artistObject(res))
+        expect(res).toStrictEqual<typeof res>(artistObject(res))
+    })
 })
 
-test.concurrent(getArtistTopTracks.name, async () => {
-    const res = await getArtistTopTracks(token, artistIDs[0], {
-        market: 'US',
-    })
+describe(getArtistTopTracks, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getArtistTopTracks(token, artistIDs[0], {
+            market: 'US',
+        })
 
-    type ExpectedItem = typeof res.tracks[number]
-    function customTrackObject(value: ExpectedItem): ExpectedItem {
-        const { album, ...otherProps } = value
-        const obj: any = trackObject({
-            ...otherProps,
-            album: {
-                ...album,
+        type ExpectedItem = typeof res.tracks[number]
+        function customTrackObject(value: ExpectedItem): ExpectedItem {
+            const { album, ...otherProps } = value
+            const obj: any = trackObject({
+                ...otherProps,
+                album: {
+                    ...album,
+                    available_markets: [],
+                },
                 available_markets: [],
-            },
-            available_markets: [],
-        })
-        delete obj.available_markets
-        delete obj.album.available_markets
-        return obj
-    }
+            })
+            delete obj.available_markets
+            delete obj.album.available_markets
+            return obj
+        }
 
-    expect(res).toStrictEqual<typeof res>({
-        tracks: res.tracks.map(customTrackObject),
+        expect(res).toStrictEqual<typeof res>({
+            tracks: res.tracks.map(customTrackObject),
+        })
     })
 })
 
-test.concurrent(getArtistRelatedArtists.name, async () => {
-    const res = await getArtistRelatedArtists(token, artistIDs[0])
+describe(getArtistRelatedArtists, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getArtistRelatedArtists(token, artistIDs[0])
 
-    expect(res).toStrictEqual<typeof res>({
-        artists: res.artists.map(artistObject),
+        expect(res).toStrictEqual<typeof res>({
+            artists: res.artists.map(artistObject),
+        })
     })
 })
 
-test.concurrent(getArtistAlbums.name, async () => {
-    const res = await getArtistAlbums(token, artistIDs[0])
+describe(getArtistAlbums, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getArtistAlbums(token, artistIDs[0])
 
-    expect(res).toStrictEqual<typeof res>(
-        pagingObject({
-            value: res,
-            endpoint: 'artist’s albums',
-            testObj: simplifiedAlbumObject,
-        })
-    )
+        expect(res).toStrictEqual<typeof res>(
+            pagingObject({
+                value: res,
+                endpoint: 'artist’s albums',
+                testObj: simplifiedAlbumObject,
+            })
+        )
+    })
 })

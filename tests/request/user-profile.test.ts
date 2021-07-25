@@ -8,14 +8,18 @@ import { privateUserObject, publicUserObject } from '../objects'
 const token = global.token
 const userID = 'spotify'
 
-test.concurrent(getCurrentUserProfile.name, async () => {
-    const res = await getCurrentUserProfile(token)
+describe(getCurrentUserProfile, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getCurrentUserProfile(token)
 
-    expect(res).toStrictEqual<typeof res>(privateUserObject(res))
+        expect(res).toStrictEqual<typeof res>(privateUserObject(res))
+    })
 })
 
-test.concurrent(getUserProfile.name, async () => {
-    const res = await getUserProfile(token, userID)
+describe(getUserProfile, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getUserProfile(token, userID)
 
-    expect(res).toStrictEqual<typeof res>(publicUserObject(res))
+        expect(res).toStrictEqual<typeof res>(publicUserObject(res))
+    })
 })

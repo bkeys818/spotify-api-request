@@ -23,7 +23,7 @@ const categoryID = 'party'
 const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
-test(getAllNewReleases.name, async () => {
+test.concurrent(getAllNewReleases.name, async () => {
     const res = await getAllNewReleases(token)
 
     expect(res).toStrictEqual<typeof res>({
@@ -35,7 +35,7 @@ test(getAllNewReleases.name, async () => {
     })
 })
 
-test(getAllFeaturedPlaylists.name, async () => {
+test.concurrent(getAllFeaturedPlaylists.name, async () => {
     const res = await getAllFeaturedPlaylists(token)
 
     expect(res).toStrictEqual<typeof res>({
@@ -48,7 +48,7 @@ test(getAllFeaturedPlaylists.name, async () => {
     })
 })
 
-test(getAllCategories.name, async () => {
+test.concurrent(getAllCategories.name, async () => {
     const res = await getAllCategories(token)
 
     expect(res).toStrictEqual<typeof res>({
@@ -60,13 +60,13 @@ test(getAllCategories.name, async () => {
     })
 })
 
-test(getCategory.name, async () => {
+test.concurrent(getCategory.name, async () => {
     const res = await getCategory(token, categoryID)
 
     expect(res).toStrictEqual<typeof res>(categoryObject(res))
 })
 
-test(getCategoryPlaylists.name, async () => {
+test.concurrent(getCategoryPlaylists.name, async () => {
     const res = await getCategoryPlaylists(token, categoryID)
 
     expect(res).toStrictEqual<typeof res>({
@@ -78,7 +78,7 @@ test(getCategoryPlaylists.name, async () => {
     })
 })
 
-test(getRecommendations.name, async () => {
+test.concurrent(getRecommendations.name, async () => {
     const res = await getRecommendations(token, {
         seed_artists: artistIDs[0],
         seed_tracks: trackIds[0],
@@ -88,7 +88,7 @@ test(getRecommendations.name, async () => {
     expect(res).toStrictEqual<typeof res>(recommendationsObject(res))
 })
 
-test(getRecommendationGenres.name, async () => {
+test.concurrent(getRecommendationGenres.name, async () => {
     const res = await getRecommendationGenres(token)
 
     expect(res).toStrictEqual<typeof res>({

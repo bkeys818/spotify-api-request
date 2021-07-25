@@ -24,7 +24,7 @@ const token = global.token
 const playlistID = '6innvmsboMZC5rdrmY292j'
 const userID = 'spotify'
 
-test(getListOfCurrentUserPlaylists.name, async () => {
+test.concurrent(getListOfCurrentUserPlaylists.name, async () => {
     const res = await getListOfCurrentUserPlaylists(token)
 
     expect(res).toStrictEqual<typeof res>(
@@ -36,7 +36,7 @@ test(getListOfCurrentUserPlaylists.name, async () => {
     )
 })
 
-test(getListOfUserPlaylists.name, async () => {
+test.concurrent(getListOfUserPlaylists.name, async () => {
     const res = await getListOfUserPlaylists(token, userID)
 
     expect(res).toStrictEqual<typeof res>(
@@ -48,21 +48,21 @@ test(getListOfUserPlaylists.name, async () => {
     )
 })
 
-// test(createPlaylist.name, async () => {
+// test.concurrent(createPlaylist.name, async () => {
 //     const res = await createPlaylist(token)
 // })
 
-test(getPlaylist.name, async () => {
+test.concurrent(getPlaylist.name, async () => {
     const res = await getPlaylist(token, playlistID)
 
     expect(res).toStrictEqual<typeof res>(playlistObject(res))
 })
 
-// test(changePlaylistsDetails.name, async () => {
+// test.concurrent(changePlaylistsDetails.name, async () => {
 //     const res = await changePlaylistsDetails(token)
 // })
 
-test(getPlaylistItems.name, async () => {
+test.concurrent(getPlaylistItems.name, async () => {
     const res = await getPlaylistItems(token, playlistID, { market: 'US' })
 
     type ExpectedItem = typeof res.items[number]
@@ -94,24 +94,24 @@ test(getPlaylistItems.name, async () => {
     )
 })
 
-// test(addItemsToPlaylist.name, async () => {
+// test.concurrent(addItemsToPlaylist.name, async () => {
 //     const res = await addItemsToPlaylist(token)
 // })
 
-// test(reorderOReplacePlaylistsItems.name, async () => {
+// test.concurrent(reorderOReplacePlaylistsItems.name, async () => {
 //     const res = await reorderOReplacePlaylistsItems(token)
 // })
 
-// test(removeItemsFromPlaylist.name, async () => {
+// test.concurrent(removeItemsFromPlaylist.name, async () => {
 //     const res = await removeItemsFromPlaylist(token)
 // })
 
-test(getPlaylistCoverImage.name, async () => {
+test.concurrent(getPlaylistCoverImage.name, async () => {
     const res = await getPlaylistCoverImage(token, playlistID)
 
     expect(res).toStrictEqual<typeof res>(res.map(imageObject))
 })
 
-// test(uploadCustomPlaylistCoverImage.name, async () => {
+// test.concurrent(uploadCustomPlaylistCoverImage.name, async () => {
 //     const res = await uploadCustomPlaylistCoverImage(token)
 // })

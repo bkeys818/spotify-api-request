@@ -4,7 +4,7 @@ import { pagingObject, trackObject } from '../objects'
 // @ts-ignore
 const token = global.token
 
-test(getUserTopArtistsandTracks.name, async () => {
+test.concurrent(getUserTopArtistsandTracks.name, async () => {
     const res = await getUserTopArtistsandTracks(token, 'tracks')
 
     expect(res).toStrictEqual<typeof res>(

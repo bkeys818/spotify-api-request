@@ -21,7 +21,7 @@ const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
 const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
-test(getUsersSavedAlbums.name, async () => {
+test.concurrent(getUsersSavedAlbums.name, async () => {
     const res = await getUsersSavedAlbums(token)
 
     expect(res).toStrictEqual<typeof res>(
@@ -35,7 +35,7 @@ test(getUsersSavedAlbums.name, async () => {
     )
 })
 
-test(getUsersSavedEpisodes.name, async () => {
+test.concurrent(getUsersSavedEpisodes.name, async () => {
     const res = await getUsersSavedEpisodes(token)
 
     expect(res).toStrictEqual<typeof res>(
@@ -49,7 +49,7 @@ test(getUsersSavedEpisodes.name, async () => {
     )
 })
 
-test(getUsersSavedShows.name, async () => {
+test.concurrent(getUsersSavedShows.name, async () => {
     const res = await getUsersSavedShows(token)
 
     expect(res).toStrictEqual<typeof res>(
@@ -63,7 +63,7 @@ test(getUsersSavedShows.name, async () => {
     )
 })
 
-test(getUsersSavedTracks.name, async () => {
+test.concurrent(getUsersSavedTracks.name, async () => {
     const res = await getUsersSavedTracks(token)
 
     expect(res).toStrictEqual<typeof res>(

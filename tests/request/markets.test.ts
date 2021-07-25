@@ -3,7 +3,7 @@ import { getAvailableMarkets } from '../../src/requests/markets'
 // @ts-ignore
 const token = global.token
 
-test(getAvailableMarkets.name, async () => {
+test.concurrent(getAvailableMarkets.name, async () => {
     const res = await getAvailableMarkets(token)
 
     expect(res).toStrictEqual<typeof res>({

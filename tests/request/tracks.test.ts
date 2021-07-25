@@ -15,7 +15,7 @@ import {
 const token = global.token
 const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
-test(getSeveralTracks.name, async () => {
+test.concurrent(getSeveralTracks.name, async () => {
     const res = await getSeveralTracks(token, trackIds)
 
     expect(res).toStrictEqual<typeof res>({
@@ -23,13 +23,13 @@ test(getSeveralTracks.name, async () => {
     })
 })
 
-test(getTrack.name, async () => {
+test.concurrent(getTrack.name, async () => {
     const res = await getTrack(token, trackIds[0])
 
     expect(res).toStrictEqual<typeof res>(trackObject(res))
 })
 
-test(getAudioFeaturesforSeveralTracks.name, async () => {
+test.concurrent(getAudioFeaturesforSeveralTracks.name, async () => {
     const res = await getAudioFeaturesforSeveralTracks(token, trackIds)
 
     expect(res).toStrictEqual<typeof res>({
@@ -37,13 +37,13 @@ test(getAudioFeaturesforSeveralTracks.name, async () => {
     })
 })
 
-test(getAudioFeaturesforTrack.name, async () => {
+test.concurrent(getAudioFeaturesforTrack.name, async () => {
     const res = await getAudioFeaturesforTrack(token, trackIds[0])
 
     expect(res).toStrictEqual<typeof res>(audioFeaturesObject())
 })
 
-test(getAudioAnalysisforTrack.name, async () => {
+test.concurrent(getAudioAnalysisforTrack.name, async () => {
     const res = await getAudioAnalysisforTrack(token, trackIds[0])
 
     expect(res).toStrictEqual<typeof res>(audioAnalysisObject(res))

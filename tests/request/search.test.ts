@@ -4,7 +4,7 @@ import { pagingObject, trackObject } from '../objects'
 // @ts-ignore
 const token = global.token
 
-test(searchForItem.name, async () => {
+test.concurrent(searchForItem.name, async () => {
     const res = await searchForItem(token, { q: 'heartbeat', type: 'tracks' })
 
     expect(res).toStrictEqual<typeof res>({

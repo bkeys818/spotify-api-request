@@ -14,7 +14,7 @@ import {
 const token = global.token
 const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 
-test(getMultipleShows.name, async () => {
+test.concurrent(getMultipleShows.name, async () => {
     const res = await getMultipleShows(token, showIDs)
 
     expect(res).toStrictEqual<typeof res>({
@@ -22,13 +22,13 @@ test(getMultipleShows.name, async () => {
     })
 })
 
-test(getShow.name, async () => {
+test.concurrent(getShow.name, async () => {
     const res = await getShow(token, showIDs[0])
 
     expect(res).toStrictEqual<typeof res>(showObject(res))
 })
 
-test(getShowEpisodes.name, async () => {
+test.concurrent(getShowEpisodes.name, async () => {
     const res = await getShowEpisodes(token, showIDs[0])
 
     expect(res).toStrictEqual<typeof res>(

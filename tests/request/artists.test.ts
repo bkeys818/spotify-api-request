@@ -16,7 +16,7 @@ import {
 const token = global.token
 const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 
-test(getMultipleArtists.name, async () => {
+test.concurrent(getMultipleArtists.name, async () => {
     const res = await getMultipleArtists(token, artistIDs)
 
     expect(res).toStrictEqual<typeof res>({
@@ -26,13 +26,13 @@ test(getMultipleArtists.name, async () => {
     })
 })
 
-test(getArtist.name, async () => {
+test.concurrent(getArtist.name, async () => {
     const res = await getArtist(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>(artistObject(res))
 })
 
-test(getArtistTopTracks.name, async () => {
+test.concurrent(getArtistTopTracks.name, async () => {
     const res = await getArtistTopTracks(token, artistIDs[0], {
         market: 'US',
     })
@@ -58,7 +58,7 @@ test(getArtistTopTracks.name, async () => {
     })
 })
 
-test(getArtistRelatedArtists.name, async () => {
+test.concurrent(getArtistRelatedArtists.name, async () => {
     const res = await getArtistRelatedArtists(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>({
@@ -66,7 +66,7 @@ test(getArtistRelatedArtists.name, async () => {
     })
 })
 
-test(getArtistAlbums.name, async () => {
+test.concurrent(getArtistAlbums.name, async () => {
     const res = await getArtistAlbums(token, artistIDs[0])
 
     expect(res).toStrictEqual<typeof res>(

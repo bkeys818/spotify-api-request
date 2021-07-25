@@ -18,16 +18,18 @@ export async function sendRequest(params: {
 
     if (pathParameter)
         for (const key in pathParameter)
-            params.endpoint = params.endpoint.replace(
-                `{${key}}`,
-                convertToString(pathParameter[key])
-            )
+            if (pathParameter[key])
+                params.endpoint = params.endpoint.replace(
+                    `{${key}}`,
+                    convertToString(pathParameter[key])
+                )
 
     const url = new URL('https://api.spotify.com/v1/' + params.endpoint)
 
     if (queryParameter)
         for (const key in queryParameter)
-            url.searchParams.set(key, convertToString(queryParameter[key]))
+            if (queryParameter[key])
+                url.searchParams.set(key, convertToString(queryParameter[key]))
 
     const options: RequestInit = {
         headers: { Authorization: formatToken(params.token) },

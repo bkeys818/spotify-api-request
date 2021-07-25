@@ -1,5 +1,5 @@
 export {}
-// import { sendRequest } from '../send-request'
+// import { sendRequest } from '../global'
 // import type { Token } from '../authorize'
 // import type { CurrentlyPlayingContextObject } from './objects'
 

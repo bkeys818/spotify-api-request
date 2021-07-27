@@ -697,8 +697,12 @@ export interface SimplifiedAlbumObject extends ContextObject<'album'> {
     album_type: 'album' | 'single' | 'compilation' | Uppercase<'album' | 'single' | 'compilation'>
     /** The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist. */
     artists: SimplifiedArtistObject[]
-    /** The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that an album is considered available in a market when at least 1 of its tracks is available in that market. */
-    available_markets: string[]
+    /** 
+     * The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that an album is considered available in a market when at least 1 of its tracks is available in that market.
+     * 
+     * Property is only included if `markets` wans’t defined in the request options.
+     */
+    available_markets?: string[]
     /** The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the album. */
     id: string
     /** The cover art for the album in various sizes, widest first. */
@@ -795,8 +799,12 @@ export interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
 
 /** [Simplified Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedshowobject) */
 export interface SimplifiedShowObject extends ContextObject<'show'> {
-    /** A list of the countries in which the show can be played, identified by their [ISO 3166-1 alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
-    available_markets: string[]
+    /**
+     * A list of the countries in which the show can be played, identified by their [ISO 3166-1 alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     * 
+     * Property is only included if `markets` wans’t defined in the request options.
+     */
+    available_markets?: string[]
     /** The copyright statements of the show. */
     copyrights: CopyrightObject[]
     /** A description of the show. */
@@ -831,8 +839,12 @@ export interface SimplifiedShowObject extends ContextObject<'show'> {
 export interface SimplifiedTrackObject extends ContextObject<'track'> {
     /** The artists who performed the track. */
     artists: SimplifiedArtistObject[]
-    /** A list of the countries in which the track can be played, identified by their [ISO 3166-1 alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). */
-    available_markets: string[]
+    /**
+     * A list of the countries in which the track can be played, identified by their [ISO 3166-1 alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     * 
+     * Property is only included if `markets` wans’t defined in the request options.
+     */
+    available_markets?: string[]
     /** The disc number (usually `1` unless the album consists of more than one disc). */
     disc_number: number
     /** The track length in milliseconds. */

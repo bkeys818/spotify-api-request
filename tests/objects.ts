@@ -486,7 +486,6 @@ export function simplifiedAlbumObject(
         ...contextObject('album'),
         album_type: expect.stringMatching(/album|single|compilation/i),
         artists: value.artists.map(simplifiedArtistObject),
-        available_markets: arrayOf(value.available_markets, String),
         id: any(String),
         images: value.images.map(imageObject),
         name: any(String),
@@ -499,6 +498,9 @@ export function simplifiedAlbumObject(
         obj.album_group = expect.stringMatching(
             /album|single|compilation|appears_on/
         )
+
+    if ('available_markets' in value && value.available_markets) 
+        obj.available_markets = arrayOf(value.available_markets, String)
 
     if ('restrictions' in value) obj.restrictions = restrictionObject()
 
@@ -582,9 +584,8 @@ export function simplifiedPlaylistObject(
 export function simplifiedShowObject(
     value: SimplifiedShowObject
 ): SimplifiedShowObject {
-    return {
+    const obj: SimplifiedShowObject = {
         ...contextObject('show'),
-        available_markets: arrayOf(value.available_markets, String),
         copyrights: value.copyrights.map(copyrightObject),
         description: any(String),
         explicit: any(Boolean),
@@ -598,6 +599,11 @@ export function simplifiedShowObject(
         publisher: any(String),
         total_episodes: any(Number),
     }
+
+    if ('available_markets' in value && value.available_markets) 
+        obj.available_markets = arrayOf(value.available_markets, String)
+
+    return obj
 }
 
 export function simplifiedTrackObject(
@@ -606,7 +612,6 @@ export function simplifiedTrackObject(
     const obj: SimplifiedTrackObject = {
         ...contextObject('track'),
         artists: value.artists.map(simplifiedArtistObject),
-        available_markets: arrayOf(value.available_markets, String),
         disc_number: any(Number),
         duration_ms: any(Number),
         explicit: any(Boolean),
@@ -616,6 +621,9 @@ export function simplifiedTrackObject(
         preview_url: value.preview_url ? any(String) : null,
         track_number: any(Number),
     }
+
+    if ('available_markets' in value && value.available_markets) 
+        obj.available_markets = arrayOf(value.available_markets, String)
 
     if ('is_playable' in value) obj.is_playable = any(Boolean)
 

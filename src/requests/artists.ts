@@ -103,6 +103,7 @@ export async function getArtistRelatedArtists(
     ).json()
 }
 
+type AlbumType = 'album' | 'single' | 'appears_on' | 'compilation'
 /**
  * Get Spotify catalog information about an artist’s albums.
  * @param {Token} token - A valid user access token or your client credentials.
@@ -123,7 +124,7 @@ export async function getArtistAlbums(
          *
          * For example: `include_groups=album,single.`
          */
-        include_groups?: string
+        include_groups?: AlbumType | AlbumType[]
         /**
          * Synonym for `country`. An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`.
          *

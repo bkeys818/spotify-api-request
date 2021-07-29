@@ -5,16 +5,22 @@ import { episodeObject } from '../objects'
 const token = global.token
 const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
 
-test(getMultipleEpisodes.name, async () => {
-    const res = await getMultipleEpisodes(token, episodeIds)
+describe(getMultipleEpisodes, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getMultipleEpisodes(token, episodeIds)
 
-    expect(res).toStrictEqual<typeof res>({
-        episodes: res.episodes.map(episodeObject),
+        expect(res).toStrictEqual<typeof res>({
+            episodes: res.episodes.map((episode) =>
+                episode === null ? null : episodeObject(episode)
+            ),
+        })
     })
 })
 
-test(getEpisode.name, async () => {
-    const res = await getEpisode(token, episodeIds[0])
+describe(getEpisode, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getEpisode(token, episodeIds[0])
 
-    expect(res).toStrictEqual<typeof res>(episodeObject(res))
+        expect(res).toStrictEqual<typeof res>(episodeObject(res))
+    })
 })

@@ -15,36 +15,46 @@ import {
 const token = global.token
 const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
-test(getSeveralTracks.name, async () => {
-    const res = await getSeveralTracks(token, trackIds)
+describe(getSeveralTracks, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getSeveralTracks(token, trackIds)
 
-    expect(res).toStrictEqual<typeof res>({
-        tracks: res.tracks.map(trackObject),
+        expect(res).toStrictEqual<typeof res>({
+            tracks: res.tracks.map(trackObject),
+        })
     })
 })
 
-test(getTrack.name, async () => {
-    const res = await getTrack(token, trackIds[0])
+describe(getTrack, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getTrack(token, trackIds[0])
 
-    expect(res).toStrictEqual<typeof res>(trackObject(res))
-})
-
-test(getAudioFeaturesforSeveralTracks.name, async () => {
-    const res = await getAudioFeaturesforSeveralTracks(token, trackIds)
-
-    expect(res).toStrictEqual<typeof res>({
-        audio_features: res.audio_features.map(audioFeaturesObject),
+        expect(res).toStrictEqual<typeof res>(trackObject(res))
     })
 })
 
-test(getAudioFeaturesforTrack.name, async () => {
-    const res = await getAudioFeaturesforTrack(token, trackIds[0])
+describe(getAudioFeaturesforSeveralTracks, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getAudioFeaturesforSeveralTracks(token, trackIds)
 
-    expect(res).toStrictEqual<typeof res>(audioFeaturesObject())
+        expect(res).toStrictEqual<typeof res>({
+            audio_features: res.audio_features.map(audioFeaturesObject),
+        })
+    })
 })
 
-test(getAudioAnalysisforTrack.name, async () => {
-    const res = await getAudioAnalysisforTrack(token, trackIds[0])
+describe(getAudioFeaturesforTrack, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getAudioFeaturesforTrack(token, trackIds[0])
 
-    expect(res).toStrictEqual<typeof res>(audioAnalysisObject(res))
+        expect(res).toStrictEqual<typeof res>(audioFeaturesObject())
+    })
+})
+
+describe(getAudioAnalysisforTrack, () => {
+    test.concurrent('basic request', async () => {
+        const res = await getAudioAnalysisforTrack(token, trackIds[0])
+
+        expect(res).toStrictEqual<typeof res>(audioAnalysisObject(res))
+    })
 })

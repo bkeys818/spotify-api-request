@@ -1,4 +1,4 @@
-import { sendRequest } from '../send-request'
+import { sendRequest } from '../global'
 import type { Token } from '../authorize'
 import type { EpisodeObject } from '../objects'
 
@@ -7,7 +7,7 @@ import type { EpisodeObject } from '../objects'
  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
  * @param {String[]} ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episodes. Maximum: 50 IDs.
  * @param {Object} options
- * @returns {Promise<{ episodes: EpisodeObject[] }>} An object whose key is `episodes` and whose value is an array of {@link EpisodeObject episode objects}.
+ * @returns {Promise<{ episodes: (EpisodeObject | null)[] }>} An object whose key is `episodes` and whose value is an array of {@link EpisodeObject episode objects}.
  */
 export async function getMultipleEpisodes(
     token: Token | string,
@@ -24,7 +24,7 @@ export async function getMultipleEpisodes(
          */
         market: string
     }
-): Promise<{ episodes: EpisodeObject[] }> {
+): Promise<{ episodes: (EpisodeObject | null)[] }> {
     const queryParameter: { [key: string]: any } = { ids: ids }
     if (options) queryParameter.market = options.market
     return await (

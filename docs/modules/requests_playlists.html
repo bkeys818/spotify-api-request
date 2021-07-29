@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>requests/playlists | Spotify API Request - v0.1.0</title>
-	<meta name="description" content="Documentation for Spotify API Request - v0.1.0">
+	<title>requests/playlists | Spotify API Request - v1.0.1</title>
+	<meta name="description" content="Documentation for Spotify API Request - v1.0.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Spotify API Request - v0.1.0</a>
+					<a href="../index.html" class="title">Spotify API Request - v1.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">Spotify API Request - v0.1.0</a>
+					<a href="../modules.html">Spotify API Request - v1.0.1</a>
 				</li>
 				<li>
 					<a href="requests_playlists.html">requests/playlists</a>
@@ -143,9 +143,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>snapshot_id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<p>} A <code>snapshot_id</code> in JSON format. The <code>snapshot_id</code> can be used to identify your playlist version in future requests.</p>
-							</blockquote>
+							<p>A <code>snapshot_id</code> in JSON format. The <code>snapshot_id</code> can be used to identify your playlist version in future requests.</p>
 						</li>
 					</ul>
 				</section>
@@ -504,7 +502,7 @@
 					<a name="getPlaylistItems" class="tsd-anchor"></a>
 					<h3>get<wbr>Playlist<wbr>Items</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Playlist<wbr>Items<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, playlistId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>additional_types<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;track&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;episode&quot;</span><span class="tsd-signature-symbol">; </span>fields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MarketPlaylistTrackObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;playlist’s tracks&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Playlist<wbr>Items<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, playlistId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>additional_types<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;track&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;episode&quot;</span><span class="tsd-signature-symbol">; </span>fields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PlaylistTrackObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;playlist’s tracks&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -576,7 +574,7 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MarketPlaylistTrackObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;playlist’s tracks&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PlaylistTrackObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;playlist’s tracks&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the <code>additional_types</code> parameter), wrapped in a {@link PagingObject paging object}.</p>
 						</li>
 					</ul>
@@ -612,15 +610,16 @@
 								</li>
 								<li>
 									<h5>tracks: <span class="tsd-signature-symbol">{ </span>positions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An array of objects containing <a href="https://developer.spotify.com/spotify-documentation/web-api/#spotify-uris-and-ids">Spotify URIs</a> of the tracks or episodes to remove. For example: <code>{ &quot;tracks&quot;: [{ &quot;uri&quot;: &quot;spotify:track:4iV5W9uYEdYUVa79Axb7Rh&quot; },{ &quot;uri&quot;: &quot;spotify:track:1301WleyT98MSxVHPZCA6M&quot; }] }</code>. A maximum of 100 objects can be sent at once.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> snapshotId: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>snapshot_id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<p>} A <code>snapshot_id</code> in JSON format. The <code>snapshot_id</code> can be used to identify your playlist version in future requests.</p>
-							</blockquote>
+							<p>A <code>snapshot_id</code> in JSON format. The <code>snapshot_id</code> can be used to identify your playlist version in future requests.</p>
 						</li>
 					</ul>
 				</section>
@@ -708,9 +707,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>snapshot_id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<p>} A <code>snapshot_id</code> in JSON format. The <code>snapshot_id</code> can be used to identify your playlist version in future requests.</p>
-							</blockquote>
+							<p>A <code>snapshot_id</code> in JSON format. The <code>snapshot_id</code> can be used to identify your playlist version in future requests.</p>
 						</li>
 					</ul>
 				</section>

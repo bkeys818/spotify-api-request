@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>requests/artists | Spotify API Request - v0.1.0</title>
-	<meta name="description" content="Documentation for Spotify API Request - v0.1.0">
+	<title>requests/artists | Spotify API Request - v1.0.1</title>
+	<meta name="description" content="Documentation for Spotify API Request - v1.0.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Spotify API Request - v0.1.0</a>
+					<a href="../index.html" class="title">Spotify API Request - v1.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">Spotify API Request - v0.1.0</a>
+					<a href="../modules.html">Spotify API Request - v1.0.1</a>
 				</li>
 				<li>
 					<a href="requests_artists.html">requests/artists</a>
@@ -123,7 +123,7 @@
 					<a name="getArtistAlbums" class="tsd-anchor"></a>
 					<h3>get<wbr>Artist<wbr>Albums</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Artist<wbr>Albums<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>include_groups<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SimplifiedAlbumObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;artist’s albums&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Artist<wbr>Albums<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>include_groups<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AlbumType</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AlbumType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SimplifiedAlbumObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;artist’s albums&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -149,10 +149,10 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>include_groups<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-symbol">{ </span>include_groups<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AlbumType</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AlbumType</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>market<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
-											<h5><span class="tsd-flag ts-flagOptional">Optional</span> include_<wbr>groups<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5>
+											<h5><span class="tsd-flag ts-flagOptional">Optional</span> include_<wbr>groups<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">AlbumType</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AlbumType</span><span class="tsd-signature-symbol">[]</span></h5>
 											<div class="tsd-comment tsd-typography">
 												<div class="lead">
 													<p>A comma-separated list of keywords that will be used to filter the response. If not supplied, all album types will be returned. Valid values are:</p>
@@ -196,7 +196,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PagingObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SimplifiedAlbumObject</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;artist’s albums&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>an array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).</p>
+							<p>An array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).</p>
 						</li>
 					</ul>
 				</section>
@@ -231,9 +231,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>artists<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArtistObject</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<p>} An object whose key is <code>&quot;artists&quot;</code> and whose value is an array of up to 20 {@link ArtistObject artist objects}.</p>
-							</blockquote>
+							<p>An object whose key is <code>&quot;artists&quot;</code> and whose value is an array of up to 20 {@link ArtistObject artist objects}.</p>
 						</li>
 					</ul>
 				</section>
@@ -241,7 +239,7 @@
 					<a name="getArtistTopTracks" class="tsd-anchor"></a>
 					<h3>get<wbr>Artist<wbr>Top<wbr>Tracks</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Artist<wbr>Top<wbr>Tracks<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArtistTopTrack</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Artist<wbr>Top<wbr>Tracks<span class="tsd-signature-symbol">(</span>token<span class="tsd-signature-symbol">: </span><a href="../interfaces/authorize.Token.html" class="tsd-signature-type" data-tsd-kind="Interface">Token</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>market<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TrackObject</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -280,10 +278,8 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArtistTopTrack</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<p>} An object whose key is <code>&quot;tracks&quot;</code> and whose value is an array of up to 10 {@link TrackObject track objects}.<br>Note: The {@link TrackObject Track objects} in the response don&#39;t conain <code>available_markets</code> and nor does it&#39;s <code>album</code> property.</p>
-							</blockquote>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>tracks<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TrackObject</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>An object whose key is <code>&quot;tracks&quot;</code> and whose value is an array of up to 10 {@link TrackObject track objects}.<br>Note: The {@link TrackObject Track objects} in the response don&#39;t conain <code>available_markets</code> and nor does it&#39;s <code>album</code> property.</p>
 						</li>
 					</ul>
 				</section>
@@ -318,9 +314,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>artists<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">ArtistObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<blockquote>
-								<p>} An object whose key is <code>&quot;artists&quot;</code> and whose value is an array of {@link ArtistObject artist object}.</p>
-							</blockquote>
+							<p>An object whose key is <code>&quot;artists&quot;</code> and whose value is an array of {@link ArtistObject artist object}.</p>
 						</li>
 					</ul>
 				</section>

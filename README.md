@@ -4,7 +4,6 @@
 </div>
 
 <div align=center>
-  <!-- TODO: - Codecov -->
   <a href="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml">
     <img src="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml/badge.svg" alt="Build Status">
   </a>
@@ -15,9 +14,6 @@
     <img src="https://img.shields.io/npm/dt/spotify-api-request" alt="NPM download count">
   </a>
 </div>
-# Project status
-
-#### This package is still in development! All request are functional and accurate, but use it at your own risk.
 
 ## Installation
 
@@ -56,12 +52,12 @@ Right now, authorization can only be done through Spotify's [Client Credentials 
 Now, we can use that token to make requests.
 
 ```typescript
-import { requests } from 'spotify-api-request'
+import { searchforItem } from 'spotify-api-request'
 
 async function searchForShow(showName: string) {
   const token = await getToken()
 
-	const searchRes = await requests.searchforItem(token, {
+	const searchRes = await searchforItem(token, {
     q: showName,
     type: 'shows'
   })

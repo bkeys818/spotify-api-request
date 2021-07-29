@@ -9,10 +9,10 @@ import type {
 
 /**
  * Get Spotify catalog information for several shows based on their Spotify IDs.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the shows. Maximum: 50 IDs.
- * @param {Object} [options]
- * @returns {Promise<{ shows: SimplifiedShowObject[] }>} An object whose key is `shows` and whose value is an array of {@link SimplifiedShowObject simple show object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the shows. Maximum: 50 IDs.
+ * @param [options]
+ * @returns An object whose key is `shows` and whose value is an array of {@link SimplifiedShowObject simple show object}.
  */
 export async function getMultipleShows(
     token: Token | string,
@@ -44,10 +44,10 @@ export async function getMultipleShows(
 
 /**
  * Get Spotify catalog information for a single show identified by its unique Spotify ID.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
- * @param {Object} [options]
- * @returns {Promise<ShowObject>} A {@link ShowObject show object}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
+ * @param [options]
+ * @returns A {@link ShowObject show object}
  */
 export async function getShow(
     token: Token | string,
@@ -78,10 +78,10 @@ export async function getShow(
 
 /**
  * Get Spotify catalog information about an show’s episodes. Optional parameters can be used to limit the number of episodes returned.
- * @param {Token} token - valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SimplifiedEpisodeObject, 'show’s episodes's>>}
+ * @param token - valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
+ * @param [options]
+ * @returns
  */
 export async function getShowEpisodes(
     token: Token | string,

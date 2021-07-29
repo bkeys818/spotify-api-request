@@ -4,10 +4,10 @@ import type { PagingObject, ArtistObject, TrackObject } from '../objects'
 
 /**
  * Get the current user’s top artists or tracks based on calculated affinity.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the current user.<br>Getting details of a user’s top artists and tracks requires authorization of the `user-top-read` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {'artists'|'tracks'} type - The type of entity to return.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<T extends 'artists' ? ArtistObject : TrackObject, `my top ${T}`>>} A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the current user.<br>Getting details of a user’s top artists and tracks requires authorization of the `user-top-read` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param type - The type of entity to return.
+ * @param [options]
+ * @returns A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
  */
 export async function getUserTopArtistsandTracks<T extends 'artists' | 'tracks'>(
     token: Token | string,

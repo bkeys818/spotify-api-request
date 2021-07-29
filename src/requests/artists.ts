@@ -9,9 +9,9 @@ import type {
 
 /**
  * Get Spotify catalog information for several artists based on their Spotify IDs.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string[]} ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artists. Maximum: 50 IDs.
- * @returns {Promise<{ artists: (ArtistObject | null)[] }>} An object whose key is `"artists"` and whose value is an array of {@link ArtistObject artist object}.
+ * @param token - A valid user access token or your client credentials.
+ * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artists. Maximum: 50 IDs.
+ * @returns An object whose key is `"artists"` and whose value is an array of {@link ArtistObject artist object}.
  */
 export async function getMultipleArtists(
     token: Token | string,
@@ -33,9 +33,9 @@ export async function getMultipleArtists(
 
 /**
  * Get Spotify catalog information for a single artist identified by their unique Spotify ID.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} id - The Spotify ID of the artist.
- * @returns {Promise<ArtistObject>} An artist object.
+ * @param token - A valid user access token or your client credentials.
+ * @param id - The Spotify ID of the artist.
+ * @returns An artist object.
  */
 export async function getArtist(
     token: Token | string,
@@ -55,10 +55,10 @@ export async function getArtist(
 
 /**
  * Get Spotify catalog information about an artist’s top tracks by country.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
- * @param {Object} [options]
- * @returns {Promise<{ tracks: ArtistTopTrack[] }>} An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.<br>Note: The {@link TrackObject Track objects} in the response don't conain `available_markets` and nor does it's `album` property.
+ * @param token - A valid user access token or your client credentials.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
+ * @param [options]
+ * @returns An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.<br>Note: The {@link TrackObject Track objects} in the response don't conain `available_markets` and nor does it's `album` property.
  */
 export async function getArtistTopTracks(
     token: Token | string,
@@ -83,9 +83,9 @@ export async function getArtistTopTracks(
 
 /**
  * Get Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community’s [listening history](http://news.spotify.com/se/2010/02/03/related-artists/).
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
- * @returns {Promise<{ artists: ArtistObject[] }>} An object whose key is `"artists"` and whose value is an array of up to 20 {@link ArtistObject artist objects}.
+ * @param token - A valid user access token or your client credentials.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
+ * @returns An object whose key is `"artists"` and whose value is an array of up to 20 {@link ArtistObject artist objects}.
  */
 export async function getArtistRelatedArtists(
     token: Token | string,
@@ -106,10 +106,10 @@ export async function getArtistRelatedArtists(
 type AlbumType = 'album' | 'single' | 'appears_on' | 'compilation'
 /**
  * Get Spotify catalog information about an artist’s albums.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SimplifiedAlbumObject, 'artist’s albums'>>} an array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid user access token or your client credentials.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
+ * @param [options]
+ * @returns An array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getArtistAlbums(
     token: Token | string,

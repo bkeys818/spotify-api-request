@@ -4,10 +4,10 @@ import type { AlbumObject, PagingObject, SimplifiedTrackObject } from '../object
 
 /**
  * Get Spotify catalog information for multiple albums identified by their Spotify IDs.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string[]} ids - A comma-separated list of [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for albums. Maximum: 20 IDs.
- * @param {Object} [options]
- * @returns {Promise<{ albums: (AlbumObject | null)[] }} Objects are returned in the order requested. If an object is not found, a `null` value is returned in the appropriate position. Duplicate `ids` in the query will result in duplicate objects in the response.
+ * @param token - A valid user access token or your client credentials.
+ * @param ids - A comma-separated list of [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for albums. Maximum: 20 IDs.
+ * @param [options]
+ * @returns Objects are returned in the order requested. If an object is not found, a `null` value is returned in the appropriate position. Duplicate `ids` in the query will result in duplicate objects in the response.
  */
 export async function getMultipleAlbums(
     token: Token | string,
@@ -33,10 +33,10 @@ export async function getMultipleAlbums(
 
 /**
  * Get Spotify catalog information for a single album.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} id - The Spotify ID of the album.
- * @param {Object} [options]
- * @returns {Promise<AlbumObject>} An album object in JSON format.
+ * @param token - A valid user access token or your client credentials.
+ * @param id - The Spotify ID of the album.
+ * @param [options]
+ * @returns An album object in JSON format.
  */
 export async function getAlbum(
     token: Token | string,
@@ -61,10 +61,10 @@ export async function getAlbum(
 
 /**
  * Get Spotify catalog information about an album’s tracks. Optional parameters can be used to limit the number of tracks returned.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} id - The Spotify ID of the album.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SimplifiedTrackObject, 'album’s tracks'>>} An album object in JSON format.
+ * @param token - A valid user access token or your client credentials.
+ * @param id - The Spotify ID of the album.
+ * @param [options]
+ * @returns An album object in JSON format.
  */
 export async function getAlbumTracks(
     token: Token | string,

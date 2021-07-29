@@ -8,10 +8,10 @@ import type {
 
 /**
  * Get Spotify catalog information for multiple tracks based on their Spotify IDs.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string[]} ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the tracks. Maximum: 50 IDs.
- * @param {Object} [options]
- * @returns {Promise<{ tracks: TrackObject[] }>} An object whose key is `tracks` and whose value is an array of {@link TrackObject track objects}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the tracks. Maximum: 50 IDs.
+ * @param [options]
+ * @returns An object whose key is `tracks` and whose value is an array of {@link TrackObject track objects}.
  */
 export async function getSeveralTracks(
     token: Token | string,
@@ -35,10 +35,10 @@ export async function getSeveralTracks(
 
 /**
  * Get Spotify catalog information for a single track identified by its unique Spotify ID.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
- * @param {Object} [options]
- * @returns {Promise<TrackObject>} A {@link TrackObject track object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
+ * @param [options]
+ * @returns A {@link TrackObject track object}.
  */
 export async function getTrack(
     token: Token | string,
@@ -61,9 +61,9 @@ export async function getTrack(
 
 /**
  * Get audio features for multiple tracks based on their Spotify IDs.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string[]} ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the tracks. Maximum: 100 IDs.
- * @returns {Promise<{ audio_features: AudioFeaturesObject[] }>} An object whose key is `"audio_features"` and whose value is an array of {@link AudioFeaturesObject audio features objects}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the tracks. Maximum: 100 IDs.
+ * @returns An object whose key is `"audio_features"` and whose value is an array of {@link AudioFeaturesObject audio features objects}.
  */
 export async function getAudioFeaturesforSeveralTracks(
     token: Token | string,
@@ -81,9 +81,9 @@ export async function getAudioFeaturesforSeveralTracks(
 
 /**
  * Get audio feature information for a single track identified by its unique Spotify ID.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
- * @returns {Promise<AudioFeaturesObject>} An {@link AudioFeaturesObject audio features object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
+ * @returns An {@link AudioFeaturesObject audio features object}.
  */
 export async function getAudioFeaturesforTrack(
     token: Token | string,
@@ -101,9 +101,9 @@ export async function getAudioFeaturesforTrack(
 
 /**
  * Get a detailed audio analysis for a single track identified by its unique Spotify ID.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
- * @returns {Promise<AudioAnalysisObject>} An {@link AudioAnalysisObject audio analysis object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
+ * @returns An {@link AudioAnalysisObject audio analysis object}.
  */
 export async function getAudioAnalysisforTrack(
     token: Token | string,

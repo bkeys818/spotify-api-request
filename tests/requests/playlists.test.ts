@@ -1,3 +1,4 @@
+import { token, playlistIDs, userIDs } from '../global'
 import {
     getListOfCurrentUserPlaylists,
     getListOfUserPlaylists,
@@ -19,11 +20,6 @@ import {
     imageObject,
 } from '../objects'
 
-// @ts-ignore
-const token = global.token
-const playlistID = '6innvmsboMZC5rdrmY292j'
-const userID = 'spotify'
-
 describe(getListOfCurrentUserPlaylists, () => {
     test.concurrent('basic request', async () => {
         const res = await getListOfCurrentUserPlaylists(token)
@@ -40,7 +36,7 @@ describe(getListOfCurrentUserPlaylists, () => {
 
 describe(getListOfUserPlaylists, () => {
     test.concurrent('basic request', async () => {
-        const res = await getListOfUserPlaylists(token, userID)
+        const res = await getListOfUserPlaylists(token, userIDs[0])
 
         expect(res).toStrictEqual<typeof res>(
             pagingObject({
@@ -58,7 +54,7 @@ describe(getListOfUserPlaylists, () => {
 
 describe(getPlaylist, () => {
     test.concurrent('basic request', async () => {
-        const res = await getPlaylist(token, playlistID)
+        const res = await getPlaylist(token, playlistIDs[0])
 
         expect(res).toStrictEqual<typeof res>(playlistObject(res))
     })
@@ -70,7 +66,7 @@ describe(getPlaylist, () => {
 
 describe(getPlaylistItems, () => {
     test.concurrent('basic request', async () => {
-        const res = await getPlaylistItems(token, playlistID, { market: 'US' })
+        const res = await getPlaylistItems(token, playlistIDs[0], { market: 'US' })
 
         type ExpectedItem = typeof res.items[number]
         function customPlaylistTrackObjectObject(
@@ -118,7 +114,7 @@ describe(getPlaylistItems, () => {
 
 describe(getPlaylistCoverImage, () => {
     test.concurrent('basic request', async () => {
-        const res = await getPlaylistCoverImage(token, playlistID)
+        const res = await getPlaylistCoverImage(token, playlistIDs[0])
 
         expect(res).toStrictEqual<typeof res>(res.map(imageObject))
     })

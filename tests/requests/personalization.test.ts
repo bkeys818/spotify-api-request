@@ -1,8 +1,6 @@
+import { token } from '../global'
 import { getUserTopArtistsandTracks } from '../../src/requests/personalization'
 import { pagingObject, trackObject } from '../objects'
-
-// @ts-ignore
-const token = global.token
 
 describe(getUserTopArtistsandTracks, () => {
     test.concurrent('basic request', async () => {

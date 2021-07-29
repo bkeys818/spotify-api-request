@@ -1,3 +1,4 @@
+import { token, artistIDs } from '../global'
 import {
     getMultipleArtists,
     getArtist,
@@ -11,10 +12,6 @@ import {
     pagingObject,
     simplifiedAlbumObject,
 } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 
 describe(getMultipleArtists, () => {
     test.concurrent('basic request', async () => {

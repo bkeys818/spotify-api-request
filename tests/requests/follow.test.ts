@@ -1,3 +1,4 @@
+import { token, artistIDs, playlistIDs, userIDs } from '../global'
 import {
     // followPlaylist,
     // unfollowPlaylist,
@@ -9,20 +10,14 @@ import {
 } from '../../src/requests/follow'
 import { arrayOf, cursorPagingObject, artistObject } from '../objects'
 
-// @ts-ignore
-const token = global.token
-const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
-const playlistID = '6innvmsboMZC5rdrmY292j'
-const userID = 'spotify'
-
 // test.concurrent(followPlaylist.name, async () => {}
 
 // test.concurrent(unfollowPlaylist.name, async () => {}
 
 describe(checkIfUsersFollowPlaylist, () => {
     test.concurrent('basic request', async () => {
-        const res = await checkIfUsersFollowPlaylist(token, playlistID, [
-            userID,
+        const res = await checkIfUsersFollowPlaylist(token, playlistIDs[0], [
+            userIDs[0],
         ])
 
         expect(res).toStrictEqual(arrayOf(res, Boolean))

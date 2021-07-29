@@ -1,12 +1,9 @@
+import { token, userIDs } from '../global'
 import {
     getCurrentUserProfile,
     getUserProfile,
 } from '../../src/requests/user-profile'
 import { privateUserObject, publicUserObject } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const userID = 'spotify'
 
 describe(getCurrentUserProfile, () => {
     test.concurrent('basic request', async () => {
@@ -18,7 +15,7 @@ describe(getCurrentUserProfile, () => {
 
 describe(getUserProfile, () => {
     test.concurrent('basic request', async () => {
-        const res = await getUserProfile(token, userID)
+        const res = await getUserProfile(token, userIDs[0])
 
         expect(res).toStrictEqual<typeof res>(publicUserObject(res))
     })

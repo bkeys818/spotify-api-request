@@ -1,3 +1,4 @@
+import { token, categoryIDs, artistIDs, trackIds } from '../global'
 import {
     getAllNewReleases,
     getAllFeaturedPlaylists,
@@ -16,12 +17,6 @@ import {
     recommendationsObject,
     arrayOf,
 } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const categoryID = 'party'
-const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
-const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
 describe(getAllNewReleases, () => {
     test.concurrent('basic request', async () => {
@@ -68,7 +63,7 @@ describe(getAllCategories, () => {
 
 describe(getCategory, () => {
     test.concurrent('basic request', async () => {
-        const res = await getCategory(token, categoryID)
+        const res = await getCategory(token, categoryIDs[0])
 
         expect(res).toStrictEqual<typeof res>(categoryObject(res))
     })
@@ -76,7 +71,7 @@ describe(getCategory, () => {
 
 describe(getCategoryPlaylists, () => {
     test.concurrent('basic request', async () => {
-        const res = await getCategoryPlaylists(token, categoryID)
+        const res = await getCategoryPlaylists(token, categoryIDs[0])
 
         expect(res).toStrictEqual<typeof res>({
             playlists: pagingObject({
@@ -93,7 +88,7 @@ describe(getRecommendations, () => {
         const res = await getRecommendations(token, {
             seed_artists: artistIDs[0],
             seed_tracks: trackIds[0],
-            seed_genres: categoryID,
+            seed_genres: categoryIDs[0],
         })
 
         expect(res).toStrictEqual<typeof res>(recommendationsObject(res))

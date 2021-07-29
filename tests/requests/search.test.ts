@@ -1,8 +1,6 @@
+import { token } from '../global'
 import { searchForItem } from '../../src/requests/search'
 import { pagingObject, trackObject } from '../objects'
-
-// @ts-ignore
-const token = global.token
 
 describe(searchForItem, () => {
     test.concurrent('basic request', async () => {

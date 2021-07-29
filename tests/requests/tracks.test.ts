@@ -1,3 +1,4 @@
+import { token, trackIds } from '../global'
 import {
     getSeveralTracks,
     getTrack,
@@ -10,10 +11,6 @@ import {
     audioFeaturesObject,
     audioAnalysisObject,
 } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
 describe(getSeveralTracks, () => {
     test.concurrent('basic request', async () => {

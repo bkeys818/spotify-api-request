@@ -1,13 +1,10 @@
+import { token, albumIDs } from '../global'
 import {
     getMultipleAlbums,
     getAlbum,
     getAlbumTracks,
 } from '../../src/requests/albums'
 import { albumObject, pagingObject, simplifiedTrackObject } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 
 describe(getMultipleAlbums, () => {
     test.concurrent('basic request', async () => {

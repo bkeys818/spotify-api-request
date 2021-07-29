@@ -1,3 +1,4 @@
+import { token, albumIDs, episodeIds, showIDs, trackIds} from '../global'
 import {
     getUsersSavedAlbums,
     getUsersSavedEpisodes,
@@ -9,13 +10,6 @@ import {
     checkUsersSavedTracks,
 } from '../../src/requests/library'
 import { arrayOf, pagingObject, savedObject } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
-const episodeIds = ['12KkLKHryOF9tvBuHsiHwS', '6qAXNDd2RhdZVeRRLcngzo']
-const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
-const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 
 describe(getUsersSavedAlbums, () => {
     test.concurrent('basic request', async () => {

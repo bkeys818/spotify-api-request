@@ -1,3 +1,4 @@
+import { token, showIDs } from '../global'
 import {
     getMultipleShows,
     getShow,
@@ -9,10 +10,6 @@ import {
     pagingObject,
     simplifiedEpisodeObject,
 } from '../objects'
-
-// @ts-ignore
-const token = global.token
-const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 
 describe(getMultipleShows, () => {
     test.concurrent('basic request', async () => {

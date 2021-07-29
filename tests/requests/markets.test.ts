@@ -1,7 +1,5 @@
+import { token } from '../global'
 import { getAvailableMarkets } from '../../src/requests/markets'
-
-// @ts-ignore
-const token = global.token
 
 describe(getAvailableMarkets, () => {
     test.concurrent('basic request', async () => {

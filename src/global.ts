@@ -1,5 +1,6 @@
 import fetch, { RequestInit, Response } from 'node-fetch'
 import type { Token } from './authorize'
+import { checkStatus } from './error'
 
 type UrlParameter = {
     [key: string]: boolean | number | string | Array<boolean | number | string>
@@ -48,7 +49,11 @@ export async function sendRequest(params: {
                 ? JSON.stringify(params.bodyParameter)
                 : params.bodyParameter
 
-    return await fetch(url.href, options)
+    const res = await fetch(url.href, options)
+    const error = await checkStatus(res)
+
+    if (error) throw error
+    else return res
 }
 
 const convertToString = (value: UrlParameter[keyof UrlParameter]) =>

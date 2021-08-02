@@ -21,7 +21,10 @@ export async function authorize(props: { clientID: string, clientSecret: string}
     if (res.status === 200) return (await res.json()) as Token
     else {
         try {
-            throw new SpotifyError(await res.json() as AuthenticationError)
+            const authError = await res.json() as AuthenticationError
+            if ('error_description' in authError)
+                throw new SpotifyError(authError.error_description, 'token')
+            else throw authError
         } catch (error) {
             if (error instanceof SpotifyError) throw error
             else throw new SpotifyError('Uknown error during authorization.', 'unknown', error)

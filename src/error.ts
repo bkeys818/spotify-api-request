@@ -79,7 +79,7 @@ export class SpotifyError extends Error {
         if (type === 'unknown') this.internalError = dataOrSystemError
         else this.data = dataOrSystemError
         
-        this.message = `${this.name} - ${SpotifyError.Type[this.type]}! ${this.message}`
+        this.message = `${SpotifyError.Type[this.type]}! ${this.message}`
     }
 
     static readonly Type = {

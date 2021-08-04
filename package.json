@@ -28,7 +28,8 @@
     "postbuild": "rimraf lib/objects.ts"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "pkce-challenge": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

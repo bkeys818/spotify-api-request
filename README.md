@@ -7,10 +7,10 @@
   <a href="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml">
     <img src="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml/badge.svg" alt="Build Status">
   </a>
-  <a href="https://www.npmjs.com/package/spotify-api-request">
-    <img src="https://img.shields.io/npm/v/spotify-api-request" alt="NPM version">
+  <a href="https://www.npmjs.com/package/spotify-api-request/v/2.0.0-0">
+    <img src="https://img.shields.io/bundlephobia/min/spotify-api-request/2.0.0-0?logoColor=blue" alt="NPM version">
   </a>
-  <a href="https://www.npmjs.com/package/spotify-api-request">
+  <a href="https://www.npmjs.com/package/spotify-api-request/v/2.0.0-0">
     <img src="https://img.shields.io/npm/dt/spotify-api-request" alt="NPM download count">
   </a>
 </div>

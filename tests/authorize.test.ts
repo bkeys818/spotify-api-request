@@ -78,7 +78,7 @@ describe(authorizeToken, () => {
     })
 })
 
-describe.only(getToken, () => {
+describe(getToken, () => {
     const params = {
         access_token: globalToken,
         token_type: 'Bearer',

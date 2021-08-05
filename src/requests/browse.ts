@@ -11,9 +11,9 @@ import type {
 
 /**
  * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {Object} options
- * @returns {Promise<{albums: PagingObject<SimplifiedAlbumObject,'new releases'>}>} The response contains a `message` and an `albums` object. The `albums` object contains an array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid user access token or your client credentials.
+ * @param options
+ * @returns The response contains a `message` and an `albums` object. The `albums` object contains an array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllNewReleases(
     token: Token | string,
@@ -38,9 +38,9 @@ export async function getAllNewReleases(
 
 /**
  * Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {Object} [options]
- * @returns {Promise<{message: string, playlists: PagingObject<SimplifiedPlaylistObject, 'featured playlists'>}>} An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid user access token or your client credentials.
+ * @param [options]
+ * @returns An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllFeaturedPlaylists(
     token: Token | string,
@@ -72,9 +72,9 @@ export async function getAllFeaturedPlaylists(
 
 /**
  * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {Object} [options]
- * @returns {Promise<{categories: PagingObject<CategoryObject,'categories'>}>} An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid user access token or your client credentials.
+ * @param [options]
+ * @returns An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getAllCategories(
     token: Token | string,
@@ -101,10 +101,10 @@ export async function getAllCategories(
 
 /**
  * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)for the category.
- * @param {Object} [options]
- * @returns {Promise<CategoryObject>} A {@link CategoryObject category object}.
+ * @param token - A valid user access token or your client credentials.
+ * @param categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)for the category.
+ * @param [options]
+ * @returns A {@link CategoryObject category object}.
  */
 export async function getCategory(
     token: Token | string,
@@ -131,10 +131,10 @@ export async function getCategory(
 
 /**
  * Get a list of Spotify playlists tagged with a particular category.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {string} categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the category.
- * @param {Object} [options]
- * @returns {Promise<{ playlists: PagingObject<SimplifiedPlaylistObject, 'category’s playlists'>}>} An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object})
+ * @param token - A valid user access token or your client credentials.
+ * @param categoryId - The [Spotify category ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the category.
+ * @param [options]
+ * @returns An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getCategoryPlaylists(
     token: Token | string,
@@ -163,9 +163,9 @@ export async function getCategoryPlaylists(
 
 /**
  * Recommendations are generated based on the available information for a given seed entity and matched against similar artists and tracks. If there is sufficient information about the provided seeds, a list of tracks will be returned together with pool size details.
- * @param {Token} token - A valid user access token or your client credentials.
- * @param {Object} options
- * @returns {Promise<RecommendationsObject>} A {@link RecommendationsObject recommendations response object}
+ * @param token - A valid user access token or your client credentials.
+ * @param options
+ * @returns A {@link RecommendationsObject recommendations response object}.
  */
 export async function getRecommendations(
     token: Token | string,
@@ -278,8 +278,8 @@ export async function getRecommendations(
 
 /**
  * Retrieve a list of available genres seed parameter values for [recommendations](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recommendations).
- * @param {Token} token - A valid user access token or your client credentials.
- * @returns {Promise<{ genres: string[] }>} An object with a `genres` field containing an array of genres.
+ * @param token - A valid user access token or your client credentials.
+ * @returns An object with a `genres` field containing an array of genres.
  */
 export async function getRecommendationGenres(
     token: Token | string

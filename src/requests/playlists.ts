@@ -10,11 +10,11 @@ import type {
 
 /**
  * Get a list of the playlists owned or followed by the current Spotify user.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Private playlists are only retrievable for the current user and requires the `playlist-read-private` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user. Note that this scope alone will not return collaborative playlists, even though they are always private.<br>Collaborative playlists are only retrievable for the current user and requires the `playlist-read-collaborative` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user.
- * @param {Object} [options]
- * @param {number} [options.limit=20]
- * @param {number} [options.offset=0]
- * @returns {Promise<PagingObject<SimplifiedPlaylistObject, 'user’s playlists'>>} An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Private playlists are only retrievable for the current user and requires the `playlist-read-private` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user. Note that this scope alone will not return collaborative playlists, even though they are always private.<br>Collaborative playlists are only retrievable for the current user and requires the `playlist-read-collaborative` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user.
+ * @param [options]
+ * @param [options.limit=20]
+ * @param [options.offset=0]
+ * @returns An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfCurrentUserPlaylists(
     token: Token | string,
@@ -37,12 +37,12 @@ export async function getListOfCurrentUserPlaylists(
 
 /**
  * Get a list of the playlists owned or followed by a Spotify user.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Private playlists are only retrievable for the current user and requires the `playlist-read-private` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user. Note that this scope alone will not return collaborative playlists, even though they are always private.<br>Collaborative playlists are only retrievable for the current user and requires the `playlist-read-collaborative` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user.
- * @param {string} userId - The user’s [Spotify user ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
- * @param {Object} [options]
- * @param {number} [options.limit=20]
- * @param {number} [options.offset=0]
- * @returns {Promise<PagingObject<SimplifiedPlaylistObject, 'user’s playlists'>>} An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Private playlists are only retrievable for the current user and requires the `playlist-read-private` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user. Note that this scope alone will not return collaborative playlists, even though they are always private.<br>Collaborative playlists are only retrievable for the current user and requires the `playlist-read-collaborative` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) to have been authorized by the user.
+ * @param userId - The user’s [Spotify user ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
+ * @param [options]
+ * @param [options.limit=20]
+ * @param [options.offset=0]
+ * @returns An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getListOfUserPlaylists(
     token: Token | string,
@@ -67,14 +67,14 @@ export async function getListOfUserPlaylists(
 
 /**
  * Create a playlist for a Spotify user. (The playlist will be empty until you {@link addItemsToPlaylist add tracks}.)
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. Creating a public playlist for a user requires authorization of the `playlist-modify-public` scope; creating a private playlist requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string} userId - The user’s [Spotify user ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
- * @param {Object} [options]
- * @param {string} options.name
- * @param {boolean} [options.public=true]
- * @param {boolean} [options.collaborative=false]
- * @param {string} [options.description]
- * @returns {Promise<PlaylistObject>} - The created {@link addItemsToPlaylist playlist object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. Creating a public playlist for a user requires authorization of the `playlist-modify-public` scope; creating a private playlist requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param userId - The user’s [Spotify user ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids).
+ * @param [options]
+ * @param options.name
+ * @param [options.public=true]
+ * @param [options.collaborative=false]
+ * @param [options.description]
+ * @returns - The created {@link addItemsToPlaylist playlist object}.
  */
 export async function createPlaylist(
     token: Token | string,
@@ -108,13 +108,13 @@ export async function createPlaylist(
 
 /**
  * Get a playlist owned by a Spotify user.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. Both Public and Private playlists belonging to any user are retrievable on provision of a valid access token.
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {Object} [options]
- * @param {string} [options.market]
- * @param {string} [options.fields]
- * @param {string} [options.additional_types]
- * @returns {Promise<PlaylistObject>} A {@link PlaylistObject playlist object} in JSON.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. Both Public and Private playlists belonging to any user are retrievable on provision of a valid access token.
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param [options]
+ * @param [options.market]
+ * @param [options.fields]
+ * @param [options.additional_types]
+ * @returns A {@link PlaylistObject playlist object} in JSON.
  */
 export async function getPlaylist(
     token: Token | string,
@@ -147,13 +147,13 @@ export async function getPlaylist(
 
 /**
  * Change a playlist’s name and public/private state. (The user must, of course, own the playlist.)
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Changing a public playlist for a user requires authorization of the `playlist-modify-public` scope; changing a private playlist requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {Object} options
- * @param {string} options.name
- * @param {boolean} [options.public]
- * @param {boolean} [options.collaborative]
- * @param {string} [options.description]
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Changing a public playlist for a user requires authorization of the `playlist-modify-public` scope; changing a private playlist requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param options
+ * @param options.name
+ * @param [options.public]
+ * @param [options.collaborative]
+ * @param [options.description]
  * @return {Promise<void>}
  */
 export async function changePlaylistDetails(
@@ -186,15 +186,15 @@ export async function changePlaylistDetails(
 
 /**
  * Get full details of the items of a playlist owned by a Spotify user.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. Both Public and Private playlists belonging to any user are retrievable on provision of a valid access token.
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {Object} options
- * @param {string} options.market
- * @param {string} [options.fields]
- * @param {number} [options.limit]
- * @param {number} [options.offset]
- * @param {'track' | 'episode'} [options.additional_types]
- * @returns {Promise<PagingObject<MarketPlaylistTrackObject, 'playlist’s tracks'>>} An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. Both Public and Private playlists belonging to any user are retrievable on provision of a valid access token.
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param options
+ * @param options.market
+ * @param [options.fields]
+ * @param [options.limit]
+ * @param [options.offset]
+ * @param [options.additional_types]
+ * @returns An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
  */
 export async function getPlaylistItems(
     token: Token | string,
@@ -231,12 +231,12 @@ export async function getPlaylistItems(
 
 /**
  * Add one or more items to a user’s playlist.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Adding items to the current user’s public playlists requires authorization of the `playlist-modify-public` scope; adding items to the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {Object} options
- * @param {number} [options.position]
- * @param {string} [options.uris]
- * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Adding items to the current user’s public playlists requires authorization of the `playlist-modify-public` scope; adding items to the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param options
+ * @param [options.position]
+ * @param [options.uris]
+ * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function addItemsToPlaylist(
     token: Token | string,
@@ -270,15 +270,15 @@ export async function addItemsToPlaylist(
  * Either reorder or replace items in a playlist depending on the request’s parameters. To reorder items, include `range_start`, `insert_before`, `range_length` and `snapshot_id` in the request’s body. To replace items, include `uris` as either a query parameter or in the request’s body. Replacing items in a playlist will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist.
  *
  * **Note**: Replace and reorder are mutually exclusive operations which share the same endpoint, but have different parameters. These operations can’t be applied together in a single request.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Reordering or replacing items in the current user’s public playlists requires authorization of the `playlist-modify-public` scope; reordering or replacing items in the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {[Object]} options
- * @param {[string[]]} options.uris
- * @param {[number]} options.range_start
- * @param {[number]} options.insert_before
- * @param {[number]} options.ange_length
- * @param {[string]} options.snapshot_id
- * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Reordering or replacing items in the current user’s public playlists requires authorization of the `playlist-modify-public` scope; reordering or replacing items in the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param options
+ * @param options.uris
+ * @param options.range_start
+ * @param options.insert_before
+ * @param options.ange_length
+ * @param options.snapshot_id
+ * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function reorderOReplacePlaylistItems(
     token: Token | string,
@@ -332,11 +332,11 @@ export async function reorderOReplacePlaylistItems(
 
 /**
  * Remove one or more items from a user’s playlist.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. Removing items from a user’s public playlist requires authorization of the `playlist-modify-public` scope; removing items from a private playlist requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {{ uri: string, positions?: number[] }[]} tracks - An array of objects containing [Spotify URIs](https://developer.spotify.com/spotify-documentation/web-api/#spotify-uris-and-ids) of the tracks or episodes to remove. For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
- * @param {string} [snapshotId] - The playlist’s snapshot ID against which you want to make the changes. The API will validate that the specified items exist and in the specified positions and make the changes, even if more recent changes have been made to the playlist.
- * @returns {Promise<{ snapshot_id: string }>} A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. Removing items from a user’s public playlist requires authorization of the `playlist-modify-public` scope; removing items from a private playlist requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param tracks - An array of objects containing [Spotify URIs](https://developer.spotify.com/spotify-documentation/web-api/#spotify-uris-and-ids) of the tracks or episodes to remove. For example: `{ "tracks": [{ "uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh" },{ "uri": "spotify:track:1301WleyT98MSxVHPZCA6M" }] }`. A maximum of 100 objects can be sent at once.
+ * @param [snapshotId] - The playlist’s snapshot ID against which you want to make the changes. The API will validate that the specified items exist and in the specified positions and make the changes, even if more recent changes have been made to the playlist.
+ * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
 export async function removeItemsFromPlaylist(
     token: Token | string,
@@ -369,9 +369,9 @@ export async function removeItemsFromPlaylist(
 
 /**
  * Get the current image associated with a specific playlist.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>This access token must be issued on behalf of the user.<br>Current playlist image for both Public and Private playlists of any user are retrievable on provision of a valid access token.
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @returns {Promise<ImageObject[]>} A list of image objects.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>This access token must be issued on behalf of the user.<br>Current playlist image for both Public and Private playlists of any user are retrievable on provision of a valid access token.
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @returns A list of image objects.
  */
 export async function getPlaylistCoverImage(
     token: Token | string,
@@ -391,10 +391,10 @@ export async function getPlaylistCoverImage(
 
 /**
  * Replace the image used to represent a specific playlist.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>This access token must be tied to the user who owns the playlist, and must have the scope `ugc-image-upload` granted. In addition, the token must also contain `playlist-modify-public` and/or `playlist-modify-private`, depending the public status of the playlist you want to update . See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string} playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
- * @param {Buffer|string} image - The Buffer of a JPEG image or a Base64 encoded JPEG image, maximum size is 256 KB.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>This access token must be tied to the user who owns the playlist, and must have the scope `ugc-image-upload` granted. In addition, the token must also contain `playlist-modify-public` and/or `playlist-modify-private`, depending the public status of the playlist you want to update . See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param image - The Buffer of a JPEG image or a Base64 encoded JPEG image, maximum size is 256 KB.
+ * @returns
  */
 export async function uploadCustomPlaylistCoverImage(
     token: Token | string,

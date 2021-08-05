@@ -4,7 +4,6 @@
 </div>
 
 <div align=center>
-  <!-- TODO: - Codecov -->
   <a href="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml">
     <img src="https://github.com/bkeys818/spotify-api-request/actions/workflows/tests.yml/badge.svg" alt="Build Status">
   </a>
@@ -15,9 +14,6 @@
     <img src="https://img.shields.io/npm/dt/spotify-api-request" alt="NPM download count">
   </a>
 </div>
-# Project status
-
-#### This package is still in development! All request are functional and accurate, but use it at your own risk.
 
 ## Installation
 
@@ -27,41 +23,30 @@ Install using Yarn or NPM
 yarn add spotify-api-request
 ```
 
-## Usage
+## Authorization
 
-#### Authorization
+Tokens are used to make requests. This method will get you a valid token for the next hour. There are four methods authorization (described in [documentation](https://github.com/bkeys818/spotify-api-request/wiki/Authorization)).
 
-Using this method will get you a valid token for the next hour. Tokens are used to make requests.
+```ts
+import { getToken } from 'spotify-api-request'
 
-```typescript
-import { authorize } from 'spotify-api-request'
-
-async function getToken() {
-  const clientId = '...'
-  const clientSecret = '...'
-  
-  const token = await authorize({
-    clientId: clientId,
-    clientSecret: clientSecret
-  })
-  
-  return token
-}
+const token = await getToken({
+  clientId: clientId,
+  clientSecret: clientSecret
+})
 ```
 
-Right now, authorization can only be done through Spotify's [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow). This requires client credentials which you can get at [Spotify's developer portal](https://developer.spotify.com/dashboard). If you'd prefer to get an access token another way, it can still be used to make request.  
-
-#### Making requests
+## Making requests
 
 Now, we can use that token to make requests.
 
-```typescript
-import { requests } from 'spotify-api-request'
+```ts
+import { searchforItem } from 'spotify-api-request'
 
 async function searchForShow(showName: string) {
   const token = await getToken()
 
-	const searchRes = await requests.searchforItem(token, {
+	const searchRes = await searchforItem(token, {
     q: showName,
     type: 'shows'
   })

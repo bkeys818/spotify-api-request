@@ -4,10 +4,10 @@ import type { EpisodeObject } from '../objects'
 
 /**
  * Get Spotify catalog information for several episodes based on their Spotify IDs.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {String[]} ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episodes. Maximum: 50 IDs.
- * @param {Object} options
- * @returns {Promise<{ episodes: (EpisodeObject | null)[] }>} An object whose key is `episodes` and whose value is an array of {@link EpisodeObject episode objects}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episodes. Maximum: 50 IDs.
+ * @param [options]
+ * @returns An object whose key is `episodes` and whose value is an array of {@link EpisodeObject episode objects}.
  */
 export async function getMultipleEpisodes(
     token: Token | string,
@@ -39,10 +39,10 @@ export async function getMultipleEpisodes(
 
 /**
  * Get Spotify catalog information for a single episode identified by its unique Spotify ID.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {string} id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episode.
- * @param {Object} [options]
- * @returns {Promise<EpisodeObject>} An {@link EpisodeObject episode object}.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episode.
+ * @param [options]
+ * @returns An {@link EpisodeObject episode object}.
  */
 export async function getEpisode(
     token: Token | string,

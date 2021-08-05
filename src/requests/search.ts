@@ -27,9 +27,9 @@ type ResponseType<T extends keyof ResponseObject | (keyof ResponseObject)[]> =
 
 /**
  * Get Spotify Catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
- * @param {Object} options
- * @returns {Promise<ResponseType<T>>} For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+ * @param options
+ * @returns For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
  */
 export async function searchForItem<T extends SearchType | SearchType[]>(
     token: Token | string,

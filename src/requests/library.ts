@@ -10,9 +10,9 @@ import type {
 
 /**
  * Get a list of the albums saved in the current Spotify user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SavedAlbumObject, 'my albums'>>} An array of {@link SavedAlbumObject saved album objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
+ * @param [options]
+ * @returns An array of {@link SavedAlbumObject saved album objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedAlbums(
     token: Token | string,
@@ -37,9 +37,9 @@ export async function getUsersSavedAlbums(
 
 /**
  * Save one or more albums to the current user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function saveAlbumsforCurrentUser(
     token: Token | string,
@@ -58,9 +58,9 @@ export async function saveAlbumsforCurrentUser(
 
 /**
  * Remove one or more albums from the current user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function removeAlbumsforCurrentUser(
     token: Token | string,
@@ -79,9 +79,9 @@ export async function removeAlbumsforCurrentUser(
 
 /**
  * Check if one or more albums is already saved in the current Spotify user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the albums. Maximum: 50 IDs.
- * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the ids were specified.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the albums. Maximum: 50 IDs.
+ * @returns An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedAlbums(
     token: Token | string,
@@ -99,9 +99,9 @@ export async function checkUsersSavedAlbums(
 
 /**
  * Get a list of the songs saved in the current Spotify user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SavedTrackObject, 'my tracks'>>} An array of {@link SavedTrackObject saved track objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
+ * @param [options]
+ * @returns An array of {@link SavedTrackObject saved track objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedTracks(
     token: Token | string,
@@ -126,9 +126,9 @@ export async function getUsersSavedTracks(
 
 /**
  * Save one or more tracks to the current user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function saveTracksforUser(
     token: Token | string,
@@ -147,9 +147,9 @@ export async function saveTracksforUser(
 
 /**
  * Remove one or more tracks from the current user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function removeUsersSavedTracks(
     token: Token | string,
@@ -168,9 +168,9 @@ export async function removeUsersSavedTracks(
 
 /**
  * Check if one or more tracks is already saved in the current Spotify user’s ‘Your Music’ library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the ids were specified.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedTracks(
     token: Token | string,
@@ -190,9 +190,9 @@ export async function checkUsersSavedTracks(
  * Get a list of the episodes saved in the current Spotify user’s library.
  *
  * This API endpoint is in **beta** and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SavedEpisodeObject, 'my episodes'>>} An array of {@link SavedEpisodeObject saved episode objects} (wrapped in a {@link PagingObject paging object}).
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
+ * @param [options]
+ * @returns An array of {@link SavedEpisodeObject saved episode objects} (wrapped in a {@link PagingObject paging object}).
  */
 export async function getUsersSavedEpisodes(
     token: Token | string,
@@ -227,9 +227,9 @@ export async function getUsersSavedEpisodes(
  * Save one or more episodes to the current user’s library.
  *
  * This API endpoint is in **beta** and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s “Your Music” collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function saveEpisodesforUser(
     token: Token | string,
@@ -250,9 +250,9 @@ export async function saveEpisodesforUser(
  * Remove one or more episodes from the current user’s library.
  *
  * This API endpoint is in **beta** and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>Modification of the current user’s collection requires authorization of the `user-library-modify` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function removeUsersSavedEpisodes(
     token: Token | string,
@@ -273,9 +273,9 @@ export async function removeUsersSavedEpisodes(
  * Check if one or more episodes is already saved in the current Spotify user’s ‘Your Episodes’ library.
  *
  * This API endpoint is in **beta** and could change without warning. Please share any feedback that you have, or issues that you discover, in our [developer community forum](https://community.spotify.com/t5/Spotify-for-Developers/bd-p/Spotify_Developer).
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<boolean[]>} An array of `true` or `false` values, in the same order in which the ids were specified.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The `user-library-read` [scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) must have been authorized by the user.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedEpisodes(
     token: Token | string,
@@ -293,9 +293,9 @@ export async function checkUsersSavedEpisodes(
 
 /**
  * Get a list of shows saved in the current Spotify user’s library. Optional parameters can be used to limit the number of shows returned.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user.
- * @param {Object} [options]
- * @returns {Promise<PagingObject<SavedShowObject, 'my shows'>>} An array of {@link SavedShowObject saved show objects} (wrapped in a {@link PagingObject paging object}) in JSON format. If the current user has no shows saved, the response will be an empty array. If a show is unavailable in the given `market` it is filtered out. The `total` field in the paging object represents the number of all items, filtered or not, and thus might be larger than the actual total number of observable items.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user.
+ * @param [options]
+ * @returns An array of {@link SavedShowObject saved show objects} (wrapped in a {@link PagingObject paging object}) in JSON format. If the current user has no shows saved, the response will be an empty array. If a show is unavailable in the given `market` it is filtered out. The `total` field in the paging object represents the number of all items, filtered or not, and thus might be larger than the actual total number of observable items.
  */
 export async function getUsersSavedShows(
     token: Token | string,
@@ -318,9 +318,9 @@ export async function getUsersSavedShows(
 
 /**
  * Save one or more shows to current Spotify user’s library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. The `user-library-modify` scope must have been authorized by the user.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. The `user-library-modify` scope must have been authorized by the user.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @returns
  */
 export async function saveShowsforCurrentUser(
     token: Token | string,
@@ -338,10 +338,10 @@ export async function saveShowsforCurrentUser(
 
 /**
  * Delete one or more shows from current Spotify user’s library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. The `user-library-modify` scope must have been authorized by the user.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
- * @param {Object} options
- * @returns {Promise<void>}
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user. The `user-library-modify` scope must have been authorized by the user.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @param options
+ * @returns
  */
 export async function removeUsersSavedShows(
     token: Token | string,
@@ -373,8 +373,8 @@ export async function removeUsersSavedShows(
 
 /**
  * Check if one or more shows is already saved in the current Spotify user’s library.
- * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user.
- * @param {string[]} ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user.
+ * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns {boolean[]} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
 export async function checkUsersSavedShows(

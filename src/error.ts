@@ -34,7 +34,7 @@ export async function checkStatus(res: Response) {
         ) {
             return new SpotifyError(
                 'Unauthorized: ' + message,
-                'authorization',
+                'token',
                 res.headers.get('Authorization')
             )
         }
@@ -61,35 +61,32 @@ export class SpotifyError extends Error {
 
     readonly data?: any[]
 
-    constructor(tokenError: AuthenticationError)
     constructor(message: string, type: ErrorType)
     constructor(message: string, type: ErrorType, ...data: any[])
     constructor(message: string, type: 'unknown', internalError: any)
     constructor(
-        messageOrToken: string | AuthenticationError,
-        type?: ErrorType,
+        message: string,
+        type: ErrorType,
         dataOrSystemError?: any
     ) {
         super()
         Object.setPrototypeOf(this, SpotifyError.prototype)
+
         this.name = 'SpotifyError'
-        this.type = type ?? 'token'
-        if (typeof messageOrToken === 'string') {
-            this.message = messageOrToken
-            if (dataOrSystemError) {
-                if (type === 'unknown') this.internalError = dataOrSystemError
-                else this.data = dataOrSystemError
-            }
-        } else {
-            this.message = messageOrToken.error_description
-        }
-        this.message = `${this.name} - ${SpotifyError.Type[this.type]}! ${this.message}`
+        this.type = type
+        this.message = message
+
+        if (type === 'unknown') this.internalError = dataOrSystemError
+        else this.data = dataOrSystemError
+        
+        this.message = `${SpotifyError.Type[this.type]}! ${this.message}`
     }
 
     static readonly Type = {
-        token: 'Failed to get token',
+        token: 'Invalid token',
         system: 'Internal error',
-        authorization: 'Failed to authorize',
+        authorizeToken: 'Failed to authorize token/refresh-token',
+        getToken: 'Failed to get token/refresh-token',
         api: 'Failure in API',
         request: 'Inavlid request',
         unknown: 'Unknown error',

@@ -1,3 +1,2 @@
-export { authorize } from './authorize'
-export type { Token } from './authorize'
-export * as requests from './requests'
+export * from './authorize'
+export * from './requests'

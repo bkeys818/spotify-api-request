@@ -6,9 +6,9 @@ export {}
 
 // /**
 //  * Get information about the user’s current playback state, including track or episode, progress, and active device. 
-//  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
-//  * @param {Object} [options]
-//  * @returns {Promise<CurrentlyPlayingContextObject>} The information returned is for the last known state, which means an inactive device could be returned if it was the last one to execute playback.
+//  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.
+//  * @param [options]
+//  * @returns The information returned is for the last known state, which means an inactive device could be returned if it was the last one to execute playback.
 //  */
 //  export async function getInformationAboutTheUsersCurrentPlayback(
 // 	token: Token | string,
@@ -33,8 +33,8 @@ export {}
 
 // /**
 //  * Transfer playback to a new device and determine if it should start playing.
-//  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>The access token must have been issued on behalf of a user.<br>The access token must have the `user-modify-playback-state` scope authorized in order to control playback.
-//  * @param {Object} options
+//  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>The access token must have been issued on behalf of a user.<br>The access token must have the `user-modify-playback-state` scope authorized in order to control playback.
+//  * @param options
 //  * @returns {}
 //  */
 // export async function transferUsersPlayback(
@@ -68,7 +68,7 @@ export {}
 
 // /**
 //  * Get information about a user’s available devices.
-//  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of a user. The access token must have the `user-read-playback-state` scope authorized in order to read information.
+//  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of a user. The access token must have the `user-read-playback-state` scope authorized in order to read information.
 //  * @returns {}
 //  */
 // export async function getUsersAvailableDevices(
@@ -88,8 +88,8 @@ export {}
 
 // /**
 //  * Get the object currently being played on the user’s Spotify account.
-//  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of a user. The access token must have the `user-read-currently-playing` and/or `user-read-playback-state` scope authorized in order to read information.
-//  * @param {Object} options
+//  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of a user. The access token must have the `user-read-currently-playing` and/or `user-read-playback-state` scope authorized in order to read information.
+//  * @param options
 //  * @returns {}
 //  */
 // export async function gettheUsersCurrentlyPlayingTrack(
@@ -115,8 +115,8 @@ export {}
 
 // /**
 //  * Start a new context or resume current playback on the user’s active device.
-//  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>The access token must have been issued on behalf of a user.<br>The access token must have the `user-modify-playback-state` scope authorized in order to control playback.
-//  * @param {Object} [options]
+//  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>The access token must have been issued on behalf of a user.<br>The access token must have the `user-modify-playback-state` scope authorized in order to control playback.
+//  * @param [options]
 //  * @returns {}
 //  */
 // export async function start/ResumeUsersPlayback(
@@ -148,8 +148,8 @@ export {}
 
 // /**
 //  * Pause playback on the user’s account.
-//  * @param {Token} token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>The access token must have been issued on behalf of a user.
-//  * @param {Object} [options]
+//  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details.<br>The access token must have been issued on behalf of a user.
+//  * @param [options]
 //  * @returns {}
 //  */
 // export async function pauseUsersPlayback(

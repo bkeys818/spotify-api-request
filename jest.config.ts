@@ -11,12 +11,12 @@ type JestConfig = Omit<Config.InitialOptions, 'globals'> & {
     globals: Pick<Config.InitialOptions, 'globals'> & Globals
 }
 
-export default  async (): Promise<JestConfig> => {
+export default async (): Promise<JestConfig> => {
     return {
         preset: 'ts-jest',
         globals: {
-            token: process.env.ACCESS_TOKEN!
+            token: process.env.ACCESS_TOKEN!,
         },
-        collectCoverageFrom: [ '**/src/**/*.ts' ]
+        collectCoverageFrom: ['**/src/**/*.ts'],
     }
 }

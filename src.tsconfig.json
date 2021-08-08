@@ -5,8 +5,9 @@
         "declaration": true,
         "declarationDir": "./types",
         "outDir": "./lib",
-        "rootDir": "./src"
+        "rootDir": "./src",
+        "allowSyntheticDefaultImports": false
     },
-    "exclude": ["tests", "jest.config.js", "global-setup.ts"],
+    "exclude": ["tests", "jest.config.js", "global-setup.ts", "authorize.ts"],
     "files": ["src/index.ts"]
 }

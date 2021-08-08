@@ -1,7 +1,6 @@
 import type { Config } from '@jest/types'
 import { config } from 'dotenv'
-
-config()
+import authorize from './authorize'
 
 export interface Globals {
     token: string
@@ -12,6 +11,8 @@ type JestConfig = Omit<Config.InitialOptions, 'globals'> & {
 }
 
 export default async (): Promise<JestConfig> => {
+    config()
+    await authorize()
     return {
         preset: 'ts-jest',
         globals: {

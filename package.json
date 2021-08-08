@@ -20,8 +20,7 @@
   ],
   "types": "types",
   "scripts": {
-    "authorize": "node authorize.js",
-    "pretest": "rimraf coverage && yarn authorize",
+    "pretest": "rimraf coverage",
     "test": "jest --coverage",
     "prebuild": "rimraf lib types",
     "build": "tsc --build src.tsconfig.json",

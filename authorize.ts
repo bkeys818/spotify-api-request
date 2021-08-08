@@ -5,17 +5,6 @@ import * as open from 'open'
 import { readFileSync, writeFileSync } from 'fs'
 import type { Token as _Token, RefreshToken } from './src/authorize'
 
-// load .env variables
-dotenv.config()
-try {
-    authorize()
-    console.log('Authorized!')
-} catch (err) {
-    if (err instanceof Error) console.log(err.message)
-    else console.log(err)
-    process.exit(1)
-}
-
 interface Token extends _Token {
     scope: string
 }
@@ -46,6 +35,7 @@ export default async function authorize() {
     ) {
         const token = await getNewToken()
         saveToEnv(token)
+        console.log(token)
         return
     }
 

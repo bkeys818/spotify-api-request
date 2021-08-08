@@ -1,5 +1,5 @@
 // @ts-ignore
-export const token: string = global.token
+export const token: string = process.env.ACCESS_TOKEN
 export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 export const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 export const categoryIDs = ['party']

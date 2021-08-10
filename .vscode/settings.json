@@ -8,5 +8,6 @@
     "files.associations": {
         "*.tsconfig.json": "jsonc"
     },
-    "liveServer.settings.root": "docs/"
+    "liveServer.settings.root": "docs/",
+    "jest.jestCommandLine": "node_modules/.bin/jest"
 }

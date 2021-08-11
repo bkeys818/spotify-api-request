@@ -11,11 +11,14 @@
 
         "moduleResolution": "node",
         "baseUrl": "./",
-        "esModuleInterop": false,
-        "typeRoots": ["./types", "./node_modules/@types"],
-
-        // "skipLibCheck": true,
+        "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true
     },
-    "include": ["src", "tests", "jest.config.js", "global-setup.ts"]
+    "include": [
+        "src",
+        "tests",
+        "jest.config.js",
+        "global-setup.ts",
+        "authorize.ts"
+    ]
 }

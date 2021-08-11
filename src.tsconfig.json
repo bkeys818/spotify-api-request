@@ -7,16 +7,6 @@
         "outDir": "./lib",
         "rootDir": "./src"
     },
-    "exclude": ["tests", "jest.config.js", "global-setup.ts"],
-    "files": ["src/index.ts"],
-
-    "typedocOptions": {
-        "entryPoints": ["src/requests", "src/authorize.ts", "src/objects.ts"],
-        "exclude": ["src/requests/index.ts"],
-        "excludeInternal": true,
-        "disableSources": true,
-        "name": "Spotify API Request",
-        "hideGenerator": true,
-        "includeVersion": true
-    }
+    "exclude": ["tests", "jest.config.js", "global-setup.ts", "authorize.ts"],
+    "files": ["src/index.ts"]
 }

@@ -1,8 +1,8 @@
 {
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "target": "es6",
-        "noEmit": true,
-
-        "allowSyntheticDefaultImports": true
-    }
+        "noEmit": true
+    },
+    "exclude": ["src"]
 }

@@ -4,7 +4,7 @@ import {
     authorizeToken,
     getToken,
     // createCode,
-} from '../src/authorize'
+} from '../src/auth'
 import { token as globalToken } from './global'
 import { any } from './objects'
 
@@ -12,7 +12,6 @@ const clientId = process.env.CLIENT_ID!
 // const clientSecret = process.env.CLIENT_SECRET!
 const redirectUri = 'http://localhost:5050/callback'
 const state = createState()
-
 const testToken: Token = {
     access_token: any(String),
     token_type: 'Bearer',

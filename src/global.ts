@@ -1,5 +1,5 @@
 import fetch, { RequestInit, Response } from 'node-fetch'
-import type { Token } from './authorize'
+import type { Token } from './auth'
 import { checkStatus } from './error'
 
 type UrlParameter = {

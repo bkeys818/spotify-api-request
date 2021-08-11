@@ -11,10 +11,8 @@
 
         "moduleResolution": "node",
         "baseUrl": "./",
-        "esModuleInterop": false,
         "typeRoots": ["./types", "./node_modules/@types"],
-
-        // "skipLibCheck": true,
+        "esModuleInterop": false,
         "forceConsistentCasingInFileNames": true
     },
     "include": [

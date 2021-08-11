@@ -35,7 +35,6 @@ export default async function authorize() {
     ) {
         const token = await getNewToken()
         saveToEnv(token)
-        console.log(token)
         return
     }
 

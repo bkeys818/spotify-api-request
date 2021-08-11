@@ -1,5 +1,5 @@
 import { sendRequest } from '../global'
-import type { Token } from '../authorize'
+import type { Token } from '../auth'
 
 /**
  * Get the list of markets where Spotify is available.

@@ -1,7 +1,7 @@
-import * as dotenv from 'dotenv'
+import dotenv from 'dotenv'
 import { createServer, RequestListener } from 'http'
 import fetch from 'node-fetch'
-import * as open from 'open'
+import open from 'open'
 import { readFileSync, writeFileSync } from 'fs'
 import type { Token as _Token, RefreshToken } from './src/authorize'
 

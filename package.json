@@ -23,8 +23,7 @@
     "pretest": "rimraf coverage",
     "test": "jest --coverage",
     "prebuild": "rimraf lib types",
-    "build": "tsc --build src.tsconfig.json",
-    "postbuild": "rimraf lib/objects.ts"
+    "build": "tsc --build src.tsconfig.json"
   },
   "dependencies": {
     "node-fetch": "^2.6.1",

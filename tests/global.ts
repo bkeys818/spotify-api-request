@@ -8,3 +8,6 @@ export const playlistIDs = ['6innvmsboMZC5rdrmY292j']
 export const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 export const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 export const userIDs = ['spotify']
+
+export const camelToSnakeCase = (str: string) =>
+    str.replace(/[A-Z]/g, ($1) => `_${$1.toLowerCase()}`)

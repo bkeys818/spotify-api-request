@@ -1,15 +1,22 @@
 import {
-    RefreshToken,
-    Token,
-    Scope,
-    createState,
-    createCode,
     authorizeToken,
     authorizeRefreshToken,
     getRefreshToken,
+    getToken,
 } from '../../src'
-import { token as globalToken, camelToSnakeCase } from '../global'
-import { paramsFromBody } from './global'
+import {
+    clientId,
+    clientSecret,
+    refreshToken,
+    redirectUri,
+    state,
+    code,
+    scopes,
+    testToken,
+    testRefreshToken,
+    camelToSnakeCase,
+    paramsFromBody,
+} from '../global'
 import fetch from 'node-fetch'
 import { mocked } from 'ts-jest/utils'
 
@@ -17,27 +24,6 @@ jest.mock('node-fetch', () => ({
     __esModule: true,
     default: jest.fn(),
 }))
-
-const clientId = process.env.CLIENT_ID!
-const clientSecret = process.env.CLIENT_SECRET!
-const refreshToken = process.env.REFRESH_TOKEN!
-const redirectUri = 'http://localhost:5050/callback'
-const state = createState()
-const code = createCode()
-const scopes: Scope[] = [
-    'app-remote-control',
-    'user-library-modify',
-    'user-read-playback-state',
-]
-const testToken: Token = {
-    access_token: globalToken,
-    expires_in: 3600,
-    token_type: 'Bearer',
-}
-const testRefreshToken: RefreshToken = {
-    ...testToken,
-    refresh_token: refreshToken,
-}
 
 const basicParams = {
     clientId: clientId,
@@ -162,7 +148,7 @@ describe(getRefreshToken, () => {
         const match: typeof body = {
             ...params,
             code: hashCode,
-            grantType: 'authorization_code'
+            grantType: 'authorization_code',
         }
         delete match.state
 
@@ -185,17 +171,189 @@ describe(getRefreshToken, () => {
         expect(body).toStrictEqual({
             ...params,
             code: hashCode,
-            grantType: 'authorization_code'
+            grantType: 'authorization_code',
         })
     })
 
-    test.todo('Error in hash')
-    test.todo('No code in hash')
-    test.todo('Error from spotify')
+    describe('Errors', () => {
+        const validParams = {
+            clientId: clientId,
+            clientSecret: clientSecret,
+            redirectUri: redirectUri,
+            state: state
+        }
+
+        test('Error in hash', async () => {
+            const errorMsg = 'Example error msg'
+            const errorHash = new URLSearchParams({
+                error: errorMsg,
+                state: state
+            }).toString()
+            expect(async () => {
+                await getRefreshToken(validParams, errorHash)
+            }).rejects.toThrowError(new RegExp(errorMsg))
+        })
+    
+        test('Invalid hash', async () => {
+            expect(async () => {
+                await getRefreshToken(validParams, '')
+            }).rejects.toThrowError(/Missing hash value/)
+        })
+    
+        test('Error from spotify', async () => {
+            const errorMsg = 'Example error msg'
+            mocked(fetch).mockImplementation((): any => Promise.resolve({
+                ok: false,
+                status: 400,
+                json: () => Promise.resolve({
+                    error: 'invalid_client',
+                    error_description: errorMsg
+                })
+            }))
+            expect(async () => {
+                await getRefreshToken(validParams, hash(true))
+            }).rejects.toThrowError(new RegExp(errorMsg))
+        })
+    })
 
     afterAll(() => {
         mocked(fetch).mockRestore()
     })
 })
 
+describe(getToken, () => {
+    describe('Overload 1 & 2', () => {
+        beforeAll(() => {
+            mocked(fetch).mockImplementation((): any =>
+                Promise.resolve({
+                    status: 400,
+                    ok: true,
+                    json: () => Promise.resolve(testToken),
+                })
+            )
+        })
+        beforeEach(() => {
+            mocked(fetch).mockClear()
+        })
 
+        test.each([
+            [
+                'Overload 1 - Successful call (using secret)',
+                {
+                    clientId: clientId,
+                    clientSecret: clientSecret,
+                    refreshToken: refreshToken,
+                },
+            ],
+            [
+                'Overload 1 - Successful call (pkce refreshToken)',
+                { clientId: clientId, refreshToken: refreshToken },
+            ],
+            [
+                'Overload 2 - Successful call',
+                { clientId: clientId, clientSecret: clientSecret },
+            ],
+        ])('%s', async (_, params) => {
+            const token = await getToken(params as any)
+
+            expect(fetch).toBeCalledTimes(1)
+            expect(token).toStrictEqual(testToken)
+
+            const init = mocked(fetch).mock.calls[0][1]
+            expect(init?.body).toBeTruthy()
+
+            const body = new URLSearchParams(init!.body as string)
+
+            let grantType
+            if ('refreshToken' in params) {
+                expect(body.has('refresh_token')).toBeTruthy()
+                expect(body.get('refresh_token')).toBe(refreshToken)
+                grantType = 'refresh_token'
+            } else grantType = 'client_credentials'
+            expect(body.has('grant_type')).toBeTruthy()
+            expect(body.get('grant_type')).toBe(grantType)
+
+            expect(init?.headers).toHaveProperty(
+                'Content-Type',
+                'application/x-www-form-urlencoded'
+            )
+
+            if ('clientSecret' in params) {
+                expect(init?.headers).toHaveProperty(
+                    'Authorization',
+                    expect.stringMatching(/Basic .+/)
+                )
+                let auth: string = (init!.headers as any).Authorization.slice(6)
+                auth = Buffer.from(auth, 'base64').toString()
+                expect(auth).toBe(`${clientId}:${clientSecret}`)
+            } else {
+                expect(body.has('client_id')).toBeTruthy()
+                expect(body.get('client_id')).toBe(clientId)
+            }
+        })
+
+        test('Spotify error', async () => {
+            const errorMsg = 'Example error msg'
+            mocked(fetch).mockImplementation((): any => Promise.resolve({
+                ok: false,
+                status: 400,
+                json: () => Promise.resolve({
+                    error: 'invalid_client',
+                    error_description: errorMsg
+                })
+            }))
+            expect(async () => {
+                await getToken({
+                    clientId: clientId,
+                    clientSecret: clientSecret
+                })
+            }).rejects.toThrowError(new RegExp(errorMsg))
+        })
+
+        afterAll(() => {
+            mocked(fetch).mockRestore()
+        })
+    })
+
+    describe('Overload 3', () => {
+        const hash = new URLSearchParams({
+            ...testToken,
+            expires_in: testToken.expires_in.toString(),
+            state: state,
+        }).toString()
+
+        test.concurrent('Successful call', () => {
+            const token = getToken(state, hash)
+            expect(token).toStrictEqual(testToken)
+        })
+
+        test.concurrent('No hash', () => {
+            expect(() => {
+                getToken(state)
+            }).toThrowError(/Missing hash value/)
+        })
+
+        test.concurrent('Error in hash', () => {
+            const errorMsg = 'Example error msg'
+            const errorHash = new URLSearchParams({
+                error: errorMsg,
+                state: state
+            }).toString()
+            expect(() => {
+                getToken(state, errorHash)
+            }).toThrowError(new RegExp(errorMsg))
+        })
+
+        test.concurrent('No state', () => {
+            expect(() => {
+                getToken(undefined, hash)
+            }).toThrowError(/No state provided/)
+        })
+
+        test.concurrent('Invalid state', () => {
+            expect(() => {
+                getToken('abc', hash)
+            }).toThrowError(/State value doesn't match/)
+        })
+    })
+})

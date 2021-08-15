@@ -59,7 +59,7 @@ export function paramsFromHash(hash?: string, state?: string) {
     const hashObj: { [key: string]: string } = {}
     for (const param of hash.split('&')) {
         const [key, value] = param.split('=')
-        hashObj[key] = decodeURIComponent(value)
+        hashObj[key] = decodeURIComponent(value.replace(/\+/g, ' '))
     }
 
     // if present, make sure state values match

@@ -5,7 +5,12 @@
         "declaration": true,
         "declarationDir": "./types",
         "outDir": "./lib",
-        "rootDir": "./src"
+        "rootDir": "./src",
+
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true
     },
     "exclude": ["tests", "jest.config.js", "global-setup.ts", "authorize.ts"],
     "files": ["src/index.ts"]

@@ -38,12 +38,16 @@ export function checkState(a: string, b?: string) {
 export function paramsFromHash(hash?: string, state?: string) {
     // get hash value & clear it from url
     if (!hash) {
-        hash = location.hash
-        const uri = location.toString()
-        const hashIndex = uri.indexOf('?')
-        if (hashIndex > 0) {
-            const cleanUri = uri.substring(0, hashIndex)
-            window.history.replaceState({}, document.title, cleanUri)
+        try {
+            hash = location.hash
+            const uri = location.toString()
+            const hashIndex = uri.indexOf('?')
+            if (hashIndex > 0) {
+                const cleanUri = uri.substring(0, hashIndex)
+                window.history.replaceState({}, document.title, cleanUri)
+            }
+        } catch {
+            hash = ''
         }
     }
     if (hash[0] == '#') hash = hash.slice(1)

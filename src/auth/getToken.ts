@@ -1,6 +1,6 @@
 import { Token, Scope } from '.'
 import { SpotifyError } from '../error'
-import { paramsFromHash, fetchToken } from './global'
+import { paramsFromHash, fetchToken, redirectTo } from './global'
 // @ts-ignore (used in tsComment @link)
 import type { getRefreshToken } from './refreshToken'
 
@@ -33,12 +33,7 @@ export async function authorizeToken(
     if (options.showDialog)
         url.searchParams.set('show_dialog', options.showDialog.toString())
 
-    const _redirect = redirect
-        ? redirect
-        : (url: string) => {
-              location.href = url
-          }
-    _redirect(url.href)
+    redirectTo(url.href, redirect)
 }
 
 interface TokenFromRefreshToken

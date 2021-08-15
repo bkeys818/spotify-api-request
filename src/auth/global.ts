@@ -4,6 +4,25 @@ import { Token } from '.'
 import { RefreshToken } from './refreshToken'
 
 /**
+ * Redirects user or throws appropriate error
+ * @param url URL to redirect to
+ * @param redirect Optional redirect method
+ */
+export function redirectTo(url: string, redirect?: (url: string) => void) {
+    if (!redirect)
+        if (typeof window == 'undefined')
+            throw new SpotifyError(
+                'location is not defined; (try using the redirect param).',
+                'getToken'
+            )
+        else
+            redirect = (url: string) => {
+                location.href = url
+            }
+    redirect(url)
+}
+
+/**
  * Makes sure state values match. If not, throws the appropriate errors.
  * @param a Expected state value
  * @param b Provided state value

@@ -1,6 +1,6 @@
 import { Scope, Token } from '.'
 import { SpotifyError } from '../error'
-import { paramsFromHash, checkState, fetchToken, redirectTo } from './global'
+import { paramsFromHash, fetchToken, redirectTo } from './global'
 
 export interface RefreshToken extends Token {
     /** A token that can be sent to the Spotify Accounts service in place of an authorization code. */
@@ -83,9 +83,7 @@ export async function getRefreshToken(
     options: GetRefreshTokenOptions | GetRefreshTokenWithPKCEOptions,
     hash?: Location['hash']
 ): Promise<RefreshToken> {
-    const hashParams = paramsFromHash(hash)
-
-    if (hashParams.state) checkState(hashParams.state, options.state)
+    const hashParams = paramsFromHash(hash ,options.state)
 
     if (!hashParams.code)
         throw new SpotifyError('No code value found.', 'getToken')

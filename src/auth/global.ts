@@ -53,7 +53,7 @@ export function paramsFromHash(hash?: string, state?: string) {
     if (hash[0] == '#') hash = hash.slice(1)
 
     // throw error if hash is empty
-    if (!hash) throw new SpotifyError('Missing hash value', 'getToken')
+    if (!hash) throw new SpotifyError('Missing hash value.', 'getToken')
 
     // get obj from hash
     const hashObj: { [key: string]: string } = {}
@@ -90,7 +90,7 @@ export async function fetchToken<T extends Token | RefreshToken>(
             'Content-Type': 'application/x-www-form-urlencoded',
             ...init.headers,
         },
-        body: body
+        body: body,
     })
     if (res.ok) return await res.json()
     else {

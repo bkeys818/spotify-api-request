@@ -40,6 +40,7 @@ export function createCode() {
 
 export function createState() {
     const lng = Math.floor(Math.random() * (32 - 24)) + 24
+    // prettier-ignore
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~'.split('')
     let str = ''
     for (var i = 0; i < lng; i++)

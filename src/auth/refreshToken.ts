@@ -5,8 +5,8 @@ import { paramsFromHash, fetchToken, redirectTo } from './global'
 export interface RefreshToken extends Token {
     /** A token that can be sent to the Spotify Accounts service in place of an authorization code. */
     refresh_token: string
-    /** A space-separated list of scopes which have been granted for this `access_token` */
-    scope?: string
+    /** A list of scopes which have been granted for this `access_token` */
+    scope?: string[]
 }
 
 interface AuthorizeRefreshTokenOptions {

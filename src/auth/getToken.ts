@@ -88,12 +88,12 @@ export function getToken(
             token_type: token.token_type as 'Bearer',
         }
     } else {
-        const init: Parameters<typeof fetchToken>[0]= {}
+        const init: Parameters<typeof fetchToken>[0] = {}
 
         if ('refreshToken' in params) {
             init.body = {
                 grant_type: 'refresh_token',
-                refresh_token: params.refreshToken
+                refresh_token: params.refreshToken,
             }
         } else init.body = { grant_type: 'client_credentials' }
 

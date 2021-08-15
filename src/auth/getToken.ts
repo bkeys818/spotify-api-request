@@ -20,7 +20,7 @@ interface ImplicitGrantParams {
  * @param options The info necessary to get a {@link Token}.
  * @param redirect Allows for more complex redirection to the authorization url incase `location` is not available.
  */
-export async function authorizeToken(
+export function authorizeToken(
     options: ImplicitGrantParams,
     redirect?: (url: string) => void
 ) {

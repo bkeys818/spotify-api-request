@@ -12,7 +12,7 @@ export interface AuthenticationError {
     /** A high level description of the error as specified in [RFC 6749 Section 5.2.](https://tools.ietf.org/html/rfc6749#section-5.2) */
     error: ASCII_ErrorCode;
     /** A more detailed description of the error as specified in [RFC 6749 Section 4.1.2.1.](https://tools.ietf.org/html/rfc6749#section-4.1.2.1) */
-    error_description: string;
+    error_description?: string;
 }
 
 /** Apart from the response code, unsuccessful responses return a JSON object containing the following information: */

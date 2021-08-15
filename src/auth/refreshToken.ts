@@ -1,12 +1,12 @@
 import { Scope, Token } from '.'
 import { SpotifyError } from '../error'
-import { paramsFromHash, checkState, fetchToken } from './global'
+import { paramsFromHash, fetchToken, redirectTo } from './global'
 
 export interface RefreshToken extends Token {
     /** A token that can be sent to the Spotify Accounts service in place of an authorization code. */
     refresh_token: string
-    /** A space-separated list of scopes which have been granted for this `access_token` */
-    scope?: string
+    /** A list of scopes which have been granted for this `access_token` */
+    scope?: string[]
 }
 
 interface AuthorizeRefreshTokenOptions {
@@ -60,19 +60,7 @@ export function authorizeRefreshToken(
         url.searchParams.set(key, query[key])
     }
 
-    const _redirect = redirect
-        ? redirect
-        : (url: string) => {
-              if (!window || !location) {
-                  throw new SpotifyError(
-                      'Variable window.location in inaccessible. Please use the redirect parameter, or (if using node) you should use getToken() with client credentials.',
-                      'authorizeToken'
-                  )
-              }
-              location.href = url
-          }
-
-    _redirect(url.href)
+    redirectTo(url.href, redirect)
 }
 
 interface GetRefreshTokenOptions {
@@ -95,9 +83,7 @@ export async function getRefreshToken(
     options: GetRefreshTokenOptions | GetRefreshTokenWithPKCEOptions,
     hash?: Location['hash']
 ): Promise<RefreshToken> {
-    const hashParams = paramsFromHash(hash)
-
-    if (hashParams.state) checkState(hashParams.state, options.state)
+    const hashParams = paramsFromHash(hash ,options.state)
 
     if (!hashParams.code)
         throw new SpotifyError('No code value found.', 'getToken')

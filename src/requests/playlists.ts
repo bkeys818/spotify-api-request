@@ -265,27 +265,17 @@ export async function addItemsToPlaylist(
     ).json()
 }
 
-// TODO: - Split into two function
 /**
- * Either reorder or replace items in a playlist depending on the request’s parameters. To reorder items, include `range_start`, `insert_before`, `range_length` and `snapshot_id` in the request’s body. To replace items, include `uris` as either a query parameter or in the request’s body. Replacing items in a playlist will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist.
- *
- * **Note**: Replace and reorder are mutually exclusive operations which share the same endpoint, but have different parameters. These operations can’t be applied together in a single request.
+ * Reorder items in a playlist.
  * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Reordering or replacing items in the current user’s public playlists requires authorization of the `playlist-modify-public` scope; reordering or replacing items in the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
  * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
  * @param options
- * @param options.uris
- * @param options.range_start
- * @param options.insert_before
- * @param options.ange_length
- * @param options.snapshot_id
  * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
-export async function reorderOReplacePlaylistItems(
+export async function reorderPlaylistItems(
     token: Token | string,
     playlistId: string,
     options: {
-        /** A list of [Spotify URIs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) to set, can be track or episode URIs. A maximum of 100 items can be set in one request. */
-        uris?: string[]
         /** The position of the first item to be reordered. */
         range_start?: number
         /**
@@ -326,6 +316,36 @@ export async function reorderOReplacePlaylistItems(
                 playlist_id: playlistId,
             },
             bodyParameter: options,
+        })
+    ).json()
+}
+
+/**
+ * Replace items in a playlist. Replacing items will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist.
+ * @param token - A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been issued on behalf of the user.<br>Reordering or replacing items in the current user’s public playlists requires authorization of the `playlist-modify-public` scope; reordering or replacing items in the current user’s private playlist (including collaborative playlists) requires the `playlist-modify-private` scope. See [Using Scopes](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).
+ * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
+ * @param uris - A list of [Spotify URIs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) to set, can be track or episode URIs. A maximum of 100 items can be set in one request.
+ * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
+ */
+export async function replacePlaylistItems(
+    token: Token | string,
+    playlistId: string,
+    uris: string[]
+): Promise<{ snapshot_id: string }> {
+    return await (
+        await sendRequest({
+            endpoint: 'playlists/{playlist_id}/tracks',
+            method: 'PUT',
+            token: token,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            pathParameter: {
+                playlist_id: playlistId,
+            },
+            queryParameter: {
+                uris: uris
+            }
         })
     ).json()
 }

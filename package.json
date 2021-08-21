@@ -18,11 +18,10 @@
     "lib",
     "types"
   ],
-  "types": "types",
   "scripts": {
     "pretest": "rimraf coverage",
     "test": "jest --coverage",
-    "prebuild": "rimraf lib types",
+    "prebuild": "rimraf lib",
     "build": "tsc --build src.tsconfig.json"
   },
   "dependencies": {

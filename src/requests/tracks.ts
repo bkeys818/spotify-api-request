@@ -1,10 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    TrackObject,
-    AudioFeaturesObject,
-    AudioAnalysisObject,
-} from '../objects'
 
 /**
  * Get Spotify catalog information for multiple tracks based on their Spotify IDs.

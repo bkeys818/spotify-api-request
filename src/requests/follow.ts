@@ -1,6 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type { CursorPagingObject, ArtistObject } from '../objects'
 
 /**
  * Add the current user as a follower of a playlist.
@@ -88,7 +86,7 @@ export async function getUserFollowedArtists<T extends 'artist'>(
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
     }
-): Promise<{ artists: CursorPagingObject<ArtistObject, 'my following'> }> {
+): Promise<{ artists: CursorPagingObject<ArtistObject> }> {
     return await (
         await sendRequest({
             endpoint: 'me/following',

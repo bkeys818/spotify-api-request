@@ -1,12 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    PagingObject,
-    SimplifiedPlaylistObject,
-    PlaylistObject,
-    PlaylistTrackObject,
-    ImageObject,
-} from '../objects'
 
 /**
  * Get a list of the playlists owned or followed by the current Spotify user.
@@ -24,7 +16,7 @@ export async function getListOfCurrentUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100,000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedPlaylistObject, 'user’s playlists'>> {
+): Promise<PagingObject<SimplifiedPlaylistObject>> {
     return await (
         await sendRequest({
             endpoint: 'me/playlists',
@@ -53,7 +45,7 @@ export async function getListOfUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedPlaylistObject, 'user’s playlists'>> {
+): Promise<PagingObject<SimplifiedPlaylistObject>> {
     return await (
         await sendRequest({
             endpoint: 'users/{user_id}/playlists',
@@ -215,7 +207,7 @@ export async function getPlaylistItems(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: 'track' | 'episode'
     }
-): Promise<PagingObject<PlaylistTrackObject, 'playlist’s tracks'>> {
+): Promise<PagingObject<PlaylistTrackObject>> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',

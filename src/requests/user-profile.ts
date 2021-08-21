@@ -1,6 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type { PrivateUserObject, PublicUserObject } from '../objects'
 
 /**
  * Get detailed profile information about the current user (including the current user’s username).

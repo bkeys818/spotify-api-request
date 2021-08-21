@@ -1,23 +1,13 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    PagingObject,
-    ArtistObject,
-    SimplifiedAlbumObject,
-    SimplifiedPlaylistObject,
-    TrackObject,
-    SimplifiedShowObject,
-    SimplifiedEpisodeObject,
-} from '../objects'
 
 
 interface ResponseObject {
-    albums: PagingObject<SimplifiedAlbumObject, 'search'>
-    artists: PagingObject<ArtistObject, 'search'>
-    playlists: PagingObject<SimplifiedPlaylistObject, 'search'>
-    tracks: PagingObject<TrackObject, 'search'>
-    shows: PagingObject<SimplifiedShowObject, 'search'>
-    episodes: PagingObject<SimplifiedEpisodeObject, 'search'>
+    albums: PagingObject<SimplifiedAlbumObject>
+    artists: PagingObject<ArtistObject>
+    playlists: PagingObject<SimplifiedPlaylistObject>
+    tracks: PagingObject<TrackObject>
+    shows: PagingObject<SimplifiedShowObject>
+    episodes: PagingObject<SimplifiedEpisodeObject>
 }
 type SearchType = keyof ResponseObject
 type ResponseType<T extends keyof ResponseObject | (keyof ResponseObject)[]> =

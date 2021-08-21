@@ -1,13 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    PagingObject,
-    SimplifiedAlbumObject,
-    SimplifiedPlaylistObject,
-    // PlaylistObject,
-    CategoryObject,
-    RecommendationsObject,
-} from '../objects'
 
 /**
  * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
@@ -25,7 +16,7 @@ export async function getAllNewReleases(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<{ albums: PagingObject<SimplifiedAlbumObject, 'new releases'> }> {
+): Promise<{ albums: PagingObject<SimplifiedAlbumObject> }> {
     return await (
         await sendRequest({
             endpoint: 'browse/new-releases',
@@ -58,7 +49,7 @@ export async function getAllFeaturedPlaylists(
     }
 ): Promise<{
     message: string
-    playlists: PagingObject<SimplifiedPlaylistObject, 'featured playlists'>
+    playlists: PagingObject<SimplifiedPlaylistObject>
 }> {
     return await (
         await sendRequest({
@@ -88,7 +79,7 @@ export async function getAllCategories(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of categories. */
         offset?: number
     }
-): Promise<{ categories: PagingObject<CategoryObject, 'categories'> }> {
+): Promise<{ categories: PagingObject<CategoryObject> }> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories',
@@ -147,7 +138,7 @@ export async function getCategoryPlaylists(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.*/
         offset?: number
     }
-): Promise<{ playlists: PagingObject<SimplifiedPlaylistObject, 'category’s playlists'>}> {
+): Promise<{ playlists: PagingObject<SimplifiedPlaylistObject>}> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories/{category_id}/playlists',

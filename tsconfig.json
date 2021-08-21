@@ -4,6 +4,8 @@
         "isolatedModules": true,
 
         "strict": true,
+        "typeRoots": ["node_modules/@types", "types"],
+
 
         "moduleResolution": "node",
         "baseUrl": "./",
@@ -15,6 +17,7 @@
         "tests",
         "jest.config.js",
         "global-setup.ts",
-        "authorize.ts"
+        "authorize.ts",
+        "types"
     ]
 }

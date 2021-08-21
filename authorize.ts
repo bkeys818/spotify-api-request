@@ -3,11 +3,6 @@ import { createServer, RequestListener } from 'http'
 import fetch from 'node-fetch'
 import open from 'open'
 import { readFileSync, writeFileSync } from 'fs'
-import type { Token as _Token, RefreshToken } from './src/auth'
-
-interface Token extends _Token {
-    scope: string
-}
 
 export default async function authorize() {
     // make sure client_id and client_state are defined

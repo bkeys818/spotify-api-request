@@ -5,16 +5,8 @@ import * as requests from '../../../src/requests'
 import { writeFileSync } from 'fs'
 import {
     Unwrap,
-    token,
-    albumIDs,
-    artistIDs,
-    categoryIDs,
-    episodeIds,
-    playlistIDs,
-    showIDs,
-    trackIds,
-    userIDs,
-    dataPath
+    params as _params,
+    dataPath,
 } from '../../global'
 
 // @ts-ignore
@@ -24,9 +16,19 @@ const params: {
             ? null
             : Parameters<typeof requests[key]>
 } = {
-    getMultipleAlbums: [ token, albumIDs ],
-    getAlbum: [ token, albumIDs[0] ],
-    getAlbumTracks: [ token, albumIDs[0] ],
+    ..._params,
+    changePlaylistDetails: null,
+    followArtistsOrUsers: null,
+    followPlaylist: null,
+    removeAlbumsforCurrentUser: null,
+    removeUsersSavedEpisodes: null,
+    saveAlbumsforCurrentUser: null,
+    saveEpisodesforUser: null,
+    saveShowsforCurrentUser: null,
+    saveTracksforUser: null,
+    unfollowArtistsOrUsers: null,
+    unfollowPlaylist: null,
+    uploadCustomPlaylistCoverImage: null
 }
 
 async function getData() {
@@ -39,7 +41,7 @@ async function getData() {
             // @ts-ignore
             responses[key] = await request(...param)
         } else {
-            responses[key] = params
+            responses[key] = param
         }
     }
     writeFileSync(dataPath, JSON.stringify(responses))

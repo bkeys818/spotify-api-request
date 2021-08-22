@@ -18,7 +18,7 @@ test.each(
     const response = responses[key]
 
     if (!(schema || response)) {
-        expect(schema).toBeNull()
+        expect(schema).toBeUndefined()
         expect(response).toBeNull()
     } else {
         // @ts-ingore

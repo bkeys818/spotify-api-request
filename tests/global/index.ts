@@ -1,7 +1,7 @@
 import {
     createState,
     createCode,
-} from '../src'
+} from '../../src'
 
 export type Unwrap<T> = T extends Promise<infer U> ? U : T
 export const dataPath = 'tests/types/responses/data.json'
@@ -53,3 +53,6 @@ export function paramsFromBody(body: string) {
     }
     return hashObj
 }
+
+import params from './params'
+export { params }

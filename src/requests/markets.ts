@@ -1,5 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
 
 // TODO - Make token optional
 /**

@@ -1,5 +1,5 @@
 import schemas from './schemas'
-import { Unwrap } from '../global'
+import { Unwrap, dataPath } from '../global'
 import type * as requests from '../../src/requests'
 import { readFileSync } from 'fs'
 
@@ -7,7 +7,7 @@ import Ajv from 'ajv'
 
 const responses: {
     [key in keyof typeof requests]: any
-} = JSON.parse(readFileSync('tests/types/responses/data.json', 'utf-8'))
+} = JSON.parse(readFileSync(dataPath, 'utf-8'))
 
 const ajv = new Ajv()
 

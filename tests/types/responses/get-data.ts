@@ -14,6 +14,7 @@ import {
     showIDs,
     trackIds,
     userIDs,
+    dataPath
 } from '../../global'
 
 // @ts-ignore
@@ -41,7 +42,7 @@ async function getData() {
             responses[key] = params
         }
     }
-    writeFileSync('tests/types/responses/data.json', JSON.stringify(responses))
+    writeFileSync(dataPath, JSON.stringify(responses))
 }
 
 getData()

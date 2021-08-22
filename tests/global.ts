@@ -29,7 +29,7 @@ export const scopes: Scope[] = [
     'user-library-modify',
     'user-read-playback-state',
 ]
-export const testToken: Token = {
+export const testToken: Omit<Token, 'scope'> = {
     access_token: token,
     expires_in: 3600,
     token_type: 'Bearer',

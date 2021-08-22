@@ -41,7 +41,7 @@ async function getData() {
             // @ts-ignore
             responses[key] = await request(...param)
         } else {
-            responses[key] = params
+            responses[key] = param
         }
     }
     writeFileSync(dataPath, JSON.stringify(responses))

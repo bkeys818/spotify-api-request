@@ -18,11 +18,11 @@
     "lib",
     "types"
   ],
-  "types": "types",
   "scripts": {
+    "update-data": "ts-node -P tsconfig.json tests/types/responses/get-data.ts",
     "pretest": "rimraf coverage",
     "test": "jest --coverage",
-    "prebuild": "rimraf lib types",
+    "prebuild": "rimraf lib",
     "build": "tsc --build src.tsconfig.json"
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.1",
     "@types/node-fetch": "^2.5.10",
+    "ajv": "^8.6.2",
     "babel-jest": "^27.0.2",
     "dotenv": "^10.0.0",
     "jest": "^27.0.4",

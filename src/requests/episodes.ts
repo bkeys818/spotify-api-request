@@ -1,6 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type { EpisodeObject } from '../objects'
 
 /**
  * Get Spotify catalog information for several episodes based on their Spotify IDs.

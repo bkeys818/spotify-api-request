@@ -1,12 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    PagingObject,
-    SavedAlbumObject,
-    SavedTrackObject,
-    SavedEpisodeObject,
-    SavedShowObject,
-} from '../objects'
 
 /**
  * Get a list of the albums saved in the current Spotify user’s ‘Your Music’ library.
@@ -24,7 +16,7 @@ export async function getUsersSavedAlbums(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<PagingObject<SavedAlbumObject, 'my albums'>> {
+): Promise<PagingObject<SavedAlbumObject>> {
     return await (
         await sendRequest({
             endpoint: 'me/albums',
@@ -113,7 +105,7 @@ export async function getUsersSavedTracks(
         /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
-): Promise<PagingObject<SavedTrackObject, 'my tracks'>> {
+): Promise<PagingObject<SavedTrackObject>> {
     return await (
         await sendRequest({
             endpoint: 'me/tracks',
@@ -212,7 +204,7 @@ export async function getUsersSavedEpisodes(
         /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
-): Promise<PagingObject<SavedEpisodeObject, 'my episodes'>> {
+): Promise<PagingObject<SavedEpisodeObject>> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes',
@@ -305,7 +297,7 @@ export async function getUsersSavedShows(
         /** The index of the first show to return. Default: 0 (the first object). Use with limit to get the next set of shows. */
         offset?: number
     }
-): Promise<PagingObject<SavedShowObject, 'my shows'>> {
+): Promise<PagingObject<SavedShowObject>> {
     return await (
         await sendRequest({
             endpoint: 'me/shows',

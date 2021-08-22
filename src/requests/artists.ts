@@ -1,11 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    ArtistObject,
-    TrackObject,
-    SimplifiedAlbumObject,
-    PagingObject,
-} from '../objects'
 
 /**
  * Get Spotify catalog information for several artists based on their Spotify IDs.
@@ -138,7 +131,7 @@ export async function getArtistAlbums(
         /** The index of the first album to return. Default: 0 (i.e., the first album). Use with `limit` to get the next set of albums. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedAlbumObject, 'artist’s albums'>> {
+): Promise<PagingObject<SimplifiedAlbumObject>> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/albums',

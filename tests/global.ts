@@ -1,10 +1,10 @@
 import {
     createState,
     createCode,
-    Token,
-    RefreshToken,
-    Scope
 } from '../src'
+
+export type Unwrap<T> = T extends Promise<infer U> ? U : T
+export const dataPath = 'tests/types/responses/data.json'
 
 export const token = process.env.ACCESS_TOKEN!
 export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
@@ -27,7 +27,7 @@ export const scopes: Scope[] = [
     'user-library-modify',
     'user-read-playback-state',
 ]
-export const testToken: Token = {
+export const testToken: Omit<Token, 'scope'> = {
     access_token: token,
     expires_in: 3600,
     token_type: 'Bearer',

@@ -1,6 +1,6 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
 
+// TODO - Make token optional
 /**
  * Get the list of markets where Spotify is available.
  * @param token - A valid user access token or your client credentials.

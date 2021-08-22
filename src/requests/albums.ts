@@ -1,6 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type { AlbumObject, PagingObject, SimplifiedTrackObject } from '../objects'
 
 /**
  * Get Spotify catalog information for multiple albums identified by their Spotify IDs.
@@ -77,7 +75,7 @@ export async function getAlbumTracks(
         /** The index of the first track to return. Default: 0 (the first object). Use with limit to get the next set of tracks. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedTrackObject, 'album’s tracks'>> {
+): Promise<PagingObject<SimplifiedTrackObject>> {
     return await (
         await sendRequest({
             endpoint: 'albums/{id}/tracks',

@@ -1,4 +1,3 @@
-import { Token, Scope } from '.'
 import { SpotifyError } from '../error'
 import { paramsFromHash, fetchToken, redirectTo } from './global'
 // @ts-ignore (used in tsComment @link)

@@ -1,11 +1,4 @@
 import { sendRequest } from '../global'
-import type { Token } from '../auth'
-import type {
-    SimplifiedShowObject,
-    ShowObject,
-    SimplifiedEpisodeObject,
-    PagingObject,
-} from '../objects'
 
 /**
  * Get Spotify catalog information for several shows based on their Spotify IDs.
@@ -102,7 +95,7 @@ export async function getShowEpisodes(
         /** The index of the first episode to return. Default: 0 (the first object). Use with limit to get the next set of episodes. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedEpisodeObject, 'show’s episodes'>> {
+): Promise<PagingObject<SimplifiedEpisodeObject>> {
     return await (
         await sendRequest({
             endpoint: 'shows/{id}/episodes',

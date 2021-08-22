@@ -53,3 +53,6 @@ export function paramsFromBody(body: string) {
     }
     return hashObj
 }
+
+import params from './params'
+export { params }

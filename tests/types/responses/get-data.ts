@@ -1,8 +1,11 @@
+import { config } from 'dotenv'
+config()
 import authorize from '../../../authorize'
 import * as requests from '../../../src/requests'
 import { writeFileSync } from 'fs'
 import {
     Unwrap,
+    token,
     albumIDs,
     artistIDs,
     categoryIDs,
@@ -12,8 +15,6 @@ import {
     trackIds,
     userIDs,
 } from '../../global'
-
-import { token } from '../../global';
 
 // @ts-ignore
 const params: {

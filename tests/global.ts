@@ -1,10 +1,12 @@
 import {
     createState,
     createCode,
-    Token,
-    RefreshToken,
-    Scope
 } from '../src'
+import { config } from 'dotenv'
+
+export type Unwrap<T> = T extends Promise<infer U> ? U : T
+
+config()
 
 export const token = process.env.ACCESS_TOKEN!
 export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']

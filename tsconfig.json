@@ -19,5 +19,9 @@
         "global-setup.ts",
         "authorize.ts",
         "types"
-    ]
+    ],
+
+    "ts-node": {
+        "files": true
+    }
 }

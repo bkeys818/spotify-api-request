@@ -509,7 +509,7 @@ declare interface PublicUserObject {
     uri: string;
 }
 /** [Recommendation Seed Object](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject) */
-declare interface RecommendationSeedObject<T extends 'ARTIST' | 'TRACK' | 'GENRE'> {
+declare interface RecommendationSeedObject {
     /** The number of tracks available after min_* and max_* filters have been applied. */
     afterFilteringSize: number;
     /** The number of tracks available after relinking for regional availability. */
@@ -521,12 +521,12 @@ declare interface RecommendationSeedObject<T extends 'ARTIST' | 'TRACK' | 'GENRE
     /** The number of recommended tracks available for this seed. */
     initialPoolSize: number;
     /** The entity type of this seed. One of `artist`, `track` or `genre`. */
-    type: T;
+    type: 'ARTIST' | 'TRACK' | 'GENRE';
 }
 /** [Recommendations Object](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationsobject) */
 declare interface RecommendationsObject {
     /** An array of [recommendation seed objects](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject). */
-    seeds: (RecommendationSeedObject<'ARTIST'> | RecommendationSeedObject<'TRACK'> | RecommendationSeedObject<'GENRE'>)[];
+    seeds: RecommendationSeedObject[];
     /** An array of [track object (simplified)](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedtrackobject) ordered according to the parameters supplied. */
     tracks: TrackObject[];
 }

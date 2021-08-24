@@ -309,25 +309,25 @@ declare interface DeviceObject {
 /** [Disallows Object](https://developer.spotify.com/documentation/web-api/reference/#object-disallowsobject) */
 declare interface DisallowsObject {
     /** Interrupting playback. Optional field. */
-    interrupting_playback?: Boolean;
+    interrupting_playback?: boolean;
     /** Pausing. Optional field. */
-    pausing?: Boolean;
+    pausing?: boolean;
     /** Resuming. Optional field. */
-    resuming?: Boolean;
+    resuming?: boolean;
     /** Seeking playback location. Optional field. */
-    seeking?: Boolean;
+    seeking?: boolean;
     /** Skipping to the next context. Optional field. */
-    skipping_next?: Boolean;
+    skipping_next?: boolean;
     /** Skipping to the previous context. Optional field. */
-    skipping_prev?: Boolean;
+    skipping_prev?: boolean;
     /** Toggling repeat context flag. Optional field. */
-    toggling_repeat_context?: Boolean;
+    toggling_repeat_context?: boolean;
     /** Toggling repeat track flag. Optional field. */
-    toggling_repeat_track?: Boolean;
+    toggling_repeat_track?: boolean;
     /** Toggling shuffle flag. Optional field. */
-    toggling_shuffle?: Boolean;
+    toggling_shuffle?: boolean;
     /** Transfering playback between devices. Optional field. */
-    transferring_playback?: Boolean;
+    transferring_playback?: boolean;
 }
 /** [Episode Object](https://developer.spotify.com/documentation/web-api/reference/#object-episodeobject) */
 declare interface EpisodeObject extends SimplifiedEpisodeObject {
@@ -346,9 +346,9 @@ declare interface ErrorObject {
 /** [Explicit Content Settings Object](https://developer.spotify.com/documentation/web-api/reference/#object-explicitcontentsettingsobject) */
 declare interface ExplicitContentSettingsObject {
     /** When true, indicates that explicit content should not be played. */
-    filter_enabled: Boolean;
+    filter_enabled: boolean;
     /** When true, indicates that the explicit content setting is locked and can’t be changed by the user. */
-    filter_locked: Boolean;
+    filter_locked: boolean;
 }
 /** [External Id Object](https://developer.spotify.com/documentation/web-api/reference/#object-externalidobject) */
 declare interface ExternalIdObject {
@@ -645,7 +645,7 @@ declare interface SimplifiedEpisodeObject extends ContextObject<'episode'> {
 /** [Simplified Playlist Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedplaylistobject) */
 declare interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
     /** Whether or not the owner allows other users to modify the playlist. */
-    collaborative: Boolean;
+    collaborative: boolean;
     /** The playlist description. Only returned for modified, verified playlists, otherwise `null`. */
     description: string | null;
     /** The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist. */

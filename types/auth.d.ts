@@ -4,9 +4,9 @@ declare interface Token {
     /** How the access token may be used. */
     token_type: 'Bearer'
     /** The time period (in seconds) for which the access token is valid. */
-    expires_in: number,
+    expires_in: number
     /** A list of scopes which have been granted for this `access_token` */
-    scope?: string[]
+    scope?: Scope[]
 }
 
 declare interface RefreshToken extends Token {

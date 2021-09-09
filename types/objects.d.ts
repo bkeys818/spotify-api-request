@@ -1,32 +1,25 @@
 declare interface AlbumObject extends SimplifiedAlbumObject {
-    /**
-     * The copyright statements of the album.
-     */
+    /** The copyright statements of the album. */
     copyrights: CopyrightObject[];
-    /**
-     * Known external IDs for the album.
-     */
+    /** Known external IDs for the album. */
     external_ids: ExternalIdObject;
     /**
      * A list of the genres used to classify the album.
+     * 
      * For example: `"Prog Rock"` , `"Post-Grunge"`. (If not yet classified, the array is empty.)
      */
     genres: string[];
-    /**
-     * The label for the album.
-     */
+    /** The label for the album. */
     label: string;
     /**
      * The popularity of the album. The value will be between `0` and `100`, with `100` being the most popular.
+     * 
      * The popularity is calculated from the popularity of the album’s individual tracks;
      */
     popularity: number;
-    /**
-     * The tracks of the album.
-     */
+    /** The tracks of the album. */
     tracks: PagingObject<SimplifiedTrackObject>;
 }
-/** [Album Restriction Object](https://developer.spotify.com/documentation/web-api/reference/#object-albumrestrictionobject) & [Track Restriction Object](https://developer.spotify.com/documentation/web-api/reference/#object-trackrestrictionobject) */
 declare interface RestrictionObject {
     /**
      * The reason for the restriction.
@@ -40,29 +33,26 @@ declare interface RestrictionObject {
      */
     reason: string;
 }
-/** [Artist Object](https://developer.spotify.com/documentation/web-api/reference/#object-artistobject) */
 declare interface ArtistObject extends SimplifiedArtistObject {
-    /**
-     * Information about the followers of the artist.
-     */
+    /** Information about the followers of the artist. */
     followers: FollowersObject;
     /**
      * A list of the genres the artist is associated with.
+     * 
      * For example: `"Prog Rock"` , `"Post-Grunge"`.
+     * 
      * (If not yet classified, the array is empty.)
      */
     genres: string[];
-    /**
-     * Images of the artist in various sizes, widest first.
-     */
+    /** Images of the artist in various sizes, widest first. */
     images: ImageObject[];
     /**
      * The popularity of the artist. The value will be between `0` and `100`, with `100` being the most popular.
+     * 
      * The artist’s popularity is calculated from the popularity of all the artist’s tracks.
      */
     popularity: number;
 }
-/** This object is not in the offical Spotify API, but its the response from "Get Audio Analysis for a Track" */
 declare interface AudioAnalysisObject {
     meta: {
         analyzer_version: `${number}.${number}.${number}`;
@@ -142,7 +132,6 @@ declare interface AudioAnalysisObject {
         confidence: number;
     }[];
 }
-/** [Audio Features Object](https://developer.spotify.com/documentation/web-api/reference/#object-audiofeaturesobject) */
 declare interface AudioFeaturesObject {
     /**
      * A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
@@ -220,7 +209,6 @@ declare interface AudioFeaturesObject {
      */
     valence: number;
 }
-/** [Category Object](https://developer.spotify.com/documentation/web-api/reference/#object-categoryobject) */
 declare interface CategoryObject {
     /** A link to the Web API endpoint returning full details of the category. */
     href: string
@@ -231,7 +219,6 @@ declare interface CategoryObject {
     /** The name of the category. */
     name: string;
 }
-/** [Context Object](https://developer.spotify.com/documentation/web-api/reference/#object-contextobject) */
 declare interface ContextObject<T extends 'artist' | 'playlist' | 'album' | 'track' | 'show' | 'episode'> {
     /** The object type. */
     type: T;
@@ -242,14 +229,12 @@ declare interface ContextObject<T extends 'artist' | 'playlist' | 'album' | 'tra
     /** The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). */
     uri: string;
 }
-/** [Copyright Object](https://developer.spotify.com/documentation/web-api/reference/#object-copyrightobject) */
 declare interface CopyrightObject {
     /** The copyright text for this content. */
     text: string;
     /** The type of copyright: `C` = the copyright, `P` = the sound recording (performance) copyright. */
     type: 'C' | 'P';
 }
-/** [Currently Playing Context Object](https://developer.spotify.com/documentation/web-api/reference/#object-currentlyplayingcontextobject) */
 declare interface CurrentlyPlayingContextObject extends CurrentlyPlayingObject {
     /** Allows to update the user declare interface based on which playback actions are available within the current context. */
     actions: DisallowsObject;
@@ -260,7 +245,6 @@ declare interface CurrentlyPlayingContextObject extends CurrentlyPlayingObject {
     /** If shuffle is on or off. */
     shuffle_state: string;
 }
-/** [Currently Playing Object](https://developer.spotify.com/documentation/web-api/reference/#object-currentlyplayingobject) */
 declare interface CurrentlyPlayingObject {
     /** A Context Object. Can be `null`. */
     context: ContextObject<'track'> | ContextObject<'episode'> | null;
@@ -275,21 +259,14 @@ declare interface CurrentlyPlayingObject {
     /** Unix Millisecond Timestamp when data was fetched. */
     timestamp: number;
 }
-/** [Cursor Object](https://developer.spotify.com/documentation/web-api/reference/#object-cursorobject) */
 declare interface CursorObject {
     /** The cursor to use as key to find the next page of items. */
     after: string | null;
 }
-/** [Cursor Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-cursorpagingobject) */
 declare interface CursorPagingObject<T> extends Omit<PagingObject<T>, 'offset' | 'previous'> {
     /** The cursors used to find the next set of items. */
     cursors: CursorObject;
 }
-/**
- * [Device Object](https://developer.spotify.com/documentation/web-api/reference/#object-deviceobject)
- *
- * [Devices Object](https://developer.spotify.com/documentation/web-api/reference/#object-devicesobject) = [Device Object]
- */
 declare interface DeviceObject {
     /** The device ID. This may be `null`. */
     id: string | null;
@@ -306,51 +283,46 @@ declare interface DeviceObject {
     /** The current volume in percent. This may be null. */
     volume_percent: number | null;
 }
-/** [Disallows Object](https://developer.spotify.com/documentation/web-api/reference/#object-disallowsobject) */
 declare interface DisallowsObject {
     /** Interrupting playback. Optional field. */
-    interrupting_playback?: Boolean;
+    interrupting_playback?: boolean;
     /** Pausing. Optional field. */
-    pausing?: Boolean;
+    pausing?: boolean;
     /** Resuming. Optional field. */
-    resuming?: Boolean;
+    resuming?: boolean;
     /** Seeking playback location. Optional field. */
-    seeking?: Boolean;
+    seeking?: boolean;
     /** Skipping to the next context. Optional field. */
-    skipping_next?: Boolean;
+    skipping_next?: boolean;
     /** Skipping to the previous context. Optional field. */
-    skipping_prev?: Boolean;
+    skipping_prev?: boolean;
     /** Toggling repeat context flag. Optional field. */
-    toggling_repeat_context?: Boolean;
+    toggling_repeat_context?: boolean;
     /** Toggling repeat track flag. Optional field. */
-    toggling_repeat_track?: Boolean;
+    toggling_repeat_track?: boolean;
     /** Toggling shuffle flag. Optional field. */
-    toggling_shuffle?: Boolean;
+    toggling_shuffle?: boolean;
     /** Transfering playback between devices. Optional field. */
-    transferring_playback?: Boolean;
+    transferring_playback?: boolean;
 }
-/** [Episode Object](https://developer.spotify.com/documentation/web-api/reference/#object-episodeobject) */
 declare interface EpisodeObject extends SimplifiedEpisodeObject {
     /** The show on which the episode belongs. */
     show: SimplifiedShowObject;
     /** The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episode. */
     uri: string;
 }
-/** [Error Object](https://developer.spotify.com/documentation/web-api/reference/#object-errorobject) */
 declare interface ErrorObject {
     /** The HTTP status code (also returned in the response header; see [Response Status Codes](https://developer.spotify.com/documentation/web-api/#response-status-codes) for more information). */
     status: number;
     /** A short description of the cause of the error. */
     message: string;
 }
-/** [Explicit Content Settings Object](https://developer.spotify.com/documentation/web-api/reference/#object-explicitcontentsettingsobject) */
 declare interface ExplicitContentSettingsObject {
     /** When true, indicates that explicit content should not be played. */
-    filter_enabled: Boolean;
+    filter_enabled: boolean;
     /** When true, indicates that the explicit content setting is locked and can’t be changed by the user. */
-    filter_locked: Boolean;
+    filter_locked: boolean;
 }
-/** [External Id Object](https://developer.spotify.com/documentation/web-api/reference/#object-externalidobject) */
 declare interface ExternalIdObject {
     /** [International Article Number](http://en.wikipedia.org/wiki/International_Article_Number_%28EAN%29) */
     isrc?: string;
@@ -359,19 +331,16 @@ declare interface ExternalIdObject {
     /** [Universal Product Code](http://en.wikipedia.org/wiki/Universal_Product_Code) */
     upc?: string;
 }
-/** [External Url Object](https://developer.spotify.com/documentation/web-api/reference/#object-externalurlobject) */
 declare interface ExternalUrlObject {
     /** The [Spotify URL](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the object. */
     spotify: string;
 }
-/** [Followers Object](https://developer.spotify.com/documentation/web-api/reference/#object-followersobject) */
 declare interface FollowersObject {
     /** A link to the Web API endpoint providing full details of the followers; `null` if not available. Please note that this will always be set to null, as the Web API does not support it at the moment. */
     href: string
     /** The total number of followers. */
     total: number;
 }
-/** [Image Object](https://developer.spotify.com/documentation/web-api/reference/#object-imageobject) */
 declare interface ImageObject {
     /** The image height in pixels. If unknown: `null` or not returned. */
     height: number | null;
@@ -380,7 +349,6 @@ declare interface ImageObject {
     /** The image width in pixels. If unknown: null or not returned. */
     width: number | null;
 }
-/** [Linked Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-linkedtrackobject) */
 declare interface LinkedTrackObject {
     /** Known external URLs for this track. */
     external_urls: ExternalUrlObject;
@@ -393,7 +361,6 @@ declare interface LinkedTrackObject {
     /** The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track. */
     uri: string;
 }
-/** [Paging Object](https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject) */
 declare interface PagingObject<T> {
     /** A link to the Web API endpoint returning the full result of the request */
     href: string
@@ -410,7 +377,6 @@ declare interface PagingObject<T> {
     /** The total number of items available to return. */
     total: number;
 }
-/** [Play History Object](https://developer.spotify.com/documentation/web-api/reference/#object-playhistoryobject) */
 declare interface PlayHistoryObject {
     /** The context the track was played from. */
     context: ContextObject<'album'> | ContextObject<'playlist'>;
@@ -419,7 +385,6 @@ declare interface PlayHistoryObject {
     /** The track the user listened to. */
     track: SimplifiedTrackObject;
 }
-/** [Player Error Object](https://developer.spotify.com/documentation/web-api/reference/#object-playererrorobject) */
 declare interface PlayerErrorObject {
     /** A short description of the cause of the error. */
     messaage: string;
@@ -447,14 +412,12 @@ declare interface PlayerErrorObject {
     /** The HTTP status code. Either `404 NOT FOUND` or `403 FORBIDDEN`. Also returned in the response header. */
     status: number;
 }
-/** [Playlist Object](https://developer.spotify.com/documentation/web-api/reference/#object-playlistobject) */
 declare interface PlaylistObject extends Omit<SimplifiedPlaylistObject, 'tracks'> {
     /** Information about the followers of the playlist. */
     followers: FollowersObject;
     /** Information about the tracks of the playlist. */
     tracks: PagingObject<PlaylistTrackObject>;
 }
-/** [Playlist Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-playlisttrackobject) */
 declare interface PlaylistTrackObject {
     /** The date and time the track or episode was added. *Note that some very old playlists may return `null` in this field.* */
     added_at: string | null;
@@ -471,14 +434,12 @@ declare interface PlaylistTrackObject {
         url: null;
     };
 }
-/** [Playlist Tracks Ref Object](https://developer.spotify.com/documentation/web-api/reference/#object-playlisttracksrefobject) */
 declare interface PlaylistTracksRefObject {
     /** A link to the Web API endpoint where full details of the playlist’s tracks can be retrieved. */
     href: string
     /** Number of tracks in the playlist. */
     total: number;
 }
-/** [Private User Object](https://developer.spotify.com/documentation/web-api/reference/#object-privateuserobject) */
 declare interface PrivateUserObject extends PublicUserObject {
     /** The country of the user, as set in the user’s account profile. An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). *This field is only available when the current user has granted access to the [user-read-private scope](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes).* */
     country: string;
@@ -489,7 +450,6 @@ declare interface PrivateUserObject extends PublicUserObject {
     /** The user’s Spotify subscription level: “premium”, “free”, etc. (The subscription level “open” can be considered the same as “free”.) *This field is only available when the current user has granted access to the [user-read-private](https://developer.spotify.com/documentation/general/guides/authorization-guide/#list-of-scopes) scope.* */
     product: string;
 }
-/** [Public User Object](https://developer.spotify.com/documentation/web-api/reference/#object-publicuserobject) */
 declare interface PublicUserObject {
     /** The name displayed on the user’s profile. `null` if not available. */
     display_name: string | null;
@@ -508,69 +468,60 @@ declare interface PublicUserObject {
     /** The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for this user. */
     uri: string;
 }
-/** [Recommendation Seed Object](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject) */
-declare interface RecommendationSeedObject<T extends 'ARTIST' | 'TRACK' | 'GENRE'> {
+declare interface RecommendationSeedObject {
     /** The number of tracks available after min_* and max_* filters have been applied. */
     afterFilteringSize: number;
     /** The number of tracks available after relinking for regional availability. */
     afterRelinkingSize: number;
-    /** A link to the full track or artist data for this seed. For tracks this will be a link to a [Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-trackobject). For artists a link to an [Artist Object](https://developer.spotify.com/documentation/web-api/reference/#object-artistobject). For genre seeds, this value will be `null`. */
+    /** A link to the full track or artist data for this seed. For tracks this will be a link to a {@link TrackObject}. For artists a link to an {@link ArtistObject}. For genre seeds, this value will be `null`. */
     href: string
     /** The id used to select this seed. This will be the same as the string used in the `seed_artists`, `seed_tracks` or `seed_genres` parameter. */
     id: string;
     /** The number of recommended tracks available for this seed. */
     initialPoolSize: number;
     /** The entity type of this seed. One of `artist`, `track` or `genre`. */
-    type: T;
+    type: 'ARTIST' | 'TRACK' | 'GENRE';
 }
-/** [Recommendations Object](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationsobject) */
 declare interface RecommendationsObject {
     /** An array of [recommendation seed objects](https://developer.spotify.com/documentation/web-api/reference/#object-recommendationseedobject). */
-    seeds: (RecommendationSeedObject<'ARTIST'> | RecommendationSeedObject<'TRACK'> | RecommendationSeedObject<'GENRE'>)[];
+    seeds: RecommendationSeedObject[];
     /** An array of [track object (simplified)](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedtrackobject) ordered according to the parameters supplied. */
     tracks: TrackObject[];
 }
-/** [Resume Point Object](https://developer.spotify.com/documentation/web-api/reference/#object-resumepointobject) */
 declare interface ResumePointObject {
     /** Whether or not the episode has been fully played by the user. */
     fully_played: boolean;
     /** The user’s most recent position in the episode in milliseconds. */
     resume_position_ms: number;
 }
-/** [Saved Album Object](https://developer.spotify.com/documentation/web-api/reference/#object-savedalbumobject) */
 declare interface SavedAlbumObject {
     /** The date and time the show was saved. Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ. If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object. */
     added_at: string;
     /** Information about the album. */
     album: AlbumObject;
 }
-/** [Saved Episode Object](https://developer.spotify.com/documentation/web-api/reference/#object-savedepisodeobject) */
 declare interface SavedEpisodeObject {
     /** The date and time the episode was saved. Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ. */
     added_at: string;
     /** Information about the episode. */
     episode: EpisodeObject;
 }
-/** [Saved Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-savedshowobject) */
 declare interface SavedShowObject {
     /** The date and time the show was saved. Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ. If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object. */
     added_at: string;
     /** Information about the show. */
     show: SimplifiedShowObject;
 }
-/** [Saved Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-savedtrackobject) */
 declare interface SavedTrackObject {
     /** The date and time the show was saved. Timestamps are returned in ISO 8601 format as Coordinated Universal Time (UTC) with a zero offset: YYYY-MM-DDTHH:MM:SSZ. If the time is imprecise (for example, the date/time of an album release), an additional field indicates the precision; see for example, release_date in an album object. */
     added_at: string;
     /** Information about the track. */
     track: TrackObject;
 }
-/** [Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-showobject) */
 declare interface ShowObject extends SimplifiedShowObject {
     /** A list of the show’s episodes. */
     episodes: PagingObject<SimplifiedEpisodeObject>;
 }
-/** [Simplified Album Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedalbumobject) */
 declare interface SimplifiedAlbumObject extends ContextObject<'album'> {
     /** The field is present when getting an artist’s albums. Possible values are “album”, “single”, “compilation”, “appears_on”. Compare to album_type this field represents relationship between the artist and the album. */
     album_group?: 'album' | 'single' | 'compilation' | 'appears_on';
@@ -594,19 +545,17 @@ declare interface SimplifiedAlbumObject extends ContextObject<'album'> {
     release_date: string;
     /** The precision with which release_date value is known: `year`, `month`, or `day`. */
     release_date_precision: 'year' | 'month' | 'day';
-    /** Included in the response when a content restriction is applied. See [Restriction Object](https://developer.spotify.com/documentation/web-api/reference/#object-albumrestrictionobject) for more details. */
+    /** Included in the response when a content restriction is applied. See {@link RestrictionObject} for more details. */
     restrictions?: RestrictionObject;
     /** This property is not currently on the official SpotifyAPI documentation */
     total_tracks: number;
 }
-/** [Simplified Artist Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedartistobject) */
 declare interface SimplifiedArtistObject extends ContextObject<'artist'> {
     /** The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist. */
     id: string;
     /** The name of the artist. */
     name: string;
 }
-/** [Simplified Episode Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedepisodeobject) */
 declare interface SimplifiedEpisodeObject extends ContextObject<'episode'> {
     /** A URL to a 30 second preview (MP3 format) of the episode. null if not available. */
     audio_preview_url: string | null;
@@ -642,10 +591,9 @@ declare interface SimplifiedEpisodeObject extends ContextObject<'episode'> {
     /** The user’s most recent position in the episode. Set if the supplied access token is a user token and has the scope user-read-playback-position. */
     resume_point?: ResumePointObject;
 }
-/** [Simplified Playlist Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedplaylistobject) */
 declare interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
     /** Whether or not the owner allows other users to modify the playlist. */
-    collaborative: Boolean;
+    collaborative: boolean;
     /** The playlist description. Only returned for modified, verified playlists, otherwise `null`. */
     description: string | null;
     /** The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist. */
@@ -672,7 +620,6 @@ declare interface SimplifiedPlaylistObject extends ContextObject<'playlist'> {
     tracks: PlaylistTracksRefObject | null;
     primary_color: null;
 }
-/** [Simplified Show Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedshowobject) */
 declare interface SimplifiedShowObject extends ContextObject<'show'> {
     /**
      * A list of the countries in which the show can be played, identified by their [ISO 3166-1 alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
@@ -709,7 +656,6 @@ declare interface SimplifiedShowObject extends ContextObject<'show'> {
      */
     total_episodes: number;
 }
-/** [Simplified Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedtrackobject) */
 declare interface SimplifiedTrackObject extends ContextObject<'track'> {
     /** The artists who performed the track. */
     artists: SimplifiedArtistObject[];
@@ -737,12 +683,11 @@ declare interface SimplifiedTrackObject extends ContextObject<'track'> {
     name: string;
     /** A link to a 30 second preview (MP3 format) of the track. Can be null */
     preview_url: string | null;
-    /** Included in the response when a content restriction is applied. See [Restriction Object](https://developer.spotify.com/documentation/web-api/reference/#object-trackrestrictionobject) for more details. */
+    /** Included in the response when a content restriction is applied. See {@link RestrictionObject} for more details. */
     restrictions?: RestrictionObject;
     /** The number of the track. If an album has several discs, the track number is the number on the specified disc. */
     track_number: number;
 }
-/** [Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-trackobject) */
 declare interface TrackObject extends SimplifiedTrackObject {
     /** The album on which the track appears. */
     album: SimplifiedAlbumObject;
@@ -761,7 +706,6 @@ declare interface TrackObject extends SimplifiedTrackObject {
     /** This property is not currently on the official SpotifyAPI documentation */
     track?: boolean;
 }
-/** [Tuneable Track Object](https://developer.spotify.com/documentation/web-api/reference/#object-tuneabletrackobject) */
 declare interface TuneableTrackObject {
     /**
      * A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.

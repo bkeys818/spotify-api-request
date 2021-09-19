@@ -1,0 +1,38 @@
+{
+    "$id": "http://example.com/types/responses.json#",
+    "definitions": {
+        "getMultipleAlbums": {
+            "type": "object",
+            "properties": {
+                "albums": {
+                    "type": "array",
+                    "items": {
+                        "type": ["object", "null"],
+                        "$ref": "objects.json#/definitions/AlbumObject"
+                    }
+                }
+            },
+            "required": ["albums"],
+            "additionalProperties": false
+        },
+        "getAlbum": { "$ref": "objects.json#/definitions/AlbumObject" },
+        "getAlbumTracks": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [{ "$ref": "objects.json#/definitions/SimplifiedTrackObject" }]
+            }
+        },
+        "getAllFeaturedPlaylists": {
+            "type": "object",
+            "properties": {
+                "message": { "type": "string" },
+                "playlists": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [{ "$ref": "objects.json#/definitions/SimplifiedPlaylistObject" }]
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,6 +3,44 @@
         {
             "url": "https://json.schemastore.org/tsconfig.json",
             "fileMatch": ["*.tsconfig.json"]
+        },
+        {
+            "schema": {
+                "allOf": [{ "$ref": "http://json-schema.org/draft-07/schema#" }],
+                "properties": {
+                    "items": { "anyOf": [{ "$ref": "#" }] },
+                    "definitions": {
+                        "type": "object",
+                        "additionalProperties": { "$ref": "#" },
+                    },
+                    "properties": {
+                        "type": "object",
+                        "additionalProperties": { "$ref": "#" },
+                    },
+                    "extends": {
+                        "type": "object",
+                        "properties": {
+                            "$ref": { "type": "string" },
+                            "omit": {
+                                "type": "array",
+                                "items": { "type": "string" }
+                            },
+                            "genericValues": {
+                                "type": "array",
+                                "items": { "$ref": "#" }
+                            }
+                        },
+                        "required": ["$ref"],
+                        "additionalProperties": false
+                    },
+                    "genericKeys": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                    },
+                    "generic": { "type": "string" }
+                }
+            },
+            "fileMatch": ["/types/*.json"]
         }
     ],
     "files.associations": {

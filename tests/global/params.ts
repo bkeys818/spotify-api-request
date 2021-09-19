@@ -12,8 +12,10 @@ import {
 } from '.'
 
 const market = 'US'
+const locale = 'en_US'
 const limit = 10
 const offset = 3
+const timestamp = '2021-10-18T09:00:00'
 
 type Defined<T> = {
     [key in keyof T]-?: T extends boolean | number | string | undefined | null
@@ -35,6 +37,16 @@ const params: {
             offset: offset,
         },
     ],
+    getAllFeaturedPlaylists: [
+        token,
+        {
+            country: market,
+            locale: locale,
+            timestamp: timestamp,
+            limit: limit,
+            offset: offset,
+        }
+    ]
 }
 
 export default params

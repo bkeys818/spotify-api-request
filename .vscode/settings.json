@@ -17,6 +17,8 @@
                         "type": "object",
                         "additionalProperties": { "$ref": "#" },
                     },
+                    "then": { "$ref": "#" },
+                    "else": { "$ref": "#" },
                     "extends": {
                         "type": "object",
                         "properties": {

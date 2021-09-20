@@ -36,7 +36,7 @@ function logErrors(
                         break
                     }
                     error.schemaPath =
-                        '#/' + error.schemaPath.slice(typePath.length)
+                        '#' + error.schemaPath.slice(typePath.length)
                 }
             } else schema = validate.schema
 
@@ -49,9 +49,15 @@ function logErrors(
                 schema = (schema as Exclude<typeof schema, boolean>)[step]
             }
 
-            let schemaStr = JSON.stringify(schema, null, 2)
-            const errorLine = new RegExp(`^\\w*"${error.keyword}"`, 'm')
-            schemaStr = schemaStr.replace(errorLine, utils.RECEIVED_COLOR)
+            let schemaStr =
+                '    ' +
+                JSON.stringify(schema, null, 2)
+                    .replace(
+                        new RegExp(`^  "${error.keyword}"`, 'm'),
+                        '  ' + utils.RECEIVED_COLOR(`"${error.keyword}"`)
+                    )
+                    .split('\n')
+                    .join('\n    ')
 
             error.message = error.message ? `\n  Error: ${error.message}` : ''
 
@@ -59,7 +65,7 @@ function logErrors(
                 `\n  Path to error: ${error.schemaPath}` +
                 error.message +
                 `\n  Schema:\n${schemaStr}` +
-                `\nRecieved: ${utils.printReceived(instance)}`
+                `\n  Recieved: ${utils.printReceived(instance)}`
             )
         })
         .join('\n')
@@ -115,6 +121,8 @@ describe('Request Responses', () => {
             .filter((key) => responses[key])
             .map((key) => [key, responses[key]])
     )('%s', (type, data) => {
+        if (typeof data == 'string')
+            expect(data).toBeFalsy()
         expect(data).toMatchSchema(type)
     })
 })

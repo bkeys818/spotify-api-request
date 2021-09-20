@@ -57,7 +57,10 @@
                 "meta": {
                     "type": "object",
                     "properties": {
-                        "analyzer_version": { "pattern": "\\d+.\\d+.\\d+" },
+                        "analyzer_version": {
+                            "type": "string",
+                            "pattern": "\\d+.\\d+.\\d+"
+                        },
                         "platform": { "type": "string" },
                         "detailed_status": { "type": "string" },
                         "status_code": { "type": "number" },

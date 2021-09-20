@@ -23,7 +23,11 @@ function modifySchemaWithKey(
                 }
             }
             // items key
-            else if (schemaKey == 'items') {
+            else if (
+                schemaKey == 'items' ||
+                schemaKey == 'then' ||
+                schemaKey == 'else'
+            ) {
                 modifySchemaWithKey(schema[schemaKey], key, modify)
             }
         }

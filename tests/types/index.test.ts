@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 import { dataPath } from '../global'
-import { schemas } from './schemas'
+import { schemas } from '../../types/schemas'
 import Ajv, { ValidateFunction } from 'ajv'
 
 import { testToken, testRefreshToken } from '../global'

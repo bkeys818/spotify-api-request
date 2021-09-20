@@ -19,8 +19,84 @@
         "getAlbumTracks": {
             "extends": {
                 "$ref": "objects.json#/definitions/PagingObject",
-                "genericValues": [{ "$ref": "objects.json#/definitions/SimplifiedTrackObject" }]
+                "genericValues": [
+                    {
+                        "$ref": "objects.json#/definitions/SimplifiedTrackObject"
+                    }
+                ]
             }
+        },
+        "getMultipleArtists": {
+            "type": "object",
+            "properties": {
+                "artists": {
+                    "type": "array",
+                    "items": {
+                        "type": ["object", "null"],
+                        "$ref": "objects.json#/definitions/ArtistObject"
+                    }
+                }
+            },
+            "required": ["artists"],
+            "additionalProperties": false
+        },
+
+        "getArtist": {
+            "$ref": "objects.json#/definitions/ArtistObject"
+        },
+        "getArtistTopTracks": {
+            "type": "object",
+            "properties": {
+                "tracks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "objects.json#/definitions/TrackObject"
+                    }
+                }
+            },
+            "required": ["tracks"],
+            "additionalProperties": false
+        },
+        "getArtistRelatedArtists": {
+            "type": "object",
+            "properties": {
+                "artists": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "objects.json#/definitions/ArtistObject"
+                    }
+                }
+            },
+            "required": ["artists"],
+            "additionalProperties": false
+        },
+        "getArtistAlbums": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    {
+                        "$ref": "objects.json#/definitions/SimplifiedAlbumObject"
+                    }
+                ]
+            }
+        },
+
+        "getAllNewReleases": {
+            "type": "object",
+            "properties": {
+                "albums": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedAlbumObject"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": ["albums"],
+            "additionalProperties": false
         },
         "getAllFeaturedPlaylists": {
             "type": "object",
@@ -29,10 +105,397 @@
                 "playlists": {
                     "extends": {
                         "$ref": "objects.json#/definitions/PagingObject",
-                        "genericValues": [{ "$ref": "objects.json#/definitions/SimplifiedPlaylistObject" }]
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedPlaylistObject"
+                            }
+                        ]
                     }
                 }
             }
-        }
+        },
+        "getAllCategories": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/CategoryObject"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": ["categories"],
+            "additionalProperties": false
+        },
+        "getCategory": {
+            "$ref": "objects.json#/definitions/CategoryObject"
+        },
+        "getCategoryPlaylists": {
+            "type": "object",
+            "properties": {
+                "message": { "type": "string" },
+                "playlists": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedPlaylistObject"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": ["message", "playlists"],
+            "additionalProperties": false
+        },
+        "getRecommendations": {
+            "$ref": "objects.json#/definitions/RecommendationsObject"
+        },
+        "getRecommendationGenres": {
+            "type": "object",
+            "properties": {
+                "genres": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["genres"],
+            "additionalProperties": false
+        },
+
+        "getMultipleEpisodes": {
+            "type": "object",
+            "properties": {
+                "episodes": {
+                    "type": ["object", "null"],
+                    "$ref": "objects.json#/definitions/EpisodeObject"
+                }
+            },
+            "required": ["episodes"],
+            "additionalProperties": false
+        },
+        "getEpisode": { "$ref": "objects.json#/definitions/EpisodeObject" },
+
+        "followPlaylist": false,
+        "unfollowPlaylist": false,
+        "checkIfUsersFollowPlaylist": {
+            "type": "array",
+            "items": { "type": "boolean" }
+        },
+        "getUserFollowedArtists": {
+            "type": "object",
+            "properties": {
+                "artists": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/CursorPagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/ArtistObject"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": ["artists"],
+            "additionalProperties": false
+        },
+        "followArtistsOrUsers": false,
+        "unfollowArtistsOrUsers": false,
+        "getFollowingStateForArtistsOrUsers": {
+            "type": "array",
+            "items": { "type": "boolean" }
+        },
+
+        "getUsersSavedAlbums": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    { "$ref": "objects.json#/definitions/SavedAlbumObject" }
+                ]
+            }
+        },
+        "saveAlbumsforCurrentUser": false,
+        "removeAlbumsforCurrentUser": false,
+        "checkUsersSavedAlbums": {
+            "type": "array",
+            "items": { "type": "boolean" }
+        },
+        "getUsersSavedTracks": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    { "$ref": "objects.json#/definitions/SavedTrackObject" }
+                ]
+            }
+        },
+        "saveTracksforUser": false,
+        "removeUsersSavedTracks": false,
+        "checkUsersSavedTracks": {
+            "type": "array",
+            "items": { "type": "boolean" }
+        },
+        "getUsersSavedEpisodes": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    { "$ref": "objects.json#/definitions/SavedEpisodeObject" }
+                ]
+            }
+        },
+        "saveEpisodesforUser": false,
+        "removeUsersSavedEpisodes": false,
+        "checkUsersSavedEpisodes": {
+            "type": "array",
+            "items": { "type": "boolean" }
+        },
+        "getUsersSavedShows": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    { "$ref": "objects.json#/definitions/SavedShowObject" }
+                ]
+            }
+        },
+        "saveShowsforCurrentUser": false,
+        "removeUsersSavedShows": false,
+        "checkUsersSavedShows": {
+            "type": "array",
+            "items": { "type": "boolean" }
+        },
+
+        "getAvailableMarkets": {
+            "type": "object",
+            "properties": {
+                "markets": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["markets"],
+            "additionalProperties": false
+        },
+
+        "getUserTopArtistsandTracks": {
+            "if": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "const": "artist"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "then": {
+                "extends": {
+                    "$ref": "objects.json#/definitions/PagingObject",
+                    "genericValues": [
+                        { "$ref": "objects.json#/definitions/ArtistObject" }
+                    ]
+                }
+            },
+            "else": {
+                "extends": {
+                    "$ref": "objects.json#/definitions/PagingObject",
+                    "genericValues": [
+                        { "$ref": "objects.json#/definitions/TrackObject" }
+                    ]
+                }
+            }
+        },
+
+        "getListOfCurrentUserPlaylists": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    {
+                        "$ref": "objects.json#/definitions/SimplifiedPlaylistObject"
+                    }
+                ]
+            }
+        },
+        "getListOfUserPlaylists": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    {
+                        "$ref": "objects.json#/definitions/SimplifiedPlaylistObject"
+                    }
+                ]
+            }
+        },
+        "createPlaylist": {
+            "$ref": "objects.json#/definitions/PlaylistObject"
+        },
+        "getPlaylist": {
+            "$ref": "objects.json#/definitions/PlaylistObject"
+        },
+        "changePlaylistDetails": false,
+        "getPlaylistItems": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    { "$ref": "objects.json#/definitions/PlaylistTrackObject" }
+                ]
+            }
+        },
+        "addItemsToPlaylist": {
+            "type": "object",
+            "properties": { "snapshot_id": { "type": "string" } },
+            "required": ["snapshot_id"],
+            "additionalProperties": false
+        },
+        "reorderPlaylistItems": {
+            "type": "object",
+            "properties": { "snapshot_id": { "type": "string" } },
+            "required": ["snapshot_id"],
+            "additionalProperties": false
+        },
+        "replacePlaylistItems": {
+            "type": "object",
+            "properties": { "snapshot_id": { "type": "string" } },
+            "required": ["snapshot_id"],
+            "additionalProperties": false
+        },
+        "removeItemsFromPlaylist": {
+            "type": "object",
+            "properties": { "snapshot_id": { "type": "string" } },
+            "required": ["snapshot_id"],
+            "additionalProperties": false
+        },
+        "getPlaylistCoverImage": {
+            "type": "array",
+            "items": { "$ref": "objects.json#/definitions/ImageObject" }
+        },
+        "uploadCustomPlaylistCoverImage": false,
+
+        "searchForItem": {
+            "type": "object",
+            "properties": {
+                "albums": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedAlbumObject"
+                            }
+                        ]
+                    }
+                },
+                "artists": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            { "$ref": "objects.json#/definitions/ArtistObject" }
+                        ]
+                    }
+                },
+                "playlists": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedPlaylistObject"
+                            }
+                        ]
+                    }
+                },
+                "tracks": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            { "$ref": "objects.json#/definitions/TrackObject" }
+                        ]
+                    }
+                },
+                "shows": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedShowObject"
+                            }
+                        ]
+                    }
+                },
+                "episodes": {
+                    "extends": {
+                        "$ref": "objects.json#/definitions/PagingObject",
+                        "genericValues": [
+                            {
+                                "$ref": "objects.json#/definitions/SimplifiedEpisodeObject"
+                            }
+                        ]
+                    }
+                }
+            },
+            "minProperties": 1,
+            "additionalProperties": false
+        },
+
+        "getMultipleShows": {
+            "type": "object",
+            "properties": {
+                "shows": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "objects.json#/definitions/SimplifiedShowObject"
+                    }
+                }
+            },
+            "required": ["shows"],
+            "additionalProperties": false
+        },
+        "getShow": { "$ref": "objects.json#/definitions/ShowObject" },
+        "getShowEpisodes": {
+            "extends": {
+                "$ref": "objects.json#/definitions/PagingObject",
+                "genericValues": [
+                    {
+                        "$ref": "objects.json#/definitions/SimplifiedEpisodeObject"
+                    }
+                ]
+            }
+        },
+
+        "getSeveralTracks": {
+            "type": "object",
+            "properties": {
+                "tracks": {
+                    "type": "array",
+                    "items": { "$ref": "objects.json#/definitions/TrackObject" }
+                }
+            },
+            "required": ["tracks"],
+            "additionalProperties": false
+        },
+        "getTrack": { "$ref": "objects.json#/definitions/TrackObject" },
+        "getAudioFeaturesforSeveralTracks": {
+            "type": "object",
+            "properties": {
+                "audio_features": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "objects.json#/definitions/AudioFeaturesObject"
+                    }
+                }
+            },
+            "required": ["audio_features"],
+            "additionalProperties": false
+        },
+        "getAudioFeaturesforTrack": {
+            "$ref": "objects.json#/definitions/AudioFeaturesObject"
+        },
+        "getAudioAnalysisforTrack": {
+            "$ref": "objects.json#/definitions/AudioAnalysisObject"
+        },
+
+        "getCurrentUserProfile": { "$ref": "objects.json#/definitions/PrivateUserObject" },
+        "getUserProfile": { "$ref": "objects.json#/definitions/PublicUserObject" }
     }
 }

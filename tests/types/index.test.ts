@@ -1,13 +1,10 @@
-import { readFileSync } from 'fs'
-import { dataPath } from '../responses'
+import { responses } from '../responses'
 import { schemas } from '../../schemas'
 import Ajv, { ValidateFunction } from 'ajv'
 
 import { testToken, testRefreshToken } from '../global'
 
 const ajv = new Ajv({ schemas: schemas })
-
-const responses = JSON.parse(readFileSync(dataPath, 'utf-8'))
 
 function logErrors(
     validate: ValidateFunction<any>,
@@ -117,7 +114,7 @@ describe('Authorization types', () => {
 
 describe('Request Responses', () => {
     test.concurrent.each(
-        Object.keys(responses)
+        (Object.keys(responses) as (keyof typeof responses)[])
             .filter((key) => responses[key])
             .map((key) => [key, responses[key]])
     )('%s', (type, data) => {

@@ -1,143 +1,111 @@
-import { readFileSync } from 'fs'
-import { AnySchema, AnySchemaObject } from 'ajv'
+import { readFileSync, readdirSync } from 'fs'
+import { Schema, SchemaObject } from 'ajv'
 
-function modifySchemaWithKey(
-    schema: AnySchema,
-    key: string,
-    modify: (schema: AnySchemaObject) => AnySchemaObject
-) {
-    if (typeof schema == 'object')
-        for (const schemaKey in schema) {
-            // key being searched for
-            if (schemaKey == key) schema = modify(schema)
-            else if (schemaKey == 'extends') {
-                schema[schemaKey].genericValues.map((schema: AnySchemaObject) =>
-                    modifySchemaWithKey(schema, key, modify)
-                )
+function formatSchemas() {
+    const schemaMap: { [key: string]: SchemaObject } = {}
+
+    readdirSync('schemas', 'utf-8')
+        .filter((path) => path.endsWith('.json'))
+        .forEach((path) => {
+            const str = readFileSync(`schemas/` + path, 'utf-8')
+            const typeSchemas = JSON.parse(str) as SchemaObject[]
+
+            for (const type in typeSchemas) {
+                const schema = typeSchemas[type]
+
+                const category = path.slice(0, -5)
+
+                schema.$id = `http://example.com/schemas/${category}/${type}.json`
+                schemaMap[schema.$id] = schema
             }
+        })
 
-            // properties key
-            else if (schemaKey == 'properties' || schemaKey == 'definitions') {
-                for (const propKey in schema[schemaKey]) {
-                    modifySchemaWithKey(schema[schemaKey][propKey], key, modify)
-                }
-            }
-            // items key
-            else if (
-                schemaKey == 'items' ||
-                schemaKey == 'then' ||
-                schemaKey == 'else'
-            ) {
-                modifySchemaWithKey(schema[schemaKey], key, modify)
-            }
-        }
-}
+    let currentSchema: CustomSchema
 
-const paths = ['types/auth.json', 'types/objects.json', 'types/responses.json']
-function compile(paths: string[]) {
-    let schemas = paths.map(getSchema)
-
-    let currentRoot: AnySchemaObject
     // extends
-    for (const schema of schemas) {
-        currentRoot = schema
-        modifySchemaWithKey(schema, 'extends', extendSchema)
+    for (const key in schemaMap) {
+        const schema = schemaMap[key]
+        if (typeof schema == 'object') {
+            currentSchema = schema
+            forSchemaWithKey(schema, 'extends', extendSchema)
+        }
     }
 
     // remove custom keywords
-    for (const schema of schemas) {
-        ;['geneicKeys', 'generic'].forEach((key) =>
-            modifySchemaWithKey(schema, key, (schema) => {
+    for (const _key in schemaMap) {
+        ;['genericKeys', 'generic'].forEach((key) =>
+            forSchemaWithKey(schemaMap[_key], key, (schema) => {
                 delete schema[key]
                 return schema
             })
         )
     }
 
-    return schemas
-
-    function getSchema(path: string) {
-        let schema: AnySchemaObject
-
-        try {
-            schema = JSON.parse(readFileSync(path, 'utf-8'))
-        } catch (err: any) {
-            let msg: string
-            if ('code' in err) {
-                msg = `No file found at ${path}`
-            } else {
-                msg = 'File is an invalid JSON\n' + err.message
-            }
-            throw new Error(msg)
-        }
-
-        return schema
-    }
+    return Object.values(schemaMap)
 
     function findSchema($ref: string) {
-        let schema = currentRoot
-        let path = $ref
+        let ref = $ref
 
-        if ($ref[0] != '#') {
-            let [uri, hash] = $ref.split('#')
-            if (!uri.startsWith('http://'))
-                uri = 'http://example.com/types/' + uri
-            let linkedSchema = schemas.find((schema) => schema.$id == uri)
-            if (!linkedSchema)
-                throw new Error(`No schema found for for uri (${uri}).`)
-            else schema = linkedSchema
-
-            path = '#' + hash
-        }
-
-        const steps = path.slice(2).split('/')
-        for (const step of steps) {
-            if (typeof schema == 'object' && step in schema)
-                schema = schema[step]
-            else {
-                throw new Error(`URI $ref (${$ref}) doesn't point to anything`)
+        if (ref.includes('../')) {
+            if (!currentSchema) throw new Error(`currentSchema is not defined`)
+            let url = new URL(currentSchema.$id!)
+            const steps = url.pathname.slice(1).split('/')
+            steps.pop()
+            while (ref.startsWith('../')) {
+                ref = ref.slice(3)
+                steps.pop()
             }
+            ref = steps.join('/') + '/' + ref
         }
 
+        const ids = Object.keys(schemaMap)
+        const id = ids.find((id) => id.endsWith('/' + ref))
+
+        if (!id)
+            throw new Error(`Can't find schema that points to $ref (${$ref})`)
+
+        const schema = schemaMap[id]
+        if (typeof schema == 'boolean')
+            throw new Error(`$ref (${ref}) can't point to a boolean schema`)
         return schema
     }
 
-    function extendSchema(schema: AnySchemaObject): AnySchemaObject {
-        let refrencedSchema = findSchema(schema.extends.$ref)
-        if (refrencedSchema.extends)
-            refrencedSchema = extendSchema(refrencedSchema)
+    function extendSchema(schema: CustomSchema) {
+        const info = schema.extends!
+        delete schema.extends
+
+        const refrencedSchema = findSchema(info.$ref)
+        if (refrencedSchema.extends) extendSchema(refrencedSchema)
 
         if ('properties' in refrencedSchema) {
-            if ('genericValues' in schema.extends) {
+            if ('genericValues' in info) {
                 if (!refrencedSchema.genericKeys)
                     throw new Error(
                         `Can't use "genericValues" unless "$ref" point to a schema with "genericKeys"`
                     )
 
-                modifySchemaWithKey(
+                forSchemaWithKey(
                     refrencedSchema,
                     'generic',
                     (schemaWithGeneric) => {
-                        const i = refrencedSchema.genericKeys.indexOf(
+                        const i = refrencedSchema.genericKeys!.indexOf(
                             schemaWithGeneric.generic
                         )
                         const { generic, ...otherProps } = schemaWithGeneric
-                        const value = schema.extends.genericValues![i]
+                        const value = info.genericValues![i]
                         return value ? { ...otherProps, ...value } : otherProps
                     }
                 )
             }
 
             let propKeys = Object.keys(refrencedSchema.properties)
-            if (schema.extends.omit)
-                propKeys = propKeys.filter(
-                    (key) => !schema.extends.omit!.includes(key)
-                )
+            if (info.omit)
+                propKeys = propKeys.filter((key) => !info.omit!.includes(key))
 
             const props: { [key: string]: { $ref: string } } = {}
             for (const key of propKeys) {
                 props[key] = {
-                    $ref: `${schema.extends.$ref}/properties/${key}`,
+                    $ref: `${info.$ref}#/properties/${key}`,
                 }
             }
             schema.properties =
@@ -150,9 +118,9 @@ function compile(paths: string[]) {
         }
 
         if ('required' in refrencedSchema) {
-            const required = schema.extends.omit
-                ? refrencedSchema.required.filter((key: string) =>
-                      !schema.extends.omit.includes(key)
+            const required = info.omit
+                ? refrencedSchema.required.filter(
+                      (key: string) => !info.omit!.includes(key)
                   )
                 : refrencedSchema.required
             schema.required =
@@ -165,6 +133,7 @@ function compile(paths: string[]) {
             if (
                 key == 'properties' ||
                 key == 'required' ||
+                key == '$id' ||
                 key == 'genericKeys' ||
                 key == 'geneic' ||
                 Object.keys(schema).includes(key)
@@ -173,9 +142,65 @@ function compile(paths: string[]) {
             schema[key] = refrencedSchema[key]
         }
 
-        delete schema.extends
         return schema
     }
 }
 
-export const schemas = compile(paths)
+/**
+ * Searches through the schema (and all it's properties) for the key. When an object with that key is found, it's run thought the callback function.
+ * @param schema The schema to search through
+ * @param key The key to search for
+ * @param callbackfn The function to run on any object with the key.
+ */
+function forSchemaWithKey<K extends string>(
+    schema: Schema,
+    key: K,
+    callbackfn: (
+        // prettier-ignore
+        schema: CustomSchema & { [key in K]: K extends keyof CustomSchema ? Exclude<CustomSchema[K], undefined> : any }
+    ) => CustomSchema | void
+) {
+    if (typeof schema == 'object')
+        for (const schemaKey in schema) {
+            // key being searched for
+            if (schemaKey == key) {
+                const _schema = callbackfn(schema as any)
+                if (_schema) schema = _schema
+            } else if (schemaKey == 'extends') {
+                ;(schema.extends as ExtendsSchema).genericValues?.map(
+                    (schema) => forSchemaWithKey(schema, key, callbackfn)
+                )
+            }
+            // properties key
+            else if (schemaKey == 'properties' || schemaKey == 'definitions') {
+                for (const propKey in schema[schemaKey]) {
+                    forSchemaWithKey(
+                        schema[schemaKey][propKey],
+                        key,
+                        callbackfn
+                    )
+                }
+            }
+            // items key
+            else if (
+                schemaKey == 'items' ||
+                schemaKey == 'then' ||
+                schemaKey == 'else'
+            ) {
+                forSchemaWithKey(schema[schemaKey], key, callbackfn)
+            }
+        }
+}
+
+interface ExtendsSchema {
+    $ref: string
+    omit?: string[]
+    genericValues?: CustomSchema[]
+}
+interface CustomSchema extends SchemaObject {
+    extends?: ExtendsSchema
+    genericKeys?: string[]
+    generic?: string
+}
+
+export const schemas = formatSchemas()

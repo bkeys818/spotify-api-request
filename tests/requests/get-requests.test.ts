@@ -1,8 +1,9 @@
 import * as requests from '../../src/requests'
-import { Unwrap, dataPath, token, params } from '../global'
+import { Unwrap, token, params } from '../global'
 import fetch, { Response } from 'node-fetch'
 import { mocked } from 'ts-jest/utils'
 import { readFileSync } from 'fs'
+import { dataPath } from '../responses'
 
 jest.mock('node-fetch', () => ({
     __esModule: true,

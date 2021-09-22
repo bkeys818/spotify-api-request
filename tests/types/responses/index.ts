@@ -1,0 +1,1 @@
+export const dataPath = 'tests/responses/data.json'

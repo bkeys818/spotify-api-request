@@ -3,7 +3,8 @@ config()
 import authorize from '../../../authorize'
 import * as requests from '../../../src/requests'
 import { writeFileSync } from 'fs'
-import { params, dataPath } from '../../global'
+import { params } from '../../global'
+import { dataPath } from '.'
 
 async function getData() {
     await authorize()

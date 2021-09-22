@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs'
-import { dataPath } from '../global'
+import { dataPath } from '../responses'
 import { schemas } from '../../schemas'
 import Ajv, { ValidateFunction } from 'ajv'
 

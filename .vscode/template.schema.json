@@ -37,8 +37,11 @@
         "schema": {
             "type": ["object", "boolean"],
             "properties": {
+                "$ref": { "type": "string" },
                 "maxLength": { "$ref": "#/definitions/nonNegativeInteger" },
-                "minLength": { "$ref": "#/definitions/nonNegativeIntegerDefault0" },
+                "minLength": {
+                    "$ref": "#/definitions/nonNegativeIntegerDefault0"
+                },
                 "additionalItems": { "$ref": "#/definitions/schema" },
                 "items": {
                     "anyOf": [
@@ -48,10 +51,14 @@
                     "default": true
                 },
                 "maxItems": { "$ref": "#/definitions/nonNegativeInteger" },
-                "minItems": { "$ref": "#/definitions/nonNegativeIntegerDefault0" },
+                "minItems": {
+                    "$ref": "#/definitions/nonNegativeIntegerDefault0"
+                },
                 "contains": { "$ref": "#/definitions/schema" },
                 "maxProperties": { "$ref": "#/definitions/nonNegativeInteger" },
-                "minProperties": { "$ref": "#/definitions/nonNegativeIntegerDefault0" },
+                "minProperties": {
+                    "$ref": "#/definitions/nonNegativeIntegerDefault0"
+                },
                 "required": { "$ref": "#/definitions/stringArray" },
                 "additionalProperties": { "$ref": "#/definitions/schema" },
                 "definitions": {
@@ -97,7 +104,30 @@
                 "allOf": { "$ref": "#/definitions/schemaArray" },
                 "anyOf": { "$ref": "#/definitions/schemaArray" },
                 "oneOf": { "$ref": "#/definitions/schemaArray" },
-                "not": { "$ref": "#/definitions/schema" }
+                "not": { "$ref": "#/definitions/schema" },
+                "extends": {
+                    "type": "object",
+                    "properties": {
+                        "$ref": {
+                            "$ref": "#/definitions/schema/properties/$ref"
+                        },
+                        "omit": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "genericValues": {
+                            "type": "array",
+                            "items": { "$ref": "#/definitions/schema" }
+                        }
+                    },
+                    "required": ["$ref"],
+                    "default": {}
+                },
+                "genericKeys": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "generic": { "type": "string" }
             },
             "default": {}
         }

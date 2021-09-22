@@ -1,1059 +1,1042 @@
 {
-    "$id": "http://example.com/types/objects.json",
-    "definitions": {
-        "AlbumObject": {
-            "extends": { "$ref": "#/definitions/SimplifiedAlbumObject" },
-            "properties": {
-                "copyrights": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/CopyrightObject" }
+    "AlbumObject": {
+        "extends": { "$ref": "SimplifiedAlbumObject.json" },
+        "properties": {
+            "copyrights": {
+                "type": "array",
+                "items": { "$ref": "CopyrightObject.json" }
+            },
+            "external_ids": { "$ref": "ExternalIdObject.json" },
+            "genres": { "type": "array", "items": { "type": "string" } },
+            "label": { "type": "string" },
+            "popularity": { "type": "number" },
+            "tracks": {
+                "extends": {
+                    "$ref": "PagingObject.json",
+                    "genericValues": [
+                        { "$ref": "SimplifiedTrackObject.json" }
+                    ]
+                }
+            }
+        },
+        "required": [
+            "copyrights",
+            "external_ids",
+            "genres",
+            "label",
+            "popularity",
+            "tracks"
+        ]
+    },
+    "RestrictionObject": {
+        "type": "object",
+        "properties": { "reason": { "type": "string" } },
+        "required": ["reason"],
+        "additionalProperties": false
+    },
+    "ArtistObject": {
+        "extends": {
+            "$ref": "SimplifiedArtistObject.json"
+        },
+        "properties": {
+            "followers": { "$ref": "FollowersObject.json" },
+            "genres": { "type": "array", "items": { "type": "string" } },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
+            },
+            "popularity": { "type": "number" }
+        },
+        "required": ["followers", "genres", "images", "popularity"]
+    },
+    "AudioAnalysisObject": {
+        "type": "object",
+        "properties": {
+            "meta": {
+                "type": "object",
+                "properties": {
+                    "analyzer_version": {
+                        "type": "string",
+                        "pattern": "\\d+.\\d+.\\d+"
+                    },
+                    "platform": { "type": "string" },
+                    "detailed_status": { "type": "string" },
+                    "status_code": { "type": "number" },
+                    "timestamp": { "type": "number" },
+                    "analysis_time": { "type": "number" },
+                    "input_process": { "type": "string" }
                 },
-                "external_ids": { "$ref": "#/definitions/ExternalIdObject" },
-                "genres": { "type": "array", "items": { "type": "string" } },
-                "label": { "type": "string" },
-                "popularity": { "type": "number" },
-                "tracks": {
-                    "extends": {
-                        "$ref": "#/definitions/PagingObject",
-                        "genericValues": [
-                            { "$ref": "#/definitions/SimplifiedTrackObject" }
-                        ]
-                    }
+                "required": [
+                    "analyzer_version",
+                    "platform",
+                    "detailed_status",
+                    "status_code",
+                    "timestamp",
+                    "analysis_time",
+                    "input_process"
+                ],
+                "additionalProperties": false
+            },
+            "track": {
+                "type": "object",
+                "properties": {
+                    "num_samples": { "type": "number" },
+                    "duration": { "type": "number" },
+                    "sample_md5": { "type": "string" },
+                    "offset_seconds": { "type": "number" },
+                    "window_seconds": { "type": "number" },
+                    "analysis_sample_rate": { "type": "number" },
+                    "analysis_channels": { "type": "number" },
+                    "end_of_fade_in": { "type": "number" },
+                    "start_of_fade_out": { "type": "number" },
+                    "loudness": { "type": "number" },
+                    "tempo": { "type": "number" },
+                    "tempo_confidence": { "type": "number" },
+                    "time_signature": { "type": "number" },
+                    "time_signature_confidence": { "type": "number" },
+                    "key": { "type": "number" },
+                    "key_confidence": { "type": "number" },
+                    "mode": { "type": "number" },
+                    "mode_confidence": { "type": "number" },
+                    "codestring": { "type": "string" },
+                    "code_version": { "type": "number" },
+                    "echoprintstring": { "type": "string" },
+                    "echoprint_version": { "type": "number" },
+                    "synchstring": { "type": "string" },
+                    "synch_version": { "type": "number" },
+                    "rhythmstring": { "type": "string" },
+                    "rhythm_version": { "type": "number" }
+                },
+                "required": [
+                    "num_samples",
+                    "duration",
+                    "sample_md5",
+                    "offset_seconds",
+                    "window_seconds",
+                    "analysis_sample_rate",
+                    "analysis_channels",
+                    "end_of_fade_in",
+                    "start_of_fade_out",
+                    "loudness",
+                    "tempo",
+                    "tempo_confidence",
+                    "time_signature",
+                    "time_signature_confidence",
+                    "key",
+                    "key_confidence",
+                    "mode",
+                    "mode_confidence",
+                    "codestring",
+                    "code_version",
+                    "echoprintstring",
+                    "echoprint_version",
+                    "synchstring",
+                    "synch_version",
+                    "rhythmstring",
+                    "rhythm_version"
+                ],
+                "additionalProperties": false
+            },
+            "bars": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "start": { "type": "number" },
+                        "duration": { "type": "number" },
+                        "confidence": { "type": "number" }
+                    },
+                    "required": ["start", "duration", "confidence"],
+                    "additionalProperties": false
                 }
             },
-            "required": [
-                "copyrights",
-                "external_ids",
-                "genres",
-                "label",
-                "popularity",
-                "tracks"
-            ]
-        },
-        "RestrictionObject": {
-            "type": "object",
-            "properties": { "reason": { "type": "string" } },
-            "required": ["reason"],
-            "additionalProperties": false
-        },
-        "ArtistObject": {
-            "extends": {
-                "$ref": "#/definitions/SimplifiedArtistObject"
-            },
-            "properties": {
-                "followers": { "$ref": "#/definitions/FollowersObject" },
-                "genres": { "type": "array", "items": { "type": "string" } },
-                "images": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "popularity": { "type": "number" }
-            },
-            "required": ["followers", "genres", "images", "popularity"]
-        },
-        "AudioAnalysisObject": {
-            "type": "object",
-            "properties": {
-                "meta": {
+            "beats": {
+                "type": "array",
+                "items": {
                     "type": "object",
                     "properties": {
-                        "analyzer_version": {
-                            "type": "string",
-                            "pattern": "\\d+.\\d+.\\d+"
-                        },
-                        "platform": { "type": "string" },
-                        "detailed_status": { "type": "string" },
-                        "status_code": { "type": "number" },
-                        "timestamp": { "type": "number" },
-                        "analysis_time": { "type": "number" },
-                        "input_process": { "type": "string" }
-                    },
-                    "required": [
-                        "analyzer_version",
-                        "platform",
-                        "detailed_status",
-                        "status_code",
-                        "timestamp",
-                        "analysis_time",
-                        "input_process"
-                    ],
-                    "additionalProperties": false
-                },
-                "track": {
-                    "type": "object",
-                    "properties": {
-                        "num_samples": { "type": "number" },
+                        "start": { "type": "number" },
                         "duration": { "type": "number" },
-                        "sample_md5": { "type": "string" },
-                        "offset_seconds": { "type": "number" },
-                        "window_seconds": { "type": "number" },
-                        "analysis_sample_rate": { "type": "number" },
-                        "analysis_channels": { "type": "number" },
-                        "end_of_fade_in": { "type": "number" },
-                        "start_of_fade_out": { "type": "number" },
+                        "confidence": { "type": "number" }
+                    },
+                    "required": ["start", "duration", "confidence"],
+                    "additionalProperties": false
+                }
+            },
+            "sections": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "start": { "type": "number" },
+                        "duration": { "type": "number" },
+                        "confidence": { "type": "number" },
                         "loudness": { "type": "number" },
                         "tempo": { "type": "number" },
                         "tempo_confidence": { "type": "number" },
-                        "time_signature": { "type": "number" },
-                        "time_signature_confidence": { "type": "number" },
                         "key": { "type": "number" },
                         "key_confidence": { "type": "number" },
                         "mode": { "type": "number" },
                         "mode_confidence": { "type": "number" },
-                        "codestring": { "type": "string" },
-                        "code_version": { "type": "number" },
-                        "echoprintstring": { "type": "string" },
-                        "echoprint_version": { "type": "number" },
-                        "synchstring": { "type": "string" },
-                        "synch_version": { "type": "number" },
-                        "rhythmstring": { "type": "string" },
-                        "rhythm_version": { "type": "number" }
+                        "time_signature": { "type": "number" },
+                        "time_signature_confidence": { "type": "number" }
                     },
                     "required": [
-                        "num_samples",
+                        "start",
                         "duration",
-                        "sample_md5",
-                        "offset_seconds",
-                        "window_seconds",
-                        "analysis_sample_rate",
-                        "analysis_channels",
-                        "end_of_fade_in",
-                        "start_of_fade_out",
+                        "confidence",
                         "loudness",
                         "tempo",
                         "tempo_confidence",
-                        "time_signature",
-                        "time_signature_confidence",
                         "key",
                         "key_confidence",
                         "mode",
                         "mode_confidence",
-                        "codestring",
-                        "code_version",
-                        "echoprintstring",
-                        "echoprint_version",
-                        "synchstring",
-                        "synch_version",
-                        "rhythmstring",
-                        "rhythm_version"
+                        "time_signature",
+                        "time_signature_confidence"
                     ],
                     "additionalProperties": false
-                },
-                "bars": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "start": { "type": "number" },
-                            "duration": { "type": "number" },
-                            "confidence": { "type": "number" }
-                        },
-                        "required": ["start", "duration", "confidence"],
-                        "additionalProperties": false
-                    }
-                },
-                "beats": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "start": { "type": "number" },
-                            "duration": { "type": "number" },
-                            "confidence": { "type": "number" }
-                        },
-                        "required": ["start", "duration", "confidence"],
-                        "additionalProperties": false
-                    }
-                },
-                "sections": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "start": { "type": "number" },
-                            "duration": { "type": "number" },
-                            "confidence": { "type": "number" },
-                            "loudness": { "type": "number" },
-                            "tempo": { "type": "number" },
-                            "tempo_confidence": { "type": "number" },
-                            "key": { "type": "number" },
-                            "key_confidence": { "type": "number" },
-                            "mode": { "type": "number" },
-                            "mode_confidence": { "type": "number" },
-                            "time_signature": { "type": "number" },
-                            "time_signature_confidence": { "type": "number" }
-                        },
-                        "required": [
-                            "start",
-                            "duration",
-                            "confidence",
-                            "loudness",
-                            "tempo",
-                            "tempo_confidence",
-                            "key",
-                            "key_confidence",
-                            "mode",
-                            "mode_confidence",
-                            "time_signature",
-                            "time_signature_confidence"
-                        ],
-                        "additionalProperties": false
-                    }
-                },
-                "segments": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "start": { "type": "number" },
-                            "duration": { "type": "number" },
-                            "confidence": { "type": "number" },
-                            "loudness_start": { "type": "number" },
-                            "loudness_max_time": { "type": "number" },
-                            "loudness_max": { "type": "number" },
-                            "loudness_end": { "type": "number" },
-                            "pitches": {
-                                "type": "array",
-                                "items": { "type": "number" }
-                            },
-                            "timbre": {
-                                "type": "array",
-                                "items": { "type": "number" }
-                            }
-                        },
-                        "required": [
-                            "start",
-                            "duration",
-                            "confidence",
-                            "loudness_start",
-                            "loudness_max_time",
-                            "loudness_max",
-                            "loudness_end",
-                            "pitches",
-                            "timbre"
-                        ],
-                        "additionalProperties": false
-                    }
-                },
-                "tatums": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "start": { "type": "number" },
-                            "duration": { "type": "number" },
-                            "confidence": { "type": "number" }
-                        },
-                        "required": ["start", "duration", "confidence"],
-                        "additionalProperties": false
-                    }
                 }
             },
-            "required": [
-                "meta",
-                "track",
-                "bars",
-                "beats",
-                "sections",
-                "segments",
-                "tatums"
-            ],
-            "additionalProperties": false
-        },
-        "AudioFeaturesObject": {
-            "type": "object",
-            "properties": {
-                "acousticness": { "type": "number" },
-                "analysis_url": { "type": "string" },
-                "danceability": { "type": "number" },
-                "duration_ms": { "type": "integer" },
-                "energy": { "type": "number" },
-                "id": { "type": "string" },
-                "instrumentalness": { "type": "number" },
-                "key": { "type": "integer" },
-                "liveness": { "type": "number" },
-                "loudness": { "type": "number" },
-                "mode": { "type": "integer" },
-                "speechiness": { "type": "number" },
-                "tempo": { "type": "number" },
-                "time_signature": { "type": "integer" },
-                "track_href": { "type": "string" },
-                "type": { "type": "string", "const": "audio_features" },
-                "uri": { "type": "string" },
-                "valence": { "type": "number" }
-            },
-            "required": [
-                "acousticness",
-                "analysis_url",
-                "danceability",
-                "duration_ms",
-                "energy",
-                "id",
-                "instrumentalness",
-                "key",
-                "liveness",
-                "loudness",
-                "mode",
-                "speechiness",
-                "tempo",
-                "time_signature",
-                "track_href",
-                "type",
-                "uri",
-                "valence"
-            ],
-            "additionalProperties": false
-        },
-        "CategoryObject": {
-            "type": "object",
-            "properties": {
-                "href": { "type": "string" },
-                "icons": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "id": { "type": "string" },
-                "name": { "type": "string" }
-            },
-            "required": ["href", "icons", "id", "name"],
-            "additionalProperties": false
-        },
-        "ContextObject": {
-            "type": "object",
-            "genericKeys": ["T"],
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "generic": "T"
-                },
-                "href": { "type": "string" },
-                "external_urls": { "$ref": "#/definitions/ExternalUrlObject" },
-                "uri": { "type": "string" }
-            },
-            "required": ["type", "href", "external_urls", "uri"]
-        },
-        "CopyrightObject": {
-            "type": "object",
-            "properties": {
-                "text": { "type": "string" },
-                "type": { "type": "string", "enum": ["C", "P"] }
-            },
-            "required": ["text", "type"],
-            "additionalProperties": false
-        },
-        "CurrentlyPlayingContextObject": {
-            "extends": { "$ref": "#/definitions/CurrentlyPlayingObject" },
-            "properties": {
-                "actions": { "$ref": "#/definitions/DisallowsObject" },
-                "device": { "$ref": "#/definitions/DeviceObject" },
-                "repeat_state": { "type": "string" },
-                "shuffle_state": { "type": "string" }
-            },
-            "required": ["actions", "device", "repeat_state", "shuffle_state"]
-        },
-        "CurrentlyPlayingObject": {
-            "type": "object",
-            "properties": {
-                "context": {
-                    "type": ["object", "null"],
-                    "extends": {
-                        "$ref": "#/definitions/ContextObject",
-                        "genericValues": [{ "enum": ["track", "episode"] }]
-                    }
-                },
-                "currently_playing_type": {},
-                "is_playing": { "type": "boolean" },
-                "item": {
-                    "type": ["object", "null"],
-                    "$ref": "#/definitions/TrackObject"
-                },
-                "progress_ms": { "type": ["number", "null"] },
-                "timestamp": { "type": "number" }
-            },
-            "required": [
-                "context",
-                "currently_playing_type",
-                "is_playing",
-                "item",
-                "progress_ms",
-                "timestamp"
-            ],
-            "additionalProperties": false
-        },
-        "CursorObject": {
-            "type": "object",
-            "properties": { "after": { "type": ["string", "null"] } },
-            "required": ["after"],
-            "additionalProperties": false
-        },
-        "CursorPagingObject": {
-            "type": "object",
-            "genericKeys": ["T"],
-            "extends": {
-                "$ref": "#/definitions/PagingObject",
-                "omit": ["offset", "previous"],
-                "genericValues": [{ "generic": "T" }]
-            },
-            "properties": {
-                "cursors": { "$ref": "#/definitions/CursorObject" }
-            },
-            "required": ["cursors"]
-        },
-        "DeviceObject": {
-            "type": "object",
-            "properties": {
-                "id": { "type": ["string", "null"] },
-                "is_active": { "type": "boolean" },
-                "is_private_session": { "type": "boolean" },
-                "is_restricted": { "type": "boolean" },
-                "name": { "type": "string" },
-                "type": { "type": "string" },
-                "volume_percent": { "type": ["number", "null"] }
-            },
-            "required": [
-                "id",
-                "is_active",
-                "is_private_session",
-                "is_restricted",
-                "name",
-                "type",
-                "volume_percent"
-            ],
-            "additionalProperties": false
-        },
-        "DisallowsObject": {
-            "type": "object",
-            "properties": {
-                "interrupting_playback": { "type": "boolean" },
-                "pausing": { "type": "boolean" },
-                "resuming": { "type": "boolean" },
-                "seeking": { "type": "boolean" },
-                "skipping_next": { "type": "boolean" },
-                "skipping_prev": { "type": "boolean" },
-                "toggling_repeat_context": { "type": "boolean" },
-                "toggling_repeat_track": { "type": "boolean" },
-                "toggling_shuffle": { "type": "boolean" },
-                "transferring_playback": { "type": "boolean" }
-            },
-            "additionalProperties": false
-        },
-        "EpisodeObject": {
-            "extends": { "$ref": "#/definitions/SimplifiedEpisodeObject" },
-            "properties": {
-                "show": { "$ref": "#/definitions/SimplifiedShowObject" }
-            },
-            "required": ["show"]
-        },
-        "ErrorObject": {
-            "type": "object",
-            "properties": {
-                "status": { "type": "number" },
-                "message": { "type": "string" }
-            },
-            "required": ["status", "message"],
-            "additionalProperties": false
-        },
-        "ExplicitContentSettingsObject": {
-            "type": "object",
-            "properties": {
-                "filter_enabled": { "type": "boolean" },
-                "filter_locked": { "type": "boolean" }
-            },
-            "required": ["filter_enabled", "filter_locked"],
-            "additionalProperties": false
-        },
-        "ExternalIdObject": {
-            "type": "object",
-            "properties": {
-                "isrc": { "type": "string" },
-                "ean": { "type": "string" },
-                "upc": { "type": "string" }
-            },
-            "additionalProperties": false
-        },
-        "ExternalUrlObject": {
-            "type": "object",
-            "properties": { "spotify": { "type": "string" } },
-            "required": ["spotify"],
-            "additionalProperties": false
-        },
-        "FollowersObject": {
-            "type": "object",
-            "properties": {
-                "href": { "type": "string" },
-                "total": { "type": "number" }
-            },
-            "required": ["href", "total"],
-            "additionalProperties": false
-        },
-        "ImageObject": {
-            "type": "object",
-            "properties": {
-                "height": { "type": ["number", "null"] },
-                "url": { "type": "string" },
-                "width": { "type": ["number", "null"] }
-            },
-            "required": ["height", "url", "width"],
-            "additionalProperties": false
-        },
-        "LinkedTrackObject": {
-            "type": "object",
-            "properties": {
-                "external_urls": { "$ref": "#/definitions/ExternalUrlObject" },
-                "href": { "type": "string" },
-                "id": { "type": "string" },
-                "type": { "type": "string", "const": "track" },
-                "uri": { "type": "string" }
-            },
-            "required": ["external_urls", "href", "id", "type", "uri"],
-            "additionalProperties": false
-        },
-        "PagingObject": {
-            "type": "object",
-            "genericKeys": ["T"],
-            "properties": {
-                "href": { "type": "string" },
-                "items": { "type": "array", "items": { "generic": "T" } },
-                "limit": { "type": "number" },
-                "next": { "type": ["string", "null"] },
-                "offset": { "type": "number" },
-                "previous": { "type": ["string", "null"] },
-                "total": { "type": "number" }
-            },
-            "required": [
-                "href",
-                "items",
-                "limit",
-                "next",
-                "offset",
-                "previous",
-                "total"
-            ],
-            "additionalProperties": false
-        },
-        "PlayHistoryObject": {
-            "type": "object",
-            "properties": {
-                "context": {
-                    "extends": {
-                        "$ref": "#/definitions/ContextObject",
-                        "genericValues": [{ "enum": ["album", "playlist"] }]
-                    }
-                },
-                "played_at": { "type": "string" },
-                "track": { "$ref": "#/definitions/SimplifiedTrackObject" }
-            },
-            "required": ["context", "played_at", "track"],
-            "additionalProperties": false
-        },
-        "PlayerErrorObject": {
-            "type": "object",
-            "properties": {
-                "messaage": { "type": "string" },
-                "reason": {
-                    "type": "string",
-                    "enum": [
-                        "NO_PREV_TRACK",
-                        "NO_NEXT_TRACK",
-                        "NO_SPECIFIC_TRACK",
-                        "ALREADY_PAUSED",
-                        "NOT_PAUSED",
-                        "NOT_PLAYING_LOCALLY",
-                        "NOT_PLAYING_TRACK",
-                        "NOT_PLAYING_CONTEXT",
-                        "ENDLESS_CONTEXT",
-                        "CONTEXT_DISALLOW",
-                        "ALREADY_PLAYING",
-                        "RATE_LIMITED",
-                        "REMOTE_CONTROL_DISALLOW",
-                        "DEVICE_NOT_CONTROLLABLE",
-                        "VOLUME_CONTROL_DISALLOW",
-                        "NO_ACTIVE_DEVICE",
-                        "PREMIUM_REQUIRED",
-                        "UNKNOWN"
-                    ]
-                },
-                "status": { "type": "number" }
-            },
-            "required": ["messaage", "reason", "status"],
-            "additionalProperties": false
-        },
-        "PlaylistObject": {
-            "extends": {
-                "$ref": "#/definitions/SimplifiedPlaylistObject",
-                "omit": ["tracks"]
-            },
-            "properties": {
-                "followers": { "$ref": "#/definitions/FollowersObject" },
-                "tracks": {
-                    "extends": {
-                        "$ref": "#/definitions/PagingObject",
-                        "genericValues": [{ "$ref": "#/definitions/PlaylistTrackObject" }]
-                    }
-                }
-            },
-            "required": [
-                "followers",
-                "tracks"
-            ]
-        },
-        "PlaylistTrackObject": {
-            "type": "object",
-            "properties": {
-                "added_at": { "type": ["string", "null"] },
-                "added_by": {
-                    "type": ["object", "null"],
-                    "extends": {
-                        "$ref": "#/definitions/PublicUserObject",
-                        "omit": ["display_name", "followers"]
-                    }
-                },
-                "is_local": { "type": "boolean" },
-                "track": { "$ref": "#/definitions/TrackObject" },
-                "primary_color": { "type": "null" },
-                "video_thumbnail": {
+            "segments": {
+                "type": "array",
+                "items": {
                     "type": "object",
-                    "properties": { "url": { "type": "null" } },
-                    "required": ["url"],
+                    "properties": {
+                        "start": { "type": "number" },
+                        "duration": { "type": "number" },
+                        "confidence": { "type": "number" },
+                        "loudness_start": { "type": "number" },
+                        "loudness_max_time": { "type": "number" },
+                        "loudness_max": { "type": "number" },
+                        "loudness_end": { "type": "number" },
+                        "pitches": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                        },
+                        "timbre": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                        }
+                    },
+                    "required": [
+                        "start",
+                        "duration",
+                        "confidence",
+                        "loudness_start",
+                        "loudness_max_time",
+                        "loudness_max",
+                        "loudness_end",
+                        "pitches",
+                        "timbre"
+                    ],
                     "additionalProperties": false
                 }
             },
-            "required": [
-                "added_at",
-                "added_by",
-                "is_local",
-                "track",
-                "primary_color",
-                "video_thumbnail"
-            ],
-            "additionalProperties": false
+            "tatums": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "start": { "type": "number" },
+                        "duration": { "type": "number" },
+                        "confidence": { "type": "number" }
+                    },
+                    "required": ["start", "duration", "confidence"],
+                    "additionalProperties": false
+                }
+            }
         },
-        "PlaylistTracksRefObject": {
-            "type": "object",
-            "properties": {
-                "href": { "type": "string" },
-                "total": { "type": "number" }
+        "required": [
+            "meta",
+            "track",
+            "bars",
+            "beats",
+            "sections",
+            "segments",
+            "tatums"
+        ],
+        "additionalProperties": false
+    },
+    "AudioFeaturesObject": {
+        "type": "object",
+        "properties": {
+            "acousticness": { "type": "number" },
+            "analysis_url": { "type": "string" },
+            "danceability": { "type": "number" },
+            "duration_ms": { "type": "integer" },
+            "energy": { "type": "number" },
+            "id": { "type": "string" },
+            "instrumentalness": { "type": "number" },
+            "key": { "type": "integer" },
+            "liveness": { "type": "number" },
+            "loudness": { "type": "number" },
+            "mode": { "type": "integer" },
+            "speechiness": { "type": "number" },
+            "tempo": { "type": "number" },
+            "time_signature": { "type": "integer" },
+            "track_href": { "type": "string" },
+            "type": { "type": "string", "const": "audio_features" },
+            "uri": { "type": "string" },
+            "valence": { "type": "number" }
+        },
+        "required": [
+            "acousticness",
+            "analysis_url",
+            "danceability",
+            "duration_ms",
+            "energy",
+            "id",
+            "instrumentalness",
+            "key",
+            "liveness",
+            "loudness",
+            "mode",
+            "speechiness",
+            "tempo",
+            "time_signature",
+            "track_href",
+            "type",
+            "uri",
+            "valence"
+        ],
+        "additionalProperties": false
+    },
+    "CategoryObject": {
+        "type": "object",
+        "properties": {
+            "href": { "type": "string" },
+            "icons": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
             },
-            "required": ["href", "total"],
-            "additionalProperties": false
+            "id": { "type": "string" },
+            "name": { "type": "string" }
         },
-        "PrivateUserObject": {
-            "extends": { "$ref": "#/definitions/PublicUserObject" },
-            "properties": {
-                "country": { "type": "string" },
-                "explicit_content": {
-                    "$ref": "#/definitions/ExplicitContentSettingsObject"
-                },
-                "email": { "type": ["string", "null"] },
-                "product": { "type": "string" }
+        "required": ["href", "icons", "id", "name"],
+        "additionalProperties": false
+    },
+    "ContextObject": {
+        "type": "object",
+        "genericKeys": ["T"],
+        "properties": {
+            "type": {
+                "type": "string",
+                "generic": "T"
             },
-            "required": [
-                "country",
-                "explicit_content",
-                "email",
-                "product"
-            ]
+            "href": { "type": "string" },
+            "external_urls": { "$ref": "ExternalUrlObject.json" },
+            "uri": { "type": "string" }
         },
-        "PublicUserObject": {
-            "type": "object",
-            "properties": {
-                "display_name": { "type": ["string", "null"] },
-                "external_urls": { "$ref": "#/definitions/ExternalUrlObject" },
-                "followers": { "$ref": "#/definitions/FollowersObject" },
-                "href": { "type": "string" },
-                "id": { "type": "string" },
-                "images": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "type": { "type": "string", "const": "user" },
-                "uri": { "type": "string" }
-            },
-            "required": [
-                "display_name",
-                "external_urls",
-                "followers",
-                "href",
-                "id",
-                "type",
-                "uri"
-            ],
-            "additionalProperties": false
+        "required": ["type", "href", "external_urls", "uri"]
+    },
+    "CopyrightObject": {
+        "type": "object",
+        "properties": {
+            "text": { "type": "string" },
+            "type": { "type": "string", "enum": ["C", "P"] }
         },
-        "RecommendationSeedObject": {
-            "type": "object",
-            "properties": {
-                "afterFilteringSize": { "type": "number" },
-                "afterRelinkingSize": { "type": "number" },
-                "href": { "type": "string" },
-                "id": { "type": "string" },
-                "initialPoolSize": { "type": "number" },
-                "type": {
-                    "type": "string",
-                    "enum": ["ARTIST", "TRACK", "GENRE"]
+        "required": ["text", "type"],
+        "additionalProperties": false
+    },
+    "CurrentlyPlayingContextObject": {
+        "extends": { "$ref": "CurrentlyPlayingObject.json" },
+        "properties": {
+            "actions": { "$ref": "DisallowsObject.json" },
+            "device": { "$ref": "DeviceObject.json" },
+            "repeat_state": { "type": "string" },
+            "shuffle_state": { "type": "string" }
+        },
+        "required": ["actions", "device", "repeat_state", "shuffle_state"]
+    },
+    "CurrentlyPlayingObject": {
+        "type": "object",
+        "properties": {
+            "context": {
+                "type": ["object", "null"],
+                "extends": {
+                    "$ref": "ContextObject.json",
+                    "genericValues": [{ "enum": ["track", "episode"] }]
                 }
             },
-            "required": [
-                "afterFilteringSize",
-                "afterRelinkingSize",
-                "href",
-                "id",
-                "initialPoolSize",
-                "type"
-            ],
-            "additionalProperties": false
+            "currently_playing_type": {},
+            "is_playing": { "type": "boolean" },
+            "item": {
+                "type": ["object", "null"],
+                "$ref": "TrackObject.json"
+            },
+            "progress_ms": { "type": ["number", "null"] },
+            "timestamp": { "type": "number" }
         },
-        "RecommendationsObject": {
-            "type": "object",
-            "properties": {
-                "seeds": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RecommendationSeedObject"
-                    }
-                },
-                "tracks": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/TrackObject" }
+        "required": [
+            "context",
+            "currently_playing_type",
+            "is_playing",
+            "item",
+            "progress_ms",
+            "timestamp"
+        ],
+        "additionalProperties": false
+    },
+    "CursorObject": {
+        "type": "object",
+        "properties": { "after": { "type": ["string", "null"] } },
+        "required": ["after"],
+        "additionalProperties": false
+    },
+    "CursorPagingObject": {
+        "type": "object",
+        "genericKeys": ["T"],
+        "extends": {
+            "$ref": "PagingObject.json",
+            "omit": ["offset", "previous"],
+            "genericValues": [{ "generic": "T" }]
+        },
+        "properties": {
+            "cursors": { "$ref": "CursorObject.json" }
+        },
+        "required": ["cursors"]
+    },
+    "DeviceObject": {
+        "type": "object",
+        "properties": {
+            "id": { "type": ["string", "null"] },
+            "is_active": { "type": "boolean" },
+            "is_private_session": { "type": "boolean" },
+            "is_restricted": { "type": "boolean" },
+            "name": { "type": "string" },
+            "type": { "type": "string" },
+            "volume_percent": { "type": ["number", "null"] }
+        },
+        "required": [
+            "id",
+            "is_active",
+            "is_private_session",
+            "is_restricted",
+            "name",
+            "type",
+            "volume_percent"
+        ],
+        "additionalProperties": false
+    },
+    "DisallowsObject": {
+        "type": "object",
+        "properties": {
+            "interrupting_playback": { "type": "boolean" },
+            "pausing": { "type": "boolean" },
+            "resuming": { "type": "boolean" },
+            "seeking": { "type": "boolean" },
+            "skipping_next": { "type": "boolean" },
+            "skipping_prev": { "type": "boolean" },
+            "toggling_repeat_context": { "type": "boolean" },
+            "toggling_repeat_track": { "type": "boolean" },
+            "toggling_shuffle": { "type": "boolean" },
+            "transferring_playback": { "type": "boolean" }
+        },
+        "additionalProperties": false
+    },
+    "EpisodeObject": {
+        "extends": { "$ref": "SimplifiedEpisodeObject.json" },
+        "properties": {
+            "show": { "$ref": "SimplifiedShowObject.json" }
+        },
+        "required": ["show"]
+    },
+    "ErrorObject": {
+        "type": "object",
+        "properties": {
+            "status": { "type": "number" },
+            "message": { "type": "string" }
+        },
+        "required": ["status", "message"],
+        "additionalProperties": false
+    },
+    "ExplicitContentSettingsObject": {
+        "type": "object",
+        "properties": {
+            "filter_enabled": { "type": "boolean" },
+            "filter_locked": { "type": "boolean" }
+        },
+        "required": ["filter_enabled", "filter_locked"],
+        "additionalProperties": false
+    },
+    "ExternalIdObject": {
+        "type": "object",
+        "properties": {
+            "isrc": { "type": "string" },
+            "ean": { "type": "string" },
+            "upc": { "type": "string" }
+        },
+        "additionalProperties": false
+    },
+    "ExternalUrlObject": {
+        "type": "object",
+        "properties": { "spotify": { "type": "string" } },
+        "required": ["spotify"],
+        "additionalProperties": false
+    },
+    "FollowersObject": {
+        "type": "object",
+        "properties": {
+            "href": { "type": "string" },
+            "total": { "type": "number" }
+        },
+        "required": ["href", "total"],
+        "additionalProperties": false
+    },
+    "ImageObject": {
+        "type": "object",
+        "properties": {
+            "height": { "type": ["number", "null"] },
+            "url": { "type": "string" },
+            "width": { "type": ["number", "null"] }
+        },
+        "required": ["height", "url", "width"],
+        "additionalProperties": false
+    },
+    "LinkedTrackObject": {
+        "type": "object",
+        "properties": {
+            "external_urls": { "$ref": "ExternalUrlObject.json" },
+            "href": { "type": "string" },
+            "id": { "type": "string" },
+            "type": { "type": "string", "const": "track" },
+            "uri": { "type": "string" }
+        },
+        "required": ["external_urls", "href", "id", "type", "uri"],
+        "additionalProperties": false
+    },
+    "PagingObject": {
+        "type": "object",
+        "genericKeys": ["T"],
+        "properties": {
+            "href": { "type": "string" },
+            "items": { "type": "array", "items": { "generic": "T" } },
+            "limit": { "type": "number" },
+            "next": { "type": ["string", "null"] },
+            "offset": { "type": "number" },
+            "previous": { "type": ["string", "null"] },
+            "total": { "type": "number" }
+        },
+        "required": [
+            "href",
+            "items",
+            "limit",
+            "next",
+            "offset",
+            "previous",
+            "total"
+        ],
+        "additionalProperties": false
+    },
+    "PlayHistoryObject": {
+        "type": "object",
+        "properties": {
+            "context": {
+                "extends": {
+                    "$ref": "ContextObject.json",
+                    "genericValues": [{ "enum": ["album", "playlist"] }]
                 }
             },
-            "required": ["seeds", "tracks"],
-            "additionalProperties": false
+            "played_at": { "type": "string" },
+            "track": { "$ref": "SimplifiedTrackObject.json" }
         },
-        "ResumePointObject": {
-            "type": "object",
-            "properties": {
-                "fully_played": { "type": "boolean" },
-                "resume_position_ms": { "type": "number" }
+        "required": ["context", "played_at", "track"],
+        "additionalProperties": false
+    },
+    "PlayerErrorObject": {
+        "type": "object",
+        "properties": {
+            "messaage": { "type": "string" },
+            "reason": {
+                "type": "string",
+                "enum": [
+                    "NO_PREV_TRACK",
+                    "NO_NEXT_TRACK",
+                    "NO_SPECIFIC_TRACK",
+                    "ALREADY_PAUSED",
+                    "NOT_PAUSED",
+                    "NOT_PLAYING_LOCALLY",
+                    "NOT_PLAYING_TRACK",
+                    "NOT_PLAYING_CONTEXT",
+                    "ENDLESS_CONTEXT",
+                    "CONTEXT_DISALLOW",
+                    "ALREADY_PLAYING",
+                    "RATE_LIMITED",
+                    "REMOTE_CONTROL_DISALLOW",
+                    "DEVICE_NOT_CONTROLLABLE",
+                    "VOLUME_CONTROL_DISALLOW",
+                    "NO_ACTIVE_DEVICE",
+                    "PREMIUM_REQUIRED",
+                    "UNKNOWN"
+                ]
             },
-            "required": ["fully_played", "resume_position_ms"],
-            "additionalProperties": false
+            "status": { "type": "number" }
         },
-        "SavedAlbumObject": {
-            "type": "object",
-            "properties": {
-                "added_at": { "type": "string" },
-                "album": { "$ref": "#/definitions/AlbumObject" }
-            },
-            "required": ["added_at", "album"],
-            "additionalProperties": false
+        "required": ["messaage", "reason", "status"],
+        "additionalProperties": false
+    },
+    "PlaylistObject": {
+        "extends": {
+            "$ref": "SimplifiedPlaylistObject.json",
+            "omit": ["tracks"]
         },
-        "SavedEpisodeObject": {
-            "type": "object",
-            "properties": {
-                "added_at": { "type": "string" },
-                "episode": { "$ref": "#/definitions/EpisodeObject" }
-            },
-            "required": ["added_at", "album"],
-            "additionalProperties": false
-        },
-        "SavedShowObject": {
-            "type": "object",
-            "properties": {
-                "added_at": { "type": "string" },
-                "show": { "$ref": "#/definitions/SimplifiedShowObject" }
-            },
-            "required": ["added_at", "album"],
-            "additionalProperties": false
-        },
-        "SavedTrackObject": {
-            "type": "object",
-            "properties": {
-                "added_at": { "type": "string" },
-                "track": { "$ref": "#/definitions/TrackObject" }
-            },
-            "required": ["added_at", "album"],
-            "additionalProperties": false
-        },
-        "ShowObject": {
-            "extends": { "$ref": "#/definitions/SimplifiedShowObject" },
-            "properties": {
-                "album": { "$ref": "#/definitions/SimplifiedAlbumObject" },
-                "external_ids": { "$ref": "#/definitions/ExternalIdObject" },
-                "popularity": { "type": "number" },
-                "episode": { "type": "boolean" },
-                "track": { "type": "boolean" }
-            },
-            "required": [
-                "album",
-                "external_ids",
-                "popularity"
-            ]
-        },
-        "SimplifiedAlbumObject": {
-            "extends": {
-                "$ref": "#/definitions/ContextObject",
-                "genericValues": [{ "const": "album" }]
-            },
-            "properties": {
-                "album_group": {
-                    "type": "string",
-                    "enum": ["album", "single", "compilation", "appears_on"]
-                },
-                "album_type": {
-                    "type": "string",
-                    "enum": ["album", "single", "compilation"]
-                },
-                "artists": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/SimplifiedArtistObject" }
-                },
-                "available_markets": {
-                    "type": "array",
-                    "items": { "type": "string" }
-                },
-                "id": { "type": "string" },
-                "images": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "name": { "type": "string" },
-                "release_date": { "type": "string" },
-                "release_date_precision": {
-                    "type": "string",
-                    "enum": ["year", "month", "day"]
-                },
-                "restrictions": { "$ref": "#/definitions/RestrictionObject" },
-                "total_tracks": { "type": "number" }
-            },
-            "required": [
-                "album_type",
-                "artists",
-                "id",
-                "images",
-                "name",
-                "release_date",
-                "release_date_precision",
-                "total_tracks"
-            ]
-        },
-        "SimplifiedArtistObject": {
-            "extends": {
-                "$ref": "#/definitions/ContextObject",
-                "genericValues": [{ "const": "artist" }]
-            },
-            "properties": {
-                "id": { "type": "string" },
-                "name": { "type": "string" }
-            },
-            "required": ["id", "name"]
-        },
-        "SimplifiedEpisodeObject": {
-            "extends": {
-                "$ref": "#/definitions/ContextObject",
-                "genericValues": [{ "const": "episode" }]
-            },
-            "properties": {
-                "audio_preview_url": { "type": ["string", "null"] },
-                "duration_ms": { "type": "number" },
-                "explicit": { "type": "boolean" },
-                "html_description": { "type": "string" },
-                "id": { "type": "string" },
-                "images": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "is_externally_hosted": { "type": "boolean" },
-                "is_playable": { "type": "boolean" },
-                "language": { "type": "string" },
-                "languages": { "type": "array", "items": { "type": "string" } },
-                "name": { "type": "string" },
-                "release_date": { "type": "string" },
-                "release_date_precision": {
-                    "type": "string",
-                    "enum": ["year", "month", "day"]
-                },
-                "resume_point": { "$ref": "#/definitions/ResumePointObject" }
-            },
-            "required": [
-                "audio_preview_url",
-                "description",
-                "duration_ms",
-                "explicit",
-                "html_description",
-                "id",
-                "images",
-                "is_externally_hosted",
-                "is_playable",
-                "language",
-                "name",
-                "release_date",
-                "release_date_precision"
-            ]
-        },
-        "SimplifiedPlaylistObject": {
-            "extends": {
-                "$ref": "#/definitions/ContextObject",
-                "genericValues": [{ "const": "playlist" }]
-            },
-            "properties": {
-                "collaborative": { "type": "boolean" },
-                "id": { "type": "string" },
-                "images": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "name": { "type": "string" },
-                "owner": {
-                    "extends": {
-                        "$ref": "#/definitions/PublicUserObject",
-                        "omit": ["followers"]
-                    }
-                },
-                "public": { "type": ["boolean", "null"] },
-                "snapshot_id": { "type": "string" },
-                "tracks": {
-                    "anyOf": [
-                        { "$ref": "#/definitions/PlaylistTracksRefObject" },
-                        { "type": "null" }
+        "properties": {
+            "followers": { "$ref": "FollowersObject.json" },
+            "tracks": {
+                "extends": {
+                    "$ref": "PagingObject.json",
+                    "genericValues": [
+                        { "$ref": "PlaylistTrackObject.json" }
                     ]
-                },
-                "primary_color": { "type": "null" }
-            },
-            "required": [
-                "collaborative",
-                "description",
-                "id",
-                "images",
-                "name",
-                "public",
-                "snapshot_id",
-                "tracks",
-                "primary_color"
-            ]
+                }
+            }
         },
-        "SimplifiedShowObject": {
-            "extends": {
-                "$ref": "#/definitions/ContextObject",
-                "genericValues": [{ "const": "show" }]
+        "required": ["followers", "tracks"]
+    },
+    "PlaylistTrackObject": {
+        "type": "object",
+        "properties": {
+            "added_at": { "type": ["string", "null"] },
+            "added_by": {
+                "type": ["object", "null"],
+                "extends": {
+                    "$ref": "PublicUserObject.json",
+                    "omit": ["display_name", "followers"]
+                }
             },
-            "properties": {
-                "available_markets": {
-                    "type": "array",
-                    "items": { "type": "string" }
-                },
-                "copyrights": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/CopyrightObject" }
-                },
-                "explicit": { "type": "boolean" },
-                "html_description": { "type": "string" },
-                "id": { "type": "string" },
-                "images": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/ImageObject" }
-                },
-                "is_externally_hosted": { "type": ["boolean", "null"] },
-                "languages": { "type": "array", "items": { "type": "string" } },
-                "media_type": { "type": "string" },
-                "name": { "type": "string" },
-                "publisher": { "type": "string" },
-                "total_episodes": { "type": "number" }
-            },
-            "required": [
-                "copyrights",
-                "description",
-                "explicit",
-                "html_description",
-                "id",
-                "images",
-                "is_externally_hosted",
-                "languages",
-                "media_type",
-                "name",
-                "publisher",
-                "total_episodes"
-            ]
+            "is_local": { "type": "boolean" },
+            "track": { "$ref": "TrackObject.json" },
+            "primary_color": { "type": "null" },
+            "video_thumbnail": {
+                "type": "object",
+                "properties": { "url": { "type": "null" } },
+                "required": ["url"],
+                "additionalProperties": false
+            }
         },
-        "SimplifiedTrackObject": {
-            "extends": {
-                "$ref": "#/definitions/ContextObject",
-                "genericValues": [{ "const": "track" }]
-            },
-            "properties": {
-                "artists": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/SimplifiedArtistObject" }
-                },
-                "available_markets": {
-                    "type": "array",
-                    "items": { "type": "string" }
-                },
-                "disc_number": { "type": "number" },
-                "duration_ms": { "type": "number" },
-                "explicit": { "type": "boolean" },
-                "id": { "type": "string" },
-                "is_local": { "type": "boolean" },
-                "is_playable": { "type": "boolean" },
-                "linked_from": { "$ref": "#/definitions/LinkedTrackObject" },
-                "name": { "type": "string" },
-                "preview_url": { "type": ["string", "null"] },
-                "restrictions": { "$ref": "#/definitions/RestrictionObject" },
-                "track_number": { "type": "number" }
-            },
-            "required": [
-                "artists",
-                "disc_number",
-                "duration_ms",
-                "explicit",
-                "id",
-                "is_local",
-                "name",
-                "preview_url",
-                "track_number"
-            ]
+        "required": [
+            "added_at",
+            "added_by",
+            "is_local",
+            "track",
+            "primary_color",
+            "video_thumbnail"
+        ],
+        "additionalProperties": false
+    },
+    "PlaylistTracksRefObject": {
+        "type": "object",
+        "properties": {
+            "href": { "type": "string" },
+            "total": { "type": "number" }
         },
-        "TrackObject": {
-            "extends": {  "$ref": "#/definitions/SimplifiedTrackObject" },
-            "properties": {
-                "album": { "$ref": "#/definitions/SimplifiedAlbumObject" },
-                "external_ids": { "$ref": "#/definitions/ExternalIdObject" },
-                "popularity": { "type": "number" },
-                "episode": { "type": "boolean" },
-                "track": { "type": "boolean" }
+        "required": ["href", "total"],
+        "additionalProperties": false
+    },
+    "PrivateUserObject": {
+        "extends": { "$ref": "PublicUserObject.json" },
+        "properties": {
+            "country": { "type": "string" },
+            "explicit_content": {
+                "$ref": "ExplicitContentSettingsObject.json"
             },
-            "required": [
-                "album",
-                "external_ids",
-                "popularity"
-            ],
-            "additionalProperties": false
+            "email": { "type": ["string", "null"] },
+            "product": { "type": "string" }
         },
-        "TuneableTrackObject": {
-            "type": "object",
-            "properties": {
-                "acousticness": { "type": "number" },
-                "danceability": { "type": "number" },
-                "duration_ms": { "type": "number" },
-                "energy": { "type": "number" },
-                "instrumentalness": { "type": "number" },
-                "key": { "type": "number" },
-                "liveness": { "type": "number" },
-                "loudness": { "type": "number" },
-                "mode": { "type": "number" },
-                "popularity": { "type": "number" },
-                "speechiness": { "type": "number" },
-                "tempo": { "type": "number" },
-                "time_signature": { "type": "number" },
-                "valence": { "type": "number" }
+        "required": ["country", "explicit_content", "email", "product"]
+    },
+    "PublicUserObject": {
+        "type": "object",
+        "properties": {
+            "display_name": { "type": ["string", "null"] },
+            "external_urls": { "$ref": "ExternalUrlObject.json" },
+            "followers": { "$ref": "FollowersObject.json" },
+            "href": { "type": "string" },
+            "id": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
             },
-            "required": [
-                "acousticness",
-                "danceability",
-                "duration_ms",
-                "energy",
-                "instrumentalness",
-                "key",
-                "liveness",
-                "loudness",
-                "mode",
-                "popularity",
-                "speechiness",
-                "tempo",
-                "time_signature",
-                "valence"
-            ],
-            "additionalProperties": false
-        }
+            "type": { "type": "string", "const": "user" },
+            "uri": { "type": "string" }
+        },
+        "required": [
+            "display_name",
+            "external_urls",
+            "followers",
+            "href",
+            "id",
+            "type",
+            "uri"
+        ],
+        "additionalProperties": false
+    },
+    "RecommendationSeedObject": {
+        "type": "object",
+        "properties": {
+            "afterFilteringSize": { "type": "number" },
+            "afterRelinkingSize": { "type": "number" },
+            "href": { "type": "string" },
+            "id": { "type": "string" },
+            "initialPoolSize": { "type": "number" },
+            "type": {
+                "type": "string",
+                "enum": ["ARTIST", "TRACK", "GENRE"]
+            }
+        },
+        "required": [
+            "afterFilteringSize",
+            "afterRelinkingSize",
+            "href",
+            "id",
+            "initialPoolSize",
+            "type"
+        ],
+        "additionalProperties": false
+    },
+    "RecommendationsObject": {
+        "type": "object",
+        "properties": {
+            "seeds": {
+                "type": "array",
+                "items": {
+                    "$ref": "RecommendationSeedObject.json"
+                }
+            },
+            "tracks": {
+                "type": "array",
+                "items": { "$ref": "TrackObject.json" }
+            }
+        },
+        "required": ["seeds", "tracks"],
+        "additionalProperties": false
+    },
+    "ResumePointObject": {
+        "type": "object",
+        "properties": {
+            "fully_played": { "type": "boolean" },
+            "resume_position_ms": { "type": "number" }
+        },
+        "required": ["fully_played", "resume_position_ms"],
+        "additionalProperties": false
+    },
+    "SavedAlbumObject": {
+        "type": "object",
+        "properties": {
+            "added_at": { "type": "string" },
+            "album": { "$ref": "AlbumObject.json" }
+        },
+        "required": ["added_at", "album"],
+        "additionalProperties": false
+    },
+    "SavedEpisodeObject": {
+        "type": "object",
+        "properties": {
+            "added_at": { "type": "string" },
+            "episode": { "$ref": "EpisodeObject.json" }
+        },
+        "required": ["added_at", "album"],
+        "additionalProperties": false
+    },
+    "SavedShowObject": {
+        "type": "object",
+        "properties": {
+            "added_at": { "type": "string" },
+            "show": { "$ref": "SimplifiedShowObject.json" }
+        },
+        "required": ["added_at", "album"],
+        "additionalProperties": false
+    },
+    "SavedTrackObject": {
+        "type": "object",
+        "properties": {
+            "added_at": { "type": "string" },
+            "track": { "$ref": "TrackObject.json" }
+        },
+        "required": ["added_at", "album"],
+        "additionalProperties": false
+    },
+    "ShowObject": {
+        "extends": { "$ref": "SimplifiedShowObject.json" },
+        "properties": {
+            "album": { "$ref": "SimplifiedAlbumObject.json" },
+            "external_ids": { "$ref": "ExternalIdObject.json" },
+            "popularity": { "type": "number" },
+            "episode": { "type": "boolean" },
+            "track": { "type": "boolean" }
+        },
+        "required": ["album", "external_ids", "popularity"]
+    },
+    "SimplifiedAlbumObject": {
+        "extends": {
+            "$ref": "ContextObject.json",
+            "genericValues": [{ "const": "album" }]
+        },
+        "properties": {
+            "album_group": {
+                "type": "string",
+                "enum": ["album", "single", "compilation", "appears_on"]
+            },
+            "album_type": {
+                "type": "string",
+                "enum": ["album", "single", "compilation"]
+            },
+            "artists": {
+                "type": "array",
+                "items": { "$ref": "SimplifiedArtistObject.json" }
+            },
+            "available_markets": {
+                "type": "array",
+                "items": { "type": "string" }
+            },
+            "id": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
+            },
+            "name": { "type": "string" },
+            "release_date": { "type": "string" },
+            "release_date_precision": {
+                "type": "string",
+                "enum": ["year", "month", "day"]
+            },
+            "restrictions": { "$ref": "RestrictionObject.json" },
+            "total_tracks": { "type": "number" }
+        },
+        "required": [
+            "album_type",
+            "artists",
+            "id",
+            "images",
+            "name",
+            "release_date",
+            "release_date_precision",
+            "total_tracks"
+        ]
+    },
+    "SimplifiedArtistObject": {
+        "extends": {
+            "$ref": "ContextObject.json",
+            "genericValues": [{ "const": "artist" }]
+        },
+        "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" }
+        },
+        "required": ["id", "name"]
+    },
+    "SimplifiedEpisodeObject": {
+        "extends": {
+            "$ref": "ContextObject.json",
+            "genericValues": [{ "const": "episode" }]
+        },
+        "properties": {
+            "audio_preview_url": { "type": ["string", "null"] },
+            "duration_ms": { "type": "number" },
+            "explicit": { "type": "boolean" },
+            "html_description": { "type": "string" },
+            "id": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
+            },
+            "is_externally_hosted": { "type": "boolean" },
+            "is_playable": { "type": "boolean" },
+            "language": { "type": "string" },
+            "languages": { "type": "array", "items": { "type": "string" } },
+            "name": { "type": "string" },
+            "release_date": { "type": "string" },
+            "release_date_precision": {
+                "type": "string",
+                "enum": ["year", "month", "day"]
+            },
+            "resume_point": { "$ref": "ResumePointObject.json" }
+        },
+        "required": [
+            "audio_preview_url",
+            "description",
+            "duration_ms",
+            "explicit",
+            "html_description",
+            "id",
+            "images",
+            "is_externally_hosted",
+            "is_playable",
+            "language",
+            "name",
+            "release_date",
+            "release_date_precision"
+        ]
+    },
+    "SimplifiedPlaylistObject": {
+        "extends": {
+            "$ref": "ContextObject.json",
+            "genericValues": [{ "const": "playlist" }]
+        },
+        "properties": {
+            "collaborative": { "type": "boolean" },
+            "id": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
+            },
+            "name": { "type": "string" },
+            "owner": {
+                "extends": {
+                    "$ref": "PublicUserObject.json",
+                    "omit": ["followers"]
+                }
+            },
+            "public": { "type": ["boolean", "null"] },
+            "snapshot_id": { "type": "string" },
+            "tracks": {
+                "anyOf": [
+                    { "$ref": "PlaylistTracksRefObject.json" },
+                    { "type": "null" }
+                ]
+            },
+            "primary_color": { "type": "null" }
+        },
+        "required": [
+            "collaborative",
+            "description",
+            "id",
+            "images",
+            "name",
+            "public",
+            "snapshot_id",
+            "tracks",
+            "primary_color"
+        ]
+    },
+    "SimplifiedShowObject": {
+        "extends": {
+            "$ref": "ContextObject.json",
+            "genericValues": [{ "const": "show" }]
+        },
+        "properties": {
+            "available_markets": {
+                "type": "array",
+                "items": { "type": "string" }
+            },
+            "copyrights": {
+                "type": "array",
+                "items": { "$ref": "CopyrightObject.json" }
+            },
+            "explicit": { "type": "boolean" },
+            "html_description": { "type": "string" },
+            "id": { "type": "string" },
+            "images": {
+                "type": "array",
+                "items": { "$ref": "ImageObject.json" }
+            },
+            "is_externally_hosted": { "type": ["boolean", "null"] },
+            "languages": { "type": "array", "items": { "type": "string" } },
+            "media_type": { "type": "string" },
+            "name": { "type": "string" },
+            "publisher": { "type": "string" },
+            "total_episodes": { "type": "number" }
+        },
+        "required": [
+            "copyrights",
+            "description",
+            "explicit",
+            "html_description",
+            "id",
+            "images",
+            "is_externally_hosted",
+            "languages",
+            "media_type",
+            "name",
+            "publisher",
+            "total_episodes"
+        ]
+    },
+    "SimplifiedTrackObject": {
+        "extends": {
+            "$ref": "ContextObject.json",
+            "genericValues": [{ "const": "track" }]
+        },
+        "properties": {
+            "artists": {
+                "type": "array",
+                "items": { "$ref": "SimplifiedArtistObject.json" }
+            },
+            "available_markets": {
+                "type": "array",
+                "items": { "type": "string" }
+            },
+            "disc_number": { "type": "number" },
+            "duration_ms": { "type": "number" },
+            "explicit": { "type": "boolean" },
+            "id": { "type": "string" },
+            "is_local": { "type": "boolean" },
+            "is_playable": { "type": "boolean" },
+            "linked_from": { "$ref": "LinkedTrackObject.json" },
+            "name": { "type": "string" },
+            "preview_url": { "type": ["string", "null"] },
+            "restrictions": { "$ref": "RestrictionObject.json" },
+            "track_number": { "type": "number" }
+        },
+        "required": [
+            "artists",
+            "disc_number",
+            "duration_ms",
+            "explicit",
+            "id",
+            "is_local",
+            "name",
+            "preview_url",
+            "track_number"
+        ]
+    },
+    "TrackObject": {
+        "extends": { "$ref": "SimplifiedTrackObject.json" },
+        "properties": {
+            "album": { "$ref": "SimplifiedAlbumObject.json" },
+            "external_ids": { "$ref": "ExternalIdObject.json" },
+            "popularity": { "type": "number" },
+            "episode": { "type": "boolean" },
+            "track": { "type": "boolean" }
+        },
+        "required": ["album", "external_ids", "popularity"],
+        "additionalProperties": false
+    },
+    "TuneableTrackObject": {
+        "type": "object",
+        "properties": {
+            "acousticness": { "type": "number" },
+            "danceability": { "type": "number" },
+            "duration_ms": { "type": "number" },
+            "energy": { "type": "number" },
+            "instrumentalness": { "type": "number" },
+            "key": { "type": "number" },
+            "liveness": { "type": "number" },
+            "loudness": { "type": "number" },
+            "mode": { "type": "number" },
+            "popularity": { "type": "number" },
+            "speechiness": { "type": "number" },
+            "tempo": { "type": "number" },
+            "time_signature": { "type": "number" },
+            "valence": { "type": "number" }
+        },
+        "required": [
+            "acousticness",
+            "danceability",
+            "duration_ms",
+            "energy",
+            "instrumentalness",
+            "key",
+            "liveness",
+            "loudness",
+            "mode",
+            "popularity",
+            "speechiness",
+            "tempo",
+            "time_signature",
+            "valence"
+        ],
+        "additionalProperties": false
     }
 }

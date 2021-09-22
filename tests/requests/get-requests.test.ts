@@ -1,17 +1,13 @@
 import * as requests from '../../src/requests'
-import { Unwrap, dataPath, token, params } from '../global'
+import { responses } from '../responses'
+import { token, params } from '../global'
 import fetch, { Response } from 'node-fetch'
 import { mocked } from 'ts-jest/utils'
-import { readFileSync } from 'fs'
 
 jest.mock('node-fetch', () => ({
     __esModule: true,
     default: jest.fn(),
 }))
-
-const responses: {
-    [key in keyof typeof requests]: Unwrap<ReturnType<typeof requests[key]>>
-} = JSON.parse(readFileSync(dataPath, 'utf-8'))
 
 function spotifyUrl(endpoint: string, pathParams?: { [key: string]: string }) {
     let url = 'https://api.spotify.com/v1/' + endpoint

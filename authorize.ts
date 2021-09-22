@@ -5,6 +5,7 @@ import open from 'open'
 import { readFileSync, writeFileSync } from 'fs'
 
 export default async function authorize() {
+    dotenv.config()
     // make sure client_id and client_state are defined
     if (!('CLIENT_ID' in process.env && process.env.CLIENT_ID)) {
         throw new Error(

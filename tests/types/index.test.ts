@@ -1,63 +1,35 @@
-import schemas from './schemas'
-import { Unwrap, dataPath } from '../global'
-import type * as requests from '../../src/requests'
-import { readFileSync } from 'fs'
+import { responses } from '../responses'
+import { ajv } from './jest-ajv'
+import { testToken, testRefreshToken } from '../global'
 
-import Ajv from 'ajv'
+// describe('Authorization types', () => {
+//     test.concurrent.each([
+//         ['Token', testToken],
+//         ['RefreshToken', testRefreshToken],
+//     ])('%s', (type, data) => {
+    // const $id = `http://example.com/schemas/responses/${type}.json`
+    // const validate = ajv.getSchema($id)
+//         expect(validate).toBeDefined()
 
-const responses: {
-    [key in keyof typeof requests]: any
-} = JSON.parse(readFileSync(dataPath, 'utf-8'))
+//         expect(data).toPassValidation(validate!)
+//     })
+// })
 
-const ajv = new Ajv()
+describe('Response Types', () => {
+    const testData = (Object.keys(responses) as (keyof typeof responses)[])
+        .filter((key) => responses[key])
+        .map((key) => [key, responses[key]] as const)
 
-test.each(
-    (Object.keys(responses) as (keyof typeof responses)[]).map((key) => [key])
-)('%s', (key) => {
-    const schema = schemas[key]
-    const response = responses[key]
+    test.concurrent.each(testData)('%s', (type, data) => {
+        // get-data throw error
+        expect(data).not.toEqual(expect.any(String))
 
-    if (!(schema || response)) {
-        expect(schema).toBeUndefined()
-        expect(response).toBeNull()
-    } else {
-        // @ts-ingore
-        const validate = ajv.compile(schema as Exclude<typeof schema, null>)
-        validate(response)
+        const $id = `http://example.com/schemas/responses/${type}.json`
+        const validate = ajv.getSchema($id)
+        expect(validate).toBeDefined()
 
-        expect(validate.errors).toBeNull()
-
-        if (validate.errors) {
-            const errors = validate.errors
-            if (errors) {
-                for (const error of errors) {
-                    const path = error.instancePath
-                        .slice(1, error.instancePath.length)
-                        .split('/')
-
-                    let name = key
-                    let _schema = schema as Exclude<typeof schema, null> 
-                    let invalidValue = response
-                    for (const step of path) {
-                        name += `.${step}`
-                        _schema = _schema.properties[step]
-                        invalidValue = invalidValue[step]
-                    }
-
-                    console.error(
-                        `TypeError: ${error.keyword} error at %s${
-                            error.message ? ` - ${error.message}.` : '.'
-                        }\nSchema: %O\nValue: %O`,
-                        name,
-                        _schema,
-                        invalidValue
-                    )
-                }
-                process.exit(1)
-            } else {
-                console.error('Unknown error')
-                process.exit(1)
-            }
-        }
-    }
+        // request returns nothing
+        if (data === null) expect(validate!.schema).toMatchObject({ type: "null" })
+        else expect(data).toPassValidation(validate!)
+    })
 })

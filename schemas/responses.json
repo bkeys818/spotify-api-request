@@ -135,7 +135,6 @@
     "getCategoryPlaylists": {
         "type": "object",
         "properties": {
-            "message": { "type": "string" },
             "playlists": {
                 "extends": {
                     "$ref": "../objects/PagingObject.json",
@@ -147,7 +146,7 @@
                 }
             }
         },
-        "required": ["message", "playlists"],
+        "required": ["playlists"],
         "additionalProperties": false
     },
     "getRecommendations": {

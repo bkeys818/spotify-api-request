@@ -165,8 +165,11 @@
         "type": "object",
         "properties": {
             "episodes": {
-                "type": ["object", "null"],
-                "$ref": "../objects/EpisodeObject.json"
+                "type": "array",
+                "items": {
+                    "type": ["object", "null"],
+                    "$ref": "../objects/EpisodeObject.json"
+                }
             }
         },
         "required": ["episodes"],

@@ -478,7 +478,7 @@
     "FollowersObject": {
         "type": "object",
         "properties": {
-            "href": { "type": "string" },
+            "href": { "type": ["string", "null"] },
             "total": { "type": "number" }
         },
         "required": ["href", "total"],

@@ -760,13 +760,16 @@
     "ShowObject": {
         "extends": { "$ref": "SimplifiedShowObject.json" },
         "properties": {
-            "album": { "$ref": "SimplifiedAlbumObject.json" },
-            "external_ids": { "$ref": "ExternalIdObject.json" },
-            "popularity": { "type": "number" },
-            "episode": { "type": "boolean" },
-            "track": { "type": "boolean" }
+            "episodes": {
+                "extends": {
+                    "$ref": "PagingObject.json",
+                    "genericValues": [{
+                        "$ref": "SimplifiedEpisodeObject.json"
+                    }]
+                }
+            }
         },
-        "required": ["album", "external_ids", "popularity"]
+        "required": ["episodes"]
     },
     "SimplifiedAlbumObject": {
         "extends": {

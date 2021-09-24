@@ -168,7 +168,9 @@
                 "type": "array",
                 "items": {
                     "type": ["object", "null"],
-                    "$ref": "../objects/EpisodeObject.json"
+                    "extends": {
+                        "$ref": "../objects/EpisodeObject.json"
+                    }
                 }
             }
         },
@@ -473,6 +475,7 @@
                     "extends": {
                         "$ref": "../objects/TrackObject.json"
                     }
+                }
             }
         },
         "required": ["tracks"],

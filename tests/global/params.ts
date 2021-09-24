@@ -145,16 +145,7 @@ const params: {
         userIDs[0],
         { limit: limit, offset: offset },
     ],
-    createPlaylist: [
-        token,
-        userIDs[0],
-        {
-            name: 'Test Playlist',
-            public: false,
-            collaborative: false,
-            description: 'Some description here',
-        },
-    ],
+    createPlaylist: null as any,
     getPlaylist: [
         token,
         playlistIDs[0],
@@ -171,7 +162,7 @@ const params: {
             additional_types: 'track',
         } as any,
     ],
-    addItemsToPlaylist: [token, playlistIDs[0], { position: 0 } as any],
+    addItemsToPlaylist: null as any,
     reorderPlaylistItems: null as any,
     replacePlaylistItems: null as any,
     removeItemsFromPlaylist: null as any,

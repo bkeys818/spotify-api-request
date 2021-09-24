@@ -41,7 +41,7 @@ export async function checkStatus(res: Response) {
         return new SpotifyError('Bad Request: ' + message, 'request')
     }
 
-    if (res.status in SpotifyError.errorCodes) {
+    if (SpotifyError.errorCodes.includes(res.status)) {
         const info = SpotifyError.detailsFor(res.status)
         return new SpotifyError(info.message, info.type)
     }
@@ -120,15 +120,15 @@ const errorDetails: { [key in ErrorCode]: ErrorDetails } = {
         type: 'request',
         message: 'Too Many Requests: Rate limiting has been applied.',
     },
+    404: {
+        type: 'request',
+        message:
+            'Not Found: The requested resource could not be found. This error can be due to a temporary or permanent condition.',
+    },
     204: {
         type: 'system',
         message:
             'No Content: The request has succeeded but returns no message body.',
-    },
-    404: {
-        type: 'system',
-        message:
-            'Not Found: The requested resource could not be found. This error can be due to a temporary or permanent condition.',
     },
     500: {
         type: 'api',

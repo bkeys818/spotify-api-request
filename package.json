@@ -19,7 +19,7 @@
     "types"
   ],
   "scripts": {
-    "update-data": "ts-node -P tsconfig.json tests/types/responses/get-data.ts",
+    "update-data": "ts-node -P tsconfig.json tests/responses/get-data.ts",
     "pretest": "rimraf coverage",
     "test": "jest --coverage",
     "prebuild": "rimraf lib",

@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs'
-import type * as requests from '../../src/requests'
+import type * as requests from '../../../src/requests'
 
-export const dataPath = 'tests/responses/data.json'
+export const dataPath = 'tests/types/responses/data.json'
 
 export const responses: {
     [key in keyof typeof requests]: string | null | { [key: string]: any }

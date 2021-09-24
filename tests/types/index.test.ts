@@ -1,4 +1,4 @@
-import { responses } from '../responses'
+import { responses } from './responses'
 import { ajv } from './jest-ajv'
 import { testToken, testRefreshToken } from '../global'
 

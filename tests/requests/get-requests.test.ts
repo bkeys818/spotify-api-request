@@ -1,5 +1,5 @@
 import * as requests from '../../src/requests'
-import { responses } from '../responses'
+import { responses } from '../types/responses'
 import { token, params } from '../global'
 import fetch, { Response } from 'node-fetch'
 import { mocked } from 'ts-jest/utils'

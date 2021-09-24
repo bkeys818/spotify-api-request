@@ -135,7 +135,7 @@ const params: {
     getUserTopArtistsandTracks: [
         token,
         'artists',
-        { timeRange: 'long_term', limit: limit, offset: offset },
+        { time_range: 'long_term', limit: limit, offset: offset },
     ],
 
     // playlists

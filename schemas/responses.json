@@ -468,7 +468,11 @@
         "properties": {
             "tracks": {
                 "type": "array",
-                "items": { "$ref": "../objects/TrackObject.json" }
+                "items": {
+                    "type": ["object", "null"],
+                    "extends": {
+                        "$ref": "../objects/TrackObject.json"
+                    }
             }
         },
         "required": ["tracks"],

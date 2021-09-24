@@ -14,7 +14,7 @@ export async function getSeveralTracks(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<{ tracks: TrackObject[] }> {
+): Promise<{ tracks: (TrackObject | null)[] }> {
     const queryParameter: { [key: string]: any } = { ids: ids }
     if (options && options.market) queryParameter.market = options.market
     return await (

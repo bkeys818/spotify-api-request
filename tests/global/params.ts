@@ -192,8 +192,8 @@ const params: {
     ],
 
     // tracks
-    getSeveralTracks: [token, showIDs, { market: market }],
-    getTrack: [token, showIDs[0], { market: market }],
+    getSeveralTracks: [token, trackIds, { market: market }],
+    getTrack: [token, trackIds[0], { market: market }],
     getAudioFeaturesforSeveralTracks: [token, trackIds],
     getAudioFeaturesforTrack: [token, trackIds[0]],
     getAudioAnalysisforTrack: [token, trackIds[0]],

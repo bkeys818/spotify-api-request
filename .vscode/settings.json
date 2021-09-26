@@ -12,6 +12,6 @@
     "files.associations": {
         "*.tsconfig.json": "jsonc"
     },
-    "liveServer.settings.root": "docs/",
+    "liveServer.settings.root": "coverage/lcov-report",
     "jest.jestCommandLine": "node_modules/.bin/jest"
 }

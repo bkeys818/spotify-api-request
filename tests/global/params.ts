@@ -99,7 +99,7 @@ const params: {
     getUserFollowedArtists: [token, { type: 'artist', limit: limit } as any],
     followArtistsOrUsers: null as any,
     unfollowArtistsOrUsers: null as any,
-    getFollowingStateForArtistsOrUsers: [token, 'artist', artistIDs],
+    getFollowingStateForArtistsOrUsers: [token, 'artist', [...artistIDs, ...userIDs]],
 
     // library
     getUsersSavedAlbums: [

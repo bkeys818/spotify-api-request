@@ -202,11 +202,6 @@ export default format({
                 },
             }),
         },
-        // TODO getRecommendations
-        getRecommendations: {
-            endpoint: 'recommendations',
-            params: (params) => ({}),
-        },
         getRecommendationGenres: {
             endpoint: 'recommendations/available-genre-seeds',
             params: (_) => ({

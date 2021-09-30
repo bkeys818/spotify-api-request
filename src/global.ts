@@ -10,7 +10,7 @@ export async function sendRequest(params: {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     token: Token | string
     headers?: { [key: string]: string }
-    pathParameter?: UrlParameter
+    pathParameter?: { [key: string]: string }
     queryParameter?: UrlParameter
     bodyParameter?: { [key: string]: any } | string
 }): Promise<Response> {

@@ -95,9 +95,6 @@ export default format({
         getPlaylistItems: 'todo',
         getPlaylistCoverImage: 'todo',
     },
-    Search: {
-        searchForItem: 'todo',
-    },
     Shows: {
         getMultipleShows: 'todo',
         getShow: 'todo',

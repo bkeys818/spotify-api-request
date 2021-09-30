@@ -21,8 +21,13 @@ describe.each(testData)('$name', ({ values }) => {
             continue
         }
         const reqeust = requests[key]
-        const { endpoint, method, params: _params, response } = value
-        const paramValues = _params(params[key].slice(1) as any)
+        const { endpoint, params: _params, response } = value
+        const param = params[key]
+        if (param === null) {
+            test.todo(key)
+            continue   
+        }
+        const paramValues = _params(param.slice(1) as any)
 
         describe(reqeust, () => {
             sendReq.mockImplementation(() =>
@@ -34,17 +39,17 @@ describe.each(testData)('$name', ({ values }) => {
             )
 
             for (const testName in paramValues) {
-                const { send, expect: expectParams } = paramValues[testName]
+                const {send: sendParams, expect: expectParams} = paramValues[testName] ?? { send: [], expect: {} }
                 test(testName, () => {
                     // @ts-expect-error
-                    const res = reqeust(token, ...send)
+                    const res = reqeust(token, ...sendParams)
 
                     expect(sendReq).toBeCalledTimes(1)
                     expect(sendReq).toBeCalledWith<
                         Parameters<typeof globalSrcUtils.sendRequest>
                     >({
                         endpoint: endpoint,
-                        method: method ?? 'GET',
+                        method: 'GET',
                         token: token,
                         ...expectParams,
                     })

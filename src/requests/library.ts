@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get a list of the albums saved in the current Spotify user’s ‘Your Music’ library.
@@ -16,7 +17,7 @@ export async function getUsersSavedAlbums(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<PagingObject<SavedAlbumObject>> {
+): Promise<Responses.getCurrentUserSavedAlbums> {
     return await (
         await sendRequest({
             endpoint: 'me/albums',
@@ -36,7 +37,7 @@ export async function getUsersSavedAlbums(
 export async function saveAlbumsforCurrentUser(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.saveAlbumsForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/albums',
@@ -57,7 +58,7 @@ export async function saveAlbumsforCurrentUser(
 export async function removeAlbumsforCurrentUser(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.removeAlbumsForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/albums',
@@ -78,7 +79,7 @@ export async function removeAlbumsforCurrentUser(
 export async function checkUsersSavedAlbums(
     token: Token | string,
     ids: string[]
-): Promise<boolean[]> {
+): Promise<Responses.checkCurrentUserSavedAlbums> {
     return await (
         await sendRequest({
             endpoint: 'me/albums/contains',
@@ -105,7 +106,7 @@ export async function getUsersSavedTracks(
         /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
-): Promise<PagingObject<SavedTrackObject>> {
+): Promise<Responses.getCurrentUserSavedTracks> {
     return await (
         await sendRequest({
             endpoint: 'me/tracks',
@@ -125,7 +126,7 @@ export async function getUsersSavedTracks(
 export async function saveTracksforUser(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.saveTracksForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/tracks',
@@ -146,7 +147,7 @@ export async function saveTracksforUser(
 export async function removeUsersSavedTracks(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.removeTracksForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/tracks',
@@ -167,7 +168,7 @@ export async function removeUsersSavedTracks(
 export async function checkUsersSavedTracks(
     token: Token | string,
     ids: string[]
-): Promise<boolean[]> {
+): Promise<Responses.checkCurrentUserSavedTracks> {
     return await (
         await sendRequest({
             endpoint: 'me/tracks/contains',
@@ -204,7 +205,7 @@ export async function getUsersSavedEpisodes(
         /** The index of the first object to return. Default: 0 (i.e., the first object). Use with `limit` to get the next set of objects. */
         offset?: number
     }
-): Promise<PagingObject<SavedEpisodeObject>> {
+): Promise<Responses.getCurrentUserSavedEpisodes> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes',
@@ -226,7 +227,7 @@ export async function getUsersSavedEpisodes(
 export async function saveEpisodesforUser(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.saveEpisodesForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes',
@@ -249,7 +250,7 @@ export async function saveEpisodesforUser(
 export async function removeUsersSavedEpisodes(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.removeEpisodesForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes',
@@ -272,7 +273,7 @@ export async function removeUsersSavedEpisodes(
 export async function checkUsersSavedEpisodes(
     token: Token | string,
     ids: string[]
-): Promise<boolean[]> {
+): Promise<Responses.checkCurrentUserSavedEpisodes> {
     return await (
         await sendRequest({
             endpoint: 'me/episodes/contains',
@@ -297,7 +298,7 @@ export async function getUsersSavedShows(
         /** The index of the first show to return. Default: 0 (the first object). Use with limit to get the next set of shows. */
         offset?: number
     }
-): Promise<PagingObject<SavedShowObject>> {
+): Promise<Responses.getCurrentUserSavedShows> {
     return await (
         await sendRequest({
             endpoint: 'me/shows',
@@ -317,7 +318,7 @@ export async function getUsersSavedShows(
 export async function saveShowsforCurrentUser(
     token: Token | string,
     ids: string[]
-): Promise<void> {
+): Promise<Responses.saveShowsForCurrentUser> {
     return await (
         await sendRequest({
             endpoint: 'me/shows',
@@ -350,7 +351,7 @@ export async function removeUsersSavedShows(
          */
         market: string
     }
-): Promise<void> {
+): Promise<Responses.removeShowsForCurrentUser> {
     const queryParameter: { [key: string]: any } = { ids: ids }
     if (options) queryParameter.market = options.market
     return await (
@@ -372,7 +373,7 @@ export async function removeUsersSavedShows(
 export async function checkUsersSavedShows(
     token: Token | string,
     ids: string[]
-): Promise<boolean[]> {
+): Promise<Responses.checkCurrentUserSavedShows> {
     return await (
         await sendRequest({
             endpoint: 'me/shows/contains',

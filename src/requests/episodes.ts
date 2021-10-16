@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get Spotify catalog information for several episodes based on their Spotify IDs.
@@ -22,7 +23,7 @@ export async function getMultipleEpisodes(
          */
         market: string
     }
-): Promise<{ episodes: (EpisodeObject | null)[] }> {
+): Promise<Responses.getMultipleEpisodes> {
     const queryParameter: { [key: string]: any } = { ids: ids }
     if (options) queryParameter.market = options.market
     return await (
@@ -57,7 +58,7 @@ export async function getEpisode(
          */
         market?: string
     }
-): Promise<EpisodeObject> {
+): Promise<Responses.getEpisode> {
     return await (
         await sendRequest({
             endpoint: 'episodes/{id}',

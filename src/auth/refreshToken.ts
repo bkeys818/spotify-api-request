@@ -1,5 +1,6 @@
 import { SpotifyError } from '../error'
 import { paramsFromHash, fetchToken, redirectTo } from './global'
+import type { RefreshToken, Scope } from 'spotify-objects'
 
 interface AuthorizeRefreshTokenOptions {
     /** The client ID provided to you by Spotify when you register your application. Available from the [Developer Dashboard](https://developer.spotify.com/dashboard/). */

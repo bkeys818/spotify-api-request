@@ -1,5 +1,6 @@
 import fetch, { RequestInit, Response } from 'node-fetch'
 import { checkStatus } from './error'
+import { Token } from 'spotify-objects'
 
 type UrlParameter = {
     [key: string]: boolean | number | string | Array<boolean | number | string>

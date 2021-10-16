@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get Spotify catalog information for several artists based on their Spotify IDs.
@@ -9,9 +10,7 @@ import { sendRequest } from '../global'
 export async function getMultipleArtists(
     token: Token | string,
     ids: string[]
-): Promise<{
-    artists: (ArtistObject | null)[]
-}> {
+): Promise<Responses.getMultipleArtists> {
     return await (
         await sendRequest({
             endpoint: 'artists',
@@ -33,7 +32,7 @@ export async function getMultipleArtists(
 export async function getArtist(
     token: Token | string,
     id: string
-): Promise<ArtistObject> {
+): Promise<Responses.getArtist> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}',
@@ -60,7 +59,7 @@ export async function getArtistTopTracks(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Synonym for `country`. */
         market: string
     }
-): Promise<{ tracks: TrackObject[] }> {
+): Promise<Responses.getArtistTopTracks> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/top-tracks',
@@ -83,7 +82,7 @@ export async function getArtistTopTracks(
 export async function getArtistRelatedArtists(
     token: Token | string,
     id: string
-): Promise<{ artists: ArtistObject[] }> {
+): Promise<Responses.getArtistRelatedArtists> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/related-artists',
@@ -131,7 +130,7 @@ export async function getArtistAlbums(
         /** The index of the first album to return. Default: 0 (i.e., the first album). Use with `limit` to get the next set of albums. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedAlbumObject>> {
+): Promise<Responses.getArtistAlbums> {
     return await (
         await sendRequest({
             endpoint: 'artists/{id}/albums',

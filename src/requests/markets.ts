@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 // TODO - Make token optional
 /**
@@ -8,7 +9,7 @@ import { sendRequest } from '../global'
  */
 export async function getAvailableMarkets(
 	token: Token | string,
-): Promise<{ markets: string[] }> {
+): Promise<Responses.getAvailableMarkets> {
 	return await(
 		await sendRequest({
 			endpoint: 'markets',

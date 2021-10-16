@@ -3,6 +3,7 @@ import { createServer, RequestListener } from 'http'
 import fetch from 'node-fetch'
 import open from 'open'
 import { readFileSync, writeFileSync } from 'fs'
+import type { Token, RefreshToken } from 'spotify-objects'
 
 export default async function authorize() {
     dotenv.config()

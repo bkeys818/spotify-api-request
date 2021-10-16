@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Add the current user as a follower of a playlist.
@@ -14,7 +15,7 @@ export async function followPlaylist(
         /** Defaults to `true`. If `true` the playlist will be included in user’s public playlists, if `false` it will remain private. */
         public: boolean
     }
-): Promise<void> {
+): Promise<Responses.followPlaylist> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/followers',
@@ -36,7 +37,7 @@ export async function followPlaylist(
 export async function unfollowPlaylist(
     token: Token | string,
     playlistId: string
-): Promise<void> {
+): Promise<Responses.unfollowPlaylist> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/followers',
@@ -58,7 +59,7 @@ export async function checkIfUsersFollowPlaylist(
     token: Token | string,
     playlistId: string,
     userIds: string[]
-): Promise<boolean[]> {
+): Promise<Responses.checkIfUsersFollowPlaylist> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/followers/contains',
@@ -86,7 +87,7 @@ export async function getUserFollowedArtists<T extends 'artist'>(
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
     }
-): Promise<{ artists: CursorPagingObject<ArtistObject> }> {
+): Promise<Responses.getUserFollowedArtists> {
     return await (
         await sendRequest({
             endpoint: 'me/following',
@@ -108,7 +109,7 @@ export async function followArtistsOrUsers(
     token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
-): Promise<void> {
+): Promise<Responses.followArtistsOrUsers> {
     return await (
         await sendRequest({
             endpoint: 'me/following',
@@ -132,7 +133,7 @@ export async function unfollowArtistsOrUsers(
     token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
-): Promise<void> {
+): Promise<Responses.unfollowArtistsOrUsers> {
     return await (
         await sendRequest({
             endpoint: 'me/following',
@@ -156,7 +157,7 @@ export async function getFollowingStateForArtistsOrUsers(
     token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
-): Promise<boolean[]> {
+): Promise<Responses.getFollowingStateForArtistsOrUsers> {
     return await (
         await sendRequest({
             endpoint: 'me/following/contains',

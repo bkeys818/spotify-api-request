@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get Spotify catalog information for multiple tracks based on their Spotify IDs.
@@ -14,7 +15,7 @@ export async function getSeveralTracks(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<{ tracks: (TrackObject | null)[] }> {
+): Promise<Responses.getMultipleTracks> {
     const queryParameter: { [key: string]: any } = { ids: ids }
     if (options && options.market) queryParameter.market = options.market
     return await (
@@ -41,7 +42,7 @@ export async function getTrack(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<TrackObject> {
+): Promise<Responses.getTrack> {
     return await (
         await sendRequest({
             endpoint: 'tracks/{id}',
@@ -62,7 +63,7 @@ export async function getTrack(
 export async function getAudioFeaturesforSeveralTracks(
     token: Token | string,
     ids: string[]
-): Promise<{ audio_features: AudioFeaturesObject[] }> {
+): Promise<Responses.getAudioFeaturesForSeveralTracks> {
     return await (
         await sendRequest({
             endpoint: 'audio-features',
@@ -82,7 +83,7 @@ export async function getAudioFeaturesforSeveralTracks(
 export async function getAudioFeaturesforTrack(
     token: Token | string,
     id: string
-): Promise<AudioFeaturesObject> {
+): Promise<Responses.getAudioFeaturesForTrack> {
     return await (
         await sendRequest({
             endpoint: 'audio-features/{id}',
@@ -102,7 +103,7 @@ export async function getAudioFeaturesforTrack(
 export async function getAudioAnalysisforTrack(
     token: Token | string,
     id: string
-): Promise<AudioAnalysisObject> {
+): Promise<Responses.getAudioAnalysisForTrack> {
     return await (
         await sendRequest({
             endpoint: 'audio-analysis/{id}',

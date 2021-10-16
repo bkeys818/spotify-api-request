@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get a list of the playlists owned or followed by the current Spotify user.
@@ -16,7 +17,7 @@ export async function getListOfCurrentUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100,000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedPlaylistObject>> {
+): Promise<Responses.getListOfCurrentUserPlaylists> {
     return await (
         await sendRequest({
             endpoint: 'me/playlists',
@@ -45,7 +46,7 @@ export async function getListOfUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedPlaylistObject>> {
+): Promise<Responses.getListOfUserPlaylists> {
     return await (
         await sendRequest({
             endpoint: 'users/{user_id}/playlists',
@@ -81,7 +82,7 @@ export async function createPlaylist(
         /** Value for playlist description as displayed in Spotify Clients and in the Web API. */
         description?: string
     }
-): Promise<PlaylistObject> {
+): Promise<Responses.createPlaylist> {
     return await (
         await sendRequest({
             endpoint: 'users/{user_id}/playlists',
@@ -123,7 +124,7 @@ export async function getPlaylist(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: string
     }
-): Promise<PlaylistObject> {
+): Promise<Responses.getPlaylist> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}',
@@ -146,7 +147,7 @@ export async function getPlaylist(
  * @param [options.public]
  * @param [options.collaborative]
  * @param [options.description]
- * @return {Promise<void>}
+ * @return {Promise<Responses.>}
  */
 export async function changePlaylistDetails(
     token: Token | string,
@@ -161,7 +162,7 @@ export async function changePlaylistDetails(
         /** Value for playlist description as displayed in Spotify Clients and in the Web API. */
         description: string
     }
-): Promise<void> {
+): Promise<Responses.changePlaylistDetails> {
     await sendRequest({
         endpoint: 'playlists/{playlist_id}',
         method: 'PUT',
@@ -207,7 +208,7 @@ export async function getPlaylistItems(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: 'track' | 'episode'
     }
-): Promise<PagingObject<PlaylistTrackObject>> {
+): Promise<Responses.getPlaylistItems> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',
@@ -243,7 +244,7 @@ export async function addItemsToPlaylist(
          */
         uris?: string
     }
-): Promise<{ snapshot_id: string }> {
+): Promise<Responses.addItemsToPlaylist> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',
@@ -295,7 +296,7 @@ export async function reorderPlaylistItems(
         /** The playlist’s snapshot ID against which you want to make the changes. */
         snapshot_id?: string
     }
-): Promise<{ snapshot_id: string }> {
+): Promise<Responses.reorderOrReplacePlaylistItems> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',
@@ -323,7 +324,7 @@ export async function replacePlaylistItems(
     token: Token | string,
     playlistId: string,
     uris: string[]
-): Promise<{ snapshot_id: string }> {
+): Promise<Responses.reorderOrReplacePlaylistItems> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/tracks',
@@ -358,7 +359,7 @@ export async function removeItemsFromPlaylist(
         positions?: number[]
     }[],
     snapshotId?: string
-): Promise<{ snapshot_id: string }> {
+): Promise<Responses.removeItemsFromPlaylist> {
     const jsonBody: { [key: string]: any } = {
         tracks: tracks,
     }
@@ -388,7 +389,7 @@ export async function removeItemsFromPlaylist(
 export async function getPlaylistCoverImage(
     token: Token | string,
     playlistId: string
-): Promise<ImageObject[]> {
+): Promise<Responses.getPlaylistCoverImage> {
     return await (
         await sendRequest({
             endpoint: 'playlists/{playlist_id}/images',
@@ -412,7 +413,7 @@ export async function uploadCustomPlaylistCoverImage(
     token: Token | string,
     playlistId: string,
     image: Buffer | string
-): Promise<void> {
+): Promise<Responses.uploadCustomPlaylistCoverImage> {
     if (typeof image != 'string') image = Buffer.from(image).toString('base64')
     // TODO: - Error if data to large
     // Throw error if data size > 256_000 bytes

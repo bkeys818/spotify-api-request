@@ -1,5 +1,6 @@
 import { SpotifyError } from '../error'
 import fetch, { RequestInit } from 'node-fetch'
+import type { Token, RefreshToken } from 'spotify-objects'
 
 /**
  * Redirects user or throws appropriate error

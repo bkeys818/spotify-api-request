@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get Spotify catalog information for multiple albums identified by their Spotify IDs.
@@ -14,7 +15,7 @@ export async function getMultipleAlbums(
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) orstring `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market: string
     }
-): Promise<{ albums: (AlbumObject | null)[] }> {
+): Promise<Responses.getMultipleAlbums> {
     const queryParameter: { [key: string]: any } = {
         ids: ids.join(','),
     }
@@ -43,7 +44,7 @@ export async function getAlbum(
         /** The market you’d like to request. Synonym for `country`. */
         market: string
     }
-): Promise<AlbumObject> {
+): Promise<Responses.getAlbum> {
     return await (
         await sendRequest({
             endpoint: 'albums/{id}',
@@ -75,7 +76,7 @@ export async function getAlbumTracks(
         /** The index of the first track to return. Default: 0 (the first object). Use with limit to get the next set of tracks. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedTrackObject>> {
+): Promise<Responses.getAlbumTracks> {
     return await (
         await sendRequest({
             endpoint: 'albums/{id}/tracks',

@@ -1,5 +1,4 @@
 import * as requests from '../../src/requests'
-import { responses } from '../responses'
 import { token, params } from '../global'
 import fetch, { Response } from 'node-fetch'
 import { mocked } from 'ts-jest/utils'
@@ -186,7 +185,7 @@ describe.each(testData)('%s', (_, funcs) => {
                     ok: true,
                     status: 200,
                     json: () => {
-                        return Promise.resolve(responses[name])
+                        return Promise.resolve({})
                     },
                 } as Response)
             )

@@ -104,14 +104,14 @@ const testData: [
     [
         'Library',
         {
-            getUsersSavedAlbums: 'todo',
-            getUsersSavedEpisodes: 'todo',
-            getUsersSavedShows: 'todo',
-            getUsersSavedTracks: 'todo',
-            checkUsersSavedAlbums: 'todo',
-            checkUsersSavedEpisodes: 'todo',
-            checkUsersSavedShows: 'todo',
-            checkUsersSavedTracks: 'todo',
+            getCurrentUserSavedAlbums: 'todo',
+            getCurrentUserSavedEpisodes: 'todo',
+            getCurrentUserSavedShows: 'todo',
+            getCurrentUserSavedTracks: 'todo',
+            checkCurrentUserSavedAlbums: 'todo',
+            checkCurrentUserSavedEpisodes: 'todo',
+            checkCurrentUserSavedShows: 'todo',
+            checkCurrentUserSavedTracks: 'todo',
         },
     ],
     [
@@ -123,7 +123,7 @@ const testData: [
     [
         'Personalization',
         {
-            getUserTopArtistsandTracks: 'todo',
+            getUserTopArtistsAndTracks: 'todo',
         },
     ],
     [
@@ -156,11 +156,11 @@ const testData: [
     [
         'Tracks',
         {
-            getSeveralTracks: 'todo',
+            getMultipleTracks: 'todo',
             getTrack: 'todo',
-            getAudioFeaturesforSeveralTracks: 'todo',
-            getAudioFeaturesforTrack: 'todo',
-            getAudioAnalysisforTrack: 'todo',
+            getAudioFeaturesForSeveralTracks: 'todo',
+            getAudioFeaturesForTrack: 'todo',
+            getAudioAnalysisForTrack: 'todo',
         },
     ],
 

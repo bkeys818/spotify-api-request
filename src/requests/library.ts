@@ -7,7 +7,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns An array of {@link SavedAlbumObject saved album objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getUsersSavedAlbums(
+export async function getCurrentUserSavedAlbums(
     token: Token | string,
     options?: {
         /** The maximum number of objects to return. Default: 20. Minimum: 1. Maximum: 50. */
@@ -34,7 +34,7 @@ export async function getUsersSavedAlbums(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function saveAlbumsforCurrentUser(
+export async function saveAlbumsForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.saveAlbumsForCurrentUser> {
@@ -55,7 +55,7 @@ export async function saveAlbumsforCurrentUser(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function removeAlbumsforCurrentUser(
+export async function removeAlbumsForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.removeAlbumsForCurrentUser> {
@@ -76,7 +76,7 @@ export async function removeAlbumsforCurrentUser(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the albums. Maximum: 50 IDs.
  * @returns An array of `true` or `false` values, in the same order in which the ids were specified.
  */
-export async function checkUsersSavedAlbums(
+export async function checkCurrentUserSavedAlbums(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.checkCurrentUserSavedAlbums> {
@@ -96,7 +96,7 @@ export async function checkUsersSavedAlbums(
  * @param [options]
  * @returns An array of {@link SavedTrackObject saved track objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getUsersSavedTracks(
+export async function getCurrentUserSavedTracks(
     token: Token | string,
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
@@ -123,7 +123,7 @@ export async function getUsersSavedTracks(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function saveTracksforUser(
+export async function saveTracksForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.saveTracksForCurrentUser> {
@@ -144,7 +144,7 @@ export async function saveTracksforUser(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function removeUsersSavedTracks(
+export async function removeTracksForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.removeTracksForCurrentUser> {
@@ -165,7 +165,7 @@ export async function removeUsersSavedTracks(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns An array of `true` or `false` values, in the same order in which the ids were specified.
  */
-export async function checkUsersSavedTracks(
+export async function checkCurrentUserSavedTracks(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.checkCurrentUserSavedTracks> {
@@ -187,7 +187,7 @@ export async function checkUsersSavedTracks(
  * @param [options]
  * @returns An array of {@link SavedEpisodeObject saved episode objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getUsersSavedEpisodes(
+export async function getCurrentUserSavedEpisodes(
     token: Token | string,
     options?: {
         /**
@@ -224,7 +224,7 @@ export async function getUsersSavedEpisodes(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function saveEpisodesforUser(
+export async function saveEpisodesForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.saveEpisodesForCurrentUser> {
@@ -247,7 +247,7 @@ export async function saveEpisodesforUser(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function removeUsersSavedEpisodes(
+export async function removeEpisodesForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.removeEpisodesForCurrentUser> {
@@ -270,7 +270,7 @@ export async function removeUsersSavedEpisodes(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns An array of `true` or `false` values, in the same order in which the ids were specified.
  */
-export async function checkUsersSavedEpisodes(
+export async function checkCurrentUserSavedEpisodes(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.checkCurrentUserSavedEpisodes> {
@@ -290,7 +290,7 @@ export async function checkUsersSavedEpisodes(
  * @param [options]
  * @returns An array of {@link SavedShowObject saved show objects} (wrapped in a {@link PagingObject paging object}) in JSON format. If the current user has no shows saved, the response will be an empty array. If a show is unavailable in the given `market` it is filtered out. The `total` field in the paging object represents the number of all items, filtered or not, and thus might be larger than the actual total number of observable items.
  */
-export async function getUsersSavedShows(
+export async function getCurrentUserSavedShows(
     token: Token | string,
     options?: {
         /** The maximum number of shows to return. Default: 20. Minimum: 1. Maximum: 50 */
@@ -315,7 +315,7 @@ export async function getUsersSavedShows(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns
  */
-export async function saveShowsforCurrentUser(
+export async function saveShowsForCurrentUser(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.saveShowsForCurrentUser> {
@@ -336,7 +336,7 @@ export async function saveShowsforCurrentUser(
  * @param options
  * @returns
  */
-export async function removeUsersSavedShows(
+export async function removeShowsForCurrentUser(
     token: Token | string,
     ids: string[],
     options?: {
@@ -370,7 +370,7 @@ export async function removeUsersSavedShows(
  * @param ids - A list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). Maximum: 50 IDs.
  * @returns {boolean[]} An array of `true` or `false` values, in the same order in which the ids were specified.
  */
-export async function checkUsersSavedShows(
+export async function checkCurrentUserSavedShows(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.checkCurrentUserSavedShows> {

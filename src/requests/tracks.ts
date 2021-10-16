@@ -8,7 +8,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns An object whose key is `tracks` and whose value is an array of {@link TrackObject track objects}.
  */
-export async function getSeveralTracks(
+export async function getMultipleTracks(
     token: Token | string,
     ids: string[],
     options?: {
@@ -60,7 +60,7 @@ export async function getTrack(
  * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the tracks. Maximum: 100 IDs.
  * @returns An object whose key is `"audio_features"` and whose value is an array of {@link AudioFeaturesObject audio features objects}.
  */
-export async function getAudioFeaturesforSeveralTracks(
+export async function getAudioFeaturesForSeveralTracks(
     token: Token | string,
     ids: string[]
 ): Promise<Responses.getAudioFeaturesForSeveralTracks> {
@@ -80,7 +80,7 @@ export async function getAudioFeaturesforSeveralTracks(
  * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
  * @returns An {@link AudioFeaturesObject audio features object}.
  */
-export async function getAudioFeaturesforTrack(
+export async function getAudioFeaturesForTrack(
     token: Token | string,
     id: string
 ): Promise<Responses.getAudioFeaturesForTrack> {
@@ -100,7 +100,7 @@ export async function getAudioFeaturesforTrack(
  * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
  * @returns An {@link AudioAnalysisObject audio analysis object}.
  */
-export async function getAudioAnalysisforTrack(
+export async function getAudioAnalysisForTrack(
     token: Token | string,
     id: string
 ): Promise<Responses.getAudioAnalysisForTrack> {

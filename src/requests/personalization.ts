@@ -7,7 +7,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
  */
-export async function getUserTopArtistsandTracks<T extends 'artists' | 'tracks'>(
+export async function getUserTopArtistsAndTracks<T extends 'artists' | 'tracks'>(
     token: Token | string,
     type: T,
     options?: {

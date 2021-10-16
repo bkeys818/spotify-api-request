@@ -25,6 +25,9 @@
     "prebuild": "rimraf lib",
     "build": "tsc --build src.tsconfig.json"
   },
+  "np": {
+    "message": "🔖 v%s"
+  },
   "dependencies": {
     "node-fetch": "^2.6.1",
     "pkce-challenge": "^2.2.0",

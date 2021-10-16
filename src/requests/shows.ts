@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get Spotify catalog information for several shows based on their Spotify IDs.
@@ -22,7 +23,7 @@ export async function getMultipleShows(
          */
         market: string
     }
-): Promise<{ shows: SimplifiedShowObject[] }> {
+): Promise<Responses.getMultipleShows> {
     const queryParameter: { [key: string]: any } = { ids: ids }
     if (options) queryParameter.market = options.market
     return await (
@@ -57,7 +58,7 @@ export async function getShow(
          */
         market: string
     }
-): Promise<ShowObject> {
+): Promise<Responses.getShow> {
     return await (
         await sendRequest({
             endpoint: 'shows/{id}',
@@ -95,7 +96,7 @@ export async function getShowEpisodes(
         /** The index of the first episode to return. Default: 0 (the first object). Use with limit to get the next set of episodes. */
         offset?: number
     }
-): Promise<PagingObject<SimplifiedEpisodeObject>> {
+): Promise<Responses.getShowEpisodes> {
     return await (
         await sendRequest({
             endpoint: 'shows/{id}/episodes',

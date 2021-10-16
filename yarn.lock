@@ -3196,6 +3196,11 @@ source-map@^0.7.3:
   resolved "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
+spotify-objects@^0.1.0-1:
+  version "0.1.0-1"
+  resolved "https://registry.yarnpkg.com/spotify-objects/-/spotify-objects-0.1.0-1.tgz#5092fefef69911a7a128a0ede2e11bb687ee1077"
+  integrity sha512-VCdrNr5GxRjLJo0uqY/aoMH0SaJ1Dm85XizdCjc1qrEuB6YT8nffczUIl3ICYthWXfYL86yki0j+q9Qu3UZc2Q==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"

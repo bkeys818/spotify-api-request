@@ -2,6 +2,7 @@ import {
     createState,
     createCode,
 } from '../../src'
+import { Token, RefreshToken, Scope } from 'spotify-objects'
 
 export type Unwrap<T> = T extends Promise<infer U> ? U : T
 

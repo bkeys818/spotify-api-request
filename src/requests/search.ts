@@ -1,19 +1,7 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
-
-interface ResponseObject {
-    albums: PagingObject<SimplifiedAlbumObject>
-    artists: PagingObject<ArtistObject>
-    playlists: PagingObject<SimplifiedPlaylistObject>
-    tracks: PagingObject<TrackObject>
-    shows: PagingObject<SimplifiedShowObject>
-    episodes: PagingObject<SimplifiedEpisodeObject>
-}
-type SearchType = keyof ResponseObject
-type ResponseType<T extends keyof ResponseObject | (keyof ResponseObject)[]> =
-    T extends SearchType ? Pick<ResponseObject, T>
-    : T extends SearchType[] ? Pick<ResponseObject, T[number]>
-    : never
+type SearchType = any extends Responses.searchForItem<infer B> ? B : never
 
 /**
  * Get Spotify Catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.
@@ -21,7 +9,7 @@ type ResponseType<T extends keyof ResponseObject | (keyof ResponseObject)[]> =
  * @param options
  * @returns For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
  */
-export async function searchForItem<T extends SearchType | SearchType[]>(
+export async function searchForItem<T extends SearchType>(
     token: Token | string,
     options: {
         /** Search [query](https://developer.spotify.com/documentation/web-api/reference/#notes-2) keywords and optional field filters and operators. */
@@ -73,7 +61,7 @@ export async function searchForItem<T extends SearchType | SearchType[]>(
          */
         include_external?: 'audio'
     }
-): Promise<ResponseType<T>> {
+): Promise<Responses.searchForItem<T>> {
     if (Array.isArray(options.type))
         options.type.map(type => type.slice(0, -1))
     else (options.type as string) = options.type.slice(0, -1)

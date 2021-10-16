@@ -102,37 +102,37 @@ const params: {
     getFollowingStateForArtistsOrUsers: [token, 'artist', artistIDs],
 
     // library
-    getUsersSavedAlbums: [
+    getCurrentUserSavedAlbums: [
         token,
         { limit: limit, offset: offset, market: market },
     ],
-    saveAlbumsforCurrentUser: null as any,
-    removeAlbumsforCurrentUser: null as any,
-    checkUsersSavedAlbums: [token, albumIDs],
-    getUsersSavedTracks: [
+    saveAlbumsForCurrentUser: null as any,
+    removeAlbumsForCurrentUser: null as any,
+    checkCurrentUserSavedAlbums: [token, albumIDs],
+    getCurrentUserSavedTracks: [
         token,
         { limit: limit, offset: offset, market: market },
     ],
-    saveTracksforUser: null as any,
-    removeUsersSavedTracks: null as any,
-    checkUsersSavedTracks: [token, trackIds],
-    getUsersSavedEpisodes: [
+    saveTracksForCurrentUser: null as any,
+    removeTracksForCurrentUser: null as any,
+    checkCurrentUserSavedTracks: [token, trackIds],
+    getCurrentUserSavedEpisodes: [
         token,
         { limit: limit, offset: offset, market: market },
     ],
-    saveEpisodesforUser: null as any,
-    removeUsersSavedEpisodes: null as any,
-    checkUsersSavedEpisodes: [token, episodeIds],
-    getUsersSavedShows: [token, { limit: limit, offset: offset }],
-    saveShowsforCurrentUser: null as any,
-    removeUsersSavedShows: null as any,
-    checkUsersSavedShows: [token, showIDs],
+    saveEpisodesForCurrentUser: null as any,
+    removeEpisodesForCurrentUser: null as any,
+    checkCurrentUserSavedEpisodes: [token, episodeIds],
+    getCurrentUserSavedShows: [token, { limit: limit, offset: offset }],
+    saveShowsForCurrentUser: null as any,
+    removeShowsForCurrentUser: null as any,
+    checkCurrentUserSavedShows: [token, showIDs],
 
     // markets
     getAvailableMarkets: [token],
 
     // personalization
-    getUserTopArtistsandTracks: [
+    getUserTopArtistsAndTracks: [
         token,
         'artists',
         { time_range: 'long_term', limit: limit, offset: offset },
@@ -192,11 +192,11 @@ const params: {
     ],
 
     // tracks
-    getSeveralTracks: [token, trackIds, { market: market }],
+    getMultipleTracks: [token, trackIds, { market: market }],
     getTrack: [token, trackIds[0], { market: market }],
-    getAudioFeaturesforSeveralTracks: [token, trackIds],
-    getAudioFeaturesforTrack: [token, trackIds[0]],
-    getAudioAnalysisforTrack: [token, trackIds[0]],
+    getAudioFeaturesForSeveralTracks: [token, trackIds],
+    getAudioFeaturesForTrack: [token, trackIds[0]],
+    getAudioAnalysisForTrack: [token, trackIds[0]],
 
     // user-profile
     getCurrentUserProfile: [token],

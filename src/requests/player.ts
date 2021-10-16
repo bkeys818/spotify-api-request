@@ -1,5 +1,6 @@
 export {}
 // import { sendRequest } from '../global'
+// import type { Token, Responses } from 'spotify-objects'
 // import type { Token } from '../authorize'
 // import type { CurrentlyPlayingContextObject } from './objects'
 
@@ -18,7 +19,7 @@ export {}
 // 		/** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. An unsupported type in the response is expected to be represented as `null` value in the `item` field. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new */
 // 		additional_types?: string
 // 	},
-// ): Promise<CurrentlyPlayingContextObject> {
+// ): Promise<Responses.> {
 // 	return await(
 // 		await sendRequest({
 // 			endpoint: 'me/player',
@@ -53,7 +54,7 @@ export {}
 // 		 */
 // 		play?: boolean
 // 	},
-// ): Promise<RETURN> {
+// ): Promise<Responses.> {
 // 	return await(
 // 		await sendRequest({
 // 			endpoint: 'me/player',
@@ -73,7 +74,7 @@ export {}
 //  */
 // export async function getUsersAvailableDevices(
 // 	token: Token | string,
-// ): Promise<RETURN> {
+// ): Promise<Responses.> {
 // 	return await(
 // 		await sendRequest({
 // 			endpoint: 'me/player/devices',
@@ -100,7 +101,7 @@ export {}
 // 		/** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. An unsupported type in the response is expected to be represented as `null` value in the `item` field. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `currently_playing_type` field. */
 // 		additional_types?: string
 // 	},
-// ): Promise<RETURN> {
+// ): Promise<Responses.> {
 // 	return await(
 // 		await sendRequest({
 // 			endpoint: 'me/player/currently-playing',
@@ -133,7 +134,7 @@ export {}
 // 		/** integer */
 // 		position_ms?: number
 // 	},
-// ): Promise<RETURN> {
+// ): Promise<Responses.> {
 // 	return await(
 // 		await sendRequest({
 // 			endpoint: 'me/player/play',
@@ -158,7 +159,7 @@ export {}
 // 		/** The id of the device this command is targeting. If not supplied, the user’s currently active device is the target. */
 // 		device_id?: string
 // 	},
-// ): Promise<RETURN> {
+// ): Promise<Responses.> {
 // 	return await(
 // 		await sendRequest({
 // 			endpoint: 'me/player/pause',

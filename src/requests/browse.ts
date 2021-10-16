@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
@@ -16,7 +17,7 @@ export async function getAllNewReleases(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<{ albums: PagingObject<SimplifiedAlbumObject> }> {
+): Promise<Responses.getAllNewReleases> {
     return await (
         await sendRequest({
             endpoint: 'browse/new-releases',
@@ -47,10 +48,7 @@ export async function getAllFeaturedPlaylists(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<{
-    message: string
-    playlists: PagingObject<SimplifiedPlaylistObject>
-}> {
+): Promise<Responses.getAllFeaturedPlaylists> {
     return await (
         await sendRequest({
             endpoint: 'browse/featured-playlists',
@@ -79,7 +77,7 @@ export async function getAllCategories(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of categories. */
         offset?: number
     }
-): Promise<{ categories: PagingObject<CategoryObject> }> {
+): Promise<Responses.getAllCategories> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories',
@@ -106,7 +104,7 @@ export async function getCategory(
         /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language. Note that, if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English).*/
         locale?: string
     }
-): Promise<CategoryObject> {
+): Promise<Responses.getCategory> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories/{category_id}',
@@ -138,7 +136,7 @@ export async function getCategoryPlaylists(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.*/
         offset?: number
     }
-): Promise<{ playlists: PagingObject<SimplifiedPlaylistObject>}> {
+): Promise<Responses.getCategoryPlaylists> {
     return await (
         await sendRequest({
             endpoint: 'browse/categories/{category_id}/playlists',
@@ -256,7 +254,7 @@ export async function getRecommendations(
         /** For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results. */
         target_valence?: number
     }
-): Promise<RecommendationsObject> {
+): Promise<Responses.getRecommendations> {
     return await (
         await sendRequest({
             endpoint: 'recommendations',
@@ -274,7 +272,7 @@ export async function getRecommendations(
  */
 export async function getRecommendationGenres(
     token: Token | string
-): Promise<{ genres: string[] }> {
+): Promise<Responses.getRecommendationGenres> {
     return await (
         await sendRequest({
             endpoint: 'recommendations/available-genre-seeds',

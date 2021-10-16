@@ -1,5 +1,4 @@
 import * as requests from '../../src/requests'
-import { responses } from '../responses'
 import { token, params } from '../global'
 import fetch, { Response } from 'node-fetch'
 import { mocked } from 'ts-jest/utils'
@@ -105,14 +104,14 @@ const testData: [
     [
         'Library',
         {
-            getUsersSavedAlbums: 'todo',
-            getUsersSavedEpisodes: 'todo',
-            getUsersSavedShows: 'todo',
-            getUsersSavedTracks: 'todo',
-            checkUsersSavedAlbums: 'todo',
-            checkUsersSavedEpisodes: 'todo',
-            checkUsersSavedShows: 'todo',
-            checkUsersSavedTracks: 'todo',
+            getCurrentUserSavedAlbums: 'todo',
+            getCurrentUserSavedEpisodes: 'todo',
+            getCurrentUserSavedShows: 'todo',
+            getCurrentUserSavedTracks: 'todo',
+            checkCurrentUserSavedAlbums: 'todo',
+            checkCurrentUserSavedEpisodes: 'todo',
+            checkCurrentUserSavedShows: 'todo',
+            checkCurrentUserSavedTracks: 'todo',
         },
     ],
     [
@@ -124,7 +123,7 @@ const testData: [
     [
         'Personalization',
         {
-            getUserTopArtistsandTracks: 'todo',
+            getUserTopArtistsAndTracks: 'todo',
         },
     ],
     [
@@ -157,11 +156,11 @@ const testData: [
     [
         'Tracks',
         {
-            getSeveralTracks: 'todo',
+            getMultipleTracks: 'todo',
             getTrack: 'todo',
-            getAudioFeaturesforSeveralTracks: 'todo',
-            getAudioFeaturesforTrack: 'todo',
-            getAudioAnalysisforTrack: 'todo',
+            getAudioFeaturesForSeveralTracks: 'todo',
+            getAudioFeaturesForTrack: 'todo',
+            getAudioAnalysisForTrack: 'todo',
         },
     ],
 
@@ -186,7 +185,7 @@ describe.each(testData)('%s', (_, funcs) => {
                     ok: true,
                     status: 200,
                     json: () => {
-                        return Promise.resolve(responses[name])
+                        return Promise.resolve({})
                     },
                 } as Response)
             )

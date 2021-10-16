@@ -1,4 +1,5 @@
 import { sendRequest } from '../global'
+import type { Token, Responses } from 'spotify-objects'
 
 /**
  * Get detailed profile information about the current user (including the current user’s username).
@@ -7,7 +8,7 @@ import { sendRequest } from '../global'
  */
 export async function getCurrentUserProfile(
     token: Token | string
-): Promise<PrivateUserObject> {
+): Promise<Responses.getCurrentUserProfile> {
     return await (
         await sendRequest({
             endpoint: 'me',
@@ -26,7 +27,7 @@ export async function getCurrentUserProfile(
 export async function getUserProfile(
     token: Token | string,
     userId: string
-): Promise<PublicUserObject> {
+): Promise<Responses.getUserProfile> {
     return await (
         await sendRequest({
             endpoint: 'users/{user_id}',

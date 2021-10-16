@@ -1,5 +1,6 @@
 import { SpotifyError } from '../error'
 import { paramsFromHash, fetchToken, redirectTo } from './global'
+import type { Token, Scope } from 'spotify-objects'
 // @ts-ignore (used in tsComment @link)
 import type { getRefreshToken } from './refreshToken'
 

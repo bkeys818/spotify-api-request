@@ -41,12 +41,12 @@ const token = await getToken({
 Now, we can use that token to make requests.
 
 ```ts
-import { searchforItem } from 'spotify-api-request'
+import { searchForItem } from 'spotify-api-request'
 
 async function searchForShow(showName: string) {
   const token = await getToken()
 
-	const searchRes = await searchforItem(token, {
+	const searchRes = await searchForItem(token, {
     q: showName,
     type: 'shows'
   })

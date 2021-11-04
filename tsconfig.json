@@ -15,7 +15,6 @@
         "tests",
         "jest.config.js",
         "global-setup.ts",
-        "authorize.ts",
         "types",
         "schemas"
     ],

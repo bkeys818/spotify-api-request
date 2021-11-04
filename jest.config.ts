@@ -1,7 +1,4 @@
 import type { Config } from '@jest/types'
-import { config } from 'dotenv'
-import authorize from './authorize'
-import { writeFileSync } from 'fs'
 
 export interface Globals {
     token: string
@@ -17,8 +14,6 @@ function vsCodeJestExtensionSettings() {
 }
 
 export default async (): Promise<Config.InitialOptions> => {
-    config()
-    await authorize()
     return {
         ...vsCodeJestExtensionSettings(),
         preset: 'ts-jest',

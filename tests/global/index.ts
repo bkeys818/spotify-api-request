@@ -6,7 +6,7 @@ import { Token, RefreshToken, Scope } from 'spotify-objects'
 
 export type Unwrap<T> = T extends Promise<infer U> ? U : T
 
-export const token = process.env.ACCESS_TOKEN!
+export const token = 'ACCESS_TOKEN'
 export const albumIDs = ['7gsWAHLeT0w7es6FofOXk1', '13dXX35pYjr8FqRla40K2a']
 export const artistIDs = ['3Gm5F95VdRxW3mqCn8RPBJ', '2QsynagSdAqZj3U9HgDzjD']
 export const categoryIDs = ['party']
@@ -16,9 +16,9 @@ export const showIDs = ['41zWZdWCpVQrKj7ykQnXRc', '7gozmLqbcbr6PScMjc0Zl4']
 export const trackIds = ['3WWAvWDBQANpJeNbvVbjMg', '0TXK1dsiK9lkeaK6neSP2j']
 export const userIDs = ['spotify']
 
-export const clientId = process.env.CLIENT_ID!
-export const clientSecret = process.env.CLIENT_SECRET!
-export const refreshToken = process.env.REFRESH_TOKEN!
+export const clientId = 'CLIENT_ID'
+export const clientSecret = 'CLIENT_SECRET'
+export const refreshToken = 'REFRESH_TOKEN'
 export const redirectUri = 'http://localhost:5050/callback'
 export const state = createState()
 export const code = createCode()

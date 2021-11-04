@@ -1,7 +1,5 @@
 import sendRequest from '../send-requests'
-import type { Token, Responses } from 'spotify-objects'
-
-type SearchType = any extends Responses.searchForItem<infer B> ? B : never
+import type { Token, Objects } from 'spotify-objects'
 
 /**
  * Get Spotify Catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.
@@ -9,7 +7,7 @@ type SearchType = any extends Responses.searchForItem<infer B> ? B : never
  * @param options
  * @returns For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
  */
-export const searchForItem = <T extends SearchType>(
+export const searchForItem = <T extends SearchType | SearchType[]>(
     token: Token | string,
     options: {
         /** Search [query](https://developer.spotify.com/documentation/web-api/reference/#notes-2) keywords and optional field filters and operators. */
@@ -61,7 +59,7 @@ export const searchForItem = <T extends SearchType>(
          */
         include_external?: 'audio'
     }
-): Promise<Responses.searchForItem<T>> => {
+): Promise<SearchResponse<T>> => {
     if (Array.isArray(options.type))
         options.type.map((type) => type.slice(0, -1))
     else (options.type as string) = options.type.slice(0, -1)
@@ -71,3 +69,18 @@ export const searchForItem = <T extends SearchType>(
         queryParameter: options,
     })
 }
+
+type SearchType = keyof SearchResponseObject
+interface SearchResponseObject {
+    albums: Objects.Paging<Objects.SimplifiedAlbum>
+    artists: Objects.Paging<Objects.Artist>
+    playlists: Objects.Paging<Objects.SimplifiedPlaylist>
+    tracks: Objects.Paging<Objects.Track>
+    shows: Objects.Paging<Objects.SimplifiedShow>
+    episodes: Objects.Paging<Objects.SimplifiedEpisode>
+}
+type SearchResponse<T extends SearchType | SearchType[]> = T extends SearchType
+    ? Pick<SearchResponseObject, T>
+    : T extends SearchType[]
+    ? Pick<SearchResponseObject, T[number]>
+    : never

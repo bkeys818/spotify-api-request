@@ -1,4 +1,4 @@
-import { sendRequest } from '../global'
+import sendRequest from '../send-requests'
 import type { Token, Responses } from 'spotify-objects'
 /**
  * Get the current user’s top artists or tracks based on calculated affinity.

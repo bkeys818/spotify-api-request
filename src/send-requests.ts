@@ -6,7 +6,7 @@ type UrlParameter = {
     [key: string]: boolean | number | string | Array<boolean | number | string>
 }
 
-export async function sendRequest(params: {
+export default async function sendRequest(params: {
     endpoint: string
     method: 'GET' | 'POST' | 'PUT' | 'DELETE'
     token: Token | string

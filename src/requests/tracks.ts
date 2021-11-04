@@ -8,25 +8,19 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns An object whose key is `tracks` and whose value is an array of {@link TrackObject track objects}.
  */
-export async function getMultipleTracks(
+export const getMultipleTracks = (
     token: Token | string,
     ids: string[],
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<Responses.getMultipleTracks> {
-    const queryParameter: { [key: string]: any } = { ids: ids }
-    if (options && options.market) queryParameter.market = options.market
-    return await (
-        await sendRequest({
-            endpoint: 'tracks',
-            method: 'GET',
-            token: token,
-            queryParameter: queryParameter,
-        })
-    ).json()
-}
+): Promise<Responses.getMultipleTracks> =>
+    sendRequest({
+        endpoint: 'tracks',
+        token: token,
+        queryParameter: { ids: ids, ...options },
+    })
 
 /**
  * Get Spotify catalog information for a single track identified by its unique Spotify ID.
@@ -35,24 +29,19 @@ export async function getMultipleTracks(
  * @param [options]
  * @returns A {@link TrackObject track object}.
  */
-export async function getTrack(
+export const getTrack = (
     token: Token | string,
     id: string,
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market?: string
     }
-): Promise<Responses.getTrack> {
-    return await (
-        await sendRequest({
-            endpoint: 'tracks/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getTrack> =>
+    sendRequest({
+        endpoint: `tracks/${id}`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get audio features for multiple tracks based on their Spotify IDs.
@@ -60,19 +49,15 @@ export async function getTrack(
  * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the tracks. Maximum: 100 IDs.
  * @returns An object whose key is `"audio_features"` and whose value is an array of {@link AudioFeaturesObject audio features objects}.
  */
-export async function getAudioFeaturesForSeveralTracks(
+export const getAudioFeaturesForSeveralTracks = (
     token: Token | string,
     ids: string[]
-): Promise<Responses.getAudioFeaturesForSeveralTracks> {
-    return await (
-        await sendRequest({
-            endpoint: 'audio-features',
-            method: 'GET',
-            token: token,
-            queryParameter: { ids: ids },
-        })
-    ).json()
-}
+): Promise<Responses.getAudioFeaturesForSeveralTracks> =>
+    sendRequest({
+        endpoint: 'audio-features',
+        token: token,
+        queryParameter: { ids: ids },
+    })
 
 /**
  * Get audio feature information for a single track identified by its unique Spotify ID.
@@ -80,19 +65,14 @@ export async function getAudioFeaturesForSeveralTracks(
  * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
  * @returns An {@link AudioFeaturesObject audio features object}.
  */
-export async function getAudioFeaturesForTrack(
+export const getAudioFeaturesForTrack = (
     token: Token | string,
     id: string
-): Promise<Responses.getAudioFeaturesForTrack> {
-    return await (
-        await sendRequest({
-            endpoint: 'audio-features/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-        })
-    ).json()
-}
+): Promise<Responses.getAudioFeaturesForTrack> =>
+    sendRequest({
+        endpoint: `audio-features/${id}`,
+        token: token,
+    })
 
 /**
  * Get a detailed audio analysis for a single track identified by its unique Spotify ID.
@@ -100,16 +80,11 @@ export async function getAudioFeaturesForTrack(
  * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
  * @returns An {@link AudioAnalysisObject audio analysis object}.
  */
-export async function getAudioAnalysisForTrack(
+export const getAudioAnalysisForTrack = (
     token: Token | string,
     id: string
-): Promise<Responses.getAudioAnalysisForTrack> {
-    return await (
-        await sendRequest({
-            endpoint: 'audio-analysis/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-        })
-    ).json()
-}
+): Promise<Responses.getAudioAnalysisForTrack> =>
+    sendRequest({
+        endpoint: `audio-analysis/${id}`,
+        token: token,
+    })

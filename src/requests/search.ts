@@ -9,7 +9,7 @@ type SearchType = any extends Responses.searchForItem<infer B> ? B : never
  * @param options
  * @returns For each `type` provided in the type parameter, the response contains an array of {@link ArtistObject artist objects} / {@link SimplifiedAlbumObject simplified album objects} / {@link TrackObject track objects} / {@link SimplifiedShowObject simplified show objects} / {@link SimplifiedEpisodeObject simplified episode objects} wrapped in a {@link PagingObject paging object}
  */
-export async function searchForItem<T extends SearchType>(
+export const searchForItem = <T extends SearchType>(
     token: Token | string,
     options: {
         /** Search [query](https://developer.spotify.com/documentation/web-api/reference/#notes-2) keywords and optional field filters and operators. */
@@ -61,16 +61,13 @@ export async function searchForItem<T extends SearchType>(
          */
         include_external?: 'audio'
     }
-): Promise<Responses.searchForItem<T>> {
+): Promise<Responses.searchForItem<T>> => {
     if (Array.isArray(options.type))
-        options.type.map(type => type.slice(0, -1))
+        options.type.map((type) => type.slice(0, -1))
     else (options.type as string) = options.type.slice(0, -1)
-    return await (
-        await sendRequest({
-            endpoint: 'search',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
+    return sendRequest({
+        endpoint: 'search',
+        token: token,
+        queryParameter: options,
+    })
 }

@@ -8,7 +8,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns An object whose key is `shows` and whose value is an array of {@link SimplifiedShowObject simple show object}.
  */
-export async function getMultipleShows(
+export const getMultipleShows = (
     token: Token | string,
     ids: string[],
     options?: {
@@ -23,18 +23,12 @@ export async function getMultipleShows(
          */
         market: string
     }
-): Promise<Responses.getMultipleShows> {
-    const queryParameter: { [key: string]: any } = { ids: ids }
-    if (options) queryParameter.market = options.market
-    return await (
-        await sendRequest({
-            endpoint: 'shows',
-            method: 'GET',
-            token: token,
-            queryParameter: queryParameter,
-        })
-    ).json()
-}
+): Promise<Responses.getMultipleShows> =>
+    sendRequest({
+        endpoint: 'shows',
+        token: token,
+        queryParameter: { ids: ids, ...options },
+    })
 
 /**
  * Get Spotify catalog information for a single show identified by its unique Spotify ID.
@@ -43,7 +37,7 @@ export async function getMultipleShows(
  * @param [options]
  * @returns A {@link ShowObject show object}
  */
-export async function getShow(
+export const getShow = (
     token: Token | string,
     id: string,
     options?: {
@@ -58,17 +52,12 @@ export async function getShow(
          */
         market: string
     }
-): Promise<Responses.getShow> {
-    return await (
-        await sendRequest({
-            endpoint: 'shows/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getShow> =>
+    sendRequest({
+        endpoint: `shows/${id}`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get Spotify catalog information about an show’s episodes. Optional parameters can be used to limit the number of episodes returned.
@@ -77,7 +66,7 @@ export async function getShow(
  * @param [options]
  * @returns
  */
-export async function getShowEpisodes(
+export const getShowEpisodes = (
     token: Token | string,
     id: string,
     options?: {
@@ -96,14 +85,9 @@ export async function getShowEpisodes(
         /** The index of the first episode to return. Default: 0 (the first object). Use with limit to get the next set of episodes. */
         offset?: number
     }
-): Promise<Responses.getShowEpisodes> {
-    return await (
-        await sendRequest({
-            endpoint: 'shows/{id}/episodes',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getShowEpisodes> =>
+    sendRequest({
+        endpoint: `shows/${id}/episodes`,
+        token: token,
+        queryParameter: options,
+    })

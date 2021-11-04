@@ -7,13 +7,13 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns A {@link PagingObject paging object} of {@link ArtistObject Artists} or {@link TrackObject Tracks}.
  */
-export async function getUserTopArtistsAndTracks<T extends 'artists' | 'tracks'>(
+export const getUserTopArtistsAndTracks = <T extends 'artists' | 'tracks'>(
     token: Token | string,
     type: T,
     options?: {
-        /** 
+        /**
          * Over what time frame the affinities are computed.
-         * 
+         *
          * Valid values:
          * - `long_term` - Calculated from several years of data and including all new data as it becomes available.
          * - `medium_term` - Approximately last 6 months. (Default)
@@ -25,14 +25,9 @@ export async function getUserTopArtistsAndTracks<T extends 'artists' | 'tracks'>
         /** The index of the first entity to return. Default: 0 (i.e., the first track). Use with limit to get the next set of entities. */
         offset?: number
     }
-): Promise<Responses.getUserTopArtistsAndTracks<T>> {
-    return await (
-        await sendRequest({
-            endpoint: 'me/top/{type}',
-            method: 'GET',
-            token: token,
-            pathParameter: { type: type },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getUserTopArtistsAndTracks<T>> =>
+    sendRequest({
+        endpoint: `me/top/${type}`,
+        token: token,
+        queryParameter: options,
+    })

@@ -1,62 +1,42 @@
-import fetch, { RequestInit, Response } from 'node-fetch'
+import fetch, { RequestInit } from 'node-fetch'
 import { checkStatus } from './error'
 import { Token } from 'spotify-objects'
 
-type UrlParameter = {
-    [key: string]: boolean | number | string | Array<boolean | number | string>
-}
+export default async function sendRequest(args: RequestOptions): Promise<any> {
+    const url = new URL('https://api.spotify.com/v1/' + args.endpoint)
 
-export default async function sendRequest(params: {
-    endpoint: string
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-    token: Token | string
-    headers?: { [key: string]: string }
-    pathParameter?: UrlParameter
-    queryParameter?: UrlParameter
-    bodyParameter?: { [key: string]: any } | string
-}): Promise<Response> {
-    const { pathParameter, queryParameter } = params
-
-    if (pathParameter)
-        for (const key in pathParameter)
-            if (pathParameter[key])
-                params.endpoint = params.endpoint.replace(
-                    `{${key}}`,
-                    convertToString(pathParameter[key])
-                )
-
-    const url = new URL('https://api.spotify.com/v1/' + params.endpoint)
-
-    if (queryParameter)
-        for (const key in queryParameter)
-            if (queryParameter[key])
-                url.searchParams.set(key, convertToString(queryParameter[key]))
+    for (const key in args.queryParameter)
+        if (args.queryParameter[key])
+            url.searchParams.set(key, convertToString(args.queryParameter[key]))
 
     const options: RequestInit = {
-        headers: { Authorization: formatToken(params.token) },
-        method: params.method,
+        headers: {
+            Authorization: formatToken(args.token),
+            'Content-Type': 'application/json',
+        },
+        method: args.method ?? 'GET',
     }
 
-    if (params.headers)
-        options.headers = {
-            ...options.headers,
-            ...params.headers,
-        }
-
-    if (params.bodyParameter)
+    if (args.bodyParameter)
         options.body =
-            typeof params.bodyParameter == 'object'
-                ? JSON.stringify(params.bodyParameter)
-                : params.bodyParameter
+            typeof args.bodyParameter == 'object'
+                ? JSON.stringify(args.bodyParameter)
+                : args.bodyParameter
 
     const res = await fetch(url.href, options)
     const error = await checkStatus(res)
 
     if (error) throw error
-    else return res
+    else {
+        try {
+            return res.json()
+        } catch {
+            return
+        }
+    }
 }
 
-const convertToString = (value: UrlParameter[keyof UrlParameter]) =>
+const convertToString = (value: UrlParameter[string]) =>
     Array.isArray(value) ? value.join() : value.toString()
 
 function formatToken(value: Token | string) {
@@ -66,3 +46,18 @@ function formatToken(value: Token | string) {
         return value.token_type + ' ' + value.access_token
     }
 }
+
+interface RequestOptions {
+    readonly token: Token | string
+    readonly endpoint: string
+    readonly method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
+    // headers?: { [key: string]: string }
+    // pathParameter?: UrlParameter
+    readonly queryParameter?: UrlParameter
+    readonly bodyParameter?: Record<string, any> | string
+}
+
+type UrlParameter = Record<
+    string,
+    boolean | number | string | Array<boolean | number | string>
+>

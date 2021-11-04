@@ -8,7 +8,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns An object whose key is `episodes` and whose value is an array of {@link EpisodeObject episode objects}.
  */
-export async function getMultipleEpisodes(
+export const getMultipleEpisodes = (
     token: Token | string,
     ids: string[],
     options?: {
@@ -23,18 +23,12 @@ export async function getMultipleEpisodes(
          */
         market: string
     }
-): Promise<Responses.getMultipleEpisodes> {
-    const queryParameter: { [key: string]: any } = { ids: ids }
-    if (options) queryParameter.market = options.market
-    return await (
-        await sendRequest({
-            endpoint: 'episodes',
-            method: 'GET',
-            token: token,
-            queryParameter: queryParameter,
-        })
-    ).json()
-}
+): Promise<Responses.getMultipleEpisodes> =>
+    sendRequest({
+        endpoint: 'episodes',
+        token: token,
+        queryParameter: { ids: ids, ...options },
+    })
 
 /**
  * Get Spotify catalog information for a single episode identified by its unique Spotify ID.
@@ -43,7 +37,7 @@ export async function getMultipleEpisodes(
  * @param [options]
  * @returns An {@link EpisodeObject episode object}.
  */
-export async function getEpisode(
+export const getEpisode = (
     token: Token | string,
     id: string,
     options?: {
@@ -58,14 +52,9 @@ export async function getEpisode(
          */
         market?: string
     }
-): Promise<Responses.getEpisode> {
-    return await (
-        await sendRequest({
-            endpoint: 'episodes/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getEpisode> =>
+    sendRequest({
+        endpoint: `episodes/${id}`,
+        token: token,
+        queryParameter: options,
+    })

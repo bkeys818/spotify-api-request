@@ -13,7 +13,10 @@ function spotifyUrl(endpoint: string, pathParams?: { [key: string]: string }) {
     for (const key in pathParams) url = url.replace(`{${key}}`, pathParams[key])
     return url
 }
-const headers = { Authorization: 'Bearer ' + token }
+const headers = {
+    Authorization: 'Bearer ' + token,
+    'Content-Type': 'application/json',
+}
 const basicFetchInit = { headers: headers, method: 'GET' }
 
 afterEach(() => {
@@ -214,9 +217,7 @@ describe.each(testData)('%s', (_, funcs) => {
                     )
                 }
 
-                expect(fetch).toHaveBeenCalledWith(
-                    ...fetchParams
-                )
+                expect(fetch).toHaveBeenCalledWith(...fetchParams)
             })
         }
     }

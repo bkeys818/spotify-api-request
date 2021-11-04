@@ -9,7 +9,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options.offset=0]
  * @returns An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getListOfCurrentUserPlaylists(
+export const getListOfCurrentUserPlaylists = (
     token: Token | string,
     options?: {
         /** The maximum number of playlists to return. Default: 20. Minimum: 1. Maximum: 50. */
@@ -17,16 +17,12 @@ export async function getListOfCurrentUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100,000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<Responses.getListOfCurrentUserPlaylists> {
-    return await (
-        await sendRequest({
-            endpoint: 'me/playlists',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getListOfCurrentUserPlaylists> =>
+    sendRequest({
+        endpoint: 'me/playlists',
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get a list of the playlists owned or followed by a Spotify user.
@@ -37,7 +33,7 @@ export async function getListOfCurrentUserPlaylists(
  * @param [options.offset=0]
  * @returns An array of {@link SimplifiedPlaylistObject simplified playlist object} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getListOfUserPlaylists(
+export const getListOfUserPlaylists = (
     token: Token | string,
     userId: string,
     options?: {
@@ -46,17 +42,12 @@ export async function getListOfUserPlaylists(
         /** The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with `limit` to get the next set of playlists. */
         offset?: number
     }
-): Promise<Responses.getListOfUserPlaylists> {
-    return await (
-        await sendRequest({
-            endpoint: 'users/{user_id}/playlists',
-            method: 'GET',
-            token: token,
-            pathParameter: { user_id: userId },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getListOfUserPlaylists> =>
+    sendRequest({
+        endpoint: `users/${userId}/playlists`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Create a playlist for a Spotify user. (The playlist will be empty until you {@link addItemsToPlaylist add tracks}.)
@@ -69,7 +60,7 @@ export async function getListOfUserPlaylists(
  * @param [options.description]
  * @returns - The created {@link addItemsToPlaylist playlist object}.
  */
-export async function createPlaylist(
+export const createPlaylist = (
     token: Token | string,
     userId: string,
     options: {
@@ -82,22 +73,13 @@ export async function createPlaylist(
         /** Value for playlist description as displayed in Spotify Clients and in the Web API. */
         description?: string
     }
-): Promise<Responses.createPlaylist> {
-    return await (
-        await sendRequest({
-            endpoint: 'users/{user_id}/playlists',
-            method: 'POST',
-            token: token,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            pathParameter: {
-                user_id: userId,
-            },
-            bodyParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.createPlaylist> =>
+    sendRequest({
+        endpoint: `users/${userId}/playlists`,
+        method: 'POST',
+        token: token,
+        bodyParameter: options,
+    })
 
 /**
  * Get a playlist owned by a Spotify user.
@@ -109,7 +91,7 @@ export async function createPlaylist(
  * @param [options.additional_types]
  * @returns A {@link PlaylistObject playlist object} in JSON.
  */
-export async function getPlaylist(
+export const getPlaylist = (
     token: Token | string,
     playlistId: string,
     options?: {
@@ -124,19 +106,12 @@ export async function getPlaylist(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: string
     }
-): Promise<Responses.getPlaylist> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getPlaylist> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Change a playlist’s name and public/private state. (The user must, of course, own the playlist.)
@@ -149,7 +124,7 @@ export async function getPlaylist(
  * @param [options.description]
  * @return {Promise<Responses.>}
  */
-export async function changePlaylistDetails(
+export const changePlaylistDetails = (
     token: Token | string,
     playlistId: string,
     options: {
@@ -162,20 +137,13 @@ export async function changePlaylistDetails(
         /** Value for playlist description as displayed in Spotify Clients and in the Web API. */
         description: string
     }
-): Promise<Responses.changePlaylistDetails> {
-    await sendRequest({
-        endpoint: 'playlists/{playlist_id}',
+): Promise<Responses.changePlaylistDetails> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}`,
         method: 'PUT',
         token: token,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        pathParameter: {
-            playlist_id: playlistId,
-        },
         bodyParameter: options,
     })
-}
 
 /**
  * Get full details of the items of a playlist owned by a Spotify user.
@@ -189,7 +157,7 @@ export async function changePlaylistDetails(
  * @param [options.additional_types]
  * @returns An array of {@link PlaylistTrackObject playlist’s track objects} and {@link EpisodeObject episode objects} (depends on the `additional_types` parameter), wrapped in a {@link PagingObject paging object}.
  */
-export async function getPlaylistItems(
+export const getPlaylistItems = (
     token: Token | string,
     playlistId: string,
     options: {
@@ -208,19 +176,12 @@ export async function getPlaylistItems(
         /** A comma-separated list of item types that your client supports besides the default `track` type. Valid types are: `track` and `episode`. **Note**: This parameter was introduced to allow existing clients to maintain their current behaviour and might be deprecated in the future. In addition to providing this parameter, make sure that your client properly handles cases of new types in the future by checking against the `type` field of each object. */
         additional_types?: 'track' | 'episode'
     }
-): Promise<Responses.getPlaylistItems> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/tracks',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getPlaylistItems> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/tracks`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Add one or more items to a user’s playlist.
@@ -231,7 +192,7 @@ export async function getPlaylistItems(
  * @param [options.uris]
  * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
-export async function addItemsToPlaylist(
+export const addItemsToPlaylist = (
     token: Token | string,
     playlistId: string,
     options?: {
@@ -244,19 +205,13 @@ export async function addItemsToPlaylist(
          */
         uris?: string
     }
-): Promise<Responses.addItemsToPlaylist> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/tracks',
-            method: 'POST',
-            token: token,
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-            bodyParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.addItemsToPlaylist> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/tracks`,
+        method: 'POST',
+        token: token,
+        bodyParameter: options,
+    })
 
 /**
  * Reorder items in a playlist.
@@ -265,7 +220,7 @@ export async function addItemsToPlaylist(
  * @param options
  * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
-export async function reorderPlaylistItems(
+export const reorderPlaylistItems = (
     token: Token | string,
     playlistId: string,
     options: {
@@ -296,22 +251,13 @@ export async function reorderPlaylistItems(
         /** The playlist’s snapshot ID against which you want to make the changes. */
         snapshot_id?: string
     }
-): Promise<Responses.reorderOrReplacePlaylistItems> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/tracks',
-            method: 'PUT',
-            token: token,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-            bodyParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.reorderOrReplacePlaylistItems> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/tracks`,
+        method: 'PUT',
+        token: token,
+        bodyParameter: options,
+    })
 
 /**
  * Replace items in a playlist. Replacing items will overwrite its existing items. This operation can be used for replacing or clearing items in a playlist.
@@ -320,28 +266,17 @@ export async function reorderPlaylistItems(
  * @param uris - A list of [Spotify URIs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) to set, can be track or episode URIs. A maximum of 100 items can be set in one request.
  * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
-export async function replacePlaylistItems(
+export const replacePlaylistItems = (
     token: Token | string,
     playlistId: string,
     uris: string[]
-): Promise<Responses.reorderOrReplacePlaylistItems> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/tracks',
-            method: 'PUT',
-            token: token,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-            queryParameter: {
-                uris: uris
-            }
-        })
-    ).json()
-}
+): Promise<Responses.reorderOrReplacePlaylistItems> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/tracks`,
+        method: 'PUT',
+        token: token,
+        queryParameter: { uris: uris },
+    })
 
 /**
  * Remove one or more items from a user’s playlist.
@@ -351,7 +286,7 @@ export async function replacePlaylistItems(
  * @param [snapshotId] - The playlist’s snapshot ID against which you want to make the changes. The API will validate that the specified items exist and in the specified positions and make the changes, even if more recent changes have been made to the playlist.
  * @returns A `snapshot_id` in JSON format. The `snapshot_id` can be used to identify your playlist version in future requests.
  */
-export async function removeItemsFromPlaylist(
+export const removeItemsFromPlaylist = (
     token: Token | string,
     playlistId: string,
     tracks: {
@@ -359,26 +294,13 @@ export async function removeItemsFromPlaylist(
         positions?: number[]
     }[],
     snapshotId?: string
-): Promise<Responses.removeItemsFromPlaylist> {
-    const jsonBody: { [key: string]: any } = {
-        tracks: tracks,
-    }
-    if (snapshotId) jsonBody.snapshot_id = snapshotId
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/tracks',
-            method: 'DELETE',
-            token: token,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-            bodyParameter: jsonBody,
-        })
-    ).json()
-}
+): Promise<Responses.removeItemsFromPlaylist> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/tracks`,
+        method: 'DELETE',
+        token: token,
+        bodyParameter: { tracks: tracks, snapshotId: snapshotId },
+    })
 
 /**
  * Get the current image associated with a specific playlist.
@@ -386,21 +308,14 @@ export async function removeItemsFromPlaylist(
  * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
  * @returns A list of image objects.
  */
-export async function getPlaylistCoverImage(
+export const getPlaylistCoverImage = (
     token: Token | string,
     playlistId: string
-): Promise<Responses.getPlaylistCoverImage> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/images',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                playlist_id: playlistId,
-            },
-        })
-    ).json()
-}
+): Promise<Responses.getPlaylistCoverImage> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/images`,
+        token: token,
+    })
 
 /**
  * Replace the image used to represent a specific playlist.
@@ -409,35 +324,17 @@ export async function getPlaylistCoverImage(
  * @param image - The Buffer of a JPEG image or a Base64 encoded JPEG image, maximum size is 256 KB.
  * @returns
  */
-export async function uploadCustomPlaylistCoverImage(
+export const uploadCustomPlaylistCoverImage = (
     token: Token | string,
     playlistId: string,
     image: Buffer | string
-): Promise<Responses.uploadCustomPlaylistCoverImage> {
-    if (typeof image != 'string') image = Buffer.from(image).toString('base64')
-    // TODO: - Error if data to large
-    // Throw error if data size > 256_000 bytes
-
-    await sendRequest({
-        endpoint: 'playlists/{playlist_id}/images',
+): Promise<Responses.uploadCustomPlaylistCoverImage> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/images`,
         method: 'PUT',
         token: token,
-        headers: { 'Content-Type': 'image/jpeg' },
-        pathParameter: { playlist_id: playlistId },
-        bodyParameter: image,
+        bodyParameter:
+            typeof image != 'string'
+                ? image
+                : Buffer.from(image).toString('base64'),
     })
-}
-
-/**
- * Get size of a Base64 encoded image.
- * @internal
- * @returns {number} Size of data in bytes.
- */
-// function sizeOfBase64(data: string): number {
-//     const n = data.length
-//     if (data.charAt(data.length - 1) == '=') {
-//         const y = data.charAt(data.length - 2) == '=' ? 2 : 1
-//         return n * (3 / 4) - y
-//     }
-//     throw new TypeError("Data isn't base64 encoded image.")
-// }

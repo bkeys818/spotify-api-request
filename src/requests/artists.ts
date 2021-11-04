@@ -7,21 +7,15 @@ import type { Token, Responses } from 'spotify-objects'
  * @param ids - A comma-separated list of the [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artists. Maximum: 50 IDs.
  * @returns An object whose key is `"artists"` and whose value is an array of {@link ArtistObject artist object}.
  */
-export async function getMultipleArtists(
+export const getMultipleArtists = (
     token: Token | string,
     ids: string[]
-): Promise<Responses.getMultipleArtists> {
-    return await (
-        await sendRequest({
-            endpoint: 'artists',
-            method: 'GET',
-            token: token,
-            queryParameter: {
-                ids: ids.join(','),
-            },
-        })
-    ).json()
-}
+): Promise<Responses.getMultipleArtists> =>
+    sendRequest({
+        endpoint: 'artists',
+        token: token,
+        queryParameter: { ids: ids },
+    })
 
 /**
  * Get Spotify catalog information for a single artist identified by their unique Spotify ID.
@@ -29,21 +23,11 @@ export async function getMultipleArtists(
  * @param id - The Spotify ID of the artist.
  * @returns An artist object.
  */
-export async function getArtist(
+export const getArtist = (
     token: Token | string,
     id: string
-): Promise<Responses.getArtist> {
-    return await (
-        await sendRequest({
-            endpoint: 'artists/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                id: id,
-            },
-        })
-    ).json()
-}
+): Promise<Responses.getArtist> =>
+    sendRequest({ endpoint: `artists/${id}`, token: token })
 
 /**
  * Get Spotify catalog information about an artist’s top tracks by country.
@@ -52,26 +36,19 @@ export async function getArtist(
  * @param [options]
  * @returns An object whose key is `"tracks"` and whose value is an array of up to 10 {@link TrackObject track objects}.<br>Note: The {@link TrackObject Track objects} in the response don't conain `available_markets` and nor does it's `album` property.
  */
-export async function getArtistTopTracks(
+export const getArtistTopTracks = (
     token: Token | string,
     id: string,
     options: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Synonym for `country`. */
         market: string
     }
-): Promise<Responses.getArtistTopTracks> {
-    return await (
-        await sendRequest({
-            endpoint: 'artists/{id}/top-tracks',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                id: id,
-            },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getArtistTopTracks> =>
+    sendRequest({
+        endpoint: `artists/${id}/top-tracks`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get Spotify catalog information about artists similar to a given artist. Similarity is based on analysis of the Spotify community’s [listening history](http://news.spotify.com/se/2010/02/03/related-artists/).
@@ -79,21 +56,11 @@ export async function getArtistTopTracks(
  * @param id - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
  * @returns An object whose key is `"artists"` and whose value is an array of up to 20 {@link ArtistObject artist objects}.
  */
-export async function getArtistRelatedArtists(
+export const getArtistRelatedArtists = (
     token: Token | string,
     id: string
-): Promise<Responses.getArtistRelatedArtists> {
-    return await (
-        await sendRequest({
-            endpoint: 'artists/{id}/related-artists',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                id: id,
-            },
-        })
-    ).json()
-}
+): Promise<Responses.getArtistRelatedArtists> =>
+    sendRequest({ endpoint: `artists/${id}/related-artists`, token: token })
 
 type AlbumType = 'album' | 'single' | 'appears_on' | 'compilation'
 /**
@@ -103,7 +70,7 @@ type AlbumType = 'album' | 'single' | 'appears_on' | 'compilation'
  * @param [options]
  * @returns An array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getArtistAlbums(
+export const getArtistAlbums = (
     token: Token | string,
     id: string,
     options?: {
@@ -130,16 +97,9 @@ export async function getArtistAlbums(
         /** The index of the first album to return. Default: 0 (i.e., the first album). Use with `limit` to get the next set of albums. */
         offset?: number
     }
-): Promise<Responses.getArtistAlbums> {
-    return await (
-        await sendRequest({
-            endpoint: 'artists/{id}/albums',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                id: id,
-            },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getArtistAlbums> =>
+    sendRequest({
+        endpoint: `artists/${id}/albums`,
+        token: token,
+        queryParameter: options,
+    })

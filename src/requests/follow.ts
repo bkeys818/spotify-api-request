@@ -8,25 +8,20 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns
  */
-export async function followPlaylist(
+export const followPlaylist = (
     token: Token | string,
     playlistId: string,
     options?: {
         /** Defaults to `true`. If `true` the playlist will be included in user’s public playlists, if `false` it will remain private. */
         public: boolean
     }
-): Promise<Responses.followPlaylist> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/followers',
-            method: 'PUT',
-            token: token,
-            headers: { 'Content-Type': 'application/json' },
-            pathParameter: { playlist_id: playlistId },
-            bodyParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.followPlaylist> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/followers`,
+        method: 'PUT',
+        token: token,
+        bodyParameter: options,
+    })
 
 /**
  * Remove the current user as a follower of a playlist.
@@ -34,19 +29,15 @@ export async function followPlaylist(
  * @param playlistId - The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) of the playlist that is to be no longer followed.
  * @returns
  */
-export async function unfollowPlaylist(
+export const unfollowPlaylist = (
     token: Token | string,
     playlistId: string
-): Promise<Responses.unfollowPlaylist> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/followers',
-            method: 'DELETE',
-            token: token,
-            pathParameter: { playlist_id: playlistId },
-        })
-    ).json()
-}
+): Promise<Responses.unfollowPlaylist> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/followers`,
+        method: 'DELETE',
+        token: token,
+    })
 
 /**
  * Check to see if one or more Spotify users are following a specified playlist.
@@ -55,21 +46,16 @@ export async function unfollowPlaylist(
  * @param userIds - A list of [Spotify User IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids); the ids of the users that you want to check to see if they follow the playlist. Maximum: 5 ids.
  * @returns An array of `true` or `false` values, in the same order in which the `ids` were specified.
  */
-export async function checkIfUsersFollowPlaylist(
+export const checkIfUsersFollowPlaylist = (
     token: Token | string,
     playlistId: string,
     userIds: string[]
-): Promise<Responses.checkIfUsersFollowPlaylist> {
-    return await (
-        await sendRequest({
-            endpoint: 'playlists/{playlist_id}/followers/contains',
-            method: 'GET',
-            token: token,
-            pathParameter: { playlist_id: playlistId },
-            queryParameter: { ids: userIds },
-        })
-    ).json()
-}
+): Promise<Responses.checkIfUsersFollowPlaylist> =>
+    sendRequest({
+        endpoint: `playlists/${playlistId}/followers/contains`,
+        token: token,
+        queryParameter: { ids: userIds },
+    })
 
 /**
  * Get the current user’s followed artists.
@@ -77,7 +63,7 @@ export async function checkIfUsersFollowPlaylist(
  * @param options
  * @returns An object that conatins an `artists` object. The `artists` object in turn contains a {@link CursorPagingObject<ArtistObject> cursor-based paging object} of {@link ArtistObject Artists}.
  */
-export async function getUserFollowedArtists<T extends 'artist'>(
+export const getUserFollowedArtists = <T extends 'artist'>(
     token: Token | string,
     options: {
         /** The ID type: currently only `artist` is supported. */
@@ -87,16 +73,12 @@ export async function getUserFollowedArtists<T extends 'artist'>(
         /** The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50. */
         limit?: number
     }
-): Promise<Responses.getUserFollowedArtists> {
-    return await (
-        await sendRequest({
-            endpoint: 'me/following',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getUserFollowedArtists> =>
+    sendRequest({
+        endpoint: 'me/following',
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Add the current user as a follower of one or more artists or other Spotify users.
@@ -105,22 +87,18 @@ export async function getUserFollowedArtists<T extends 'artist'>(
  * @param ids - A list of the artist or the user [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). A maximum of 50 IDs can be sent in one request.
  * @returns
  */
-export async function followArtistsOrUsers(
+export const followArtistsOrUsers = (
     token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
-): Promise<Responses.followArtistsOrUsers> {
-    return await (
-        await sendRequest({
-            endpoint: 'me/following',
-            method: 'PUT',
-            token: token,
-            headers: { 'Content-Type': 'application/json' },
-            queryParameter: { type: type },
-            bodyParameter: { ids: ids },
-        })
-    ).json()
-}
+): Promise<Responses.followArtistsOrUsers> =>
+    sendRequest({
+        endpoint: 'me/following',
+        method: 'PUT',
+        token: token,
+        queryParameter: { type: type },
+        bodyParameter: { ids: ids },
+    })
 
 /**
  * Remove the current user as a follower of one or more artists or other Spotify users.
@@ -129,22 +107,18 @@ export async function followArtistsOrUsers(
  * @param ids - A list of the artist or the user [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). A maximum of 50 IDs can be sent in one request.
  * @returns
  */
-export async function unfollowArtistsOrUsers(
+export const unfollowArtistsOrUsers = (
     token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
-): Promise<Responses.unfollowArtistsOrUsers> {
-    return await (
-        await sendRequest({
-            endpoint: 'me/following',
-            method: 'DELETE',
-            token: token,
-            headers: { 'Content-Type': 'application/json' },
-            queryParameter: { type: type },
-            bodyParameter: { ids: ids },
-        })
-    ).json()
-}
+): Promise<Responses.unfollowArtistsOrUsers> =>
+    sendRequest({
+        endpoint: 'me/following',
+        method: 'DELETE',
+        token: token,
+        queryParameter: { type: type },
+        bodyParameter: { ids: ids },
+    })
 
 /**
  * Check to see if the current user is following one or more artists or other Spotify users.
@@ -153,17 +127,13 @@ export async function unfollowArtistsOrUsers(
  * @param ids - A list of the artist or the user [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). A maximum of 50 IDs can be sent in one request.
  * @returns An array of `true` or `false` values, in the same order in which the `ids` were specified.
  */
-export async function getFollowingStateForArtistsOrUsers(
+export const getFollowingStateForArtistsOrUsers = (
     token: Token | string,
     type: 'artist' | 'user',
     ids: string[]
-): Promise<Responses.getFollowingStateForArtistsOrUsers> {
-    return await (
-        await sendRequest({
-            endpoint: 'me/following/contains',
-            method: 'GET',
-            token: token,
-            queryParameter: { type: type, ids: ids.join() },
-        })
-    ).json()
-}
+): Promise<Responses.getFollowingStateForArtistsOrUsers> =>
+    sendRequest({
+        endpoint: 'me/following/contains',
+        token: token,
+        queryParameter: { type: type, ids: ids },
+    })

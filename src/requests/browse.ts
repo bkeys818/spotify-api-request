@@ -7,7 +7,7 @@ import type { Token, Responses } from 'spotify-objects'
  * @param options
  * @returns The response contains a `message` and an `albums` object. The `albums` object contains an array of {@link SimplifiedAlbumObject simplified album objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getAllNewReleases(
+export const getAllNewReleases = (
     token: Token | string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
@@ -17,16 +17,12 @@ export async function getAllNewReleases(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<Responses.getAllNewReleases> {
-    return await (
-        await sendRequest({
-            endpoint: 'browse/new-releases',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getAllNewReleases> =>
+    sendRequest({
+        endpoint: 'browse/new-releases',
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get a list of Spotify featured playlists (shown, for example, on a Spotify player’s ‘Browse’ tab).
@@ -34,7 +30,7 @@ export async function getAllNewReleases(
  * @param [options]
  * @returns An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getAllFeaturedPlaylists(
+export const getAllFeaturedPlaylists = (
     token: Token | string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want the list of returned items to be relevant to a particular country. If omitted, the returned items will be relevant to all countries. */
@@ -48,16 +44,12 @@ export async function getAllFeaturedPlaylists(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items. */
         offset?: number
     }
-): Promise<Responses.getAllFeaturedPlaylists> {
-    return await (
-        await sendRequest({
-            endpoint: 'browse/featured-playlists',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getAllFeaturedPlaylists> =>
+    sendRequest({
+        endpoint: 'browse/featured-playlists',
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
@@ -65,7 +57,7 @@ export async function getAllFeaturedPlaylists(
  * @param [options]
  * @returns An object with a categories field, with an array of {@link CategoryObjects category objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getAllCategories(
+export const getAllCategories = (
     token: Token | string,
     options?: {
         /** A country: an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Provide this parameter if you want to narrow the list of returned categories to those relevant to a particular country. If omitted, the returned items will be globally relevant. */
@@ -77,16 +69,12 @@ export async function getAllCategories(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of categories. */
         offset?: number
     }
-): Promise<Responses.getAllCategories> {
-    return await (
-        await sendRequest({
-            endpoint: 'browse/categories',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getAllCategories> =>
+    sendRequest({
+        endpoint: 'browse/categories',
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
@@ -95,7 +83,7 @@ export async function getAllCategories(
  * @param [options]
  * @returns A {@link CategoryObject category object}.
  */
-export async function getCategory(
+export const getCategory = (
     token: Token | string,
     categoryId: string,
     options?: {
@@ -104,19 +92,12 @@ export async function getCategory(
         /** The desired language, consisting of an [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)language code and an [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), joined by an underscore. For example: `es_MX`, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language. Note that, if `locale` is not supplied, or if the specified language is not available, the category strings returned will be in the Spotify default language (American English).*/
         locale?: string
     }
-): Promise<Responses.getCategory> {
-    return await (
-        await sendRequest({
-            endpoint: 'browse/categories/{category_id}',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                category_id: categoryId,
-            },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getCategory> =>
+    sendRequest({
+        endpoint: `browse/categories/${categoryId}`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get a list of Spotify playlists tagged with a particular category.
@@ -125,7 +106,7 @@ export async function getCategory(
  * @param [options]
  * @returns An array of {@link SimplifiedPlaylistObject simplified playlist objects} (wrapped in a {@link PagingObject paging object}).
  */
-export async function getCategoryPlaylists(
+export const getCategoryPlaylists = (
     token: Token | string,
     categoryId: string,
     options?: {
@@ -136,19 +117,12 @@ export async function getCategoryPlaylists(
         /** The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.*/
         offset?: number
     }
-): Promise<Responses.getCategoryPlaylists> {
-    return await (
-        await sendRequest({
-            endpoint: 'browse/categories/{category_id}/playlists',
-            method: 'GET',
-            token: token,
-            pathParameter: {
-                category_id: categoryId,
-            },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getCategoryPlaylists> =>
+    sendRequest({
+        endpoint: `browse/categories/${categoryId}/playlists`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Recommendations are generated based on the available information for a given seed entity and matched against similar artists and tracks. If there is sufficient information about the provided seeds, a list of tracks will be returned together with pool size details.
@@ -156,7 +130,7 @@ export async function getCategoryPlaylists(
  * @param options
  * @returns A {@link RecommendationsObject recommendations response object}.
  */
-export async function getRecommendations(
+export const getRecommendations = (
     token: Token | string,
     options: {
         /** The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20. Minimum: 1. Maximum: 100. */
@@ -254,30 +228,22 @@ export async function getRecommendations(
         /** For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request `target_energy=0.6` and `target_danceability=0.8`. All target values will be weighed equally in ranking results. */
         target_valence?: number
     }
-): Promise<Responses.getRecommendations> {
-    return await (
-        await sendRequest({
-            endpoint: 'recommendations',
-            method: 'GET',
-            token: token,
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getRecommendations> =>
+    sendRequest({
+        endpoint: 'recommendations',
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Retrieve a list of available genres seed parameter values for [recommendations](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recommendations).
  * @param token - A valid user access token or your client credentials.
  * @returns An object with a `genres` field containing an array of genres.
  */
-export async function getRecommendationGenres(
+export const getRecommendationGenres = (
     token: Token | string
-): Promise<Responses.getRecommendationGenres> {
-    return await (
-        await sendRequest({
-            endpoint: 'recommendations/available-genre-seeds',
-            method: 'GET',
-            token: token,
-        })
-    ).json()
-}
+): Promise<Responses.getRecommendationGenres> =>
+    sendRequest({
+        endpoint: 'recommendations/available-genre-seeds',
+        token: token,
+    })

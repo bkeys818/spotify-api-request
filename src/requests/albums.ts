@@ -8,27 +8,19 @@ import type { Token, Responses } from 'spotify-objects'
  * @param [options]
  * @returns Objects are returned in the order requested. If an object is not found, a `null` value is returned in the appropriate position. Duplicate `ids` in the query will result in duplicate objects in the response.
  */
-export async function getMultipleAlbums(
+export const getMultipleAlbums = (
     token: Token | string,
     ids: string[],
     options?: {
         /** An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) orstring `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/). */
         market: string
     }
-): Promise<Responses.getMultipleAlbums> {
-    const queryParameter: { [key: string]: any } = {
-        ids: ids.join(','),
-    }
-    if (options) queryParameter.market = options.market
-    return await (
-        await sendRequest({
-            endpoint: 'albums',
-            method: 'GET',
-            token: token,
-            queryParameter: queryParameter,
-        })
-    ).json()
-}
+): Promise<Responses.getMultipleAlbums> =>
+    sendRequest({
+        endpoint: 'albums',
+        token: token,
+        queryParameter: { ids: ids, ...options },
+    })
 
 /**
  * Get Spotify catalog information for a single album.
@@ -37,26 +29,19 @@ export async function getMultipleAlbums(
  * @param [options]
  * @returns An album object in JSON format.
  */
-export async function getAlbum(
+export const getAlbum = (
     token: Token | string,
     id: string,
     options?: {
         /** The market you’d like to request. Synonym for `country`. */
         market: string
     }
-): Promise<Responses.getAlbum> {
-    return await (
-        await sendRequest({
-            endpoint: 'albums/{id}',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-            ...((): object | void => {
-                if (options) return { queryParameter: options }
-            })(),
-        })
-    ).json()
-}
+): Promise<Responses.getAlbum> =>
+    sendRequest({
+        endpoint: `albums/${id}`,
+        token: token,
+        queryParameter: options,
+    })
 
 /**
  * Get Spotify catalog information about an album’s tracks. Optional parameters can be used to limit the number of tracks returned.
@@ -65,7 +50,7 @@ export async function getAlbum(
  * @param [options]
  * @returns An album object in JSON format.
  */
-export async function getAlbumTracks(
+export const getAlbumTracks = (
     token: Token | string,
     id: string,
     options?: {
@@ -76,14 +61,9 @@ export async function getAlbumTracks(
         /** The index of the first track to return. Default: 0 (the first object). Use with limit to get the next set of tracks. */
         offset?: number
     }
-): Promise<Responses.getAlbumTracks> {
-    return await (
-        await sendRequest({
-            endpoint: 'albums/{id}/tracks',
-            method: 'GET',
-            token: token,
-            pathParameter: { id: id },
-            queryParameter: options,
-        })
-    ).json()
-}
+): Promise<Responses.getAlbumTracks> =>
+    sendRequest({
+        endpoint: `albums/${id}/tracks`,
+        token: token,
+        queryParameter: options,
+    })
